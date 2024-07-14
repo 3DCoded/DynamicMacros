@@ -10,7 +10,7 @@ class DynamicMacros:
         )
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
-        gcmd.respond_info(gcmd.get_command_parameters)
+        gcmd.respond_info(gcmd.get_command_parameters())
     
 def load_config(config):
     return DynamicMacros(config)
