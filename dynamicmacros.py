@@ -10,7 +10,10 @@ class DynamicMacros:
         )
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
-        gcmd.respond_info(gcmd.get_command_parameters())
+        params = gcmd.get_command_parameters()
+        with open('~/params.txt', 'w') as file:
+            file.write(str(params) + '\n\n\n' + str(type(params)))
+        gcmd.respond_info("Wrote to ~/params.txt")
     
 def load_config(config):
     return DynamicMacros(config)
