@@ -19,7 +19,7 @@ class DynamicMacros:
         )
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
-        macro = gcmd.get('macro')
+        macro = gcmd.get('MACRO')
         params = gcmd.get_command_parameters()
         rawparams = gcmd.get_raw_command_parameters()
         self._run_macro(macro, params, rawparams)
