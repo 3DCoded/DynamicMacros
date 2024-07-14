@@ -29,7 +29,7 @@ class DynamicMacros:
         self._run_macro(macro, params, rawparams)
     
     def generate_cmd(self, name):
-        def cmd(self, gcmd):
+        def cmd(gcmd):
             params = gcmd.get_command_parameters()
             rawparams = gcmd.get_raw_command_parameters()
             self._run_macro(name, params, rawparams)
