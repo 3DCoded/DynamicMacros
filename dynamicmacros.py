@@ -20,7 +20,7 @@ class DynamicMacros:
 
         self._update_macros()
         for name in self.macros.keys():
-            self.gcde.register_command(name, self.generate_cmd(name))
+            self.gcode.register_command(name, self.generate_cmd(name))
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
         macro = gcmd.get('MACRO')
