@@ -11,7 +11,7 @@ class DynamicMacros:
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
         params = gcmd.get_command_parameters()
-        with open('~/params.txt', 'w+') as file:
+        with open('/home/pi/params.txt', 'w+') as file:
             file.write(str(params) + '\n\n\n' + str(type(params)))
         gcmd.respond_info("Wrote to ~/params.txt")
     
