@@ -17,12 +17,23 @@ class DynamicMacros:
             'DYNAMIC_MACRO',
             self.cmd_DYNAMIC_MACRO
         )
+
+        self._update_macros()
+        for name in self.macros.keys():
+            self.gcde.register_command(name, self.generate_cmd(name))
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
         macro = gcmd.get('MACRO')
         params = gcmd.get_command_parameters()
         rawparams = gcmd.get_raw_command_parameters()
         self._run_macro(macro, params, rawparams)
+    
+    def generate_cmd(self, name):
+        def cmd(self, gcmd):
+            params = gcmd.get_command_parameters()
+            rawparams = gcmd.get_raw_command_parameters()
+            self._run_macro(name, params, rawparams)
+        return cmd
     
     def _run_macro(self, macro_name, params, rawparams):
         self._update_macros()
