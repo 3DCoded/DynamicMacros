@@ -1,3 +1,0 @@
-# Klipper Dynamic Macros
-
-
