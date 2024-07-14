@@ -21,12 +21,13 @@ class DynamicMacros:
     def cmd_DYNAMIC_MACRO(self, gcmd):
         macro = gcmd.get('macro')
         params = gcmd.get_command_parameters()
-        self._run_macro(macro, params)
+        rawparams = gcmd.get_raw_command_parameters()
+        self._run_macro(macro, params, rawparams)
     
-    def _run_macro(self, macro_name, params):
+    def _run_macro(self, macro_name, params, rawparams):
         self._update_macros()
         macro = self.macros[macro_name]
-        macro.run()
+        macro.run(params, rawparams)
     
     def _update_macros(self):
         for fname in self.fnames:
