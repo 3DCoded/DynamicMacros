@@ -21,25 +21,27 @@ class DynamicMacros:
         )
 
         self._update_macros()
-        # for name in self.macros.keys():
-        #     self.gcode.register_command(name.upper(), self.generate_cmd(name))
     
     def register_macro(self, macro):
-        if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
+        if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_ha3ndlers):
             self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro.name.upper()), desc=macro.desc)
         self.macros[macro.name] = macro
 
     def unregister_macro(self, macro):
+        self.gcode.register_command(macro.name.upper(), None)
         if macro in self.macros:
-            self.gcode.register_command(macro.name.upper())
             self.macros[macro.name] = None
             del self.macros[macro.name]
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
-        macro = gcmd.get('MACRO')
+        self._update_macros()
+        macro = gcmd.get('MACRO', '')
+        if not macro:
+            return
         params = gcmd.get_command_parameters()
         rawparams = gcmd.get_raw_command_parameters()
         self._run_macro(macro, params, rawparams)
+    
     
     def generate_cmd(self, name):
         def cmd(gcmd):
@@ -49,7 +51,7 @@ class DynamicMacros:
         return cmd
     
     def _run_macro(self, macro_name, params, rawparams):
-        self._update_macros()
+        # self._update_macros()
         macro = self.macros.get(macro_name, self.placeholder)
         macro.run(params, rawparams)
     
