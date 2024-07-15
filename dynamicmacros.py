@@ -25,7 +25,7 @@ class DynamicMacros:
         #     self.gcode.register_command(name.upper(), self.generate_cmd(name))
     
     def register_macro(self, macro):
-        if macro.name not in self.gcode.ready_gcode_handlers:
+        if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
             self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro.name.upper()), desc=macro.desc)
         self.macros[macro.name] = macro
 
