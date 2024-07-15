@@ -64,3 +64,30 @@ Run `MYTEST` again, and the output should be:
 ```
 Test successful!
 ```
+
+## When to Restart Klipper or Reload Dynamic Macros
+
+Dynamic Macros provides a utility `DYNAMIC_MACRO` command to run macros manually, and to refresh the macros. Usage examples (assuming M900 is defined as a Dynamic Macro):
+
+```gcode
+DYNAMIC_MACRO MACRO=M900 K=0.035
+```
+
+is the same as:
+
+```
+M900 K0.035
+```
+
+To refresh Dynamic Macros, just run `DYNAMIC_MACRO` with no parameters.
+
+A Klipper restart is required if:
+
+- You changed the description
+
+A `DYNAMIC_MACRO` refresh is required if:
+
+- You created a new macro
+- You renamed an existing macro
+- You changed the contents of a macro
+- You deleted an existing macro
