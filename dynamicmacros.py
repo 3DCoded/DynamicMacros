@@ -24,12 +24,15 @@ class DynamicMacros:
         #     self.gcode.register_command(name.upper(), self.generate_cmd(name))
     
     def register_macro(self, macro):
+        if macro.name in self.gcode.ready_gcode_handlers:
+            self.unregister_macro(macro)
         self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro.name.upper()), desc=macro.desc)
         self.macros[macro.name] = macro
 
     def unregister_macro(self, macro):
         if macro in self.macros:
             self.gcode.register_command(macro.name.upper())
+            self.macros[macro.name] = None
             del self.macros[macro.name]
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
