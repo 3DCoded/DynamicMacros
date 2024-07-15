@@ -51,7 +51,7 @@ class DynamicMacros:
         macro.run(params, rawparams)
     
     def _update_macros(self):
-        for macro in self.macros:
+        for macro in self.macros.values():
             self.unregister_macro(macro)
         for fname in self.fnames:
             path = config_path / fname
