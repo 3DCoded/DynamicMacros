@@ -47,8 +47,8 @@ Not all macros will benefit from being dynamic. Here's a few questions you can a
 - Is it a macro that is unstable/may break?
 - Is it a macro that may need to be edited several times?
 
-If your answer to either of those was yes, then your macro will likely benefit from being dynamic. Follow the [Tutorial](3dcoded.github.io/DynamicMacros/tutorial) to get started with Dynamic Macros.
+If your answer to either of those was yes, then your macro will likely benefit from being dynamic. Follow the [Tutorial](https://3dcoded.github.io/DynamicMacros/tutorial) to get started with Dynamic Macros.
 
 ## Features
 
-See [Development Status](3dcoded.github.io/DynamicMacros/devstatus) for the currently available features, and planned features.
+See [Development Status](https://3dcoded.github.io/DynamicMacros/devstatus) for the currently available features, and planned features.
