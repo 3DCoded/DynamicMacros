@@ -46,3 +46,7 @@ Not all macros will benefit from being dynamic. Here's a few questions you can a
 - Is it a macro that may need to be edited several times?
 
 If your answer to either of those was yes, then your macro will likely benefit from being dynamic. Follow the [Tutorial](tutorial.md) to get started with Dynamic Macros.
+
+## Features
+
+See [Development Status](devstatus.md) for the currently available features, and planned features.
