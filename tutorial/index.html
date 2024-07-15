@@ -352,6 +352,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#when-to-restart-klipper-or-reload-dynamic-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Restart Klipper or Reload Dynamic Macros
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -433,6 +442,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#when-to-restart-klipper-or-reload-dynamic-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Restart Klipper or Reload Dynamic Macros
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -495,6 +513,25 @@ sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w
 <p>Run <code>MYTEST</code> again, and the output should be:
 <div class="highlight"><pre><span></span><code>Test successful!
 </code></pre></div></p>
+<h2 id="when-to-restart-klipper-or-reload-dynamic-macros">When to Restart Klipper or Reload Dynamic Macros</h2>
+<p>Dynamic Macros provides a utility <code>DYNAMIC_MACRO</code> command to run macros manually, and to refresh the macros. Usage examples (assuming M900 is defined as a Dynamic Macro):</p>
+<div class="highlight"><pre><span></span><code>DYNAMIC_MACRO MACRO=M900 K=0.035
+</code></pre></div>
+<p>is the same as:</p>
+<div class="highlight"><pre><span></span><code>M900 K0.035
+</code></pre></div>
+<p>To refresh Dynamic Macros, just run <code>DYNAMIC_MACRO</code> with no parameters.</p>
+<p>A Klipper restart is required if:</p>
+<ul>
+<li>You changed the description</li>
+</ul>
+<p>A <code>DYNAMIC_MACRO</code> refresh is required if:</p>
+<ul>
+<li>You created a new macro</li>
+<li>You renamed an existing macro</li>
+<li>You changed the contents of a macro</li>
+<li>You deleted an existing macro</li>
+</ul>
 
 
 
