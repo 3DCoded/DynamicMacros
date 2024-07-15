@@ -77,7 +77,7 @@ class DynamicMacro:
     def from_section(config, section, printer):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
-        desc = config.get(section, 'description', '')
+        desc = config.get(section, 'description') or ''
         return DynamicMacro(name, raw, printer, desc=desc)
     
     def run(self, params, rawparams):
