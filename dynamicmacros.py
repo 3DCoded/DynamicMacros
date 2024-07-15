@@ -12,6 +12,7 @@ class DynamicMacros:
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
         self.macros = {}
+        self.placeholder = DynamicMacro('Placeholder', 'M117 ERROR', self.printer)
         
         self.gcode.register_command(
             'DYNAMIC_MACRO',
@@ -24,9 +25,8 @@ class DynamicMacros:
         #     self.gcode.register_command(name.upper(), self.generate_cmd(name))
     
     def register_macro(self, macro):
-        if macro.name in self.gcode.ready_gcode_handlers:
-            return
-        self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro.name.upper()), desc=macro.desc)
+        if macro.name not in self.gcode.ready_gcode_handlers:
+            self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro.name.upper()), desc=macro.desc)
         self.macros[macro.name] = macro
 
     def unregister_macro(self, macro):
@@ -50,7 +50,7 @@ class DynamicMacros:
     
     def _run_macro(self, macro_name, params, rawparams):
         self._update_macros()
-        macro = self.macros[macro_name]
+        macro = self.macros.get(macro_name, self.placeholder)
         macro.run(params, rawparams)
     
     def _update_macros(self):
