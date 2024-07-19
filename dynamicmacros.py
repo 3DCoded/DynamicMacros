@@ -94,6 +94,9 @@ class DynamicMacro:
 class DynamicPrinter:
     def __init__(self, printer):
         self._printer = printer
+
+    def __hasattribute__(self, name: str):
+        return hasattr(self._printer, name)
     
     def __getattribute__(self, name: str):
         if name == '_printer':
