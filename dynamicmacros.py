@@ -96,10 +96,12 @@ class DynamicPrinter:
         self._printer = printer
     
     def __getattribute__(self, name: str):
+        if name == '_printer':
+            return super().__getattribute__('_printer')
         return getattr(self._printer, name)
 
     def __getitem__(self, item: str):
-        return self._printer.__getitem__(item)
+        return self._printer[item]
     
 def load_config(config):
     return DynamicMacros(config)
