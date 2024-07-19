@@ -103,8 +103,8 @@ class DynamicPrinter:
     def __getattribute__(self, name: str):
         logging.info(f'DynamicMacros GETATTR {name}')
         logging.info(f'printer.{name} = ')
-        logging.info(getattr(DynamicMacros.printer,name))
-        return getattr(DynamicMacros.printer, name) or 'NONE'
+        logging.info(DynamicMacros.printer[name])
+        return DynamicMacros.printer[name] or 'NONE'
 
     def __getitem__(self, item: str):
         return DynamicMacros.printer[item]
