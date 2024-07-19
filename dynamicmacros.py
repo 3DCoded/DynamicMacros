@@ -10,6 +10,7 @@ config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 class DynamicMacros:
     def __init__(self, config):
         self.printer = config.get_printer()
+        DynamicMacros.printer = self.printer
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
         self.macros = {}
@@ -93,22 +94,19 @@ class DynamicMacro:
         self.template.run_gcode_from_command(kwparams)
 
 class DynamicPrinter:
-    def __init__(self, printer):
-        self._printer = printer
+    def __init__(self):
+        pass
 
     def __hasattribute__(self, name: str):
-        return hasattr(self._printer, name)
+        return hasattr(DynamicMacros.printer, name)
     
     def __getattribute__(self, name: str):
         logging.info(f'DynamicMacros GETATTR {name}')
-        if name == '_printer':
-            return super().__getattribute__('_printer')
-        logging.info(f'printer.{name} = {getattr(self._printer,name)}')
-        logging.info(f'printer[{name}] = {self._printer[name]}')
-        return getattr(self._printer, name) or self._printer[name]
+        logging.info(f'printer.{name} = {getattr(DynamicMacros.printer,name)}')
+        return getattr(DynamicMacros.printer, name) or DynamicMacros.printer[name]
 
     def __getitem__(self, item: str):
-        return self._printer[item]
+        return DynamicMacros.printer[item]
     
 def load_config(config):
     return DynamicMacros(config)
