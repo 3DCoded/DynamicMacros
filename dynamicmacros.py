@@ -51,8 +51,6 @@ class DynamicMacros:
         return cmd
     
     def _run_macro(self, macro, params, rawparams):
-        # self._update_macros()
-        # macro = self.macros.get(macro_name, self.placeholder)
         macro.run(params, rawparams)
     
     def _update_macros(self):
@@ -88,9 +86,20 @@ class DynamicMacro:
     def run(self, params, rawparams):
         kwparams = dict(self.variables)
         kwparams.update(self.template.create_template_context())
+        kwparams['dynamic_printer'] = DynamicPrinter(self.printer)
         kwparams['params'] = params
         kwparams['rawparams'] = rawparams
         self.template.run_gcode_from_command(kwparams)
+
+class DynamicPrinter:
+    def __init__(self, _printer):
+        self._printer = _printer
+    
+    def __getattribute__(self, name: str):
+        return self._printer.__getattribute__(name)
+
+    def __getitem__(self, item: str):
+        return self._printer.__getitem__(item)
     
 def load_config(config):
     return DynamicMacros(config)
