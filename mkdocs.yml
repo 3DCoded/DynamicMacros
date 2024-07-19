@@ -45,4 +45,5 @@ theme:
 nav:
   - Home: index.md
   - tutorial.md
+  - examples.md
   - devstatus.md
