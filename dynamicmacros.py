@@ -92,11 +92,11 @@ class DynamicMacro:
         self.template.run_gcode_from_command(kwparams)
 
 class DynamicPrinter:
-    def __init__(self, _printer):
-        self._printer = _printer
+    def __init__(self, printer):
+        self._printer = printer
     
     def __getattribute__(self, name: str):
-        return self._printer.__getattribute__(name)
+        return getattr(self._printer, name)
 
     def __getitem__(self, item: str):
         return self._printer.__getitem__(item)
