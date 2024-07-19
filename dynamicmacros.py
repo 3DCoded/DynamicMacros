@@ -101,7 +101,7 @@ class DynamicPrinter:
     def __getattribute__(self, name: str):
         if name == '_printer':
             return super().__getattribute__('_printer')
-        return getattr(self._printer, name)
+        return getattr(self._printer, name) or self._printer[name]
 
     def __getitem__(self, item: str):
         return self._printer[item]
