@@ -3,6 +3,7 @@ from .gcode_macro import TemplateWrapper
 from pathlib import Path
 import configparser
 import os
+import logging
 
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
@@ -99,8 +100,11 @@ class DynamicPrinter:
         return hasattr(self._printer, name)
     
     def __getattribute__(self, name: str):
+        logging.log(f'DynamicMacros GETATTR {name}')
         if name == '_printer':
             return super().__getattribute__('_printer')
+        logging.log(f'printer.{name} = {getattr(self._printer,name)}')
+        logging.log(f'printer[{name}] = {self._printer[name]}')
         return getattr(self._printer, name) or self._printer[name]
 
     def __getitem__(self, item: str):
