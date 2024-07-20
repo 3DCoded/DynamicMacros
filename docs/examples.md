@@ -1,8 +1,10 @@
 # Example Macros
 
-This page will hold several different Dynamic Macro examples. Note that most of the examples here can be used as normal macros, but were developed using Dynamic Macros.
+This page will hold several different Dynamic Macro examples. Note that most of the examples here are specific to Dynamic Macros only.
 
 ## M900
+
+!!! info "Normal Macro"
 
 In Marlin, M900 K is used to set pressure/linear advance. Now, you can use it in Klipper too:
 
@@ -33,4 +35,43 @@ gcode:
   RECURSION_TEST NUM={num-1}
   {% endif %}
   
+```
+
+## Receiving Position Updates
+
+!!! info "Dynamic Macros Only"
+
+This is an example Dynamic Macro to demonstrate the ability to receive position updates from within the same macro.
+
+```cfg
+[gcode_macro DYNAMIC_MOVE]
+gcode:
+  G28
+
+  
+  M117 Before: {printer.toolhead.position.z}
+  # Above displays position after G28
+  G90
+  G1 Z20
+
+
+  M117 After: {printer.toolhead.position.z}
+  # Above displays position after G1
+```
+
+## Preserving Variables
+
+!!! info "Dynamic Macros Only"
+
+This is an example of how to preserve variables across triple-newlines in Dynamic Macros.
+
+```cfg
+[gcode_macro VARIABLES]
+gcode:
+    {% set num = update("num", 10) %}
+    M117 {num}
+
+
+    M117 {num}
+    # Above line outputs 10
 ```

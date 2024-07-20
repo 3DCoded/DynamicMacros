@@ -4,9 +4,6 @@
 
 ---
 
-!!! warning
-    This is still a work in progress.
-
 Klipper Dynamic Macros is an unofficial way to update macros without restarting Klipper, so you can update macros mid-print and see their results live. 
 
 ## How Normal Macros Work

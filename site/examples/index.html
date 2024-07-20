@@ -363,6 +363,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#receiving-position-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving Position Updates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preserving-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preserving Variables
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -435,6 +453,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#receiving-position-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving Position Updates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preserving-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preserving Variables
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -454,8 +490,11 @@
 
 
 <h1 id="example-macros">Example Macros</h1>
-<p>This page will hold several different Dynamic Macro examples. Note that most of the examples here can be used as normal macros, but were developed using Dynamic Macros.</p>
+<p>This page will hold several different Dynamic Macro examples. Note that most of the examples here are specific to Dynamic Macros only.</p>
 <h2 id="m900">M900</h2>
+<div class="admonition info">
+<p class="admonition-title">Normal Macro</p>
+</div>
 <p>In Marlin, M900 K is used to set pressure/linear advance. Now, you can use it in Klipper too:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[gcode_macro M900]</span>
 <span class="na">description</span><span class="o">:</span><span class="w"> </span><span class="s">Set Pressure Advance</span>
@@ -479,6 +518,39 @@
 <span class="w">  </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{num}</span>
 <span class="w">  </span><span class="na">RECURSION_TEST NUM</span><span class="o">=</span><span class="s">{num-1}</span>
 <span class="w">  </span><span class="na">{% endif %}</span>
+</code></pre></div>
+<h2 id="receiving-position-updates">Receiving Position Updates</h2>
+<div class="admonition info">
+<p class="admonition-title">Dynamic Macros Only</p>
+</div>
+<p>This is an example Dynamic Macro to demonstrate the ability to receive position updates from within the same macro.</p>
+<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro DYNAMIC_MOVE]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">  </span><span class="na">G28</span>
+
+
+<span class="w">  </span><span class="na">M117 Before</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
+<span class="w">  </span><span class="c1"># Above displays position after G28</span>
+<span class="w">  </span><span class="na">G90</span>
+<span class="w">  </span><span class="na">G1 Z20</span>
+
+
+<span class="w">  </span><span class="na">M117 After</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
+<span class="w">  </span><span class="c1"># Above displays position after G1</span>
+</code></pre></div>
+<h2 id="preserving-variables">Preserving Variables</h2>
+<div class="admonition info">
+<p class="admonition-title">Dynamic Macros Only</p>
+</div>
+<p>This is an example of how to preserve variables across triple-newlines in Dynamic Macros.</p>
+<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro VARIABLES]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">update(&quot;num&quot;, 10) %}</span>
+<span class="w">    </span><span class="na">M117 {num}</span>
+
+
+<span class="w">    </span><span class="na">M117 {num}</span>
+<span class="w">    </span><span class="c1"># Above line outputs 10</span>
 </code></pre></div>
 
 

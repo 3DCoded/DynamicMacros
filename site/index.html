@@ -526,10 +526,6 @@
 <h1 id="klipper-dynamic-macros">Klipper Dynamic Macros</h1>
 <p><strong>Never restart Klipper again for simple macros.</strong></p>
 <hr />
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This is still a work in progress.</p>
-</div>
 <p>Klipper Dynamic Macros is an unofficial way to update macros without restarting Klipper, so you can update macros mid-print and see their results live. </p>
 <h2 id="how-normal-macros-work">How Normal Macros Work</h2>
 <p>Your macros are written in a <code>.cfg</code> file, then included into your <code>printer.cfg</code>. When Klipper restarts, it parses these files and saves the macros internally (you can't change them without restarting Klipper). When a macro is called, the cached code is interpreted and run. This method is faster, as the macros don't have to be reread every time.</p>
