@@ -353,6 +353,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recursion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiving-variable-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving Variable Updates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#when-to-restart-klipper-or-reload-dynamic-macros" class="md-nav__link">
     <span class="md-ellipsis">
       When to Restart Klipper or Reload Dynamic Macros
@@ -463,6 +481,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recursion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiving-variable-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving Variable Updates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#when-to-restart-klipper-or-reload-dynamic-macros" class="md-nav__link">
     <span class="md-ellipsis">
       When to Restart Klipper or Reload Dynamic Macros
@@ -533,6 +569,56 @@ sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w
 <p>Run <code>MYTEST</code> again, and the output should be:
 <div class="highlight"><pre><span></span><code>Test successful!
 </code></pre></div></p>
+<h2 id="recursion">Recursion</h2>
+<p>Unlike normal <code>gcode_macro</code>s, Dynamic Macros supports recursion (allowing a macro to call itself). For more examples, see <a href="../examples/#recursion">Examples</a></p>
+<h2 id="receiving-variable-updates">Receiving Variable Updates</h2>
+<p>Unlike normal <code>gcode_macro</code>s, Dynamic Macros supports receiving variable updates within the same macro. For example, the following macro will show the same output in both <code>M117</code>s:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro STATIC_MOVE]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">  </span><span class="na">G28</span>
+<span class="w">  </span><span class="na">M117 Before</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
+<span class="w">  </span><span class="c1"># Above displays position before macro run</span>
+<span class="w">  </span><span class="na">G90</span>
+<span class="w">  </span><span class="na">G1 Z20</span>
+<span class="w">  </span><span class="na">M117 After</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
+<span class="w">  </span><span class="c1"># Above displays same position</span>
+</code></pre></div>
+<p>However, this macro will show different outputs based on the current Z position of the toolhead:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro DYNAMIC_MOVE]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">  </span><span class="na">G28</span>
+
+
+<span class="w">  </span><span class="na">M117 Before</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
+<span class="w">  </span><span class="c1"># Above displays position after G28</span>
+<span class="w">  </span><span class="na">G90</span>
+<span class="w">  </span><span class="na">G1 Z20</span>
+
+
+<span class="w">  </span><span class="na">M117 After</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
+<span class="w">  </span><span class="c1"># Above displays position after G1</span>
+</code></pre></div>
+<p>Notice the large whitespaces. Three newline characters (two blank lines) between code segments denotes a variable update. However, some variables won't be preserevd across the whitespace.</p>
+<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro VARIABLES]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10 %}</span>
+<span class="w">    </span><span class="na">M117 {num}</span>
+
+
+<span class="w">    </span><span class="na">M117 {num}</span>
+<span class="w">    </span><span class="c1"># Above line outputs nothing</span>
+</code></pre></div>
+<p>You can use the <code>update()</code> function to preserve certain variables across the whitespaces:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro VARIABLES]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">update(&quot;num&quot;, 10) %}</span>
+<span class="w">    </span><span class="na">M117 {num}</span>
+
+
+<span class="w">    </span><span class="na">M117 {num}</span>
+<span class="w">    </span><span class="c1"># Above line outputs 10</span>
+</code></pre></div>
+<p>See <a href="../examples/#receiving-position-updates">Examples</a> for examples.</p>
 <h2 id="when-to-restart-klipper-or-reload-dynamic-macros">When to Restart Klipper or Reload Dynamic Macros</h2>
 <p>Dynamic Macros provides a utility <code>DYNAMIC_MACRO</code> command to run macros manually, and to refresh the macros. Usage examples (assuming M900 is defined as a Dynamic Macro):</p>
 <div class="highlight"><pre><span></span><code>DYNAMIC_MACRO MACRO=M900 K=0.035
