@@ -44,7 +44,7 @@ class DynamicMacros:
         rawparams = gcmd.get_raw_command_parameters()
         macro = self.macros.get(macro_name, self.placeholder)
         self._run_macro(macro, params, rawparams)
-        msg = macro.template.template.globals
+        msg = macro.vars
         gcmd.respond_info(f'Message: {msg}')
     
     
@@ -78,9 +78,13 @@ class DynamicMacro:
         self.raw = raw
         self.printer = printer
         self.desc = desc
+        self.vars = {}
         self.env = jinja2.Environment('{%', '%}', '{', '}')
         self.template = TemplateWrapper(self.printer, self.env, self.name, self.raw)
         self.variables = {}
+    
+    def update(self, name, val):
+        self.vars[name] = val
     
     def from_section(config, section, printer):
         raw = config.get(section, 'gcode')
@@ -93,6 +97,8 @@ class DynamicMacro:
         kwparams.update(self.template.create_template_context())
         kwparams['params'] = params
         kwparams['rawparams'] = rawparams
+        kwparams['vars'] = self.vars
+        kwparams['update'] = self.update
         self.template.run_gcode_from_command(kwparams)
     
 def load_config(config):
