@@ -37,12 +37,14 @@ class DynamicMacros:
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
         self._update_macros()
-        macro = gcmd.get('MACRO', '')
-        if not macro:
+        macro_name = gcmd.get('MACRO', '')
+        if not macro_name:
             return
         params = gcmd.get_command_parameters()
         rawparams = gcmd.get_raw_command_parameters()
-        self._run_macro(self.macros.get(macro, self.placeholder), params, rawparams)
+        macro = self.macros.get(macro_name, self.placeholder)
+        self._run_macro(macro, params, rawparams)
+        gcmd.respond_info('Globals: ' + str(macro.get_globals()))
     
     
     def generate_cmd(self, macro):
@@ -78,6 +80,9 @@ class DynamicMacro:
         self.env = jinja2.Environment('{%', '%}', '{', '}')
         self.template = TemplateWrapper(self.printer, self.env, self.name, self.raw)
         self.variables = {}
+    
+    def get_globals(self):
+        return self.template.globals
     
     def from_section(config, section, printer):
         raw = config.get(section, 'gcode')
