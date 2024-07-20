@@ -43,8 +43,9 @@ class DynamicMacros:
         params = gcmd.get_command_parameters()
         rawparams = gcmd.get_raw_command_parameters()
         macro = self.macros.get(macro_name, self.placeholder)
-        vars = self._run_macro(macro, params, rawparams)
-        gcmd.respond_info('Variables: ' + str(vars))
+        self._run_macro(macro, params, rawparams)
+        msg = dir(macro.template)
+        gcmd.respond_info(f'Message: {msg}')
     
     
     def generate_cmd(self, macro):
@@ -88,14 +89,11 @@ class DynamicMacro:
         return DynamicMacro(name, raw, printer, desc=desc)
     
     def run(self, params, rawparams):
-        vars = {}
         kwparams = dict(self.variables)
         kwparams.update(self.template.create_template_context())
         kwparams['params'] = params
         kwparams['rawparams'] = rawparams
-        kwparams['vars'] = vars
         self.template.run_gcode_from_command(kwparams)
-        return vars
     
 def load_config(config):
     return DynamicMacros(config)
