@@ -44,7 +44,7 @@ class DynamicMacros:
         rawparams = gcmd.get_raw_command_parameters()
         macro = self.macros.get(macro_name, self.placeholder)
         self._run_macro(macro, params, rawparams)
-        msg = dir(macro.template)
+        msg = dir(macro.template.template)
         gcmd.respond_info(f'Message: {msg}')
     
     
