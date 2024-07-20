@@ -3,12 +3,14 @@ from .gcode_macro import TemplateWrapper
 from pathlib import Path
 import configparser
 import os
+import logging
 
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
 class DynamicMacros:
     def __init__(self, config):
         self.printer = config.get_printer()
+        DynamicMacros.printer = self.printer
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
         self.macros = {}
@@ -35,12 +37,15 @@ class DynamicMacros:
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
         self._update_macros()
-        macro = gcmd.get('MACRO', '')
-        if not macro:
+        macro_name = gcmd.get('MACRO', '')
+        if not macro_name:
             return
         params = gcmd.get_command_parameters()
         rawparams = gcmd.get_raw_command_parameters()
-        self._run_macro(self.macros.get(macro, self.placeholder), params, rawparams)
+        macro = self.macros.get(macro_name, self.placeholder)
+        self._run_macro(macro, params, rawparams)
+        msg = macro.vars
+        gcmd.respond_info(f'Message: {msg}')
     
     
     def generate_cmd(self, macro):
@@ -51,8 +56,6 @@ class DynamicMacros:
         return cmd
     
     def _run_macro(self, macro, params, rawparams):
-        # self._update_macros()
-        # macro = self.macros.get(macro_name, self.placeholder)
         macro.run(params, rawparams)
     
     def _update_macros(self):
@@ -75,9 +78,20 @@ class DynamicMacro:
         self.raw = raw
         self.printer = printer
         self.desc = desc
-        self.env = jinja2.Environment('{%', '%}', '{', '}')
-        self.template = TemplateWrapper(self.printer, self.env, self.name, self.raw)
         self.variables = {}
+
+        self.gcodes = self.raw.split('\n\n\n')
+        self.templates = []
+        for gcode in self.gcodes:
+            self.templates.append(self.generate_template(gcode))
+    
+    def generate_template(self, gcode):
+        env = jinja2.Environment('{%', '%}', '{', '}')
+        return TemplateWrapper(self.printer, env, self.name, gcode)
+    
+    def update(self, name, val):
+        self.variables[name] = val
+        return val
     
     def from_section(config, section, printer):
         raw = config.get(section, 'gcode')
@@ -86,11 +100,16 @@ class DynamicMacro:
         return DynamicMacro(name, raw, printer, desc=desc)
     
     def run(self, params, rawparams):
+        for template in self.templates:
+            self._run(template, params, rawparams)
+    
+    def _run(self, template, params, rawparams):
         kwparams = dict(self.variables)
-        kwparams.update(self.template.create_template_context())
+        kwparams.update(template.create_template_context())
         kwparams['params'] = params
         kwparams['rawparams'] = rawparams
-        self.template.run_gcode_from_command(kwparams)
+        kwparams['update'] = self.update
+        template.run_gcode_from_command(kwparams)
     
 def load_config(config):
     return DynamicMacros(config)
