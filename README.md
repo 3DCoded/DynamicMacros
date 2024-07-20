@@ -4,9 +4,6 @@
 
 ---
 
-> [!IMPORTANT]
-> This is still a work in progress.
-
 Klipper Dynamic Macros is an unofficial way to update macros without restarting Klipper, so you can update macros mid-print and see their results live. 
 
 ## Documentation
@@ -22,6 +19,13 @@ Your macros are written in a `.cfg` file, then included into your `printer.cfg`.
 ## How Dynamic Macros Work
 
 Your macros are written in a `.cfg` file, then the relative path to that file is configured in a `[dynamicmacros]` config section. The config files are read and parsed every time you run the macro. This method is slightly slower, as the macros have to be reread every time.
+
+## Additional Features
+
+Dynamic Macros also supports additional features over normal GCode macros:
+
+- Recursion
+- In development: Receiving variable updates within one macro
 
 ## Variables
 
