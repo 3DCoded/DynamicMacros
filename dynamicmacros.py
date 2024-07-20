@@ -43,8 +43,8 @@ class DynamicMacros:
         params = gcmd.get_command_parameters()
         rawparams = gcmd.get_raw_command_parameters()
         macro = self.macros.get(macro_name, self.placeholder)
-        self._run_macro(macro, params, rawparams)
-        gcmd.respond_info('Globals: ' + str(macro.get_globals()))
+        vars = self._run_macro(macro, params, rawparams)
+        gcmd.respond_info('Variables: ' + str(vars))
     
     
     def generate_cmd(self, macro):
@@ -81,9 +81,6 @@ class DynamicMacro:
         self.template = TemplateWrapper(self.printer, self.env, self.name, self.raw)
         self.variables = {}
     
-    def get_globals(self):
-        return self.template.globals
-    
     def from_section(config, section, printer):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
@@ -91,28 +88,14 @@ class DynamicMacro:
         return DynamicMacro(name, raw, printer, desc=desc)
     
     def run(self, params, rawparams):
+        vars = {}
         kwparams = dict(self.variables)
         kwparams.update(self.template.create_template_context())
-        kwparams['dynamic_printer'] = DynamicPrinter()
         kwparams['params'] = params
         kwparams['rawparams'] = rawparams
+        kwparams['vars'] = vars
         self.template.run_gcode_from_command(kwparams)
-
-class DynamicPrinter:
-    def __init__(self):
-        pass
-
-    def __hasattribute__(self, name: str):
-        return hasattr(DynamicMacros.printer, name)
-    
-    def __getattribute__(self, name: str):
-        logging.info(f'DynamicMacros GETATTR {name}')
-        logging.info(f'printer.{name} = ')
-        logging.info(DynamicMacros.printer.lookup_object(name))
-        return DynamicMacros.printer.lookup_object(name) or 'NONE'
-
-    def __getitem__(self, item: str):
-        return DynamicMacros.printer[item]
+        return vars
     
 def load_config(config):
     return DynamicMacros(config)
