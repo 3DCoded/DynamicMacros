@@ -3,7 +3,6 @@ from .gcode_macro import TemplateWrapper
 from pathlib import Path
 import configparser
 import os
-import logging
 
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
@@ -36,16 +35,19 @@ class DynamicMacros:
             del self.macros[macro.name]
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
-        self._update_macros()
-        macro_name = gcmd.get('MACRO', '')
-        if not macro_name:
-            return
-        params = gcmd.get_command_parameters()
-        rawparams = gcmd.get_raw_command_parameters()
-        macro = self.macros.get(macro_name, self.placeholder)
-        self._run_macro(macro, params, rawparams)
-        msg = macro.vars
-        gcmd.respond_info(f'Message: {msg}')
+        try:
+            self._update_macros()
+            macro_name = gcmd.get('MACRO', '')
+            if not macro_name:
+                return
+            params = gcmd.get_command_parameters()
+            rawparams = gcmd.get_raw_command_parameters()
+            macro = self.macros.get(macro_name, self.placeholder)
+            self._run_macro(macro, params, rawparams)
+            msg = macro.vars
+            gcmd.respond_info(f'Message: {msg}')
+        except Exception as e:
+            gcmd.respond_error(str(e))
     
     
     def generate_cmd(self, macro):
@@ -92,6 +94,14 @@ class DynamicMacro:
     def update(self, name, val):
         self.variables[name] = val
         return val
+
+    def get_macro_variables(self, macro_name):
+        macro = self.printer.lookup_object(f'gcode_macro {macro_name}')
+        return macro.variables
+
+    def update_from_dict(self, dictionary):
+        self.variables.update(dictionary)
+        return dictionary
     
     def from_section(config, section, printer):
         raw = config.get(section, 'gcode')
