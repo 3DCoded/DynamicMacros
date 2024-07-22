@@ -25,7 +25,8 @@ Your macros are written in a `.cfg` file, then the relative path to that file is
 Dynamic Macros also supports additional features over normal GCode macros:
 
 - Recursion
-- In development: Receiving variable updates within one macro
+- Receiving variable updates within one macro
+- In development: Retrieving all variables from another macro
 
 ## Variables
 
