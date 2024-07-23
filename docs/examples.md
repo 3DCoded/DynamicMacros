@@ -4,7 +4,7 @@ This page will hold several different Dynamic Macro examples. Note that most of 
 
 ## M900
 
-!!! warning "Normal Macro"
+!!! info "Normal Macro"
 
 In Marlin, M900 K is used to set pressure/linear advance. Now, you can use it in Klipper too:
 
