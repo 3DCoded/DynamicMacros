@@ -9,9 +9,6 @@
 - Removing existing Dynamic Macros without restarting Klipper
 - Renaming Dynamic Macros without restarting Klipper
 - Dynamic Macro descriptions
-
-## Experimental
-
-- [X] Dynamic Macro variables
-- [X] Retrieving variables from other macros
-- [ ] Support for `rename_existing`
+- Dynamic Macro variables
+- Retrieving variables from other macros
+- Support for `rename_existing`

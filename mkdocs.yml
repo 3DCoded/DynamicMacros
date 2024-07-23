@@ -48,5 +48,7 @@ nav:
   - Features:
     - features/recursion.md
     - features/receivingvariables.md
+    - features/utilities.md
+    - features/variables.md
   - examples.md
   - devstatus.md
