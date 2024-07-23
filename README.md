@@ -14,7 +14,7 @@ Read the documentation [here](https://3dcoded.github.io/DynamicMacros)
 
 ## Features
 
-- [Recursion]([recursion.md](https://3dcoded.github.io/DynamicMacros/features/recursion)
+- [Recursion](https://3dcoded.github.io/DynamicMacros/features/recursion)
 - [Receiving Variables](https://3dcoded.github.io/DynamicMacros/features/receivingvariables)
 - [Utility Functions](https://3dcoded.github.io/DynamicMacros/features/utilities)
 - [Variables](https://3dcoded.github.io/DynamicMacros/features/variables)
