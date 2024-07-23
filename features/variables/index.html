@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/devstatus/">
+        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/features/variables/">
       
       
-        <link rel="prev" href="../examples/">
+        <link rel="prev" href="../utilities/">
       
       
+        <link rel="next" href="../../examples/">
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.29">
     
     
       
-        <title>Development Status - Klipper Dynamic Macros</title>
+        <title>Variables - Klipper Dynamic Macros</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.76a95c52.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.76a95c52.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#development-status" class="md-skip">
+        <a href="#variables" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Klipper Dynamic Macros" class="md-header__button md-logo" aria-label="Klipper Dynamic Macros" data-md-component="logo">
+    <a href="../.." title="Klipper Dynamic Macros" class="md-header__button md-logo" aria-label="Klipper Dynamic Macros" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -108,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Development Status
+              Variables
             
           </span>
         </div>
@@ -228,7 +230,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Klipper Dynamic Macros" class="md-nav__button md-logo" aria-label="Klipper Dynamic Macros" data-md-component="logo">
+    <a href="../.." title="Klipper Dynamic Macros" class="md-nav__button md-logo" aria-label="Klipper Dynamic Macros" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -258,7 +260,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -278,7 +280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorial/" class="md-nav__link">
+      <a href="../../tutorial/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -295,8 +297,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -311,13 +315,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -331,7 +333,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Features
@@ -345,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/recursion/" class="md-nav__link">
+      <a href="../recursion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -366,7 +368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/receivingvariables/" class="md-nav__link">
+      <a href="../receivingvariables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -387,7 +389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/utilities/" class="md-nav__link">
+      <a href="../utilities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -403,54 +405,6 @@
             
               
                 
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../features/variables/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Variables
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../examples/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Example Macros
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
   
   
     
@@ -469,7 +423,7 @@
           
   
   <span class="md-ellipsis">
-    Development Status
+    Variables
   </span>
   
 
@@ -480,7 +434,7 @@
         
   
   <span class="md-ellipsis">
-    Development Status
+    Variables
   </span>
   
 
@@ -502,9 +456,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#set_dynamic_variable" class="md-nav__link">
     <span class="md-ellipsis">
-      Features
+      SET_DYNAMIC_VARIABLE
     </span>
   </a>
   
@@ -514,6 +468,54 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Example Macros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devstatus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development Status
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -545,9 +547,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#set_dynamic_variable" class="md-nav__link">
     <span class="md-ellipsis">
-      Features
+      SET_DYNAMIC_VARIABLE
     </span>
   </a>
   
@@ -571,20 +573,12 @@
   
 
 
-<h1 id="development-status">Development Status</h1>
-<h2 id="features">Features</h2>
-<ul>
-<li>Editing macros without restarting Klipper</li>
-<li>Accessing printer information from within Dynamic Macros</li>
-<li>Accessing parameters from within Dynamic Macros</li>
-<li>Adding new Dynamic Macros without restarting Klipper</li>
-<li>Removing existing Dynamic Macros without restarting Klipper</li>
-<li>Renaming Dynamic Macros without restarting Klipper</li>
-<li>Dynamic Macro descriptions</li>
-<li>Dynamic Macro variables</li>
-<li>Retrieving variables from other macros</li>
-<li>Support for <code>rename_existing</code></li>
-</ul>
+<h1 id="variables">Variables</h1>
+<p>Dynamic Macro variables work nearly the same way as standard <code>gcode_macro</code> variables. This guide covers the differences.</p>
+<h2 id="set_dynamic_variable">SET_DYNAMIC_VARIABLE</h2>
+<p>Instead of using <code>SET_GCODE_VARIABLE</code>, Dynamic Macros use <code>SET_DYNAMIC_VARIABLE</code> to update Dynamic Macro variables. Example (assuming <code>VAR_TEST</code> is defined from <a href="../utilities/">Utilities</a>):</p>
+<div class="highlight"><pre><span></span><code>SET_DYNAMIC_VARIABLE MACRO=var_test VARIABLE=a VALUE=15
+</code></pre></div>
 
 
 
@@ -631,10 +625,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
     
   </body>
