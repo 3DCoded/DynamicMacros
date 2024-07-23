@@ -29,8 +29,20 @@ class DynamicMacros:
         self.macros[macro.name] = macro
         if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
             self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
-            self.gcode.register_mux_command('SET_GCODE_VARIABLE', 'MACRO', macro.name, macro.cmd_SET_GCODE_VARIABLE, desc="Set the value of a G-Code macro variable")
+            # self.gcode.register_mux_command('SET_GCODE_VARIABLE', 'MACRO', macro.name, macro.cmd_SET_GCODE_VARIABLE, desc="Set the value of a G-Code macro variable")
+            self._register_set_gcode_variable(macro)
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
+    
+    def _register_set_gcode_variable(self, macro):
+        prev = self.gcode.mux_commands.get('SET_GCODE_VARIABLE')
+        if prev is None:
+            handler = lambda gcmd: self.gcode._cmd_mux('SET_GCODE_VARIABLE', gcmd)
+            self.gcode.register_command('SET_GCODE_VARIABLE', handler, desc='Set the value of a G-Code macro variable')
+            self.gcode.mux_commands['SET_GCODE_VARIABLE'] = prev = ('MACRO', {})
+        prev_key, prev_values = prev
+        if prev_key != 'MACRO':
+            return
+        prev_values[macro.name] = macro.cmd_SET_GCODE_VARIABLE
 
     def unregister_macro(self, macro):
         self.gcode.register_command(macro.name.upper(), None)
