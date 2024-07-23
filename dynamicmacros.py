@@ -47,6 +47,7 @@ class DynamicMacros:
             raise gcmd.error("Unable to parse '%s' as a literal: %s" %
                              (value, e))
         if name is not None:
+            name = name.upper()
             if name in self.macros:
                 macro = self.macros[name]
                 macro.variables[variable] = literal
@@ -97,13 +98,18 @@ class DynamicMacros:
                     self.register_macro(macro)
 
 class DynamicMacro:
-    def __init__(self, name, raw, printer, desc='', variables={}):
+    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None):
         self.name = name
         self.raw = raw
         self.printer = printer
+        self.gcode = self.printer.lookup_object('gcode')
         self.desc = desc
         self.variables = variables
+        self.rename_existing = rename_existing
         self.vars = {}
+
+        if self.rename_existing is not None:
+            self.rename()
 
         self.gcodes = self.raw.split('\n\n\n')
         self.templates = []
@@ -113,6 +119,13 @@ class DynamicMacro:
     def generate_template(self, gcode):
         env = jinja2.Environment('{%', '%}', '{', '}')
         return TemplateWrapper(self.printer, env, self.name, gcode)
+    
+    def rename(self):
+        prev_cmd = self.gcode.register_command(self.rename_existing, None)
+        prev_desc = f'Renamed from {prev_cmd}'
+        if prev_cmd is None:
+            return
+        self.gcode.register_command(self.rename_existing, prev_cmd, desc=prev_desc)
     
     def update(self, name, val):
         self.vars[name] = val
@@ -130,12 +143,13 @@ class DynamicMacro:
         raw = config.get(section, 'gcode')
         name = section.split()[1]
         desc = config.get(section, 'description') if config.has_option(section, 'description') else 'No Description'
+        rename_existing = config.get(section, 'rename_existing') if config.has_option(section, 'rename_existing') else None
         variables = {}
         for key, value in config.items(section):
             if key.startswith('variable_'):
                 variable = key[len('variable_'):]
                 variables[variable] = value
-        return DynamicMacro(name, raw, printer, desc=desc, variables=variables)
+        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing)
     
     def run(self, params, rawparams):
         for template in self.templates:
