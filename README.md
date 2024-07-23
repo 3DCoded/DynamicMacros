@@ -33,3 +33,7 @@ Follow the [Tutorial](https://3dcoded.github.io/DynamicMacros/tutorial) to get s
 ## Features
 
 See [Development Status](https://3dcoded.github.io/DynamicMacros/devstatus) for the currently available features, and planned features.
+
+## More Projects
+
+If you like this project, don't forget to give it a star! Also, check out the [3MS](https://github.com/3dcoded/3ms), a modular multimaterial system for Klipper!
