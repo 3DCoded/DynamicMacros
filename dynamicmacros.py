@@ -51,7 +51,7 @@ class DynamicMacros:
             msg = macro.vars
             gcmd.respond_info(f'Message: {msg}')
         except Exception as e:
-            gcmd.respond_error(str(e))
+            gcmd.respond_info(str(e))
     
     def generate_cmd(self, macro):
         def cmd(gcmd):
