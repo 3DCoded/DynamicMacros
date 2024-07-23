@@ -121,8 +121,8 @@ class DynamicMacro:
         return TemplateWrapper(self.printer, env, self.name, gcode)
     
     def rename(self):
-        prev_cmd = self.gcode.register_command(self.rename_existing, None)
-        prev_desc = f'Renamed from {prev_cmd}'
+        prev_cmd = self.gcode.register_command(self.name, None)
+        prev_desc = f'Renamed from {self.name}'
         if prev_cmd is None:
             return
         self.gcode.register_command(self.rename_existing, prev_cmd, desc=prev_desc)
