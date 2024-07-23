@@ -151,6 +151,9 @@ class DynamicMacro:
                 variables[variable] = value
         return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing)
     
+    def get_status(self, *args, **kwargs):
+        return self.variables
+
     def run(self, params, rawparams):
         for template in self.templates:
             self._run(template, params, rawparams)
