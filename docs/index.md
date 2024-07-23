@@ -31,3 +31,7 @@ See [Development Status](devstatus.md) for the currently available features, and
 ## Examples
 
 See [Example Macros](examples.md) for examples of Dynamic Macros.
+
+## More Projects
+
+If you like this project, don't forget to give it a star! Also, check out the [3MS](https://github.com/3dcoded/3ms), a modular multimaterial system for Klipper!
