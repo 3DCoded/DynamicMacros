@@ -4,7 +4,7 @@ This page will hold several different Dynamic Macro examples. Note that most of 
 
 ## M900
 
-!!! info "Normal Macro"
+!!! warning "Normal Macro"
 
 In Marlin, M900 K is used to set pressure/linear advance. Now, you can use it in Klipper too:
 
@@ -20,7 +20,7 @@ gcode:
 
 ## Recursion
 
-!!! info "Dynamic Macros Only"
+!!! success "Dynamic Macro"
 
 This is an example Dynamic Macro to demonstrate the recursive functionality of Dynamic Macros.
 
@@ -39,7 +39,7 @@ gcode:
 
 ## Receiving Position Updates
 
-!!! info "Dynamic Macros Only"
+!!! success "Dynamic Macro"
 
 This is an example Dynamic Macro to demonstrate the ability to receive position updates from within the same macro.
 
@@ -61,7 +61,7 @@ gcode:
 
 ## Preserving Variables
 
-!!! info "Dynamic Macros Only"
+!!! success "Dynamic Macro"
 
 This is an example of how to preserve variables across triple-newlines in Dynamic Macros.
 
