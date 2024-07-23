@@ -45,5 +45,8 @@ theme:
 nav:
   - Home: index.md
   - tutorial.md
+  - Features:
+    - features/recursion.md
+    - features/receivingvariables.md
   - examples.md
   - devstatus.md

@@ -4,19 +4,19 @@
 
 ---
 
-Klipper Dynamic Macros is an unofficial way to update macros without restarting Klipper, so you can update macros mid-print and see their results live. 
+Klipper Dynamic Macros is an unofficial way to update macros without restarting Klipper, so you can update macros mid-print and see their results live. It also supports extra features that normal GCode Macros don't have.
 
 ## How Normal Macros Work
 
-Your macros are written in a `.cfg` file, then included into your `printer.cfg`. When Klipper restarts, it parses these files and saves the macros internally (you can't change them without restarting Klipper). When a macro is called, the cached code is interpreted and run. This method is faster, as the macros don't have to be reread every time.
+Your macros are written in a `.cfg` file, then included into your `printer.cfg`. When Klipper restarts, it parses these files and saves the macros internally (you can't change them without restarting Klipper). When a macro is called, the cached code is interpreted and run.
 
 ## How Dynamic Macros Work
 
-Your macros are written in a `.cfg` file, then the relative path to that file is configured in a `[dynamicmacros]` config section. The config files are read and parsed every time you run the macro. This method is slightly slower, as the macros have to be reread every time.
+Your macros are written in a `.cfg` file, then the relative path to that file is configured in a `[dynamicmacros]` config section. The config files are read and parsed every time you run the macro, allowing you to update macros without restarting Klipper.
 
 ## Variables
 
-Dynamic Macros support all features of normal `gcode_macros`, EXCEPT variables. Here's a simple example of which kind of variables work and won't work with Dynamic Macros.
+Dynamic Macros support all features of normal `gcode_macros`, EXCEPT variables (experimental). Here's a simple example of which kind of variables work and won't work with Dynamic Macros.
 
 === "Works"
     ```cfg
