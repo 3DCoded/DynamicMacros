@@ -39,4 +39,21 @@ gcode:
 
 ## update_from_dict()
 
-The `update_from_dict()` function allows for saving the output of `get_macro_variables()` (or other dictionaries) across 
+The `update_from_dict()` function allows for saving the output of `get_macro_variables()` (or other dictionaries) across the whitespaces when [Receiving Variables](receivingvariables.md). Example:
+
+```cfg
+[gcode_macro MY_SETTINGS]
+variable_a: 10
+variable_b: 20
+gcode:
+    RESPOND MSG="settings"
+
+[gcode_macro GET_SETTINGS]
+gcode:
+    {% set settings = get_macro_variables("MY_SETTINGS") %}
+    {% set settings = update_from_dict(settings) %}
+
+
+    RESPOND MSG="A: {a}" # 10
+    RESPOND MSG="B: {b}" # 20
+```

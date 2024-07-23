@@ -304,6 +304,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-normal-macros-work" class="md-nav__link">
     <span class="md-ellipsis">
       How Normal Macros Work
@@ -322,18 +331,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#variables" class="md-nav__link">
+  <a href="#get-started" class="md-nav__link">
     <span class="md-ellipsis">
-      Variables
+      Get Started
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#should-a-macro-be-dynamic" class="md-nav__link">
+  <a href="#planned-features" class="md-nav__link">
     <span class="md-ellipsis">
-      Should a Macro be Dynamic?
+      Planned Features
     </span>
   </a>
   
@@ -343,15 +352,6 @@
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       Examples
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Features
     </span>
   </a>
   
@@ -381,6 +381,144 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="features/recursion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recursion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="features/receivingvariables/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Receiving Variable Updates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="features/utilities/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Utility Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="features/variables/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Variables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -452,6 +590,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-normal-macros-work" class="md-nav__link">
     <span class="md-ellipsis">
       How Normal Macros Work
@@ -470,18 +617,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#variables" class="md-nav__link">
+  <a href="#get-started" class="md-nav__link">
     <span class="md-ellipsis">
-      Variables
+      Get Started
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#should-a-macro-be-dynamic" class="md-nav__link">
+  <a href="#planned-features" class="md-nav__link">
     <span class="md-ellipsis">
-      Should a Macro be Dynamic?
+      Planned Features
     </span>
   </a>
   
@@ -491,15 +638,6 @@
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       Examples
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Features
     </span>
   </a>
   
@@ -526,43 +664,24 @@
 <h1 id="klipper-dynamic-macros">Klipper Dynamic Macros</h1>
 <p><strong>Never restart Klipper again for simple macros.</strong></p>
 <hr />
-<p>Klipper Dynamic Macros is an unofficial way to update macros without restarting Klipper, so you can update macros mid-print and see their results live. </p>
-<h2 id="how-normal-macros-work">How Normal Macros Work</h2>
-<p>Your macros are written in a <code>.cfg</code> file, then included into your <code>printer.cfg</code>. When Klipper restarts, it parses these files and saves the macros internally (you can't change them without restarting Klipper). When a macro is called, the cached code is interpreted and run. This method is faster, as the macros don't have to be reread every time.</p>
-<h2 id="how-dynamic-macros-work">How Dynamic Macros Work</h2>
-<p>Your macros are written in a <code>.cfg</code> file, then the relative path to that file is configured in a <code>[dynamicmacros]</code> config section. The config files are read and parsed every time you run the macro. This method is slightly slower, as the macros have to be reread every time.</p>
-<h2 id="variables">Variables</h2>
-<p>Dynamic Macros support all features of normal <code>gcode_macros</code>, EXCEPT variables. Here's a simple example of which kind of variables work and won't work with Dynamic Macros.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Works</label><label for="__tabbed_1_2">Doesn't Work</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro test]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.NUMBER|int %}</span>
-<span class="w">    </span><span class="na">M117 Number</span><span class="o">:</span><span class="w"> </span><span class="s">{number}</span>
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro test]</span>
-<span class="na">variable_number</span><span class="o">:</span><span class="w"> </span><span class="s">10</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">M117 Number</span><span class="o">:</span><span class="w"> </span><span class="s">{printer[&quot;gcode_macro test&quot;].number}</span>
-</code></pre></div>
-</div>
-</div>
-</div>
-<p>Dynamic Macros can still read macro variables from normal <code>gcode_macros</code>, but they can't store variables themselves.</p>
-<h2 id="should-a-macro-be-dynamic">Should a Macro be Dynamic?</h2>
-<p>Not all macros will benefit from being dynamic. Here's a few questions you can ask about the macro to see if it should be dynamic:</p>
+<p>Klipper Dynamic Macros is an unofficial way to update macros without restarting Klipper, so you can update macros mid-print and see their results live. It also supports extra features that normal GCode Macros don't have.</p>
+<h2 id="features">Features</h2>
 <ul>
-<li>Is it a macro that is unstable/may break?</li>
-<li>Is it a macro that may need to be edited several times?</li>
+<li><a href="features/recursion/">Recursion</a></li>
+<li><a href="features/receivingvariables/">Receiving Variables</a></li>
+<li><a href="features/utilities/">Utility Functions</a></li>
+<li><a href="features/variables/">Variables</a></li>
 </ul>
-<p>If your answer to either of those was yes, then your macro will likely benefit from being dynamic. Follow the <a href="tutorial/">Tutorial</a> to get started with Dynamic Macros.</p>
+<h2 id="how-normal-macros-work">How Normal Macros Work</h2>
+<p>Your macros are written in a <code>.cfg</code> file, then included into your <code>printer.cfg</code>. When Klipper restarts, it parses these files and saves the macros internally (you can't change them without restarting Klipper). When a macro is called, the cached code is interpreted and run.</p>
+<h2 id="how-dynamic-macros-work">How Dynamic Macros Work</h2>
+<p>Your macros are written in a <code>.cfg</code> file, then the relative path to that file is configured in a <code>[dynamicmacros]</code> config section. The config files are read and parsed every time you run the macro, allowing you to update macros without restarting Klipper.</p>
+<h2 id="get-started">Get Started</h2>
+<p>Follow the <a href="tutorial/">Tutorial</a> to get started with Dynamic Macros.</p>
+<h2 id="planned-features">Planned Features</h2>
+<p>See <a href="devstatus/">Development Status</a> for the currently available features, and planned features.</p>
 <h2 id="examples">Examples</h2>
 <p>See <a href="examples/">Example Macros</a> for examples of Dynamic Macros.</p>
-<h2 id="features">Features</h2>
-<p>See <a href="devstatus/">Development Status</a> for the currently available features, and planned features.</p>
 
 
 
