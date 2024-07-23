@@ -142,6 +142,8 @@ class DynamicMacro:
         kwparams['params'] = params
         kwparams['rawparams'] = rawparams
         kwparams['update'] = self.update
+        kwparams['get_macro_variables'] = self.get_macro_variables
+        kwparams['update_from_dict'] = self.update_from_dict
         template.run_gcode_from_command(kwparams)
     
 def load_config(config):
