@@ -22,6 +22,11 @@ class DynamicMacros:
             self.cmd_DYNAMIC_MACRO,
             desc='Run Dynamic Macro'
         )
+        self.gcode.register_command(
+            'SET_DYNAMIC_VARIABLE',
+            self.cmd_SET_DYNAMIC_VARIABLE,
+            desc="Set the value of a G-Code macro variable"
+        )
 
         self._update_macros()
     
@@ -29,20 +34,22 @@ class DynamicMacros:
         self.macros[macro.name] = macro
         if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
             self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
-            # self.gcode.register_mux_command('SET_GCODE_VARIABLE', 'MACRO', macro.name, macro.cmd_SET_GCODE_VARIABLE, desc="Set the value of a G-Code macro variable")
-            self._register_set_gcode_variable(macro)
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
     
-    def _register_set_gcode_variable(self, macro):
-        prev = self.gcode.mux_commands.get('SET_GCODE_VARIABLE')
-        if prev is None:
-            handler = lambda gcmd: self.gcode._cmd_mux('SET_GCODE_VARIABLE', gcmd)
-            self.gcode.register_command('SET_GCODE_VARIABLE', handler, desc='Set the value of a G-Code macro variable')
-            self.gcode.mux_commands['SET_GCODE_VARIABLE'] = prev = ('MACRO', {})
-        prev_key, prev_values = prev
-        if prev_key != 'MACRO':
-            return
-        prev_values[macro.name] = macro.cmd_SET_GCODE_VARIABLE
+    def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
+        name = gcmd.get('MACRO')
+        variable = gcmd.get('VARIABLE')
+        value = gcmd.get('VALUE')
+        try:
+            literal = ast.literal_eval(value)
+            json.dumps(literal, separators=(',', ':'))
+        except (SyntaxError, TypeError, ValueError) as e:
+            raise gcmd.error("Unable to parse '%s' as a literal: %s" %
+                             (value, e))
+        if name is not None:
+            if name in self.macros:
+                macro = self.macros[name]
+                macro.variables[variable] = literal
 
     def unregister_macro(self, macro):
         self.gcode.register_command(macro.name.upper(), None)
@@ -118,19 +125,6 @@ class DynamicMacro:
     def update_from_dict(self, dictionary):
         self.vars.update(dictionary)
         return dictionary
-    
-    def cmd_SET_GCODE_VARIABLE(self, gcmd):
-        variable = gcmd.get('VARIABLE')
-        value = gcmd.get('VALUE')
-        if variable not in self.variables:
-            raise gcmd.error("Unknown gcode_macro variable '%s'" % (variable,))
-        try:
-            literal = ast.literal_eval(value)
-            json.dumps(literal, separators=(',', ':'))
-        except (SyntaxError, TypeError, ValueError) as e:
-            raise gcmd.error("Unable to parse '%s' as a literal: %s" %
-                             (value, e))
-        self.variables[variable] = literal
     
     def from_section(config: configparser.RawConfigParser, section, printer):
         raw = config.get(section, 'gcode')
