@@ -5,17 +5,20 @@ import configparser
 import os
 import ast
 import json
+from secrets import token_hex
 
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
 class DynamicMacros:
     def __init__(self, config):
+        # Initialize variables
         self.printer = config.get_printer()
         DynamicMacros.printer = self.printer
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-        self.macros = {}
-        self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer)
+
+        self.macros = {} # Holds macros in name: DynamicMacro format
+        self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
         
         self.gcode.register_command(
             'DYNAMIC_MACRO',
@@ -31,21 +34,24 @@ class DynamicMacros:
         self._update_macros()
     
     def register_macro(self, macro):
-        self.macros[macro.name] = macro
+        self.macros[macro.name] = macro # update internal macros list
         if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
-            self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
-            self.printer.objects[f'gcode_macro {macro.name}'] = macro
+            self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro), desc=macro.desc) # register GCode command
+            self.printer.objects[f'gcode_macro {macro.name}'] = macro # trick Klipper into thinking this is a gcode_macro
     
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         name = gcmd.get('MACRO')
         variable = gcmd.get('VARIABLE')
         value = gcmd.get('VALUE')
+
+        # Convert to a literal, if possible
         try:
             literal = ast.literal_eval(value)
             json.dumps(literal, separators=(',', ':'))
         except (SyntaxError, TypeError, ValueError) as e:
             raise gcmd.error("Unable to parse '%s' as a literal: %s" %
                              (value, e))
+        
         if name is not None:
             name = name.upper()
             if name in self.macros:
@@ -53,10 +59,10 @@ class DynamicMacros:
                 macro.variables[variable] = literal
 
     def unregister_macro(self, macro):
-        self.gcode.register_command(macro.name.upper(), None)
+        self.gcode.register_command(macro.name.upper(), None) # unregister GCode command
         if macro in self.macros:
-            self.macros[macro.name] = None
-            del self.macros[macro.name]
+            self.macros[macro.name] = None # update internal macros list
+            del self.macros[macro.name] # remove macro from internal macros list
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
         try:
@@ -67,9 +73,7 @@ class DynamicMacros:
             params = gcmd.get_command_parameters()
             rawparams = gcmd.get_raw_command_parameters()
             macro = self.macros.get(macro_name, self.placeholder)
-            self._run_macro(macro, params, rawparams)
-            msg = macro.vars
-            gcmd.respond_info(f'Message: {msg}')
+            self._run_macro(macro, params, rawparams) # Run macro
         except Exception as e:
             gcmd.respond_info(str(e))
     
@@ -85,9 +89,9 @@ class DynamicMacros:
     
     def _update_macros(self):
         for macro in self.macros.values():
-            self.unregister_macro(macro)
+            self.unregister_macro(macro) # unregister all macros
         for fname in self.fnames:
-            path = config_path / fname
+            path = config_path / fname # create full file path
             config = configparser.RawConfigParser()
             config.read(path)
             for section in config.sections():
@@ -138,6 +142,25 @@ class DynamicMacro:
     def update_from_dict(self, dictionary):
         self.vars.update(dictionary)
         return dictionary
+
+    def python(self, python):
+        key = f'_python{token_hex()}'
+        def output(value):
+            return self.update(key, value)
+        python_vars = {}
+        for k, v in self.kwparams.items():
+            python_vars[k] = v
+        python_vars['output'] = output
+        python_vars['gcode'] = self.gcode.run_script_from_command
+        try:
+            exec(
+                python,
+                globals=python_vars,
+                locals=python_vars,
+            )
+        except Exception as e:
+            self.gcode.respond_info(f'ERROR:\n{e}')
+        return self.variables.get(key)
     
     def from_section(config: configparser.RawConfigParser, section, printer):
         raw = config.get(section, 'gcode')
@@ -153,12 +176,8 @@ class DynamicMacro:
     
     def get_status(self, *args, **kwargs):
         return self.variables
-
-    def run(self, params, rawparams):
-        for template in self.templates:
-            self._run(template, params, rawparams)
     
-    def _run(self, template, params, rawparams):
+    def update_kwparams(self, template, params, rawparams):
         kwparams = dict(self.variables)
         kwparams.update(self.vars)
         kwparams.update(template.create_template_context())
@@ -167,7 +186,15 @@ class DynamicMacro:
         kwparams['update'] = self.update
         kwparams['get_macro_variables'] = self.get_macro_variables
         kwparams['update_from_dict'] = self.update_from_dict
-        template.run_gcode_from_command(kwparams)
+        self.kwparams = kwparams
+
+    def run(self, params, rawparams):
+        for template in self.templates:
+            self._run(template, params, rawparams)
+    
+    def _run(self, template, params, rawparams):
+        self.update_kwparams(template, params, rawparams)
+        template.run_gcode_from_command(self.kwparams)
     
 def load_config(config):
     return DynamicMacros(config)
