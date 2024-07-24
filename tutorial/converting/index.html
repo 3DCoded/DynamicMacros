@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/features/recursion/">
+        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/tutorial/converting/">
       
       
-        <link rel="prev" href="../../tutorial/experimental/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../receivingvariables/">
+        <link rel="next" href="../usingfeatures/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Recursion - Klipper Dynamic Macros</title>
+        <title>Converting to Dynamic Macros - Klipper Dynamic Macros</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#recursion" class="md-skip">
+        <a href="#converting-to-dynamic-macros" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Recursion
+              Converting to Dynamic Macros
             
           </span>
         </div>
@@ -297,19 +297,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -323,7 +323,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Tutorial
@@ -337,7 +337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -355,10 +355,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../tutorial/converting/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Converting to Dynamic Macros
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -367,6 +387,44 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#printercfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      printer.cfg
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-macros-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Macros Configuration
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -379,7 +437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/usingfeatures/" class="md-nav__link">
+      <a href="../usingfeatures/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -400,7 +458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/experimental/" class="md-nav__link">
+      <a href="../experimental/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -425,19 +483,19 @@
       
   
   
-    
   
   
-  
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -451,7 +509,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Features
@@ -462,19 +520,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../features/recursion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -483,7 +532,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -496,7 +544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../receivingvariables/" class="md-nav__link">
+      <a href="../../features/receivingvariables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utilities/" class="md-nav__link">
+      <a href="../../features/utilities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -538,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../variables/" class="md-nav__link">
+      <a href="../../features/variables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -619,6 +667,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#printercfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      printer.cfg
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-macros-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Macros Configuration
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -632,7 +706,7 @@
                   
 
   
-    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/features/recursion.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/tutorial/converting.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -640,8 +714,31 @@
   
 
 
-<h1 id="recursion">Recursion</h1>
-<p>Unlike normal <code>gcode_macro</code>s, Dynamic Macros supports recursion (allowing a macro to call itself). For more examples, see <a href="../../examples/#recursion">Examples</a></p>
+<h1 id="converting-to-dynamic-macros">Converting to Dynamic Macros</h1>
+<p>Follow this tutorial to convert your standard <code>gcode_macro</code> to a Dynamic Macro. </p>
+<h2 id="printercfg">printer.cfg</h2>
+<p>First, remove the <code>include</code> line in your <code>printer.cfg</code> referencing the file your macros are in. For example, if your macros are in <code>macros.cfg</code>, remove the line:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[include macros.cfg]</span>
+</code></pre></div>
+<p>from your <code>printer.cfg</code>.</p>
+<h2 id="dynamic-macros-configuration">Dynamic Macros Configuration</h2>
+<p>Next, if you don't already have one, create a <code>[dynamicmacros]</code> config section in your <code>printer.cfg</code> and add your macro configuration to it:</p>
+<div class="highlight"><span class="filename">printer.cfg</span><pre><span></span><code><span class="k">[dynamicmacros]</span>
+<span class="na">configs</span><span class="o">:</span><span class="w"> </span><span class="s">macros.cfg</span><span class="w"> </span><span class="c1"># You can add more files to this list, separated by commas.</span>
+</code></pre></div>
+<details class="tip">
+<summary>KlipperScreen</summary>
+<p>If you convert your <code>LOAD_FILAMENT</code> and <code>UNLOAD_FILAMENT</code> macros to be dynamic, KlipperScreen may not recognize them and report an error. To fix this, add blank macros to your <code>printer.cfg</code>, before your <code>[dynamicmacros]</code> section. Example:
+<div class="highlight"><span class="filename">printer.cfg</span><pre><span></span><code><span class="k">[gcode_macro LOAD_FILAMENT]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">M117 LOAD</span>
+<span class="k">[gcode_macro UNLOAD_FILAMENT]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">M117 UNLOAD</span>
+</code></pre></div></p>
+</details>
+<p>Restart Klipper.</p>
+<p>That's it. Your macros are now Dynamic Macros.</p>
 
 
 

@@ -280,11 +280,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorial/" class="md-nav__link">
+      <a href="../setup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Tutorial
+    Setup
   </span>
   
 
@@ -301,16 +301,6 @@
   
     
     
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -326,7 +316,7 @@
             
   
   <span class="md-ellipsis">
-    Features
+    Tutorial
   </span>
   
 
@@ -335,6 +325,134 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Table of Contents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/converting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Converting to Dynamic Macros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/usingfeatures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Dynamic Macros Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/experimental/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Experimental Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Features
           </label>
@@ -651,16 +769,29 @@
 <div class="admonition success">
 <p class="admonition-title">Dynamic Macro</p>
 </div>
-<p>This is an example Dynamic Macro to demonstrate the recursive functionality of Dynamic Macros.</p>
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro RECURSION_TEST]</span>
+<p>These are a few example Dynamic Macros to demonstrate the recursive functionality of Dynamic Macros.</p>
+<div class="highlight"><span class="filename">Counting to 10</span><pre><span></span><code><span class="k">[gcode_macro COUNT]</span>
 <span class="na">gcode</span><span class="o">:</span>
-<span class="w">  </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.NUM|default(5)|int %}</span>
-<span class="w">  </span><span class="na">{% if num</span><span class="w"> </span><span class="o">=</span><span class="s">= 0 %}</span>
-<span class="w">  </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;End&quot;</span>
-<span class="w">  </span><span class="na">{% else %}</span>
-<span class="w">  </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{num}</span>
-<span class="w">  </span><span class="na">RECURSION_TEST NUM</span><span class="o">=</span><span class="s">{num-1}</span>
-<span class="w">  </span><span class="na">{% endif %}</span>
+<span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.NUM|default(1)|int %}</span>
+<span class="w">    </span><span class="na">{% if num &lt;</span><span class="o">=</span><span class="w"> </span><span class="s">10 %}</span>
+<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{num}</span>
+<span class="w">        </span><span class="na">COUNT NUM</span><span class="o">=</span><span class="s">{num+1}</span><span class="w"> </span><span class="c1"># Count up 1</span>
+<span class="w">    </span><span class="na">{% else %}</span>
+<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Done Counting&quot;</span>
+<span class="w">    </span><span class="na">{% endif %}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Load to Filament Sensor</span><pre><span></span><code><span class="k">[gcode_macro LOAD_TO_FSENSOR]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">{% set val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">printer[&quot;filament_sensor fsensor&quot;].filament_detected %}</span>
+<span class="w">    </span><span class="na">{% if val</span><span class="w"> </span><span class="o">=</span><span class="s">= 0 %}</span>
+<span class="w">        </span><span class="na">M83</span>
+<span class="w">        </span><span class="na">G1 E50 F900 # Move filament 50mm forwards</span>
+<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Waiting for fsensor&quot;</span>
+<span class="w">        </span><span class="na">LOAD_TO_FSENSOR # Recursion</span>
+<span class="w">    </span><span class="na">{% else %}</span>
+<span class="w">        </span><span class="na">G1 E65 F900 # Move filament to nozzle</span>
+<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Filament Loaded&quot;</span>
+<span class="w">    </span><span class="na">{% endif %}</span>
 </code></pre></div>
 <h2 id="receiving-position-updates">Receiving Position Updates</h2>
 <div class="admonition success">
@@ -741,7 +872,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.action.edit", "navigation.indexes", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>

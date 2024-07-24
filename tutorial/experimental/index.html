@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/features/recursion/">
+        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/tutorial/experimental/">
       
       
-        <link rel="prev" href="../../tutorial/experimental/">
+        <link rel="prev" href="../usingfeatures/">
       
       
-        <link rel="next" href="../receivingvariables/">
+        <link rel="next" href="../../features/recursion/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Recursion - Klipper Dynamic Macros</title>
+        <title>Experimental Features - Klipper Dynamic Macros</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#recursion" class="md-skip">
+        <a href="#experimental-features" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Recursion
+              Experimental Features
             
           </span>
         </div>
@@ -297,19 +297,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -323,7 +323,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Tutorial
@@ -337,7 +337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -358,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/converting/" class="md-nav__link">
+      <a href="../converting/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -379,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/usingfeatures/" class="md-nav__link">
+      <a href="../usingfeatures/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -397,10 +397,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../tutorial/experimental/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Experimental Features
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -409,6 +429,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-python-from-within-a-macro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running Python from within a Macro
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running Python from within a Macro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python Math
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-file-running-gcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python File Running GCode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -425,19 +498,19 @@
       
   
   
-    
   
   
-  
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -451,7 +524,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Features
@@ -462,19 +535,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../features/recursion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -483,7 +547,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -496,7 +559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../receivingvariables/" class="md-nav__link">
+      <a href="../../features/receivingvariables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utilities/" class="md-nav__link">
+      <a href="../../features/utilities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -538,7 +601,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../variables/" class="md-nav__link">
+      <a href="../../features/variables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -619,6 +682,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-python-from-within-a-macro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running Python from within a Macro
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running Python from within a Macro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python Math
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-file-running-gcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python File Running GCode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -632,7 +736,7 @@
                   
 
   
-    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/features/recursion.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/tutorial/experimental.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -640,8 +744,52 @@
   
 
 
-<h1 id="recursion">Recursion</h1>
-<p>Unlike normal <code>gcode_macro</code>s, Dynamic Macros supports recursion (allowing a macro to call itself). For more examples, see <a href="../../examples/#recursion">Examples</a></p>
+<h1 id="experimental-features">Experimental Features</h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The features on this page are experimental, and untested or only lightly tested. Proceed at your own risk.</p>
+</div>
+<h2 id="running-python-from-within-a-macro">Running Python from within a Macro</h2>
+<div class="admonition info">
+<p class="admonition-title">Disclaimer</p>
+<p>This functionality allows Dynamic Macros to gain significant control over your printer and Klipper host. I am not responsible for whatever happens if you download a malicious macro.</p>
+</div>
+<p>There are three main reasons why this could be helpful:</p>
+<ol>
+<li>Allowing for deeper control of Klipper and the Klipper host</li>
+<li>A learning bridge for creating Klipper plugins/extras</li>
+<li>A tool to help develop Klipper plugins/extras without restarting Klipper</li>
+</ol>
+<p>First, get on the <code>dev</code> branch:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/DynamicMacros
+git<span class="w"> </span>checkout<span class="w"> </span>dev
+git<span class="w"> </span>pull<span class="w"> </span>origin
+sh<span class="w"> </span>install.sh
+sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>restart
+</code></pre></div>
+<p>To run Python from within a Dynamic Macro, use either the <code>python()</code> utility function, or the <code>python_file()</code> utility function. The <code>python()</code> function accepts python code as a multiline string, and the <code>python_file()</code> function accepts a filename (relative to your <code>printer.cfg</code> folder).</p>
+<p>Here are a few examples:</p>
+<h3 id="python-math">Python Math</h3>
+<div class="highlight"><span class="filename">macros.cfg</span><pre><span></span><code><span class="k">[gcode_macro MATH]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">{% set value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python(&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="na">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">kwargs[&#39;a&#39;]</span>
+<span class="w">    </span><span class="na">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">kwargs[&#39;b&#39;]</span>
+<span class="w">    </span><span class="na">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">a + b</span>
+<span class="w">    </span><span class="na">output(c)</span>
+<span class="w">    </span><span class="na">&quot;&quot;&quot;, a</span><span class="o">=</span><span class="s">1, b=2) %}</span>
+<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{value}</span>
+</code></pre></div>
+<h3 id="python-file-running-gcode">Python File Running GCode</h3>
+<div class="highlight"><span class="filename">macros.cfg</span><pre><span></span><code><span class="k">[gcode_macro PYFILE]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">{% set value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python_file(&quot;test.py&quot;) %}</span>
+<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{value}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">test.py</span><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello from Python!&quot;</span><span class="p">)</span>
+<span class="n">gcode</span><span class="p">(</span><span class="s2">&quot;G28</span><span class="se">\n</span><span class="s2">G1 X100 Y100 Z100 F1200&quot;</span><span class="p">)</span>
+<span class="n">output</span><span class="p">(</span><span class="s2">&quot;GCode Executed&quot;</span><span class="p">)</span>
+</code></pre></div>
 
 
 

@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/features/recursion/">
+        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/tutorial/usingfeatures/">
       
       
-        <link rel="prev" href="../../tutorial/experimental/">
+        <link rel="prev" href="../converting/">
       
       
-        <link rel="next" href="../receivingvariables/">
+        <link rel="next" href="../experimental/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Recursion - Klipper Dynamic Macros</title>
+        <title>Using Dynamic Macros Features - Klipper Dynamic Macros</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#recursion" class="md-skip">
+        <a href="#using-dynamic-macros-features" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Recursion
+              Using Dynamic Macros Features
             
           </span>
         </div>
@@ -297,19 +297,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -323,7 +323,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Tutorial
@@ -337,7 +337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -358,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/converting/" class="md-nav__link">
+      <a href="../converting/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -376,10 +376,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../tutorial/usingfeatures/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Using Dynamic Macros Features
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -388,6 +408,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recursion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiving-variable-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving Variable Updates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utility-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utility Functions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -400,7 +467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/experimental/" class="md-nav__link">
+      <a href="../experimental/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -425,19 +492,19 @@
       
   
   
-    
   
   
-  
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -451,7 +518,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Features
@@ -462,19 +529,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../features/recursion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -483,7 +541,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -496,7 +553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../receivingvariables/" class="md-nav__link">
+      <a href="../../features/receivingvariables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utilities/" class="md-nav__link">
+      <a href="../../features/utilities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -538,7 +595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../variables/" class="md-nav__link">
+      <a href="../../features/variables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -619,6 +676,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recursion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiving-variable-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving Variable Updates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utility-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utility Functions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -632,7 +724,7 @@
                   
 
   
-    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/features/recursion.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/tutorial/usingfeatures.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -640,8 +732,40 @@
   
 
 
-<h1 id="recursion">Recursion</h1>
-<p>Unlike normal <code>gcode_macro</code>s, Dynamic Macros supports recursion (allowing a macro to call itself). For more examples, see <a href="../../examples/#recursion">Examples</a></p>
+<h1 id="using-dynamic-macros-features">Using Dynamic Macros Features</h1>
+<p>Now that your macros are dynamic, you can use the powerful feature set of Dynamic Macros.</p>
+<h2 id="recursion"><a href="../../features/recursion/">Recursion</a></h2>
+<p>Recursion allows a macro to call itself, something standard GCode macros can't do. </p>
+<p>When using recursion, it's important to make sure your macro has an "end case". This is a case when the macro won't call itself again. Otherwise the macro will be stuck in an infinite loop and freeze Klipper.</p>
+<p>Here are a few examples of recursion:</p>
+<div class="highlight"><span class="filename">Counting to 10</span><pre><span></span><code><span class="k">[gcode_macro COUNT]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.NUM|default(1)|int %}</span>
+<span class="w">    </span><span class="na">{% if num &lt;</span><span class="o">=</span><span class="w"> </span><span class="s">10 %}</span>
+<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{num}</span>
+<span class="w">        </span><span class="na">COUNT NUM</span><span class="o">=</span><span class="s">{num+1}</span><span class="w"> </span><span class="c1"># Count up 1</span>
+<span class="w">    </span><span class="na">{% else %}</span>
+<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Done Counting&quot;</span>
+<span class="w">    </span><span class="na">{% endif %}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Load to Filament Sensor</span><pre><span></span><code><span class="k">[gcode_macro LOAD_TO_FSENSOR]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">{% set val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">printer[&quot;filament_sensor fsensor&quot;].filament_detected %}</span>
+<span class="w">    </span><span class="na">{% if val</span><span class="w"> </span><span class="o">=</span><span class="s">= 0 %}</span>
+<span class="w">        </span><span class="na">M83</span>
+<span class="w">        </span><span class="na">G1 E50 F900 # Move filament 50mm forwards</span>
+<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Waiting for fsensor&quot;</span>
+<span class="w">        </span><span class="na">LOAD_TO_FSENSOR # Recursion</span>
+<span class="w">    </span><span class="na">{% else %}</span>
+<span class="w">        </span><span class="na">G1 E65 F900 # Move filament to nozzle</span>
+<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Filament Loaded&quot;</span>
+<span class="w">    </span><span class="na">{% endif %}</span>
+</code></pre></div>
+<h2 id="receiving-variable-updates"><a href="../../features/receivingvariables/">Receiving Variable Updates</a></h2>
+<p>Receiving variable updates allows Dynamic Macros to update variables without rerunning the macro. </p>
+<p>An example of this is getting the printer's position. A standard GCode macro will evaluate all the variables, then run the GCode. However, using three newlines (two blank lines) between code segments in Dynamic Macros will allow each segment to be evaluated at runtime, allowing for variable updates.</p>
+<h2 id="utility-functions"><a href="../../features/utilities/">Utility Functions</a></h2>
+<p>See the link above (the subtitle) for more information on utility functions.</p>
 
 
 
