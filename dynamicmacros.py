@@ -156,7 +156,6 @@ class DynamicMacro:
             exec(
                 python,
                 python_vars,
-                python_vars,
             )
         except Exception as e:
             self.gcode.respond_info(f'ERROR:\n{e}')
