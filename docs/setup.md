@@ -69,6 +69,12 @@ Test successful!
 
 - [Recursion](recursion.md)
 - [Receiving Variable Updates](receivingvariables.md)
+- [Utility Functions](utilities.md)
+- [Variables](variables.md)
+
+## Tutorial
+
+Follow the [Tutorial](tutorial/index.md).
 
 ## When to Restart Klipper or Reload Dynamic Macros
 
