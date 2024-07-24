@@ -12,3 +12,8 @@
 - Dynamic Macro variables
 - Retrieving variables from other macros
 - Support for `rename_existing`
+
+## Planned Features
+
+- [ ] Running Python internally inside macros
+- [ ] Allow configuring multiple `dynamicmacros` config sections

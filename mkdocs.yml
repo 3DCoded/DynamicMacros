@@ -1,6 +1,7 @@
 site_name: Klipper Dynamic Macros
 site_url: https://3dcoded.github.io/DynamicMacros
 repo_url: https://github.com/3dcoded/DynamicMacros
+edit_uri: blob/docs/docs/
 plugins:
   - search
   - autolinks
@@ -20,10 +21,12 @@ markdown_extensions:
       alternate_style: true
 theme:
   features:
+      - content.action.edit
       - navigation.indexes
       - navigation.expand
       - navigation.instant
       - navigation.instant.prefetch
+      - content.code.copy
       - search.suggest
       - search.highlight
       - search.share
