@@ -143,7 +143,7 @@ class DynamicMacro:
         self.vars.update(dictionary)
         return dictionary
 
-    def python(self, python):
+    def python(self, python, *args, **kwargs):
         key = f'_python{token_hex()}'
         def output(value):
             return self.update(key, value)
@@ -154,6 +154,8 @@ class DynamicMacro:
         python_vars['gcode'] = self.gcode.run_script_from_command
         python_vars['printer'] = self.printer
         python_vars['print'] = lambda *args: self.gcode.run_script_from_command('RESPOND MSG="' + ' '.join(map(str, args)) + '"')
+        python_vars['args'] = args
+        python_vars['kwargs'] = kwargs
         try:
             exec(
                 python,
