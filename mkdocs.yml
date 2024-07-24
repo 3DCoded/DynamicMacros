@@ -22,7 +22,6 @@ markdown_extensions:
 theme:
   features:
       - content.action.edit
-      - navigation.indexes
       - navigation.expand
       - navigation.instant
       - navigation.instant.prefetch
@@ -47,7 +46,12 @@ theme:
         name: Switch to light mode
 nav:
   - Home: index.md
-  - tutorial.md
+  - setup.md
+  - Tutorial:
+    - tutorial/index.md
+    - tutorial/converting.md
+    - tutorial/usingfeatures.md
+    - tutorial/experimental.md
   - Features:
     - features/recursion.md
     - features/receivingvariables.md

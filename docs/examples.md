@@ -22,19 +22,33 @@ gcode:
 
 !!! success "Dynamic Macro"
 
-This is an example Dynamic Macro to demonstrate the recursive functionality of Dynamic Macros.
+These are a few example Dynamic Macros to demonstrate the recursive functionality of Dynamic Macros.
 
-```cfg
-[gcode_macro RECURSION_TEST]
+```cfg title="Counting to 10"
+[gcode_macro COUNT]
 gcode:
-  {% set num = params.NUM|default(5)|int %}
-  {% if num == 0 %}
-  RESPOND MSG="End"
-  {% else %}
-  RESPOND MSG={num}
-  RECURSION_TEST NUM={num-1}
-  {% endif %}
-  
+    {% set num = params.NUM|default(1)|int %}
+    {% if num <= 10 %}
+        RESPOND MSG={num}
+        COUNT NUM={num+1} # Count up 1
+    {% else %}
+        RESPOND MSG="Done Counting"
+    {% endif %}
+```
+
+```cfg title="Load to Filament Sensor"
+[gcode_macro LOAD_TO_FSENSOR]
+gcode:
+    {% set val = printer["filament_sensor fsensor"].filament_detected %}
+    {% if val == 0 %}
+        M83
+        G1 E50 F900 # Move filament 50mm forwards
+        RESPOND MSG="Waiting for fsensor"
+        LOAD_TO_FSENSOR # Recursion
+    {% else %}
+        G1 E65 F900 # Move filament to nozzle
+        RESPOND MSG="Filament Loaded"
+    {% endif %}
 ```
 
 ## Receiving Position Updates

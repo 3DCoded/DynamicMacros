@@ -16,7 +16,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://3dcoded.github.io/DynamicMacros/tutorial/</loc>
+         <loc>https://3dcoded.github.io/DynamicMacros/setup/</loc>
          <lastmod>2024-07-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -37,6 +37,26 @@
     </url>
     <url>
          <loc>https://3dcoded.github.io/DynamicMacros/features/variables/</loc>
+         <lastmod>2024-07-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://3dcoded.github.io/DynamicMacros/tutorial/</loc>
+         <lastmod>2024-07-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://3dcoded.github.io/DynamicMacros/tutorial/converting/</loc>
+         <lastmod>2024-07-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://3dcoded.github.io/DynamicMacros/tutorial/experimental/</loc>
+         <lastmod>2024-07-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://3dcoded.github.io/DynamicMacros/tutorial/usingfeatures/</loc>
          <lastmod>2024-07-24</lastmod>
          <changefreq>daily</changefreq>
     </url>

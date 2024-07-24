@@ -1,4 +1,4 @@
-# Tutorial
+# Setup
 
 Follow this guide to setup and confiure Dynamic Macros.
 
@@ -20,7 +20,7 @@ To configure Dynamic Macros, put in your `printer.cfg` (or a file included in it
 
 ```cfg title="printer.cfg"
 [dynamicmacros]
-macros: dynamic.cfg
+configs: dynamic.cfg
 ```
 
 Create a new file in the same folder as your `printer.cfg` called `dynamic.cfg`. In it, configure some macros like you normally would. Example:
