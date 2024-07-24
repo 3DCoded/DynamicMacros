@@ -165,13 +165,13 @@ class DynamicMacro:
             self.gcode.respond_info(f'Python Error:\n{e}')
         return self.vars.get(key)
 
-    def python_file(self, fname):
+    def python_file(self, fname, *args, **kwargs):
         try:
             with open(config_path / fname, 'r') as file:
                 text = file.read()
         except Exception as e:
             self.gcode.respond_info('Python file missing')
-        return self.python(text)
+        return self.python(text, *args, **kwargs)
     
     def from_section(config: configparser.RawConfigParser, section, printer):
         raw = config.get(section, 'gcode')
