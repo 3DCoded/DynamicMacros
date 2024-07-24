@@ -158,8 +158,8 @@ class DynamicMacro:
                 python_vars,
             )
         except Exception as e:
-            self.gcode.respond_info(f'ERROR:\n{e}')
-        return self.variables.get(key)
+            self.gcode.respond_info(f'Python Error:\n{e}')
+        return self.vars.get(key)
     
     def from_section(config: configparser.RawConfigParser, section, printer):
         raw = config.get(section, 'gcode')
