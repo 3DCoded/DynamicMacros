@@ -153,6 +153,7 @@ class DynamicMacro:
         python_vars['output'] = output
         python_vars['gcode'] = self.gcode.run_script_from_command
         python_vars['printer'] = self.printer
+        python_vars['print'] = lambda *args: self.gcode.run_script_from_command('RESPOND MSG="' + ' '.join(map(str, args)) + '"')
         try:
             exec(
                 python,
@@ -161,6 +162,14 @@ class DynamicMacro:
         except Exception as e:
             self.gcode.respond_info(f'Python Error:\n{e}')
         return self.vars.get(key)
+
+    def python_file(self, fname):
+        try:
+            with open(config_path / fname, 'r') as file:
+                text = file.read()
+        except Exception as e:
+            self.gcode.respond_info('Python file missing')
+        return self.python(text)
     
     def from_section(config: configparser.RawConfigParser, section, printer):
         raw = config.get(section, 'gcode')
@@ -187,6 +196,7 @@ class DynamicMacro:
         kwparams['get_macro_variables'] = self.get_macro_variables
         kwparams['update_from_dict'] = self.update_from_dict
         kwparams['python'] = self.python
+        kwparams['python_file'] = self.python_file
         self.kwparams = kwparams
 
     def run(self, params, rawparams):
