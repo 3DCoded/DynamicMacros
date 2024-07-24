@@ -186,6 +186,7 @@ class DynamicMacro:
         kwparams['update'] = self.update
         kwparams['get_macro_variables'] = self.get_macro_variables
         kwparams['update_from_dict'] = self.update_from_dict
+        kwparams['python'] = self.python
         self.kwparams = kwparams
 
     def run(self, params, rawparams):
