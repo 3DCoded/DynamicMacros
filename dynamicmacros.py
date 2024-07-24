@@ -152,6 +152,7 @@ class DynamicMacro:
             python_vars[k] = v
         python_vars['output'] = output
         python_vars['gcode'] = self.gcode.run_script_from_command
+        python_vars['printer'] = self.printer
         try:
             exec(
                 python,
