@@ -104,7 +104,7 @@ class DynamicMacros:
                     self.register_macro(macro) # register new macro
 
 class DynamicMacro:
-    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None):
+    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None, repeat=False):
         # initialize variables
         self.name = name
         self.raw = raw
@@ -113,7 +113,15 @@ class DynamicMacro:
         self.desc = desc
         self.variables = variables
         self.rename_existing = rename_existing
+        self.initial_duration = initial_duration
+        self.repeat = repeat
         self.vars = {}
+
+        if self.initial_duration is not None:
+            self.reactor = self.printer.get_reactor()
+            self.timer_handler = None
+            self.inside_timer = False
+            self.printer.register_event_handler("klippy:ready", self._handle_ready)
 
         if self.rename_existing is not None:
             self.rename() # rename previous macro if necessary
@@ -122,6 +130,20 @@ class DynamicMacro:
         self.templates = []
         for gcode in self.gcodes:
             self.templates.append(self.generate_template(gcode))
+    
+    def _handle_ready(self):
+        waketime = self.reactor.monotonic() + self.interval
+        self.timer_handler = self.reactor.register_timer(
+            self._gcode_timer_event, waketime)
+        
+    def _gcode_timer_event(self, eventtime):
+        self.inside_timer = True
+        nextwake = self.reactor.NEVER
+        if self.repeat:
+            nextwake = eventtime + self.initial_duration
+        self.run({}, '')
+        self.inside_timer = False
+        return nextwake
     
     def generate_template(self, gcode):
         env = jinja2.Environment('{%', '%}', '{', '}')
@@ -191,12 +213,14 @@ class DynamicMacro:
         name = section.split()[1]
         desc = config.get(section, 'description') if config.has_option(section, 'description') else 'No Description'
         rename_existing = config.get(section, 'rename_existing') if config.has_option(section, 'rename_existing') else None
+        initial_duration = config.get(section, 'initial_duration') if config.has_section('initial_duration') else None
+        repeat = config.getboolean(section, 'repeat') if config.has_section('repeat') else False
         variables = {}
         for key, value in config.items(section):
             if key.startswith('variable_'):
                 variable = key[len('variable_'):]
                 variables[variable] = value
-        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing)
+        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
     
     def get_status(self, *args, **kwargs):
         return self.variables
