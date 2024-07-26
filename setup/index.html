@@ -335,6 +335,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Configuration
@@ -719,6 +728,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Configuration
@@ -793,6 +811,22 @@
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/3DCoded/DynamicMacros
 <span class="nb">cd</span><span class="w"> </span>DynamicMacros
+sh<span class="w"> </span>install.sh
+sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>restart
+</code></pre></div>
+<p>Add to your <code>moonraker.conf</code>:</p>
+<div class="highlight"><span class="filename">moonraker.conf</span><pre><span></span><code><span class="c1"># DynamicMacros Update Manager</span>
+<span class="k">[update_manager DynamicMacros]</span>
+<span class="na">type</span><span class="o">:</span><span class="w"> </span><span class="s">git_repo</span>
+<span class="na">path</span><span class="o">:</span><span class="w"> </span><span class="s">~/DynamicMacros</span>
+<span class="na">origin</span><span class="o">:</span><span class="w"> </span><span class="s">https://github.com/3DCoded/DynamicMacros.git</span>
+<span class="na">primary_branch</span><span class="o">:</span><span class="w"> </span><span class="s">main</span>
+<span class="na">is_system_service</span><span class="o">:</span><span class="w"> </span><span class="s">False</span>
+<span class="na">install_script</span><span class="o">:</span><span class="w"> </span><span class="s">install.sh</span>
+</code></pre></div>
+<h2 id="updating">Updating</h2>
+<p>First, update via Moonraker's update manager. Then run in your terminal:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/DynamicMacros
 sh<span class="w"> </span>install.sh
 sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>restart
 </code></pre></div>
