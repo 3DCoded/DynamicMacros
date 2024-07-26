@@ -92,17 +92,20 @@ class DynamicMacros:
             self.unregister_macro(macro) # unregister all macros
         for fname in self.fnames:
             path = config_path / fname # create full file path
+
+            # Pase config files
             config = configparser.RawConfigParser()
             config.read(path)
             for section in config.sections():
-                if section.split()[0] == 'gcode_macro':
-                    name = section.split()[1]
-                    macro = DynamicMacro.from_section(config, section, self.printer)
+                if section.split()[0] == 'gcode_macro': # Check if section is a gcode_macro
+                    name = section.split()[1] # get name
+                    macro = DynamicMacro.from_section(config, section, self.printer) # create DynamicMacro from config section
                     self.macros[name] = macro
-                    self.register_macro(macro)
+                    self.register_macro(macro) # register new macro
 
 class DynamicMacro:
     def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None):
+        # initialize variables
         self.name = name
         self.raw = raw
         self.printer = printer
@@ -113,9 +116,9 @@ class DynamicMacro:
         self.vars = {}
 
         if self.rename_existing is not None:
-            self.rename()
+            self.rename() # rename previous macro if necessary
 
-        self.gcodes = self.raw.split('\n\n\n')
+        self.gcodes = self.raw.split('\n\n\n') # split gcode by triple-newlines
         self.templates = []
         for gcode in self.gcodes:
             self.templates.append(self.generate_template(gcode))
@@ -125,24 +128,30 @@ class DynamicMacro:
         return TemplateWrapper(self.printer, env, self.name, gcode)
     
     def rename(self):
-        prev_cmd = self.gcode.register_command(self.name, None)
+        prev_cmd = self.gcode.register_command(self.name, None) # get previous command
         prev_desc = f'Renamed from {self.name}'
         if prev_cmd is None:
             return
-        self.gcode.register_command(self.rename_existing, prev_cmd, desc=prev_desc)
+        self.gcode.register_command(self.rename_existing, prev_cmd, desc=prev_desc) # rename previous command
     
+    # --- Utility Functions ---
+
+    # Update vars from within a macro
     def update(self, name, val):
         self.vars[name] = val
         return val
 
+    # Get all the variables from another macro
     def get_macro_variables(self, macro_name):
         macro = self.printer.lookup_object(f'gcode_macro {macro_name}')
         return macro.variables
 
+    # Update vars from a dictionary
     def update_from_dict(self, dictionary):
         self.vars.update(dictionary)
         return dictionary
 
+    # Run Python code from within a macro
     def python(self, python, *args, **kwargs):
         key = f'_python{token_hex()}'
         def output(value):
@@ -165,6 +174,7 @@ class DynamicMacro:
             self.gcode.respond_info(f'Python Error:\n{e}')
         return self.vars.get(key)
 
+    # Run Python file from within a macro
     def python_file(self, fname, *args, **kwargs):
         try:
             with open(config_path / fname, 'r') as file:
@@ -172,6 +182,9 @@ class DynamicMacro:
         except Exception as e:
             self.gcode.respond_info('Python file missing')
         return self.python(text, *args, **kwargs)
+    
+
+
     
     def from_section(config: configparser.RawConfigParser, section, printer):
         raw = config.get(section, 'gcode')
