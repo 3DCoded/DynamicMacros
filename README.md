@@ -12,6 +12,13 @@ Read the documentation [here](https://3dcoded.github.io/DynamicMacros)
 
 [![Built with Material for MkDocs](https://img.shields.io/badge/Material_for_MkDocs-526CFE?style=for-the-badge&logo=MaterialForMkDocs&logoColor=white)](https://squidfunk.github.io/mkdocs-material/)
 
+## More Projects
+
+If you like this project, don't forget to give it a star! Also, check out my other projects:
+
+- [3MS](https://github.com/3dcoded/3ms), a modular multimaterial system for Klipper
+- [KlipperMaintenance](https://github.com/3DCoded/KlipperMaintenance), maintenance reminders for Klipper
+
 ## Features
 
 - [Recursion](https://3dcoded.github.io/DynamicMacros/features/recursion)
@@ -33,7 +40,3 @@ Follow the [Tutorial](https://3dcoded.github.io/DynamicMacros/tutorial) to get s
 ## Features
 
 See [Development Status](https://3dcoded.github.io/DynamicMacros/devstatus) for the currently available features, and planned features.
-
-## More Projects
-
-If you like this project, don't forget to give it a star! Also, check out the [3MS](https://github.com/3dcoded/3ms), a modular multimaterial system for Klipper!
