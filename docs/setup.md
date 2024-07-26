@@ -14,6 +14,29 @@ sh install.sh
 sudo service klipper restart
 ```
 
+Add to your `moonraker.conf`:
+
+```cfg title="moonraker.conf"
+# DynamicMacros Update Manager
+[update_manager DynamicMacros]
+type: git_repo
+path: ~/DynamicMacros
+origin: https://github.com/3DCoded/DynamicMacros.git
+primary_branch: main
+is_system_service: False
+install_script: install.sh
+```
+
+## Updating
+
+First, update via Moonraker's update manager. Then run in your terminal:
+
+```sh
+cd ~/DynamicMacros
+sh install.sh
+sudo service klipper restart
+```
+
 ## Configuration
 
 To configure Dynamic Macros, put in your `printer.cfg` (or a file included in it):
