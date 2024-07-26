@@ -26,6 +26,9 @@ sudo service klipper restart
 
 To run Python from within a Dynamic Macro, use either the `python()` utility function, or the `python_file()` utility function. The `python()` function accepts python code as a multiline string, and the `python_file()` function accepts a filename (relative to your `printer.cfg` folder).
 
+!!! tip
+    When using the `python()` utiltiy function, Jinja2 (which converts the macro to GCode) may throw errors during parsing. If you are getting errors, it is recommended to switch to `python_file()`.
+
 Here are a few examples:
 
 ### Python Math

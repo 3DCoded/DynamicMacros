@@ -31,6 +31,8 @@ configs: macros.cfg # You can add more files to this list, separated by commas.
     gcode:
         M117 UNLOAD
     ```
+??? failure "Unknown config object 'gcode_macro'"
+    If you are getting a "Unknown config object 'gcode_macro'" error after converting your macros to Dynamic Macros, move your `[dynamicmacros]` section to be after your `[virtual_sdcard]` section.
 
 Restart Klipper.
 
