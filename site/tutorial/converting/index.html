@@ -741,6 +741,20 @@
 <summary>Unknown config object 'gcode_macro'</summary>
 <p>If you are getting a "Unknown config object 'gcode_macro'" error after converting your macros to Dynamic Macros, move your <code>[dynamicmacros]</code> section to be after your <code>[virtual_sdcard]</code> section.</p>
 </details>
+<details class="tip">
+<summary>Nacro Names</summary>
+<p>Klipper has certain macro names reserved for core functionality. If you are experiencing errors, don't name your Dynamic Macros any of the following:</p>
+<ul>
+<li><code>PAUSE</code></li>
+<li><code>RESUME</code></li>
+<li><code>CANCEL_PRINT</code></li>
+</ul>
+<p>If you want to make those macros dynamic, first define them as a <strong>standard</strong> GCode macro:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro PAUSE]</span>
+<span class="na">gcode</span><span class="o">:</span>
+<span class="w">    </span><span class="na">DYNAMIC_PAUSE</span>
+</code></pre></div>
+</details>
 <p>Restart Klipper.</p>
 <p>That's it. Your macros are now Dynamic Macros.</p>
 
