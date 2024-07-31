@@ -17,4 +17,4 @@
 
 - [X] [EXPERIMENTAL: Running Python internally inside macros](experimental.md#running-python-from-within-a-macro)
 - [ ] Allow configuring multiple `dynamicmacros` config sections
-- [ ] Dynamic implementation of `delayed_gcode`
+- [X] [Dynamic implementation of `delayed_gcode`](experimental.md#delayed_gcode)

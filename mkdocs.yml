@@ -57,5 +57,7 @@ nav:
     - features/receivingvariables.md
     - features/utilities.md
     - features/variables.md
+    - features/python.md
+    - features/delayed.md
   - examples.md
   - devstatus.md
