@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/features/utilities/">
+        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/features/python/">
       
       
-        <link rel="prev" href="../receivingvariables/">
+        <link rel="prev" href="../variables/">
       
       
-        <link rel="next" href="../variables/">
+        <link rel="next" href="../delayed/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Utility Functions - Klipper Dynamic Macros</title>
+        <title>Python - Klipper Dynamic Macros</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#utility-functions" class="md-skip">
+        <a href="#python" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Utility Functions
+              Python
             
           </span>
         </div>
@@ -504,30 +504,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Utility Functions
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../utilities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -536,53 +516,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#update" class="md-nav__link">
-    <span class="md-ellipsis">
-      update()
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get_macro_variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      get_macro_variables()
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#update_from_dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      update_from_dict()
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -613,10 +546,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../python/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -625,6 +578,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-python-from-within-a-macro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running Python from within a Macro
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running Python from within a Macro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python Math
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-file-running-gcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python File Running GCode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -725,29 +731,35 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#update" class="md-nav__link">
+  <a href="#running-python-from-within-a-macro" class="md-nav__link">
     <span class="md-ellipsis">
-      update()
+      Running Python from within a Macro
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running Python from within a Macro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python Math
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#get_macro_variables" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#python-file-running-gcode" class="md-nav__link">
     <span class="md-ellipsis">
-      get_macro_variables()
+      Python File Running GCode
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#update_from_dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      update_from_dict()
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -766,7 +778,7 @@
                   
 
   
-    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/features/utilities.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/features/python.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -774,51 +786,45 @@
   
 
 
-<h1 id="utility-functions">Utility Functions</h1>
-<p>Dynamic Macros provides a few utility functions to make Dynamic Macros easier to write.</p>
-<h2 id="update">update()</h2>
-<p>The <code>update()</code> function allows to save variables across whitespaces (see <a href="../receivingvariables/">Receiving Variables</a> for more information). Example:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro MY_MACRO]</span>
+<h1 id="python">Python</h1>
+<p>Dynamic Macros's most powerful feature allows you to run Python code directly from within a macro.</p>
+<h2 id="running-python-from-within-a-macro">Running Python from within a Macro</h2>
+<div class="admonition note">
+<p class="admonition-title">Disclaimer</p>
+<p>This functionality allows Dynamic Macros to gain significant control over your printer and Klipper host. I am not responsible for whatever happens if you download a malicious macro.</p>
+</div>
+<p>There are three main reasons why this could be helpful:</p>
+<ol>
+<li>Allowing for deeper control of Klipper and the Klipper host</li>
+<li>A learning bridge for creating Klipper plugins/extras</li>
+<li>A tool to help develop Klipper plugins/extras without restarting Klipper</li>
+</ol>
+<p>To run Python from within a Dynamic Macro, use either the <code>python()</code> utility function, or the <code>python_file()</code> utility function. The <code>python()</code> function accepts python code as a multiline string, and the <code>python_file()</code> function accepts a filename (relative to your <code>printer.cfg</code> folder).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When using the <code>python()</code> utiltiy function, Jinja2 (which converts the macro to GCode) may throw errors during parsing. If you are getting errors, it is recommended to switch to <code>python_file()</code>.</p>
+</div>
+<p>Here are a few examples:</p>
+<h3 id="python-math">Python Math</h3>
+<div class="highlight"><span class="filename">macros.cfg</span><pre><span></span><code><span class="k">[gcode_macro MATH]</span>
 <span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10 %}</span>
-<span class="w">    </span><span class="na">{% set b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">update(&quot;b&quot;, 20) %}</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;A: {a}&quot;</span><span class="w"> </span><span class="c1"># 10</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;B: {b}&quot;</span><span class="w"> </span><span class="c1"># 20</span>
-
-
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;A: {a}&quot;</span><span class="w"> </span><span class="c1"># &quot;&quot;</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;B: {b}&quot;</span><span class="w"> </span><span class="c1"># 20</span>
+<span class="w">    </span><span class="na">{% set value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python(&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="na">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">kwargs[&#39;a&#39;]</span>
+<span class="w">    </span><span class="na">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">kwargs[&#39;b&#39;]</span>
+<span class="w">    </span><span class="na">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">a + b</span>
+<span class="w">    </span><span class="na">output(c)</span>
+<span class="w">    </span><span class="na">&quot;&quot;&quot;, a</span><span class="o">=</span><span class="s">1, b=2) %}</span>
+<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{value}</span>
 </code></pre></div>
-<h2 id="get_macro_variables">get_macro_variables()</h2>
-<p>The <code>get_macro_variables()</code> function allows to retrieve all the variables from another macro in one line of code. Example:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro MY_SETTINGS]</span>
-<span class="na">variable_a</span><span class="o">:</span><span class="w"> </span><span class="s">10</span>
-<span class="na">variable_b</span><span class="o">:</span><span class="w"> </span><span class="s">20</span>
+<h3 id="python-file-running-gcode">Python File Running GCode</h3>
+<div class="highlight"><span class="filename">macros.cfg</span><pre><span></span><code><span class="k">[gcode_macro PYFILE]</span>
 <span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;settings&quot;</span>
-
-<span class="k">[gcode_macro GET_SETTINGS]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">get_macro_variables(&quot;MY_SETTINGS&quot;) %}</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Settings: {settings}&quot;</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;A: {settings.a}&quot;</span>
+<span class="w">    </span><span class="na">{% set value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python_file(&quot;test.py&quot;) %}</span>
+<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{value}</span>
 </code></pre></div>
-<h2 id="update_from_dict">update_from_dict()</h2>
-<p>The <code>update_from_dict()</code> function allows for saving the output of <code>get_macro_variables()</code> (or other dictionaries) across the whitespaces when <a href="../receivingvariables/">Receiving Variables</a>. Example:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro MY_SETTINGS]</span>
-<span class="na">variable_a</span><span class="o">:</span><span class="w"> </span><span class="s">10</span>
-<span class="na">variable_b</span><span class="o">:</span><span class="w"> </span><span class="s">20</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;settings&quot;</span>
-
-<span class="k">[gcode_macro GET_SETTINGS]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">get_macro_variables(&quot;MY_SETTINGS&quot;) %}</span>
-<span class="w">    </span><span class="na">{% set settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">update_from_dict(settings) %}</span>
-
-
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;A: {a}&quot;</span><span class="w"> </span><span class="c1"># 10</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;B: {b}&quot;</span><span class="w"> </span><span class="c1"># 20</span>
+<div class="highlight"><span class="filename">test.py</span><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello from Python!&quot;</span><span class="p">)</span>
+<span class="n">gcode</span><span class="p">(</span><span class="s2">&quot;G28</span><span class="se">\n</span><span class="s2">G1 X100 Y100 Z100 F1200&quot;</span><span class="p">)</span>
+<span class="n">output</span><span class="p">(</span><span class="s2">&quot;GCode Executed&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 

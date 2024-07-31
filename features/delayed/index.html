@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/features/utilities/">
+        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/features/delayed/">
       
       
-        <link rel="prev" href="../receivingvariables/">
+        <link rel="prev" href="../python/">
       
       
-        <link rel="next" href="../variables/">
+        <link rel="next" href="../../examples/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Utility Functions - Klipper Dynamic Macros</title>
+        <title>Delayed GCode - Klipper Dynamic Macros</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#utility-functions" class="md-skip">
+        <a href="#delayed-gcode" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Utility Functions
+              Delayed GCode
             
           </span>
         </div>
@@ -504,30 +504,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Utility Functions
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../utilities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -536,53 +516,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#update" class="md-nav__link">
-    <span class="md-ellipsis">
-      update()
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get_macro_variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      get_macro_variables()
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#update_from_dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      update_from_dict()
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -634,10 +567,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../delayed/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Delayed GCode
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -646,6 +599,44 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -725,27 +716,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#update" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      update()
+      Configuration
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get_macro_variables" class="md-nav__link">
+  <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
-      get_macro_variables()
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#update_from_dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      update_from_dict()
+      Parameters
     </span>
   </a>
   
@@ -766,7 +748,7 @@
                   
 
   
-    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/features/utilities.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/features/delayed.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -774,52 +756,31 @@
   
 
 
-<h1 id="utility-functions">Utility Functions</h1>
-<p>Dynamic Macros provides a few utility functions to make Dynamic Macros easier to write.</p>
-<h2 id="update">update()</h2>
-<p>The <code>update()</code> function allows to save variables across whitespaces (see <a href="../receivingvariables/">Receiving Variables</a> for more information). Example:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro MY_MACRO]</span>
+<h1 id="delayed-gcode">Delayed GCode</h1>
+<p>Dynamic Macros supports a feature similar to <code>delayed_gcode</code>.</p>
+<h2 id="configuration">Configuration</h2>
+<p>To configure a DynamicMacro to be run repeatedly/after a delay, update your macro as follows:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Before</label><label for="__tabbed_1_2">After</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro test]</span>
 <span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10 %}</span>
-<span class="w">    </span><span class="na">{% set b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">update(&quot;b&quot;, 20) %}</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;A: {a}&quot;</span><span class="w"> </span><span class="c1"># 10</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;B: {b}&quot;</span><span class="w"> </span><span class="c1"># 20</span>
-
-
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;A: {a}&quot;</span><span class="w"> </span><span class="c1"># &quot;&quot;</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;B: {b}&quot;</span><span class="w"> </span><span class="c1"># 20</span>
+<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;test&quot;</span>
 </code></pre></div>
-<h2 id="get_macro_variables">get_macro_variables()</h2>
-<p>The <code>get_macro_variables()</code> function allows to retrieve all the variables from another macro in one line of code. Example:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro MY_SETTINGS]</span>
-<span class="na">variable_a</span><span class="o">:</span><span class="w"> </span><span class="s">10</span>
-<span class="na">variable_b</span><span class="o">:</span><span class="w"> </span><span class="s">20</span>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro test]</span>
+<span class="na">initial_duration</span><span class="o">:</span><span class="w"> </span><span class="s">2</span><span class="w"> </span><span class="c1"># Wait two seconds after Klipper starts to run this, and two seconds between repeats (if enabled)</span>
+<span class="na">repeat</span><span class="o">:</span><span class="w"> </span><span class="s">true</span><span class="w"> </span><span class="c1"># true means repeat, false means don&#39;t repeat</span>
 <span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;settings&quot;</span>
-
-<span class="k">[gcode_macro GET_SETTINGS]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">get_macro_variables(&quot;MY_SETTINGS&quot;) %}</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Settings: {settings}&quot;</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;A: {settings.a}&quot;</span>
+<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;test&quot;</span>
 </code></pre></div>
-<h2 id="update_from_dict">update_from_dict()</h2>
-<p>The <code>update_from_dict()</code> function allows for saving the output of <code>get_macro_variables()</code> (or other dictionaries) across the whitespaces when <a href="../receivingvariables/">Receiving Variables</a>. Example:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro MY_SETTINGS]</span>
-<span class="na">variable_a</span><span class="o">:</span><span class="w"> </span><span class="s">10</span>
-<span class="na">variable_b</span><span class="o">:</span><span class="w"> </span><span class="s">20</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;settings&quot;</span>
-
-<span class="k">[gcode_macro GET_SETTINGS]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">get_macro_variables(&quot;MY_SETTINGS&quot;) %}</span>
-<span class="w">    </span><span class="na">{% set settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">update_from_dict(settings) %}</span>
-
-
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;A: {a}&quot;</span><span class="w"> </span><span class="c1"># 10</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;B: {b}&quot;</span><span class="w"> </span><span class="c1"># 20</span>
-</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="parameters">Parameters</h2>
+<p><code>initial_duration</code> specifies the delay after Klipper starts that the macro will be run, and the duration between repeats, if <code>repeat</code> is true.</p>
+<p><code>repeat</code> specifies whether or not to repeat the macro.</p>
 
 
 
