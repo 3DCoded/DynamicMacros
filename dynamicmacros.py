@@ -132,7 +132,7 @@ class DynamicMacro:
             self.templates.append(self.generate_template(gcode))
     
     def _handle_ready(self):
-        waketime = self.reactor.monotonic() + self.interval
+        waketime = self.reactor.monotonic() + self.initial_duration
         self.timer_handler = self.reactor.register_timer(
             self._gcode_timer_event, waketime)
         
