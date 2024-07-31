@@ -94,7 +94,7 @@ class DynamicMacros:
             path = config_path / fname # create full file path
 
             # Pase config files
-            config = configparser.RawConfigParser()
+            config = configparser.ConfigParser()
             config.read(path)
             for section in config.sections():
                 if section.split()[0] == 'gcode_macro': # Check if section is a gcode_macro
@@ -208,7 +208,7 @@ class DynamicMacro:
 
 
     
-    def from_section(config: configparser.RawConfigParser, section, printer):
+    def from_section(config: configparser.ConfigParser, section, printer):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
         desc = config.get(section, 'description') if config.has_option(section, 'description') else 'No Description'
