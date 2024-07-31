@@ -409,17 +409,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Experimental Features
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -429,58 +418,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#running-python-from-within-a-macro" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running Python from within a Macro
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Running Python from within a Macro">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#python-math" class="md-nav__link">
-    <span class="md-ellipsis">
-      Python Math
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#python-file-running-gcode" class="md-nav__link">
-    <span class="md-ellipsis">
-      Python File Running GCode
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -615,6 +552,48 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/delayed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delayed GCode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -682,47 +661,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#running-python-from-within-a-macro" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running Python from within a Macro
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Running Python from within a Macro">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#python-math" class="md-nav__link">
-    <span class="md-ellipsis">
-      Python Math
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#python-file-running-gcode" class="md-nav__link">
-    <span class="md-ellipsis">
-      Python File Running GCode
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -749,51 +687,6 @@
 <p class="admonition-title">Warning</p>
 <p>The features on this page are experimental, and untested or only lightly tested. Proceed at your own risk.</p>
 </div>
-<h2 id="running-python-from-within-a-macro">Running Python from within a Macro</h2>
-<div class="admonition info">
-<p class="admonition-title">Disclaimer</p>
-<p>This functionality allows Dynamic Macros to gain significant control over your printer and Klipper host. I am not responsible for whatever happens if you download a malicious macro.</p>
-</div>
-<p>There are three main reasons why this could be helpful:</p>
-<ol>
-<li>Allowing for deeper control of Klipper and the Klipper host</li>
-<li>A learning bridge for creating Klipper plugins/extras</li>
-<li>A tool to help develop Klipper plugins/extras without restarting Klipper</li>
-</ol>
-<p>First, get on the <code>dev</code> branch:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/DynamicMacros
-git<span class="w"> </span>checkout<span class="w"> </span>dev
-git<span class="w"> </span>pull<span class="w"> </span>origin
-sh<span class="w"> </span>install.sh
-sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>restart
-</code></pre></div>
-<p>To run Python from within a Dynamic Macro, use either the <code>python()</code> utility function, or the <code>python_file()</code> utility function. The <code>python()</code> function accepts python code as a multiline string, and the <code>python_file()</code> function accepts a filename (relative to your <code>printer.cfg</code> folder).</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>When using the <code>python()</code> utiltiy function, Jinja2 (which converts the macro to GCode) may throw errors during parsing. If you are getting errors, it is recommended to switch to <code>python_file()</code>.</p>
-</div>
-<p>Here are a few examples:</p>
-<h3 id="python-math">Python Math</h3>
-<div class="highlight"><span class="filename">macros.cfg</span><pre><span></span><code><span class="k">[gcode_macro MATH]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python(&quot;&quot;&quot;</span>
-<span class="w">    </span><span class="na">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">kwargs[&#39;a&#39;]</span>
-<span class="w">    </span><span class="na">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">kwargs[&#39;b&#39;]</span>
-<span class="w">    </span><span class="na">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">a + b</span>
-<span class="w">    </span><span class="na">output(c)</span>
-<span class="w">    </span><span class="na">&quot;&quot;&quot;, a</span><span class="o">=</span><span class="s">1, b=2) %}</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{value}</span>
-</code></pre></div>
-<h3 id="python-file-running-gcode">Python File Running GCode</h3>
-<div class="highlight"><span class="filename">macros.cfg</span><pre><span></span><code><span class="k">[gcode_macro PYFILE]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python_file(&quot;test.py&quot;) %}</span>
-<span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{value}</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">test.py</span><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello from Python!&quot;</span><span class="p">)</span>
-<span class="n">gcode</span><span class="p">(</span><span class="s2">&quot;G28</span><span class="se">\n</span><span class="s2">G1 X100 Y100 Z100 F1200&quot;</span><span class="p">)</span>
-<span class="n">output</span><span class="p">(</span><span class="s2">&quot;GCode Executed&quot;</span><span class="p">)</span>
-</code></pre></div>
 
 
 

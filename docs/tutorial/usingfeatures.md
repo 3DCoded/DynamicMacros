@@ -46,3 +46,11 @@ An example of this is getting the printer's position. A standard GCode macro wil
 ## [Utility Functions](utilities.md)
 
 See the link above (the subtitle) for more information on utility functions.
+
+## [Python](python.md)
+
+Dynamic Macro's most powerful feature allows you to run Python code from within a macro. See the link above (the subtitle) for more information.
+
+## [delayed_gcode](delayed.md)
+
+Dynamic Macros supports a feature similar to `delayed_gcode`. See the link above (the subtitle) for more information.

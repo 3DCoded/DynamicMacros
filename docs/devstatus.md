@@ -12,9 +12,9 @@
 - Dynamic Macro variables
 - Retrieving variables from other macros
 - Support for `rename_existing`
+- Running Python from within a Dynamic Macro
+- Dynamic `delayed_gcode` implementation
 
 ## Planned Features
 
-- [X] [EXPERIMENTAL: Running Python internally inside macros](experimental.md#running-python-from-within-a-macro)
 - [ ] Allow configuring multiple `dynamicmacros` config sections
-- [X] [Dynamic implementation of `delayed_gcode`](experimental.md#delayed_gcode)
