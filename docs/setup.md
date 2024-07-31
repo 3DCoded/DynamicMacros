@@ -117,7 +117,9 @@ To refresh Dynamic Macros, just run `DYNAMIC_MACRO` with no parameters.
 
 A Klipper restart is required if:
 
-- You changed the description
+- You changed the `description`
+- You changed the `initial_duration`
+- You changed the `repeat`
 
 A `DYNAMIC_MACRO` refresh is required if:
 
