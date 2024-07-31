@@ -25,6 +25,8 @@ If you like this project, don't forget to give it a star! Also, check out my oth
 - [Receiving Variables](https://3dcoded.github.io/DynamicMacros/features/receivingvariables)
 - [Utility Functions](https://3dcoded.github.io/DynamicMacros/features/utilities)
 - [Variables](https://3dcoded.github.io/DynamicMacros/features/variables)
+- [Python](https://3dcoded.github.io/DynamicMacros/features/python)
+- [Delayed GCode](https://3dcoded.github.io/DynamicMacros/features/delayed)
 
 ## How Normal Macros Work
 
