@@ -215,8 +215,8 @@ class DynamicMacro:
         name = section.split()[1]
         desc = config.get(section, 'description') if config.has_option(section, 'description') else 'No Description'
         rename_existing = config.get(section, 'rename_existing') if config.has_option(section, 'rename_existing') else None
-        initial_duration = config.get(section, 'initial_duration') if config.has_section('initial_duration') else None
-        repeat = config.getboolean(section, 'repeat') if config.has_section('repeat') else False
+        initial_duration = config.get(section, 'initial_duration') if config.has_option(section, 'initial_duration') else None
+        repeat = config.getboolean(section, 'repeat') if config.has_option(section, 'repeat') else False
         variables = {}
         for key, value in config.items(section):
             if key.startswith('variable_'):
