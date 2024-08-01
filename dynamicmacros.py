@@ -156,7 +156,7 @@ class DynamicMacrosCluster(DynamicMacros):
     
     def _run_macro(self, macro, params, rawparams):
         # If Python is disabled, prevent from running Python
-        sandboxed = self.sandboxed_kwparams(macro, macro.update_kwparams)
+        sandboxed = self.sandboxed_kwparams(macro, macro._update_kwparams)
         macro.update_kwparams = sandboxed
         macro.run(params, rawparams)
 
@@ -279,7 +279,7 @@ class DynamicMacro:
     def get_status(self, *args, **kwargs):
         return self.variables
     
-    def update_kwparams(self, template, params, rawparams):
+    def _update_kwparams(self, template, params, rawparams):
         kwparams = dict(self.variables)
         kwparams.update(self.vars)
         kwparams.update(template.create_template_context())
@@ -291,6 +291,9 @@ class DynamicMacro:
         kwparams['python'] = self.python
         kwparams['python_file'] = self.python_file
         self.kwparams = kwparams
+    
+    def update_kwparams(self, template, params, rawparams):
+        self._update_kwparams(template, params, rawparams)
 
     def run(self, params, rawparams):
         for template in self.templates:
