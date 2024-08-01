@@ -143,9 +143,9 @@ class DynamicMacrosCluster(DynamicMacros):
             self.gcode.respond_info(f'{name} has been blocked from performing a disabled task.')
         return func
 
-    def sandboxed_kwparams(self, macro, func):
+    def sandboxed_kwparams(self, macro):
         def func(template, params, rawparams):
-            kwparams = func(template, params, rawparams)
+            kwparams = macro._update_kwparams(template, params, rawparams)
             if not self.python_enabled:
                 kwparams['python'] = self.disabled_func(macro.name, 'run Python code')
                 kwparams['python_file'] = self.disabled_func(macro.name, 'run Python file')
@@ -156,7 +156,7 @@ class DynamicMacrosCluster(DynamicMacros):
     
     def _run_macro(self, macro, params, rawparams):
         # If Python is disabled, prevent from running Python
-        sandboxed = self.sandboxed_kwparams(macro, macro._update_kwparams)
+        sandboxed = self.sandboxed_kwparams(macro)
         macro.update_kwparams = sandboxed
         macro.run(params, rawparams)
 
