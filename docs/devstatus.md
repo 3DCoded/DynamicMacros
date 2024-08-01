@@ -17,4 +17,9 @@
 
 ## Planned Features
 
-- [ ] Allow configuring multiple `dynamicmacros` config sections
+A checkmark indicates a feature is experimental.
+
+- [X] Allow configuring multiple `dynamicmacros` config sections as clusters
+    - [X] Disable Python per-cluster
+    - [X] Disable `printer` object per-cluster
+- [ ] Better error handling
