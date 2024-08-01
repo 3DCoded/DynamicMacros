@@ -130,35 +130,34 @@ class DynamicMacrosCluster(DynamicMacros):
 
         # Cluster-specific settings
         self.python_enabled = config.getboolean('python_enabled', True)
+        self.printer_enabled = config.getboolean('printer_enabled', True)
 
         self.macros = {} # Holds macros in name: DynamicMacro format
         self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
-        
-        # self.gcode.register_mux_command(
-        #     'DYNAMIC_MACRO',
-        #     'CLUSTER',
-        #     self.name,
-        #     self.cmd_DYNAMIC_MACRO,
-        #     desc='Run Dynamic Macro'
-        # )
-        # self.gcode.register_mux_command(
-        #     'SET_DYNAMIC_VARIABLE',
-        #     'CLUSTER',
-        #     self.name,
-        #     self.cmd_SET_DYNAMIC_VARIABLE,
-        #     desc="Set the value of a G-Code macro variable"
-        # )
 
         self._update_macros()
     
     def disabled_func(self, name, msg):
         def func(*args, **kwargs):
             self.gcode.respond_info(f'WARNING: {name} attempted to {msg} when disabled.')
+            self.gcode.respond_info(f'{name} has been blocked from performing a disabled task.')
+        return func
+
+    def sandboxed_kwparams(self, macro, func):
+        def func(template, params, rawparams):
+            kwparams = func(template, params, rawparams)
+            if not self.python_enabled:
+                kwparams['python'] = self.disabled_func(macro.name, 'run Python code')
+                kwparams['python_file'] = self.disabled_func(macro.name, 'run Python file')
+            if not self.printer_enabled:
+                kwparams['printer'] = self.disabled_func(macro.name, 'access printer object')
+            macro.kwparams = kwparams
         return func
     
     def _run_macro(self, macro, params, rawparams):
-        if not self.python_enabled:
-            macro.python = macro.python_file = self.disabled_func(macro.name, 'run Python code')
+        # If Python is disabled, prevent from running Python
+        sandboxed = self.sandboxed_kwparams(macro, macro.update_kwparams)
+        macro.update_kwparams = sandboxed
         macro.run(params, rawparams)
 
 class DynamicMacro:
@@ -262,9 +261,6 @@ class DynamicMacro:
         except Exception as e:
             self.gcode.respond_info('Python file missing')
         return self.python(text, *args, **kwargs)
-    
-
-
     
     def from_section(config: configparser.RawConfigParser, section, printer):
         raw = config.get(section, 'gcode')
