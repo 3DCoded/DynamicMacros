@@ -103,6 +103,48 @@ class DynamicMacros:
                     self.macros[name] = macro
                     self.register_macro(macro) # register new macro
 
+class DynamicMacrosCluster(DynamicMacros):
+    def __init__(self, config):
+        # Initialize variables
+        self.printer = config.get_printer()
+        self.name = config.get_name().split()[1]
+        DynamicMacros.printer = self.printer
+        self.gcode = self.printer.lookup_object('gcode')
+        self.fnames = config.getlist('configs')
+
+        # Cluster-specific settings
+        self.python_enabled = config.getboolean('python_enabled', True)
+
+        self.macros = {} # Holds macros in name: DynamicMacro format
+        self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
+        
+        self.gcode.register_mux_command(
+            'DYNAMIC_MACRO',
+            'CLUSTER',
+            self.name,
+            self.cmd_DYNAMIC_MACRO,
+            desc='Run Dynamic Macro'
+        )
+        self.gcode.register_mux_command(
+            'SET_DYNAMIC_VARIABLE',
+            'CLUSTER',
+            self.name,
+            self.cmd_SET_DYNAMIC_VARIABLE,
+            desc="Set the value of a G-Code macro variable"
+        )
+
+        self._update_macros()
+    
+    def disabled_func(self, name, msg):
+        def func(*args, **kwargs):
+            self.gcode.respond_info(f'WARNING: {name} attempted to {msg} when disabled.')
+        return func
+    
+    def _run_macro(self, macro, params, rawparams):
+        if not self.python_enabled:
+            macro.python = macro.python_file = self.disabled_func(macro.name, 'run Python code')
+        macro.run(params, rawparams)
+
 class DynamicMacro:
     def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None, repeat=False):
         # initialize variables
@@ -248,3 +290,6 @@ class DynamicMacro:
     
 def load_config(config):
     return DynamicMacros(config)
+
+def load_config_prefix(config):
+    return DynamicMacrosCluster(config)
