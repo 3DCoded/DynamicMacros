@@ -10,6 +10,8 @@ from secrets import token_hex
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
 class DynamicMacros:
+    clusters = {}
+
     def __init__(self, config):
         # Initialize variables
         self.printer = config.get_printer()
@@ -40,6 +42,10 @@ class DynamicMacros:
             self.printer.objects[f'gcode_macro {macro.name}'] = macro # trick Klipper into thinking this is a gcode_macro
     
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
+        cluster = gcmd.get('CLUSTER', None)
+        if cluster is not None and cluster in self.clusters:
+            return self.clusters[cluster].cmd_SET_DYNAMIC_VARIABLE(self, gcmd)
+
         name = gcmd.get('MACRO')
         variable = gcmd.get('VARIABLE')
         value = gcmd.get('VALUE')
@@ -65,6 +71,9 @@ class DynamicMacros:
             del self.macros[macro.name] # remove macro from internal macros list
     
     def cmd_DYNAMIC_MACRO(self, gcmd):
+        cluster = gcmd.get('CLUSTER', None)
+        if cluster is not None and cluster in self.clusters:
+            return self.clusters[cluster].cmd_DYNAMIC_MACRO(self, gcmd)
         try:
             self._update_macros()
             macro_name = gcmd.get('MACRO', '')
@@ -112,26 +121,28 @@ class DynamicMacrosCluster(DynamicMacros):
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
 
+        DynamicMacros.clusters[self.name] = self
+
         # Cluster-specific settings
         self.python_enabled = config.getboolean('python_enabled', True)
 
         self.macros = {} # Holds macros in name: DynamicMacro format
         self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
         
-        self.gcode.register_mux_command(
-            'DYNAMIC_MACRO',
-            'CLUSTER',
-            self.name,
-            self.cmd_DYNAMIC_MACRO,
-            desc='Run Dynamic Macro'
-        )
-        self.gcode.register_mux_command(
-            'SET_DYNAMIC_VARIABLE',
-            'CLUSTER',
-            self.name,
-            self.cmd_SET_DYNAMIC_VARIABLE,
-            desc="Set the value of a G-Code macro variable"
-        )
+        # self.gcode.register_mux_command(
+        #     'DYNAMIC_MACRO',
+        #     'CLUSTER',
+        #     self.name,
+        #     self.cmd_DYNAMIC_MACRO,
+        #     desc='Run Dynamic Macro'
+        # )
+        # self.gcode.register_mux_command(
+        #     'SET_DYNAMIC_VARIABLE',
+        #     'CLUSTER',
+        #     self.name,
+        #     self.cmd_SET_DYNAMIC_VARIABLE,
+        #     desc="Set the value of a G-Code macro variable"
+        # )
 
         self._update_macros()
     
