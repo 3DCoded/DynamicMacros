@@ -44,8 +44,10 @@ class DynamicMacros:
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         cluster = gcmd.get('CLUSTER', None)
         if cluster is not None and cluster in self.clusters:
-            return self.clusters[cluster].cmd_SET_DYNAMIC_VARIABLE(gcmd)
+            return self.clusters[cluster]._cmd_SET_DYNAMIC_VARIABLE(gcmd)
+        return self._cmd_SET_DYNAMIC_VARIABLE(gcmd)
 
+    def _cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         name = gcmd.get('MACRO')
         variable = gcmd.get('VARIABLE')
         value = gcmd.get('VALUE')
@@ -73,7 +75,10 @@ class DynamicMacros:
     def cmd_DYNAMIC_MACRO(self, gcmd):
         cluster = gcmd.get('CLUSTER', None)
         if cluster is not None and cluster in self.clusters:
-            return self.clusters[cluster].cmd_DYNAMIC_MACRO(gcmd)
+            return self.clusters[cluster]._cmd_DYNAMIC_MACRO(gcmd)
+        return self._cmd_DYNAMIC_MACRO(gcmd)
+    
+    def _cmd_DYNAMIC_MACRO(self, gcmd):
         try:
             self._update_macros()
             macro_name = gcmd.get('MACRO', '')
