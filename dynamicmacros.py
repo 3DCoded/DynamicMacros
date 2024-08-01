@@ -150,7 +150,7 @@ class DynamicMacrosCluster(DynamicMacros):
                 macro.kwparams['python'] = self.disabled_func(macro.name, 'run Python code')
                 macro.kwparams['python_file'] = self.disabled_func(macro.name, 'run Python file')
             if not self.printer_enabled:
-                macro.kwparams['printer'] = self.disabled_func(macro.name, 'access printer object')
+                macro.kwparams['printer'] = None
         return func
     
     def _run_macro(self, macro, params, rawparams):
