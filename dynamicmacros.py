@@ -151,6 +151,13 @@ class DynamicMacrosCluster(DynamicMacros):
         self.macros = {} # Holds macros in name: DynamicMacro format
         self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
         DynamicMacros.printer = self.printer
+
+        DynamicMacros.clusters[self.name] = self
+
+        # Cluster-specific settings
+        self.python_enabled = config.getboolean('python_enabled', True)
+        self.printer_enabled = config.getboolean('printer_enabled', True)
+
         self.config_parser = MacroConfigParser(config_path)
         self._update_macros()
     
