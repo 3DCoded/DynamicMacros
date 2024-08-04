@@ -36,7 +36,7 @@ class DynamicMacros:
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-
+        DynamicMacros.printer = self.printer
         self.macros = {} # Holds macros in name: DynamicMacro format
         self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
         
@@ -148,10 +148,9 @@ class DynamicMacrosCluster(DynamicMacros):
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-
         self.macros = {} # Holds macros in name: DynamicMacro format
         self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
-
+        DynamicMacros.printer = self.printer
         self.config_parser = MacroConfigParser(config_path)
         self._update_macros()
     
