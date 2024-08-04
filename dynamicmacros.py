@@ -9,13 +9,31 @@ from secrets import token_hex
 
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
+class MacroConfigParser:
+    def __init__(self, config_path):
+        self.config_path = config_path
+
+    def read_config_file(self, filename):
+        path = self.config_path / filename
+        config = configparser.RawConfigParser(strict=False, inline_comment_prefixes=(';', '#'))
+        config.read(path)
+        return config
+
+    def extract_macros(self, config):
+        macros = {}
+        for section in config.sections():
+            if section.startswith('gcode_macro'):
+                macro = DynamicMacro.from_section(config, section, DynamicMacros.printer)
+                macros[macro.name] = macro
+        return macros
+
+
 class DynamicMacros:
     clusters = {}
 
     def __init__(self, config):
         # Initialize variables
         self.printer = config.get_printer()
-        DynamicMacros.printer = self.printer
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
 
@@ -33,6 +51,7 @@ class DynamicMacros:
             desc="Set the value of a G-Code macro variable"
         )
 
+        self.config_parser = MacroConfigParser(config_path)
         self._update_macros()
     
     def register_macro(self, macro):
@@ -102,27 +121,32 @@ class DynamicMacros:
         macro.run(params, rawparams)
     
     def _update_macros(self):
-        for macro in self.macros.values():
-            self.unregister_macro(macro) # unregister all macros
-        for fname in self.fnames:
-            path = config_path / fname # create full file path
+        self._unregister_all_macros()
+        self._load_and_register_macros_from_files()
 
-            # Pase config files
-            config = configparser.RawConfigParser(strict=False, inline_comment_prefixes=(';', '#'))
-            config.read(path)
-            for section in config.sections():
-                if section.split()[0] == 'gcode_macro': # Check if section is a gcode_macro
-                    name = section.split()[1] # get name
-                    macro = DynamicMacro.from_section(config, section, self.printer) # create DynamicMacro from config section
-                    self.macros[name] = macro
-                    self.register_macro(macro) # register new macro
+    def _unregister_all_macros(self):
+        for macro in list(self.macros.values()):
+            self.unregister_macro(macro)
+
+    def _load_and_register_macros_from_files(self):
+        for fname in self.fnames:
+            self._load_and_register_macros_from_file(fname)
+
+    def _load_and_register_macros_from_file(self, fname):
+        config = self.config_parser.read_config_file(fname)
+        new_macros = self.config_parser.extract_macros(config)
+        self._register_new_macros(new_macros)
+
+    def _register_new_macros(self, new_macros):
+        for name, macro in new_macros.items():
+            self.macros[name] = macro
+            self.register_macro(macro)
 
 class DynamicMacrosCluster(DynamicMacros):
     def __init__(self, config):
         # Initialize variables
         self.printer = config.get_printer()
         self.name = config.get_name().split()[1]
-        DynamicMacros.printer = self.printer
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
 
@@ -294,6 +318,7 @@ class DynamicMacro:
     def update_kwparams(self, template, params, rawparams):
         self._update_kwparams(template, params, rawparams)
 
+    
     def run(self, params, rawparams):
         for template in self.templates:
             self._run(template, params, rawparams)
