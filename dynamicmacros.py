@@ -62,6 +62,9 @@ class DynamicMacros:
         if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
             self.gcode.register_command(
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
+            if isinstance(macro, DelayedDynamicMacro):
+                self.gcode.register_mux_command(
+                    'UPDATE_DELAYED_GCODE', 'MACRO', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
 
     # TODO: Replace with SET_GCODE_VARIABLE
@@ -90,6 +93,9 @@ class DynamicMacros:
     def unregister_macro(self, macro):
         macro.repeat = False
         self.gcode.register_command(macro.name.upper(), None)
+        if isinstance(macro, DelayedDynamicMacro):
+            self.gcode.register_mux_command(
+                'UPDATE_DELAYED_GCODE', 'MACRO', macro.name, None)
         self.macros.pop(macro.name, None)
 
     def cmd_DYNAMIC_MACRO(self, gcmd):
@@ -187,7 +193,7 @@ class DynamicMacrosCluster(DynamicMacros):
 
 
 class DynamicMacro:
-    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None, repeat=False):
+    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None):
         self.name = name
         self.raw = raw
         self.printer = printer
@@ -195,8 +201,7 @@ class DynamicMacro:
         self.desc = desc
         self.variables = variables
         self.rename_existing = rename_existing
-        self.initial_duration = initial_duration
-        self.repeat = repeat
+        self.duration = initial_duration
         self.vars = {}
 
         if self.initial_duration:
@@ -214,15 +219,22 @@ class DynamicMacro:
             gcode) for gcode in self.gcodes]
 
     def _handle_ready(self):
-        waketime = self.reactor.monotonic() + self.initial_duration
+        waketime = self.reactor.NEVER
+        if self.duration:
+            waketime = self.reactor.monotonic() + self.duration
         self.timer_handler = self.reactor.register_timer(
             self._gcode_timer_event, waketime)
 
     def _gcode_timer_event(self, eventtime):
         self.inside_timer = True
-        nextwake = eventtime + self.initial_duration if self.repeat else self.reactor.NEVER
-        self.run({}, '')
-        self.inside_timer = False
+        try:
+            self.gcode.run_script(self.timer_gcode.render())
+        except Exception:
+            pass
+        nextwake = self.reactor.NEVER
+        if self.repeat:
+            nextwake = eventtime + self.duration
+        self.inside_timer = self.repeat = False
         return nextwake
 
     def generate_template(self, gcode):
@@ -280,10 +292,9 @@ class DynamicMacro:
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
             section, 'initial_duration', fallback=None)
-        repeat = config.getboolean(section, 'repeat', fallback=False)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
-        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
+        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration)
 
     def get_status(self, *args, **kwargs):
         return self.variables
@@ -333,7 +344,17 @@ class DelayedDynamicMacro(DynamicMacro):
         self.gcodes = self.raw.split('\n\n\n')
         self.templates = [self.generate_template(
             gcode) for gcode in self.gcodes]
-    # TODO: Handle UPDATE_DELAYED_GCODE commands
+
+    # Handle UPDATE_DELAYED_GCODE command
+    def cmd_UPDATE_DELAYED_GCODE(self, gcmd):
+        self.initial_duration = gcmd.get_float('DURATION', minval=0)
+        if self.inside_timer:
+            self.repeat = (self.duration != 0.)
+        else:
+            waketime = self.reactor.NEVER
+            if self.duration:
+                waketime = self.reactor.monotonic() + self.duration
+            self.reactor.update_timer(self.timer_handler, waketime)
 
 
 def load_config(config):
