@@ -226,7 +226,7 @@ class DynamicMacro:
     def _gcode_timer_event(self, eventtime):
         self.inside_timer = True
         try:
-            self.gcode.run_script(self.timer_gcode.render())
+            self.run({}, '')
         except Exception:
             pass
         nextwake = self.reactor.NEVER
