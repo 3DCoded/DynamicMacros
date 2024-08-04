@@ -345,6 +345,18 @@ class DelayedDynamicMacro(DynamicMacro):
         self.templates = [self.generate_template(
             gcode) for gcode in self.gcodes]
 
+    @staticmethod
+    def from_section(config, section, printer):
+        raw = config.get(section, 'gcode')
+        name = section.split()[1]
+        desc = config.get(section, 'description', fallback='No Description')
+        rename_existing = config.get(section, 'rename_existing', fallback=None)
+        initial_duration = config.getfloat(
+            section, 'initial_duration', fallback=None)
+        variables = {key[len('variable_'):]: value for key, value in config.items(
+            section) if key.startswith('variable_')}
+        return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration)
+
     # Handle UPDATE_DELAYED_GCODE command
     def cmd_UPDATE_DELAYED_GCODE(self, gcmd):
         self.duration = gcmd.get_float('DURATION', minval=0)
