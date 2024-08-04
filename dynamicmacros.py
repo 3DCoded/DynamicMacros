@@ -146,19 +146,13 @@ class DynamicMacrosCluster(DynamicMacros):
     def __init__(self, config):
         # Initialize variables
         self.printer = config.get_printer()
-        self.name = config.get_name().split()[1]
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-
-        DynamicMacros.clusters[self.name] = self
-
-        # Cluster-specific settings
-        self.python_enabled = config.getboolean('python_enabled', True)
-        self.printer_enabled = config.getboolean('printer_enabled', True)
 
         self.macros = {} # Holds macros in name: DynamicMacro format
         self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
 
+        self.config_parser = MacroConfigParser(config_path)
         self._update_macros()
     
     def disabled_func(self, name, msg):
