@@ -338,7 +338,7 @@ class DelayedDynamicMacro(DynamicMacro):
             self.timer_handler = None
             self.inside_timer = False
             self.printer.register_event_handler(
-                "klippy:ready", self._handle_ready)
+                "dynamicmacros:refresh", self._handle_ready)
 
         if self.rename_existing:
             self.rename()
