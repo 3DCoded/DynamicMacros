@@ -207,7 +207,7 @@ class DynamicMacro:
         if self.duration:
             self.reactor = self.printer.get_reactor()
             self.timer_handler = None
-            self.inside_timer = False
+            self.inside_timer = self.repeat = False
             self.printer.register_event_handler(
                 "klippy:ready", self._handle_ready)
 
