@@ -75,6 +75,7 @@ class DynamicMacros:
                 macro.variables[variable] = literal
 
     def unregister_macro(self, macro):
+        macro.repeat = False
         self.gcode.register_command(macro.name.upper(), None)
         self.macros.pop(macro.name, None)
 
