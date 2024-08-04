@@ -66,8 +66,8 @@ class DynamicMacros:
 
     # TODO: Replace with SET_GCODE_VARIABLE
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
-        cluster = gcmd.get('CLUSTER')
-        if cluster and cluster in self.clusters:
+        cluster = gcmd.get('CLUSTER', None)
+        if cluster is not None and cluster in self.clusters:
             return self.clusters[cluster]._cmd_SET_DYNAMIC_VARIABLE(gcmd)
         return self._cmd_SET_DYNAMIC_VARIABLE(gcmd)
 
@@ -93,7 +93,7 @@ class DynamicMacros:
         self.macros.pop(macro.name, None)
 
     def cmd_DYNAMIC_MACRO(self, gcmd):
-        cluster = gcmd.get('CLUSTER')
+        cluster = gcmd.get('CLUSTER', None)
         if cluster and cluster in self.clusters:
             return self.clusters[cluster]._cmd_DYNAMIC_MACRO(gcmd)
         return self._cmd_DYNAMIC_MACRO(gcmd)
