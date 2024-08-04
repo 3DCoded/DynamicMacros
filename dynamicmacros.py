@@ -62,9 +62,8 @@ class DynamicMacros:
         if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
             self.gcode.register_command(
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
-            if hasattr(macro, 'cmd_UPDATE_DELAYED_GCODE'):
-                self.gcode.register_mux_command(
-                    'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
+            self.gcode.register_mux_command(
+                'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
 
     # TODO: Replace with SET_GCODE_VARIABLE
@@ -93,9 +92,8 @@ class DynamicMacros:
     def unregister_macro(self, macro):
         macro.repeat = False
         self.gcode.register_command(macro.name.upper(), None)
-        if hasattr(macro, 'cmd_UPDATE_DELAYED_GCODE'):
-            self.gcode.register_mux_command(
-                'UPDATE_DELAYED_GCODE', 'ID', macro.name, None)
+        self.gcode.register_mux_command(
+            'UPDATE_DELAYED_GCODE', 'ID', macro.name, None)
         self.macros.pop(macro.name, None)
 
     def cmd_DYNAMIC_MACRO(self, gcmd):
@@ -308,6 +306,9 @@ class DynamicMacro:
 
     def update_kwparams(self, template, params, rawparams):
         self._update_kwparams(template, params, rawparams)
+
+    def cmd_UPDATE_DELAYED_GCODE(self, gcmd):
+        pass
 
     def run(self, params, rawparams):
         for template in self.templates:
