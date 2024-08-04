@@ -204,7 +204,7 @@ class DynamicMacro:
         self.duration = initial_duration
         self.vars = {}
 
-        if self.initial_duration:
+        if self.duration:
             self.reactor = self.printer.get_reactor()
             self.timer_handler = None
             self.inside_timer = False
@@ -319,7 +319,7 @@ class DynamicMacro:
 
 
 class DelayedDynamicMacro(DynamicMacro):
-    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None, repeat=False):
+    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None):
         self.name = name
         self.raw = raw
         self.printer = printer
@@ -327,11 +327,10 @@ class DelayedDynamicMacro(DynamicMacro):
         self.desc = desc
         self.variables = variables
         self.rename_existing = rename_existing
-        self.initial_duration = initial_duration
-        self.repeat = repeat
+        self.duration = initial_duration
         self.vars = {}
 
-        if self.initial_duration:
+        if self.duration:
             self.reactor = self.printer.get_reactor()
             self.timer_handler = None
             self.inside_timer = False
@@ -347,7 +346,7 @@ class DelayedDynamicMacro(DynamicMacro):
 
     # Handle UPDATE_DELAYED_GCODE command
     def cmd_UPDATE_DELAYED_GCODE(self, gcmd):
-        self.initial_duration = gcmd.get_float('DURATION', minval=0)
+        self.duration = gcmd.get_float('DURATION', minval=0)
         if self.inside_timer:
             self.repeat = (self.duration != 0.)
         else:
