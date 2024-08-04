@@ -146,6 +146,7 @@ class DynamicMacrosCluster(DynamicMacros):
     def __init__(self, config):
         # Initialize variables
         self.printer = config.get_printer()
+        self.name = config.get_name().split()[1]
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
         self.macros = {} # Holds macros in name: DynamicMacro format
