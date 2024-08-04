@@ -64,7 +64,7 @@ class DynamicMacros:
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
             if isinstance(macro, DelayedDynamicMacro):
                 self.gcode.register_mux_command(
-                    'UPDATE_DELAYED_GCODE', 'MACRO', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
+                    'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
 
     # TODO: Replace with SET_GCODE_VARIABLE
@@ -95,7 +95,7 @@ class DynamicMacros:
         self.gcode.register_command(macro.name.upper(), None)
         if isinstance(macro, DelayedDynamicMacro):
             self.gcode.register_mux_command(
-                'UPDATE_DELAYED_GCODE', 'MACRO', macro.name, None)
+                'UPDATE_DELAYED_GCODE', 'ID', macro.name, None)
         self.macros.pop(macro.name, None)
 
     def cmd_DYNAMIC_MACRO(self, gcmd):
