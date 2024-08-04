@@ -54,8 +54,14 @@ class DynamicMacros:
         self.gcode.register_command(
             'SET_DYNAMIC_VARIABLE', self.cmd_SET_DYNAMIC_VARIABLE, desc="Set macro variable value")
 
+        self.printer.register_event_handler(
+            'klippy:ready', self._refresh_delayed)
+
         self.config_parser = MacroConfigParser(config_path)
         self._update_macros()
+
+    def _refresh_delayed(self):
+        self.printer.send_event('dynamicmacros:refresh')
 
     def register_macro(self, macro):
         self.macros[macro.name] = macro
@@ -123,6 +129,7 @@ class DynamicMacros:
     def _update_macros(self):
         self._unregister_all_macros()
         self._load_and_register_macros_from_files()
+        self._refresh_delayed()
 
     def _unregister_all_macros(self):
         for macro in list(self.macros.values()):
@@ -158,8 +165,14 @@ class DynamicMacrosCluster(DynamicMacros):
         self.python_enabled = config.getboolean('python_enabled', True)
         self.printer_enabled = config.getboolean('printer_enabled', True)
 
+        self.printer.register_event_handler(
+            'klippy:ready', self._refresh_delayed)
+
         self.config_parser = MacroConfigParser(config_path)
         self._update_macros()
+
+    def _refresh_delayed(self):
+        self.printer.send_event('dynamicmacros:refresh')
 
     def disabled_func(self, name, msg):
         def func(*args, **kwargs):
@@ -204,7 +217,7 @@ class DynamicMacro:
             self.timer_handler = None
             self.inside_timer = False
             self.printer.register_event_handler(
-                "klippy:ready", self._handle_ready)
+                "dynamicmacros:refresh", self._handle_ready)
 
         if self.rename_existing:
             self.rename()
