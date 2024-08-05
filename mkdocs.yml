@@ -19,6 +19,10 @@ markdown_extensions:
   - attr_list
   - pymdownx.tabbed:
       alternate_style: true
+extra:
+  analytics:
+    provider: google
+    property: G-1YVCJR4FQR
 theme:
   features:
       - content.action.edit
