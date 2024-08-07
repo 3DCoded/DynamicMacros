@@ -6,8 +6,12 @@ import os
 import ast
 import json
 from secrets import token_hex
+import logging
 
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
+
+class MissingConfigError(Exception):
+    pass
 
 class DynamicMacros:
     def __init__(self, config):
@@ -16,6 +20,7 @@ class DynamicMacros:
         DynamicMacros.printer = self.printer
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
+        self.config_path = Path(config.get('config_path', config_path).replace('~', os.path.expanduser('~')))
 
         self.macros = {} # Holds macros in name: DynamicMacro format
         self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
@@ -67,6 +72,9 @@ class DynamicMacros:
     def cmd_DYNAMIC_MACRO(self, gcmd):
         try:
             self._update_macros()
+            logging.info('DynamicMacros Macros:')
+            for name in self.macros:
+                logging.info(f'    Name: {name}')
             macro_name = gcmd.get('MACRO', '')
             if not macro_name:
                 return
@@ -91,12 +99,16 @@ class DynamicMacros:
         for macro in self.macros.values():
             self.unregister_macro(macro) # unregister all macros
         for fname in self.fnames:
-            path = config_path / fname # create full file path
+            path = self.config_path / fname # create full file path
+
+            if not os.path.exists(path):
+                raise MissingConfigError(f'Missing Configuration at {path}')
 
             # Pase config files
             config = configparser.RawConfigParser(strict=False, inline_comment_prefixes=(';', '#'))
             config.read(path)
             for section in config.sections():
+                logging.info(f'DynamicMacros: Reading section {section}')
                 if section.split()[0] == 'gcode_macro': # Check if section is a gcode_macro
                     name = section.split()[1] # get name
                     macro = DynamicMacro.from_section(config, section, self.printer) # create DynamicMacro from config section
@@ -199,7 +211,7 @@ class DynamicMacro:
     # Run Python file from within a macro
     def python_file(self, fname, *args, **kwargs):
         try:
-            with open(config_path / fname, 'r') as file:
+            with open(self.config_path / fname, 'r') as file:
                 text = file.read()
         except Exception as e:
             self.gcode.respond_info('Python file missing')
