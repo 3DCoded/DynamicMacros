@@ -665,6 +665,113 @@
   
   
   
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Klippy Extras
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Klippy Extras
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extras/extras-start/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Writing Klippy Extras
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extras/extras-structure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extras/extras-bettergreeter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BetterGreeter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../examples/" class="md-nav__link">
         
@@ -770,24 +877,30 @@
 <p>Follow this tutorial to convert your standard <code>gcode_macro</code> to a Dynamic Macro. </p>
 <h2 id="printercfg">printer.cfg</h2>
 <p>First, remove the <code>include</code> line in your <code>printer.cfg</code> referencing the file your macros are in. For example, if your macros are in <code>macros.cfg</code>, remove the line:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[include macros.cfg]</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">[include macros.cfg]</span>
+</code></pre></div></td></tr></table></div>
 <p>from your <code>printer.cfg</code>.</p>
 <h2 id="dynamic-macros-configuration">Dynamic Macros Configuration</h2>
 <p>Next, if you don't already have one, create a <code>[dynamicmacros]</code> config section in your <code>printer.cfg</code> and add your macro configuration to it:</p>
-<div class="highlight"><span class="filename">printer.cfg</span><pre><span></span><code><span class="k">[dynamicmacros]</span>
-<span class="na">configs</span><span class="o">:</span><span class="w"> </span><span class="s">macros.cfg</span><span class="w"> </span><span class="c1"># You can add more files to this list, separated by commas.</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">printer.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">[dynamicmacros]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="na">configs</span><span class="o">:</span><span class="w"> </span><span class="s">macros.cfg</span><span class="w"> </span><span class="c1"># You can add more files to this list, separated by commas.</span>
+</code></pre></div></td></tr></table></div>
 <details class="tip">
 <summary>KlipperScreen</summary>
 <p>If you convert your <code>LOAD_FILAMENT</code> and <code>UNLOAD_FILAMENT</code> macros to be dynamic, KlipperScreen may not recognize them and report an error. To fix this, add blank macros to your <code>printer.cfg</code>, before your <code>[dynamicmacros]</code> section. Example:
-<div class="highlight"><span class="filename">printer.cfg</span><pre><span></span><code><span class="k">[gcode_macro LOAD_FILAMENT]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">M117 LOAD</span>
-<span class="k">[gcode_macro UNLOAD_FILAMENT]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">M117 UNLOAD</span>
-</code></pre></div></p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">printer.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">[gcode_macro LOAD_FILAMENT]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="na">M117 LOAD</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">[gcode_macro UNLOAD_FILAMENT]</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="na">M117 UNLOAD</span>
+</code></pre></div></td></tr></table></div></p>
 </details>
 <details class="failure">
 <summary>Unknown config object 'gcode_macro'</summary>
@@ -802,10 +915,12 @@
 <li><code>CANCEL_PRINT</code></li>
 </ul>
 <p>If you want to make those macros dynamic, first define them as a <strong>standard</strong> GCode macro:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[gcode_macro PAUSE]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">DYNAMIC_PAUSE</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[gcode_macro PAUSE]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="na">DYNAMIC_PAUSE</span>
+</code></pre></div></td></tr></table></div>
 </details>
 <p>Restart Klipper.</p>
 <p>That's it. Your macros are now Dynamic Macros.</p>
@@ -857,7 +972,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>

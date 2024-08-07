@@ -692,6 +692,113 @@
   
   
   
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Klippy Extras
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Klippy Extras
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extras/extras-start/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Writing Klippy Extras
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extras/extras-structure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extras/extras-bettergreeter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BetterGreeter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../examples/" class="md-nav__link">
         
@@ -826,29 +933,48 @@
 <p>Recursion allows a macro to call itself, something standard GCode macros can't do. </p>
 <p>When using recursion, it's important to make sure your macro has an "end case". This is a case when the macro won't call itself again. Otherwise the macro will be stuck in an infinite loop and freeze Klipper.</p>
 <p>Here are a few examples of recursion:</p>
-<div class="highlight"><span class="filename">Counting to 10</span><pre><span></span><code><span class="k">[gcode_macro COUNT]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.NUM|default(1)|int %}</span>
-<span class="w">    </span><span class="na">{% if num &lt;</span><span class="o">=</span><span class="w"> </span><span class="s">10 %}</span>
-<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{num}</span>
-<span class="w">        </span><span class="na">COUNT NUM</span><span class="o">=</span><span class="s">{num+1}</span><span class="w"> </span><span class="c1"># Count up 1</span>
-<span class="w">    </span><span class="na">{% else %}</span>
-<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Done Counting&quot;</span>
-<span class="w">    </span><span class="na">{% endif %}</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">Load to Filament Sensor</span><pre><span></span><code><span class="k">[gcode_macro LOAD_TO_FSENSOR]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">printer[&quot;filament_sensor fsensor&quot;].filament_detected %}</span>
-<span class="w">    </span><span class="na">{% if val</span><span class="w"> </span><span class="o">=</span><span class="s">= 0 %}</span>
-<span class="w">        </span><span class="na">M83</span>
-<span class="w">        </span><span class="na">G1 E50 F900 # Move filament 50mm forwards</span>
-<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Waiting for fsensor&quot;</span>
-<span class="w">        </span><span class="na">LOAD_TO_FSENSOR # Recursion</span>
-<span class="w">    </span><span class="na">{% else %}</span>
-<span class="w">        </span><span class="na">G1 E65 F900 # Move filament to nozzle</span>
-<span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Filament Loaded&quot;</span>
-<span class="w">    </span><span class="na">{% endif %}</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Counting to 10</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span>
+<span class="normal"><a href="#__codelineno-0-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">[gcode_macro COUNT]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.NUM|default(1)|int %}</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="na">{% if num &lt;</span><span class="o">=</span><span class="w"> </span><span class="s">10 %}</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{num}</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">        </span><span class="na">COUNT NUM</span><span class="o">=</span><span class="s">{num+1}</span><span class="w"> </span><span class="c1"># Count up 1</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="na">{% else %}</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Done Counting&quot;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="na">{% endif %}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Load to Filament Sensor</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">[gcode_macro LOAD_TO_FSENSOR]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="na">{% set val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">printer[&quot;filament_sensor fsensor&quot;].filament_detected %}</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="na">{% if val</span><span class="w"> </span><span class="o">=</span><span class="s">= 0 %}</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">        </span><span class="na">M83</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">        </span><span class="na">G1 E50 F900 # Move filament 50mm forwards</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Waiting for fsensor&quot;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">        </span><span class="na">LOAD_TO_FSENSOR # Recursion</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="na">{% else %}</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">        </span><span class="na">G1 E65 F900 # Move filament to nozzle</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Filament Loaded&quot;</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">    </span><span class="na">{% endif %}</span>
+</code></pre></div></td></tr></table></div>
 <h2 id="receiving-variable-updates"><a href="../../features/receivingvariables/">Receiving Variable Updates</a></h2>
 <p>Receiving variable updates allows Dynamic Macros to update variables without rerunning the macro. </p>
 <p>An example of this is getting the printer's position. A standard GCode macro will evaluate all the variables, then run the GCode. However, using three newlines (two blank lines) between code segments in Dynamic Macros will allow each segment to be evaluated at runtime, allowing for variable updates.</p>
@@ -906,7 +1032,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
