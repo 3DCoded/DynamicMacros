@@ -790,11 +790,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../extras/extras-install/" class="md-nav__link">
+      <a href="../extras/extras-bettergreeter/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Extras install
+    BetterGreeter
   </span>
   
 
@@ -967,43 +967,64 @@
 <p>Follow this guide to setup and confiure Dynamic Macros.</p>
 <h2 id="install">Install</h2>
 <p>Run in your terminal:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/3DCoded/DynamicMacros
-<span class="nb">cd</span><span class="w"> </span>DynamicMacros
-sh<span class="w"> </span>install.sh
-sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>restart
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/3DCoded/DynamicMacros
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>DynamicMacros
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>sh<span class="w"> </span>install.sh
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>restart
+</code></pre></div></td></tr></table></div>
 <p>Add to your <code>moonraker.conf</code>:</p>
-<div class="highlight"><span class="filename">moonraker.conf</span><pre><span></span><code><span class="c1"># DynamicMacros Update Manager</span>
-<span class="k">[update_manager DynamicMacros]</span>
-<span class="na">type</span><span class="o">:</span><span class="w"> </span><span class="s">git_repo</span>
-<span class="na">path</span><span class="o">:</span><span class="w"> </span><span class="s">~/DynamicMacros</span>
-<span class="na">origin</span><span class="o">:</span><span class="w"> </span><span class="s">https://github.com/3DCoded/DynamicMacros.git</span>
-<span class="na">primary_branch</span><span class="o">:</span><span class="w"> </span><span class="s">main</span>
-<span class="na">is_system_service</span><span class="o">:</span><span class="w"> </span><span class="s">False</span>
-<span class="na">install_script</span><span class="o">:</span><span class="w"> </span><span class="s">install.sh</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">moonraker.conf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span>
+<span class="normal"><a href="#__codelineno-1-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># DynamicMacros Update Manager</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="k">[update_manager DynamicMacros]</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="na">type</span><span class="o">:</span><span class="w"> </span><span class="s">git_repo</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="na">path</span><span class="o">:</span><span class="w"> </span><span class="s">~/DynamicMacros</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="na">origin</span><span class="o">:</span><span class="w"> </span><span class="s">https://github.com/3DCoded/DynamicMacros.git</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="na">primary_branch</span><span class="o">:</span><span class="w"> </span><span class="s">main</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="na">is_system_service</span><span class="o">:</span><span class="w"> </span><span class="s">False</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="na">install_script</span><span class="o">:</span><span class="w"> </span><span class="s">install.sh</span>
+</code></pre></div></td></tr></table></div>
 <h2 id="updating">Updating</h2>
 <p>First, update via Moonraker's update manager. Then run in your terminal:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/DynamicMacros
-sh<span class="w"> </span>install.sh
-sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>restart
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>~/DynamicMacros
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>sh<span class="w"> </span>install.sh
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w"> </span>restart
+</code></pre></div></td></tr></table></div>
 <h2 id="configuration">Configuration</h2>
 <p>To configure Dynamic Macros, put in your <code>printer.cfg</code> (or a file included in it):</p>
-<div class="highlight"><span class="filename">printer.cfg</span><pre><span></span><code><span class="k">[dynamicmacros]</span>
-<span class="na">configs</span><span class="o">:</span><span class="w"> </span><span class="s">dynamic.cfg</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">printer.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[dynamicmacros]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">configs</span><span class="o">:</span><span class="w"> </span><span class="s">dynamic.cfg</span>
+</code></pre></div></td></tr></table></div>
 <p>Create a new file in the same folder as your <code>printer.cfg</code> called <code>dynamic.cfg</code>. In it, configure some macros like you normally would. Example:</p>
-<div class="highlight"><span class="filename">dynamic.cfg</span><pre><span></span><code><span class="k">[gcode_macro MYTEST]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">M117 Hello world!</span>
-
-<span class="k">[gcode_macro HEAT_HOTEND]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">{% set temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.TEMP|int %}</span>
-<span class="w">    </span><span class="na">M104 S{temp}</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">dynamic.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span>
+<span class="normal"><a href="#__codelineno-4-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">[gcode_macro MYTEST]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="na">M117 Hello world!</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="k">[gcode_macro HEAT_HOTEND]</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="na">{% set temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.TEMP|int %}</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="na">M104 S{temp}</span>
+</code></pre></div></td></tr></table></div>
 <p>Restart Klipper.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -1011,18 +1032,20 @@ sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w
 </div>
 <h2 id="testing">Testing</h2>
 <p>If you run the command <code>MYTEST</code>, the output should be:
-<div class="highlight"><pre><span></span><code>Hello world!
-</code></pre></div></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>Hello world!
+</code></pre></div></td></tr></table></div></p>
 <p>If you runthe command <code>HEAT_HOTEND TEMP=200</code>, the hotend should start heating up. </p>
 <p>Next, edit the <code>MYTEST</code> macro to output something else, like <code>Test successful!</code></p>
-<div class="highlight"><span class="filename">dynamic.cfg</span><pre><span></span><code><span class="k">[gcode_macro MYTEST]</span>
-<span class="na">gcode</span><span class="o">:</span>
-<span class="w">    </span><span class="na">M117 Test successful!</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">dynamic.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">[gcode_macro MYTEST]</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="na">M117 Test successful!</span>
+</code></pre></div></td></tr></table></div>
 <p>Save the file, but <strong>do not</strong> restart Klipper.</p>
 <p>Run <code>MYTEST</code> again, and the output should be:
-<div class="highlight"><pre><span></span><code>Test successful!
-</code></pre></div></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>Test successful!
+</code></pre></div></td></tr></table></div></p>
 <h2 id="features">Features</h2>
 <ul>
 <li><a href="../features/recursion/">Recursion</a></li>
@@ -1034,11 +1057,11 @@ sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w
 <p>Follow the <a href="../tutorial/">Tutorial</a>.</p>
 <h2 id="when-to-restart-klipper-or-reload-dynamic-macros">When to Restart Klipper or Reload Dynamic Macros</h2>
 <p>Dynamic Macros provides a utility <code>DYNAMIC_MACRO</code> command to run macros manually, and to refresh the macros. Usage examples (assuming M900 is defined as a Dynamic Macro):</p>
-<div class="highlight"><pre><span></span><code>DYNAMIC_MACRO MACRO=M900 K=0.035
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>DYNAMIC_MACRO MACRO=M900 K=0.035
+</code></pre></div></td></tr></table></div>
 <p>is the same as:</p>
-<div class="highlight"><pre><span></span><code>M900 K0.035
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>M900 K0.035
+</code></pre></div></td></tr></table></div>
 <p>To refresh Dynamic Macros, just run <code>DYNAMIC_MACRO</code> with no parameters.</p>
 <p>A Klipper restart is required if:</p>
 <ul>
@@ -1101,7 +1124,7 @@ sudo<span class="w"> </span>service<span class="w"> </span>klipper<span class="w
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
