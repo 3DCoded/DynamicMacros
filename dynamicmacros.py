@@ -10,6 +10,9 @@ import logging
 
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
+class MissingConfigError(Exception):
+    pass
+
 class DynamicMacros:
     def __init__(self, config):
         # Initialize variables
@@ -96,6 +99,9 @@ class DynamicMacros:
             self.unregister_macro(macro) # unregister all macros
         for fname in self.fnames:
             path = config_path / fname # create full file path
+
+            if not os.path.exists(path):
+                raise MissingConfigError(f'Missing Configuration at {path}')
 
             # Pase config files
             config = configparser.RawConfigParser(strict=False, inline_comment_prefixes=(';', '#'))
