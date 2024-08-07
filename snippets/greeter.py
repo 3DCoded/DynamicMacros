@@ -8,6 +8,7 @@ class Greeter:
     # --8<-- [end:initheader]
         # --8<-- [start:readcfg]
         self.printer = config.get_printer()
+        self.reactor = self.printer.get_reactor()
         self.gcode = self.printer.lookup_object('gcode')
 
         self.message = config.get('message', 'Welcome to Klipper!')
@@ -15,20 +16,22 @@ class Greeter:
 
         # --8<-- [start:regcmd]
         self.gcode.register_command(
-            'GREET', self.cmd_GREET, desc=self.cmd_GRRET_help)
+            'GREET', self.cmd_GREET, desc=self.cmd_GREET_help)
         self.printer.register_event_handler(
             'klippy:ready', self._ready_handler)
         # --8<-- [end:regcmd]
     # --8<-- [end:init]
 
     # --8<-- [start:handler]
-    def _ready_handler(self, eventtime):
-        self._greet()
+    def _ready_handler(self):
+        waketime = self.reactor.monotonic() + 1
+        self.reactor.register_timer(self._greet, waketime)
     # --8<-- [end:handler]
 
     # --8<-- [start:agreet]
-    def _greet(self):
+    def _greet(self, eventtime=None):
         self.gcode.respond_info(self.message)
+        return self.reactor.NEVER
     # --8<-- [end:agreet]
 
     # --8<-- [start:greet]
