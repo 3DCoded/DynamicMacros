@@ -43,6 +43,7 @@ To configure Dynamic Macros, put in your `printer.cfg` (or a file included in it
 
 ```cfg title="printer.cfg"
 [dynamicmacros]
+config_path: ~/printer_data/config # If you left your printer configuration path as the default, you don't need to specify this
 configs: dynamic.cfg
 ```
 

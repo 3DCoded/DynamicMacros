@@ -18,6 +18,7 @@ Next, if you don't already have one, create a `[dynamicmacros]` config section i
 
 ```cfg title="printer.cfg"
 [dynamicmacros]
+config_path: ~/printer_data/config # If you left your printer configuration path as the default, you don't need to specify this
 configs: macros.cfg # You can add more files to this list, separated by commas.
 ```
 
