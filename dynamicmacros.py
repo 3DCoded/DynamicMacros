@@ -6,6 +6,7 @@ import os
 import ast
 import json
 from secrets import token_hex
+import logging
 
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
@@ -67,6 +68,9 @@ class DynamicMacros:
     def cmd_DYNAMIC_MACRO(self, gcmd):
         try:
             self._update_macros()
+            logging.info('DynamicMacros Macros:')
+            for macro in self.macros:
+                logging.info(f'    Name: {macro.name}')
             macro_name = gcmd.get('MACRO', '')
             if not macro_name:
                 return
