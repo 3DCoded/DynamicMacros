@@ -20,7 +20,7 @@ class DynamicMacros:
         DynamicMacros.printer = self.printer
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-        self.config_path = Path(config.get('config_path', config_path))
+        self.config_path = Path(config.get('config_path', config_path).replace('~', os.path.expanduser('~')))
 
         self.macros = {} # Holds macros in name: DynamicMacro format
         self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
