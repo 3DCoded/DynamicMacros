@@ -20,6 +20,7 @@ class DynamicMacros:
         DynamicMacros.printer = self.printer
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
+        self.config_path = config.get('config_path', config_path)
 
         self.macros = {} # Holds macros in name: DynamicMacro format
         self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
@@ -98,7 +99,7 @@ class DynamicMacros:
         for macro in self.macros.values():
             self.unregister_macro(macro) # unregister all macros
         for fname in self.fnames:
-            path = config_path / fname # create full file path
+            path = self.config_path / fname # create full file path
 
             if not os.path.exists(path):
                 raise MissingConfigError(f'Missing Configuration at {path}')
@@ -210,7 +211,7 @@ class DynamicMacro:
     # Run Python file from within a macro
     def python_file(self, fname, *args, **kwargs):
         try:
-            with open(config_path / fname, 'r') as file:
+            with open(self.config_path / fname, 'r') as file:
                 text = file.read()
         except Exception as e:
             self.gcode.respond_info('Python file missing')
