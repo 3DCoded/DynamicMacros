@@ -50,7 +50,8 @@ class DynamicMacros:
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-        self.config_path = Path(config.get('config_path', config_path).replace('~', os.path.expanduser('~')))
+        self.config_path_str = config.get('config_path', config_path).replace('~', os.path.expanduser('~'))
+        self.config_path = Path(self.config_path_str)
 
         DynamicMacros.printer = self.printer
         self.macros = {}
@@ -165,7 +166,8 @@ class DynamicMacrosCluster(DynamicMacros):
         self.name = config.get_name().split()[1]
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-        self.config_path = Path(config.get('config_path', config_path).replace('~', os.path.expanduser('~')))
+        self.config_path_str = config.get('config_path', config_path).replace('~', os.path.expanduser('~'))
+        self.config_path = Path(self.config_path_str)
 
         DynamicMacros.printer = self.printer
         self.macros = {}
