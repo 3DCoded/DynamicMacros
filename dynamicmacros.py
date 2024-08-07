@@ -69,8 +69,8 @@ class DynamicMacros:
         try:
             self._update_macros()
             logging.info('DynamicMacros Macros:')
-            for macro in self.macros:
-                logging.info(f'    Name: {macro.name}')
+            for name in self.macros:
+                logging.info(f'    Name: {name}')
             macro_name = gcmd.get('MACRO', '')
             if not macro_name:
                 return
