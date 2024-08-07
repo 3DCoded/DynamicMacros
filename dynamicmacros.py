@@ -101,6 +101,7 @@ class DynamicMacros:
             config = configparser.RawConfigParser(strict=False, inline_comment_prefixes=(';', '#'))
             config.read(path)
             for section in config.sections():
+                logging.info(f'DynamicMacros: Reading section {section}')
                 if section.split()[0] == 'gcode_macro': # Check if section is a gcode_macro
                     name = section.split()[1] # get name
                     macro = DynamicMacro.from_section(config, section, self.printer) # create DynamicMacro from config section
