@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/extras/extras-bettergreeter/">
+        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/extras/extras-ex2/">
       
       
-        <link rel="prev" href="../extras-structure/">
+        <link rel="prev" href="../extras-ex1/">
       
       
-        <link rel="next" href="../../examples/">
+        <link rel="next" href="../extras-ex3/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>BetterGreeter - Klipper Dynamic Macros</title>
+        <title>Example 2: BetterGreeter - Klipper Dynamic Macros</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#bettergreeter" class="md-skip">
+        <a href="#example-2-bettergreeter" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              BetterGreeter
+              Example 2: BetterGreeter
             
           </span>
         </div>
@@ -666,11 +666,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../extras-structure/" class="md-nav__link">
+      <a href="../extras-ex1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Structure
+    Example 1: Greeter (Structure)
   </span>
   
 
@@ -700,7 +700,7 @@
           
   
   <span class="md-ellipsis">
-    BetterGreeter
+    Example 2: BetterGreeter
   </span>
   
 
@@ -711,7 +711,7 @@
         
   
   <span class="md-ellipsis">
-    BetterGreeter
+    Example 2: BetterGreeter
   </span>
   
 
@@ -768,10 +768,49 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Code
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extras-ex3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Example 3: KlipperMaintenance
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -886,6 +925,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Code
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -901,7 +958,7 @@
                   
 
   
-    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/extras/extras-bettergreeter.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/extras/extras-ex2.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -909,12 +966,12 @@
   
 
 
-<h1 id="bettergreeter">BetterGreeter</h1>
+<h1 id="example-2-bettergreeter">Example 2: BetterGreeter</h1>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This page is under construction.</p>
 </div>
-<p>For this tutorial, we are going to improve on the greeter code used in <a href="../extras-structure/">Structure</a>. </p>
+<p>For this tutorial, we are going to improve on the greeter code used in <a href="../extras-ex1/">Structure</a>. </p>
 <p>For reference, the entire original greeter code is below:</p>
 <details open="open">
 <summary>Original Greeter</summary>
@@ -1053,11 +1110,11 @@
 </span><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 </span><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="hll">
 </span><a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Welcome to Klipper!&#39;</span><span class="p">)</span>
-</span><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_int</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Here, the <code>printer</code>, <code>reactor</code>, <code>gcode</code>, and <code>message</code> variables are the same as in the previous Klippy extra. However, in this case, there are a couple new variables:</p>
 <ul>
-<li><code>name</code> is explained in <a href="../extras-structure/#other-things">the last section of Structure</a>.</li>
+<li><code>name</code> is explained in <a href="../extras-ex1/#other-things">the last section of Structure</a>.</li>
 <li><code>delay</code> is read as an <code class="highlight"><span class="nb">int</span></code> from the <code>config</code> object, with default value <code class="highlight"><span class="mi">0</span></code>. The default value of <code class="highlight"><span class="mi">0</span></code> indicates it will not be run when Klippy starts.</li>
 </ul>
 <h2 id="gcode-commands-and-event-handler">GCode Commands and Event Handler</h2>
@@ -1091,7 +1148,7 @@
 <a id="__codelineno-5-6" name="__codelineno-5-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7"></a>
 <a id="__codelineno-5-8" name="__codelineno-5-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Welcome to Klipper!&#39;</span><span class="p">)</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_int</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10"></a>
 <a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="hll">        <span class="c1">#(1)!</span>
 </span><a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">register_mux_command</span><span class="p">(</span>
@@ -1109,7 +1166,7 @@
 <ol>
 <li><code>register_mux_command</code> is used here because there are <strong>multiple</strong> <code>greeting</code> configuration sections, and each should be called separately.</li>
 </ol>
-<p>Here, a few parts are similar to the example in <a href="../extras-structure/">Structure</a>, but not identical. Let's start with the GCode command.</p>
+<p>Here, a few parts are similar to the example in <a href="../extras-ex1/">Structure</a>, but not identical. Let's start with the GCode command.</p>
 <p>In the Structure example, the GCode command was registered with:</p>
 <p><code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">register_command</span><span class="p">(</span><span class="s1">&#39;GREET&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREET</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREET_help</span><span class="p">)</span></code></p>
 <p>In this new example, the GCode command is registered with:</p>
@@ -1136,6 +1193,286 @@
 <li>Description <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREETING_help</span></code></li>
 </ul>
 <p>Next, the <code>register_event_handler</code> is nearly identical to the Structure example, except in this case, it is run only <code class="highlight"><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">&gt;</span> <span class="mi">0</span></code>.</p>
+<h2 id="functions">Functions</h2>
+<p>The next part to creating this Klippy extra is the functions.</p>
+<p>There are three functions in the <code>Greeting</code> class:</p>
+<ul>
+<li><code>ready_handler</code></li>
+<li><code>_greet</code></li>
+<li><code>cmd_GREETING</code></li>
+</ul>
+<details class="info">
+<summary>Flowchart</summary>
+<pre class="mermaid"><code>graph TD
+A[klippy:ready] --&gt; B[_ready_handler]
+    B --&gt; C[Wait self.delay seconds]
+    C --&gt; D[_greet]
+    D --&gt; E[Display self.message]
+    F[cmd_GREETING] --&gt; E</code></pre>
+</details>
+<p>The first function, <code>_ready_handler</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">greeting.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="k">class</span> <span class="nc">Greeting</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_printer</span><span class="p">()</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">get_reactor</span><span class="p">()</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;gcode&#39;</span><span class="p">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Welcome to Klipper!&#39;</span><span class="p">)</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">register_mux_command</span><span class="p">(</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a>            <span class="s1">&#39;GREETING&#39;</span><span class="p">,</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a>            <span class="s1">&#39;NAME&#39;</span><span class="p">,</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREETING</span><span class="p">,</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a>            <span class="n">desc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREETING_help</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a>        <span class="p">)</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">register_event_handler</span><span class="p">(</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a>            <span class="s1">&#39;klippy:ready&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ready_handler</span><span class="p">)</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="hll">    <span class="k">def</span> <span class="nf">_ready_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><a id="__codelineno-7-23" name="__codelineno-7-23"></a><span class="hll">        <span class="n">waketime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span>
+</span><a id="__codelineno-7-24" name="__codelineno-7-24"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">register_timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_greet</span><span class="p">,</span> <span class="n">waketime</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>This function takes no parameters, and runs when Klippy reports <code class="highlight"><span class="s2">&quot;klippy:ready&quot;</span></code>.</p>
+<p>Inside, the <code>waketime</code> variable is declared as <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span></code>. Let's break this declaration down:</p>
+<ul>
+<li><code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span></code> This is the current Klippy time</li>
+<li><code class="highlight"><span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span></code> This adds <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">delay</span></code> to the current time.</li>
+</ul>
+<p>The result is that <code>waketime</code> contains the Klippy time for <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">delay</span></code> seconds in the future. Finally, we use <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">register_timer</span></code> to register this time, telling it to run <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">_greet</span><span class="p">()</span></code> when the time occurs.</p>
+<hr />
+<p>The next function, <code>_greet</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">greeting.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">class</span> <span class="nc">Greeting</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_printer</span><span class="p">()</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">get_reactor</span><span class="p">()</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;gcode&#39;</span><span class="p">)</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Welcome to Klipper!&#39;</span><span class="p">)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">register_mux_command</span><span class="p">(</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a>            <span class="s1">&#39;GREETING&#39;</span><span class="p">,</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>            <span class="s1">&#39;NAME&#39;</span><span class="p">,</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREETING</span><span class="p">,</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>            <span class="n">desc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREETING_help</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a>        <span class="p">)</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">register_event_handler</span><span class="p">(</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a>            <span class="s1">&#39;klippy:ready&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ready_handler</span><span class="p">)</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a>    <span class="k">def</span> <span class="nf">_ready_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a>        <span class="n">waketime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">register_timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_greet</span><span class="p">,</span> <span class="n">waketime</span><span class="p">)</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="hll">    <span class="k">def</span> <span class="nf">_greet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eventtime</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+</span><a id="__codelineno-8-28" name="__codelineno-8-28"></a><span class="hll">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">NEVER</span>
+</span></code></pre></div></td></tr></table></div>
+<p class="annotate">This function takes an optional <code>eventtime</code> parameter (unused) (1), and prints out <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">message</span></code> to the Klipper console, using <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span></code>.</p>
+<ol>
+<li>This is passed by Klippy when it calls <code>_greet()</code> after the timer occurs.</li>
+</ol>
+<hr />
+<p>The final function in this class is the <code>cmd_GREETING</code> function:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">greeting.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span>
+<span class="normal"><a href="#__codelineno-9-22">22</a></span>
+<span class="normal"><a href="#__codelineno-9-23">23</a></span>
+<span class="normal"><a href="#__codelineno-9-24">24</a></span>
+<span class="normal"><a href="#__codelineno-9-25">25</a></span>
+<span class="normal"><a href="#__codelineno-9-26">26</a></span>
+<span class="normal"><a href="#__codelineno-9-27">27</a></span>
+<span class="normal"><a href="#__codelineno-9-28">28</a></span>
+<span class="normal"><a href="#__codelineno-9-29">29</a></span>
+<span class="normal"><a href="#__codelineno-9-30">30</a></span>
+<span class="normal"><a href="#__codelineno-9-31">31</a></span>
+<span class="normal"><a href="#__codelineno-9-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="k">class</span> <span class="nc">Greeting</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_printer</span><span class="p">()</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">get_reactor</span><span class="p">()</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;gcode&#39;</span><span class="p">)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Welcome to Klipper!&#39;</span><span class="p">)</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">register_mux_command</span><span class="p">(</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a>            <span class="s1">&#39;GREETING&#39;</span><span class="p">,</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a>            <span class="s1">&#39;NAME&#39;</span><span class="p">,</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREETING</span><span class="p">,</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a>            <span class="n">desc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREETING_help</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a>        <span class="p">)</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">register_event_handler</span><span class="p">(</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a>            <span class="s1">&#39;klippy:ready&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ready_handler</span><span class="p">)</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a>
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a>    <span class="k">def</span> <span class="nf">_ready_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23"></a>        <span class="n">waketime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">register_timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_greet</span><span class="p">,</span> <span class="n">waketime</span><span class="p">)</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25"></a>
+<a id="__codelineno-9-26" name="__codelineno-9-26"></a>    <span class="k">def</span> <span class="nf">_greet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eventtime</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">NEVER</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29"></a>
+<a id="__codelineno-9-30" name="__codelineno-9-30"></a><span class="hll">    <span class="n">cmd_GREETING_help</span> <span class="o">=</span> <span class="s2">&quot;Greet the user&quot;</span>
+</span><a id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="hll">    <span class="k">def</span> <span class="nf">cmd_GREETING</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gcmd</span><span class="p">):</span>
+</span><a id="__codelineno-9-32" name="__codelineno-9-32"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">_greet</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+<p>This function simply calls <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">_greet</span><span class="p">()</span></code>, which displays <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">message</span></code> to the Klipper terminal.</p>
+<h2 id="full-code">Full Code</h2>
+<p>The full code of this Klippy extra is:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">greeting.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span>
+<span class="normal"><a href="#__codelineno-10-21">21</a></span>
+<span class="normal"><a href="#__codelineno-10-22">22</a></span>
+<span class="normal"><a href="#__codelineno-10-23">23</a></span>
+<span class="normal"><a href="#__codelineno-10-24">24</a></span>
+<span class="normal"><a href="#__codelineno-10-25">25</a></span>
+<span class="normal"><a href="#__codelineno-10-26">26</a></span>
+<span class="normal"><a href="#__codelineno-10-27">27</a></span>
+<span class="normal"><a href="#__codelineno-10-28">28</a></span>
+<span class="normal"><a href="#__codelineno-10-29">29</a></span>
+<span class="normal"><a href="#__codelineno-10-30">30</a></span>
+<span class="normal"><a href="#__codelineno-10-31">31</a></span>
+<span class="normal"><a href="#__codelineno-10-32">32</a></span>
+<span class="normal"><a href="#__codelineno-10-33">33</a></span>
+<span class="normal"><a href="#__codelineno-10-34">34</a></span>
+<span class="normal"><a href="#__codelineno-10-35">35</a></span>
+<span class="normal"><a href="#__codelineno-10-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="k">class</span> <span class="nc">Greeting</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_printer</span><span class="p">()</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">get_reactor</span><span class="p">()</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;gcode&#39;</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Welcome to Klipper!&#39;</span><span class="p">)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">register_mux_command</span><span class="p">(</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a>            <span class="s1">&#39;GREETING&#39;</span><span class="p">,</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a>            <span class="s1">&#39;NAME&#39;</span><span class="p">,</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREETING</span><span class="p">,</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a>            <span class="n">desc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_GREETING_help</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a>        <span class="p">)</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a>
+<a id="__codelineno-10-19" name="__codelineno-10-19"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">register_event_handler</span><span class="p">(</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21"></a>            <span class="s1">&#39;klippy:ready&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ready_handler</span><span class="p">)</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22"></a>
+<a id="__codelineno-10-23" name="__codelineno-10-23"></a>    <span class="k">def</span> <span class="nf">_ready_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24"></a>        <span class="n">waketime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">register_timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_greet</span><span class="p">,</span> <span class="n">waketime</span><span class="p">)</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26"></a>
+<a id="__codelineno-10-27" name="__codelineno-10-27"></a>    <span class="k">def</span> <span class="nf">_greet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eventtime</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">NEVER</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30"></a>
+<a id="__codelineno-10-31" name="__codelineno-10-31"></a>    <span class="n">cmd_GREETING_help</span> <span class="o">=</span> <span class="s2">&quot;Greet the user&quot;</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32"></a>    <span class="k">def</span> <span class="nf">cmd_GREETING</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gcmd</span><span class="p">):</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_greet</span><span class="p">()</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34"></a>
+<a id="__codelineno-10-35" name="__codelineno-10-35"></a><span class="k">def</span> <span class="nf">load_config_prefix</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36"></a>    <span class="k">return</span> <span class="n">Greeting</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>You can install it following <a href="../extras-ex1/#install">these</a> instructions, replacing <code>greeter.py</code> with <code>greeting.py</code>.</p>
+<hr />
+<p>Last example (so far):</p>
+<p><a class="md-button" href="../extras-ex3/">Example 3: KlipperMaintenance <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 407 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="m372 232.5-3.7-6.5c.1-46.4-21.4-65.3-46.5-79.7 7.6-2 15.4-3.6 17.6-13.2 13.1-3.3 15.8-9.4 17.1-15.8 3.4-2.3 14.8-8.7 13.6-19.7 6.4-4.4 10-10.1 8.1-18.1 6.9-7.5 8.7-13.7 5.8-19.4 8.3-10.3 4.6-15.6 1.1-20.9 6.2-11.2.7-23.2-16.6-21.2-6.9-10.1-21.9-7.8-24.2-7.8-2.6-3.2-6-6-16.5-4.7-6.8-6.1-14.4-5-22.3-2.1-9.3-7.3-15.5-1.4-22.6.8C271.6.6 269 5.5 263.5 7.6c-12.3-2.6-16.1 3-22 8.9l-6.9-.1c-18.6 10.8-27.8 32.8-31.1 44.1-3.3-11.3-12.5-33.3-31.1-44.1l-6.9.1c-5.9-5.9-9.7-11.5-22-8.9-5.6-2-8.1-7-19.4-3.4-4.6-1.4-8.9-4.4-13.9-4.3-2.6.1-5.5 1-8.7 3.5-7.9-3-15.5-4-22.3 2.1-10.5-1.3-14 1.4-16.5 4.7-2.3 0-17.3-2.3-24.2 7.8C21.2 16 15.8 28 22 39.2c-3.5 5.4-7.2 10.7 1.1 20.9-2.9 5.7-1.1 11.9 5.8 19.4-1.8 8 1.8 13.7 8.1 18.1-1.2 11 10.2 17.4 13.6 19.7 1.3 6.4 4 12.4 17.1 15.8 2.2 9.5 10 11.2 17.6 13.2-25.1 14.4-46.6 33.3-46.5 79.7l-3.7 6.5c-28.8 17.2-54.7 72.7-14.2 117.7 2.6 14.1 7.1 24.2 11 35.4 5.9 45.2 44.5 66.3 54.6 68.8 14.9 11.2 30.8 21.8 52.2 29.2C159 504.2 181 512 203 512h1c22.1 0 44-7.8 64.2-28.4 21.5-7.4 37.3-18 52.2-29.2 10.2-2.5 48.7-23.6 54.6-68.8 3.9-11.2 8.4-21.3 11-35.4 40.6-45.1 14.7-100.5-14-117.7zm-22.2-8c-1.5 18.7-98.9-65.1-82.1-67.9 45.7-7.5 83.6 19.2 82.1 67.9zm-43 93.1c-24.5 15.8-59.8 5.6-78.8-22.8s-14.6-64.2 9.9-80c24.5-15.8 59.8-5.6 78.8 22.8s14.6 64.2-9.9 80zM238.9 29.3c.8 4.2 1.8 6.8 2.9 7.6 5.4-5.8 9.8-11.7 16.8-17.3 0 3.3-1.7 6.8 2.5 9.4 3.7-5 8.8-9.5 15.5-13.3-3.2 5.6-.6 7.3 1.2 9.6 5.1-4.4 10-8.8 19.4-12.3-2.6 3.1-6.2 6.2-2.4 9.8 5.3-3.3 10.6-6.6 23.1-8.9-2.8 3.1-8.7 6.3-5.1 9.4 6.6-2.5 14-4.4 22.1-5.4-3.9 3.2-7.1 6.3-3.9 8.8 7.1-2.2 16.9-5.1 26.4-2.6l-6 6.1c-.7.8 14.1.6 23.9.8-3.6 5-7.2 9.7-9.3 18.2 1 1 5.8.4 10.4 0-4.7 9.9-12.8 12.3-14.7 16.6 2.9 2.2 6.8 1.6 11.2.1-3.4 6.9-10.4 11.7-16 17.3 1.4 1 3.9 1.6 9.7.9-5.2 5.5-11.4 10.5-18.8 15 1.3 1.5 5.8 1.5 10 1.6-6.7 6.5-15.3 9.9-23.4 14.2 4 2.7 6.9 2.1 10 2.1-5.7 4.7-15.4 7.1-24.4 10 1.7 2.7 3.4 3.4 7.1 4.1-9.5 5.3-23.2 2.9-27 5.6.9 2.7 3.6 4.4 6.7 5.8-15.4.9-57.3-.6-65.4-32.3 15.7-17.3 44.4-37.5 93.7-62.6-38.4 12.8-73 30-102 53.5-34.3-15.9-10.8-55.9 5.8-71.8zm-34.4 114.6c24.2-.3 54.1 17.8 54 34.7-.1 15-21 27.1-53.8 26.9-32.1-.4-53.7-15.2-53.6-29.8 0-11.9 26.2-32.5 53.4-31.8zm-123-12.8c3.7-.7 5.4-1.5 7.1-4.1-9-2.8-18.7-5.3-24.4-10 3.1 0 6 .7 10-2.1-8.1-4.3-16.7-7.7-23.4-14.2 4.2-.1 8.7 0 10-1.6-7.4-4.5-13.6-9.5-18.8-15 5.8.7 8.3.1 9.7-.9-5.6-5.6-12.7-10.4-16-17.3 4.3 1.5 8.3 2 11.2-.1-1.9-4.2-10-6.7-14.7-16.6 4.6.4 9.4 1 10.4 0-2.1-8.5-5.8-13.3-9.3-18.2 9.8-.1 24.6 0 23.9-.8l-6-6.1c9.5-2.5 19.3.4 26.4 2.6 3.2-2.5-.1-5.6-3.9-8.8 8.1 1.1 15.4 2.9 22.1 5.4 3.5-3.1-2.3-6.3-5.1-9.4 12.5 2.3 17.8 5.6 23.1 8.9 3.8-3.6.2-6.7-2.4-9.8 9.4 3.4 14.3 7.9 19.4 12.3 1.7-2.3 4.4-4 1.2-9.6 6.7 3.8 11.8 8.3 15.5 13.3 4.1-2.6 2.5-6.2 2.5-9.4 7 5.6 11.4 11.5 16.8 17.3 1.1-.8 2-3.4 2.9-7.6 16.6 15.9 40.1 55.9 6 71.8-29-23.5-63.6-40.7-102-53.5 49.3 25 78 45.3 93.7 62.6-8 31.8-50 33.2-65.4 32.3 3.1-1.4 5.8-3.2 6.7-5.8-4-2.8-17.6-.4-27.2-5.6zm60.1 24.1c16.8 2.8-80.6 86.5-82.1 67.9-1.5-48.7 36.5-75.5 82.1-67.9zM38.2 342c-23.7-18.8-31.3-73.7 12.6-98.3 26.5-7 9 107.8-12.6 98.3zm91 98.2c-13.3 7.9-45.8 4.7-68.8-27.9-15.5-27.4-13.5-55.2-2.6-63.4 16.3-9.8 41.5 3.4 60.9 25.6 16.9 20 24.6 55.3 10.5 65.7zm-26.4-119.7c-24.5-15.8-28.9-51.6-9.9-80s54.3-38.6 78.8-22.8 28.9 51.6 9.9 80c-19.1 28.4-54.4 38.6-78.8 22.8zM205 496c-29.4 1.2-58.2-23.7-57.8-32.3-.4-12.7 35.8-22.6 59.3-22 23.7-1 55.6 7.5 55.7 18.9.5 11-28.8 35.9-57.2 35.4zm58.9-124.9c.2 29.7-26.2 53.8-58.8 54-32.6.2-59.2-23.8-59.4-53.4v-.6c-.2-29.7 26.2-53.8 58.8-54 32.6-.2 59.2 23.8 59.4 53.4v.6zm82.2 42.7c-25.3 34.6-59.6 35.9-72.3 26.3-13.3-12.4-3.2-50.9 15.1-72 20.9-23.3 43.3-38.5 58.9-26.6 10.5 10.3 16.7 49.1-1.7 72.3zm22.9-73.2c-21.5 9.4-39-105.3-12.6-98.3 43.9 24.7 36.3 79.6 12.6 98.3z"/></svg></span></a></p>
 
 
 
