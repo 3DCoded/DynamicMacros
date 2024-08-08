@@ -90,7 +90,8 @@ nav:
     - features/delayed.md
   - Klippy Extras:
     - extras/extras-start.md
-    - extras/extras-structure.md
-    - extras/extras-bettergreeter.md
+    - extras/extras-ex1.md
+    - extras/extras-ex2.md
+    - extras/extras-ex3.md
   - examples.md
   - devstatus.md

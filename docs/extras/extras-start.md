@@ -15,4 +15,4 @@ While DynamicMacros makes Klipper macros much more powerful, sometimes a Klippy 
 
 Start writing your first Klippy extra:
 
-[Start :material-code-json:](extras-structure.md){ .md-button }
+[Start :material-code-json:](extras-ex1.md){ .md-button }

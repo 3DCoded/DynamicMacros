@@ -1,4 +1,4 @@
-# Structure
+# Example 1: Greeter (Structure)
 
 !!! info
     This page is under construction.
@@ -116,8 +116,8 @@ Here, you can see the `cmd_GREET_help` is set to a string. Next, the `cmd_GREET`
     There are a few `get_` functions that can be used with the `gcmd` parameter:
 
     - `get` returns a `#!py str`
-    - `get_int` returns an `#!py int`
-    - `get_float` returns a `#!py float`
+    - `getint` returns an `#!py int`
+    - `getfloat` returns a `#!py float`
 
     `gcmd` also has a `respond_info` function, similar to the `#!py self.gcode.respond_info` function.
 
@@ -129,6 +129,20 @@ Here, you can see the `cmd_GREET_help` is set to a string. Next, the `cmd_GREET`
     for _ in range(repeat):
         self._greet()
     ```
+
+## Install
+
+To install a Klippy extra, it has to be placed in the `~/klipper/klippy/extras/` folder. Here's a simple command to install `greeter.py`:
+
+```sh
+cp greeter.py ~/klipper/klippy/extras/greeter.py
+```
+
+You can also create an install script that uses the `ln` command to create a link to the file, rather than a copy:
+
+```sh title="install.sh"
+ln -f greeter.py ~/klippy/klippy/extras/greeter.py
+```
 
 ## Other Things
 
@@ -143,6 +157,6 @@ A few things that are good to know before moving on:
 
 ---
 
-Now, we can begin learning how to create Klippy extras:
+Next example:
 
-[Start :fontawesome-brands-python:](extras-bettergreeter.md){ .md-button }
+[Example 2: BetterGreeter :fontawesome-brands-python:](extras-ex2.md){ .md-button }

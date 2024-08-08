@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/extras/extras-structure/">
+        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/extras/extras-ex1/">
       
       
         <link rel="prev" href="../extras-start/">
       
       
-        <link rel="next" href="../extras-bettergreeter/">
+        <link rel="next" href="../extras-ex2/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Structure - Klipper Dynamic Macros</title>
+        <title>Example 1: Greeter (Structure) - Klipper Dynamic Macros</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#structure" class="md-skip">
+        <a href="#example-1-greeter-structure" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Structure
+              Example 1: Greeter (Structure)
             
           </span>
         </div>
@@ -679,7 +679,7 @@
           
   
   <span class="md-ellipsis">
-    Structure
+    Example 1: Greeter (Structure)
   </span>
   
 
@@ -690,7 +690,7 @@
         
   
   <span class="md-ellipsis">
-    Structure
+    Example 1: Greeter (Structure)
   </span>
   
 
@@ -730,6 +730,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#other-things" class="md-nav__link">
     <span class="md-ellipsis">
       Other Things
@@ -754,11 +763,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../extras-bettergreeter/" class="md-nav__link">
+      <a href="../extras-ex2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    BetterGreeter
+    Example 2: BetterGreeter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extras-ex3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Example 3: KlipperMaintenance
   </span>
   
 
@@ -860,6 +890,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#other-things" class="md-nav__link">
     <span class="md-ellipsis">
       Other Things
@@ -883,7 +922,7 @@
                   
 
   
-    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/extras/extras-structure.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/extras/extras-ex1.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -891,7 +930,7 @@
   
 
 
-<h1 id="structure">Structure</h1>
+<h1 id="example-1-greeter-structure">Example 1: Greeter (Structure)</h1>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This page is under construction.</p>
@@ -1028,8 +1067,8 @@
 <p>There are a few <code>get_</code> functions that can be used with the <code>gcmd</code> parameter:</p>
 <ul>
 <li><code>get</code> returns a <code class="highlight"><span class="nb">str</span></code></li>
-<li><code>get_int</code> returns an <code class="highlight"><span class="nb">int</span></code></li>
-<li><code>get_float</code> returns a <code class="highlight"><span class="nb">float</span></code></li>
+<li><code>getint</code> returns an <code class="highlight"><span class="nb">int</span></code></li>
+<li><code>getfloat</code> returns a <code class="highlight"><span class="nb">float</span></code></li>
 </ul>
 <p><code>gcmd</code> also has a <code>respond_info</code> function, similar to the <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span></code> function.</p>
 <hr />
@@ -1039,18 +1078,25 @@
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_greet</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 </details>
+<h2 id="install">Install</h2>
+<p>To install a Klippy extra, it has to be placed in the <code>~/klipper/klippy/extras/</code> folder. Here's a simple command to install <code>greeter.py</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>cp<span class="w"> </span>greeter.py<span class="w"> </span>~/klipper/klippy/extras/greeter.py
+</code></pre></div></td></tr></table></div>
+<p>You can also create an install script that uses the <code>ln</code> command to create a link to the file, rather than a copy:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">install.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>ln<span class="w"> </span>-f<span class="w"> </span>greeter.py<span class="w"> </span>~/klippy/klippy/extras/greeter.py
+</code></pre></div></td></tr></table></div>
 <h2 id="other-things">Other Things</h2>
 <p>A few things that are good to know before moving on:</p>
 <ul>
 <li>If your Klippy extra uses <code>load_config_prefix</code>, instead of <code>load_config</code>, you can get the name of the configuration section (e.g. <code>[greeter first]</code> is named <code>first</code>) by using: 
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">config</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">config</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div></li>
 <li>If you want to learn more about additional capabilities of Klippy extras, check out the <a href="https://github.com/Klipper3d/klipper/tree/master/klippy/extras">built-in Klippy extras</a>.</li>
 <li>For further explanation of topics on this page, open the dropdowns.</li>
 </ul>
 <hr />
-<p>Now, we can begin learning how to create Klippy extras:</p>
-<p><a class="md-button" href="../extras-bettergreeter/">Start <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"/></svg></span></a></p>
+<p>Next example:</p>
+<p><a class="md-button" href="../extras-ex2/">Example 2: BetterGreeter <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"/></svg></span></a></p>
 
 
 

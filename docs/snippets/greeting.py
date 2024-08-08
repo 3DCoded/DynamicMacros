@@ -14,7 +14,7 @@ class Greeting:
         self.name = config.get_name().split()[1]
 
         self.message = config.get('message', 'Welcome to Klipper!')
-        self.delay = config.get_int('delay', 0)
+        self.delay = config.getint('delay', 0)
         # --8<-- [end:readcfg]
 
         # --8<-- [start:regcmd]

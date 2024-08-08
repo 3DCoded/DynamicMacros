@@ -21,17 +21,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://3dcoded.github.io/DynamicMacros/extras/extras-bettergreeter/</loc>
+         <loc>https://3dcoded.github.io/DynamicMacros/extras/extras-ex1/</loc>
+         <lastmod>2024-08-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://3dcoded.github.io/DynamicMacros/extras/extras-ex2/</loc>
+         <lastmod>2024-08-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://3dcoded.github.io/DynamicMacros/extras/extras-ex3/</loc>
          <lastmod>2024-08-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://3dcoded.github.io/DynamicMacros/extras/extras-start/</loc>
-         <lastmod>2024-08-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://3dcoded.github.io/DynamicMacros/extras/extras-structure/</loc>
          <lastmod>2024-08-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
