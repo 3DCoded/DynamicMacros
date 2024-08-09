@@ -5,6 +5,7 @@ edit_uri: blob/docs/docs/
 plugins:
   - search
   - autolinks
+  - print-site
 markdown_extensions:
   - attr_list
   - md_in_html
@@ -49,6 +50,7 @@ extra:
             <a href="https://github.com/3DCoded/DynamicMacros/issues/new?assignees=&labels=documentation&projects=&template=documentation.md&title=%5BDOCS%5D" target="_blank" rel="noopener">opening an issue</a>.
 theme:
   logo: assets/logo.png
+  custom_dir: docs/overrides
   features:
       - content.action.edit
       - navigation.expand
