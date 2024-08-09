@@ -818,6 +818,48 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#maintenance-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maintenance Class
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maintenance Class">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initializer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initializer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feedback
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -948,6 +990,48 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maintenance Class
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maintenance Class">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initializer_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initializer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feedback
+    </span>
+  </a>
   
 </li>
       
@@ -1631,6 +1715,222 @@
 <li><code>cmd_CHECK_MAINTENANCE(gcmd)</code></li>
 <li><code>cmd_UPDATE_MAINTENANCE(gcmd)</code></li>
 </ul>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">maintain.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">class</span> <span class="nc">Maintain</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>    <span class="o">...</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="k">def</span> <span class="nf">get_remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># Returns the remaining hours/meters until this expires</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>        <span class="n">last</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_db</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">trigger</span><span class="p">]</span> <span class="c1"># Get the last trigger</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>        <span class="n">now</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_history</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">trigger</span><span class="p">]</span> <span class="c1"># Get the current state</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a>        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">-</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="n">last</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Return how close the difference is to self.threshold, and round to two decimal places</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>    <span class="n">cmd_CHECK_MAINTENANCE_help</span> <span class="o">=</span> <span class="s1">&#39;Check maintenance&#39;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a>    <span class="k">def</span> <span class="nf">cmd_CHECK_MAINTENANCE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gcmd</span><span class="p">):</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a>        <span class="n">gcmd</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="s1">Maintenance </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1"> Status:</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="s1">Next maintenance in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_remaining</span><span class="p">()</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="si">}</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="s1">Maintenance message: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="si">}</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="s1">        &#39;&#39;&#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a>    <span class="n">cmd_UPDATE_MAINTENANCE_help</span> <span class="o">=</span> <span class="s1">&#39;Update maintenance&#39;</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a>    <span class="k">def</span> <span class="nf">cmd_UPDATE_MAINTENANCE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gcmd</span><span class="p">):</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">update_db</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fetch_history</span><span class="p">())</span> <span class="c1"># (1)!</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>This erases the current maintenance status, and is called when maintenance has been done. <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">fetch_history</span><span class="p">()</span></code> retrieves the current state of the printer history (print time, filament), and then <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">update_db</span><span class="p">()</span></code> saves that data to the JSON database.</li>
+</ol>
+<p>The first function, <code>get_remaining</code>, works as follows (assuming the trigger is <code>print_time</code> and threshold is <code>250</code>):</p>
+<ol>
+<li>Read the last print time that maintenance occured at</li>
+<li>Read the current accumulated print time</li>
+<li>Get the difference between the two (how long has it been since last maintenance?)</li>
+<li>Subtract that from <code>threshold</code> (how much longer until maintenance should be done?)</li>
+<li>Round to two decimal places and return</li>
+</ol>
+<p>The next function, <code>cmd_CHECK_MAINTENANCE</code>, corresponds to the GCode command <code>CHECK_MAINTENANCE</code>, and outputs the <code>Maintain</code> object's variables in a user-friendly format.</p>
+<p>The final function, <code>cmd_UPDATE_MAINTENANCE</code>, corresponds to the GCode command <code>UPDATE_MAINTENANCE</code>, and erases the current maintenance state. Click the plus sign in the function for more information.</p>
+<h2 id="maintenance-class">Maintenance Class</h2>
+<p>Now that we've gone through the <code>Maintain</code> class, let's see how multiple <code>Maintain</code> objects are managed in the <code>Maintenance</code> class. This class does the following:</p>
+<ul>
+<li>Displays maintenance reminders</li>
+<li>Provides the <code>MAINTAIN_STATUS</code> command to overview the current maintenance state</li>
+</ul>
+<p>Unlike the <code>Maintain</code> class, which has multiple objects, there will be only one <code>Maintenance</code> object. Let's start with the initializer.</p>
+<h3 id="initializer_1">Initializer</h3>
+<p>The initializer of the <code>Maintenance</code> class is shown below:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">maintain.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">class</span> <span class="nc">Maintenance</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_printer</span><span class="p">()</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">get_reactor</span><span class="p">()</span>
+</span><a id="__codelineno-6-6" name="__codelineno-6-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;gcode&#39;</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;interval&#39;</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+</span><a id="__codelineno-6-9" name="__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">timer_handler</span> <span class="o">=</span> <span class="kc">None</span>
+</span><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">inside_timer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span> <span class="o">=</span> <span class="kc">False</span>
+</span><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">register_event_handler</span><span class="p">(</span><span class="s2">&quot;klippy:ready&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_ready</span><span class="p">)</span>
+</span><a id="__codelineno-6-13" name="__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">register_command</span><span class="p">(</span><span class="s1">&#39;MAINTAIN_STATUS&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_MAINTAIN_STATUS</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_MAINTAIN_STATUS_help</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>This initializer may look similar to the BetterGreeter initializer in the previous example. This is because both the <code>BetterGreeter</code> and <code>Maintenance</code> classes use Klipper's timer system to schedule events. </p>
+<p>There are four highlighted sections in the above code block. Let's go through each of them and explain what they do. </p>
+<ol>
+<li>This sets up the <code>reactor</code> object, which is important in scheduling events with Klipper.</li>
+<li>This reads the interval from the configuration, defaulting to <code class="highlight"><span class="mi">60</span></code> if no value is provided.</li>
+<li>This section is based off the <code>delayed_gcode</code> code, which is builtin to Klipper. Source code <a href="https://github.com/Klipper3d/klipper/blob/12cd1d9e81c32b26ccc319af1dfc3633438908f1/klippy/extras/delayed_gcode.py">here</a>. This section declares a <code>timer_handler</code>, <code>inside_timer</code>, and <code>repeat</code> variables, all of which will be used later. The last line of this section registers the <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">_handle_ready</span></code> function to run when Klippy is ready.</li>
+<li>This final line registers the <code class="highlight"><span class="s2">&quot;MAINTAIN_STATUS&quot;</span></code> GCode command.</li>
+</ol>
+<h3 id="functions_1">Functions</h3>
+<p>The next part of the <code>Maintenance</code> class is its functions:</p>
+<ul>
+<li><code>_handle_ready</code></li>
+<li><code>_gcode_timer_event</code></li>
+<li><code>check_maintenance</code></li>
+<li><code>cmd_MAINTAIN_STATUS</code></li>
+</ul>
+<p>Click on the plus symbols in the code below to learn more about specific parts.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">maintian.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span>
+<span class="normal"><a href="#__codelineno-7-25">25</a></span>
+<span class="normal"><a href="#__codelineno-7-26">26</a></span>
+<span class="normal"><a href="#__codelineno-7-27">27</a></span>
+<span class="normal"><a href="#__codelineno-7-28">28</a></span>
+<span class="normal"><a href="#__codelineno-7-29">29</a></span>
+<span class="normal"><a href="#__codelineno-7-30">30</a></span>
+<span class="normal"><a href="#__codelineno-7-31">31</a></span>
+<span class="normal"><a href="#__codelineno-7-32">32</a></span>
+<span class="normal"><a href="#__codelineno-7-33">33</a></span>
+<span class="normal"><a href="#__codelineno-7-34">34</a></span>
+<span class="normal"><a href="#__codelineno-7-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="k">class</span> <span class="nc">Maintenance</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="k">def</span> <span class="nf">_handle_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>        <span class="n">waketime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="c1"># (1)!</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">timer_handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">register_timer</span><span class="p">(</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_gcode_timer_event</span><span class="p">,</span> <span class="n">waketime</span><span class="p">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>    <span class="k">def</span> <span class="nf">_gcode_timer_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eventtime</span><span class="p">):</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>        <span class="c1"># This function is based on the delayed_gcode Klipper code.</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inside_timer</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">check_maintenance</span><span class="p">()</span> <span class="c1"># Check if maintenance needs to be done.</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a>        <span class="n">nextwake</span> <span class="o">=</span> <span class="n">eventtime</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inside_timer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a>        <span class="k">return</span> <span class="n">nextwake</span> <span class="c1"># (2)!</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a>    <span class="k">def</span> <span class="nf">check_maintenance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a>        <span class="n">objs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">lookup_objects</span><span class="p">(</span><span class="s1">&#39;maintain&#39;</span><span class="p">)</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a>        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">:</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a>            <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># (3)!</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Maintain</span><span class="p">):</span> <span class="c1"># (4)!</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a>                <span class="k">continue</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21"></a>            <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">get_remaining</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># (5)!</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Maintenance &quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">&quot; Expired!</span><span class="se">\n</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">run_script_from_command</span><span class="p">(</span><span class="s1">&#39;M117 Maintenance Expired!&#39;</span><span class="p">)</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24"></a>
+<a id="__codelineno-7-25" name="__codelineno-7-25"></a>    <span class="n">cmd_MAINTAIN_STATUS_help</span> <span class="o">=</span> <span class="s1">&#39;Check status of maintenance&#39;</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26"></a>    <span class="k">def</span> <span class="nf">cmd_MAINTAIN_STATUS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gcmd</span><span class="p">):</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27"></a>        <span class="n">objs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">lookup_objects</span><span class="p">(</span><span class="s1">&#39;maintain&#39;</span><span class="p">)</span> <span class="c1"># Load all Maintain objects</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28"></a>        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">:</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29"></a>            <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># (3)!</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Maintain</span><span class="p">):</span> <span class="c1"># (4)!</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31"></a>                <span class="k">continue</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32"></a>            <span class="n">remain</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get_remaining</span><span class="p">()</span> <span class="c1"># You can call functions on other Klippy extras</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33"></a>            <span class="k">if</span> <span class="n">remain</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># (5)!</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Maintenance &quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">&quot; Expired!</span><span class="se">\n</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">get_remaining</span><span class="p">()</span><span class="si">}{</span><span class="n">obj</span><span class="o">.</span><span class="n">units</span><span class="si">}</span><span class="s1"> remaining&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>
+<div class="admonition question">
+<p class="admonition-title">Quiz</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Question</label><label for="__tabbed_2_2">Answer</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">What does <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span></code> return?</div>
+<div class="tabbed-block"><code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span></code> returns the current Klippy time.</div>
+</div>
+</div>
+</div>
+</li>
+<li>This is necessary for the timer to repeat. If you wanted to make this function not repeat, you can make it return <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">reactor</span><span class="o">.</span><span class="n">NEVER</span></code>.</li>
+<li>Whenever you use <code class="highlight"><span class="n">printer</span><span class="o">.</span><span class="n">lookup_objects</span></code>, it will return a list of tuples, where each tuple contains, in order, the configuration name of the object, then the actual Python object.</li>
+<li>Because the <code>Maintenance</code> class is also configured with a <code>[maintain]</code> config section (the difference being that <code>Maintenance</code> doesn't have a name, while <code>Maintain</code> does have a name, like <code>[maintain lubricate]</code>), a check has to be made to ensure a <code>Maintain</code> object has been found.</li>
+<li><code class="highlight"><span class="k">if</span> <span class="n">get_remaining</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span></code>, the maintenance is expired and needs to be done.</li>
+</ol>
+<p>There are general flows of information in these functions:</p>
+<p><strong>GCode Flow:</strong></p>
+<ol>
+<li><code>MAINTAIN_STATUS</code> is called from GCode</li>
+<li><code>cmd_MAINTAIN_STATUS</code> is called in Python</li>
+<li>All <code>Maintain</code> objects are retrieved</li>
+<li>If a <code>Maintain</code> object is expired, notify the user in the terminal</li>
+<li>Display the status of all <code>Maintain</code> objects</li>
+</ol>
+<p><strong>Timer Flow:</strong></p>
+<ol>
+<li>Klippy reports ready and calls <code>_handle_ready</code></li>
+<li><code>_handle_ready</code> schedules an event to happen in <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">interval</span></code> seconds</li>
+<li><code>_gcode_timer_event</code> is called by Klippy, and the maintenance is checked</li>
+<li>Repeat step 3 until Klippy shuts down</li>
+</ol>
+<p>The first flow, the GCode flow, runs when the user manually runs the <code>MAINTAIN_STATUS</code> command. This makes it useful for checking how close certain maintenance objects are to being expired.</p>
+<p>The second flow, the timer flow, runs behind the scenes as long as Klippy is running. This makes it useful for reminding the user if maintenance needs to be done without the need for manually checking.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Using a combination of GCode-initiated code, and timer-initiated code allows for Klippy extras to be more user-friendly.</p>
+</div>
+<h2 id="feedback">Feedback</h2>
+<p>Was this tutorial helpful? Do you have any feedback for it? Are there any areas where you think this could be improved?</p>
+<p>Let me know either on the <a href="https://klipper.discourse.group/t/klippy-extras-tutorial/18184?u=3dcoded">Klipper Discourse</a> or in a <a href="https://github.com/3DCoded/DynamicMacros/issues/new?assignees=&amp;labels=documentation&amp;projects=&amp;template=documentation.md&amp;title=%5BDOCS%5D">Documentation Issue</a> on Github.</p>
+<p>Thank you for your feedback!</p>
 
 
 
