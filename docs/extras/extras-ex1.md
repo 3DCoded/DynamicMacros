@@ -1,8 +1,5 @@
 # Example 1: Greeter (Structure)
 
-!!! info
-    This page is under construction.
-
 Before you start to write a Klippy extra, it is important to understand the structure of a Klippy extra. 
 
 ---
@@ -159,4 +156,4 @@ A few things that are good to know before moving on:
 
 Next example:
 
-[Example 2: BetterGreeter :fontawesome-brands-python:](extras-ex2.md){ .md-button }
+[Example 2: BetterGreeter :fontawesome-solid-angle-right:](extras-ex2.md){ .md-button }

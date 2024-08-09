@@ -1,8 +1,5 @@
 # Example 2: BetterGreeter
 
-!!! info
-    This page is under construction.
-
 For this tutorial, we are going to improve on the greeter code used in [Structure](extras-ex1.md). 
 
 For reference, the entire original greeter code is below:
@@ -64,10 +61,17 @@ The next step of our Klippy extra is to setup the class variables and read the p
 --8<-- "greeting.py:readcfg"
 ```
 
+!!! question inline end "Quiz"
+    === "Question"
+        If there was a configuration option (int) named `repeats`, how would you get it in the initializer?
+    === "Answer"
+        `#!py config.getint('repeats')`
+
 Here, the `printer`, `reactor`, `gcode`, and `message` variables are the same as in the previous Klippy extra. However, in this case, there are a couple new variables:
 
 - `name` is explained in [the last section of Structure](extras-ex1.md#other-things).
 - `delay` is read as an `#!py int` from the `config` object, with default value `#!py 0`. The default value of `#!py 0` indicates it will not be run when Klippy starts.
+
 
 ## GCode Commands and Event Handler
 
@@ -172,6 +176,9 @@ This function takes an optional `eventtime` parameter (unused) (1), and prints o
 
 1. This is passed by Klippy when it calls `_greet()` after the timer occurs.
 
+!!! tip
+    If you want the timer function to repeat, you can return the provided `eventtime` plus any number of seconds in the future, and it will repeat.
+
 ---
 
 The final function in this class is the `cmd_GREETING` function:
@@ -205,4 +212,4 @@ You can install it following [these](extras-ex1.md#install) instructions, replac
 
 Last example (so far):
 
-[Example 3: KlipperMaintenance :fontawesome-brands-raspberry-pi:](extras-ex3.md){ .md-button }
+[Example 3: KlipperMaintenance :fontawesome-solid-angle-right:](extras-ex3.md){ .md-button }

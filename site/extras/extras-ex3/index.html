@@ -91,7 +91,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -148,7 +148,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -1457,6 +1457,44 @@
 <li><strong>Third highlighted section:</strong> Register GCode commands</li>
 </ul>
 <p>The line <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">init_db</span><span class="p">()</span></code> will be explained later in functions.</p>
+<div class="admonition question">
+<p class="admonition-title">Quiz</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Question</label><label for="__tabbed_1_2">Answer</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>How would you add another trigger type (called <code class="highlight"><span class="s2">&quot;axes_distance&quot;</span></code> with units <code class="highlight"><span class="s2">&quot;m&quot;</span></code>)?</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getchoice</span><span class="p">(</span><span class="s1">&#39;trigger&#39;</span><span class="p">,</span> <span class="p">[</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>    <span class="s1">&#39;print_time&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="s1">&#39;filament&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>    <span class="s1">&#39;time&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="hll">    <span class="s1">&#39;axes_distance&#39;</span><span class="p">])</span>
+</span><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">==</span> <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="c1"># (3)!</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;h&#39;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">==</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">==</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;h&#39;</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="hll"><span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">==</span> <span class="s1">&#39;axes_distance&#39;</span><span class="p">:</span>
+</span><a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="hll">    <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+</div>
 <h3 id="functions">Functions</h3>
 <p>The next part of the <code>Maintain</code> class is its functions. The functions in this class are, broken down into two sections:</p>
 <p><strong>Database:</strong></p>
@@ -1473,101 +1511,101 @@
 <li><code>cmd_UPDATE_MAINTENANCE(gcmd)</code></li>
 </ul>
 <p>First, the database functions (again, plus signs throughout the code explain in more detail what each part does):</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">maintain.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-3-10">10</a></span>
-<span class="normal"><a href="#__codelineno-3-11">11</a></span>
-<span class="normal"><a href="#__codelineno-3-12">12</a></span>
-<span class="normal"><a href="#__codelineno-3-13">13</a></span>
-<span class="normal"><a href="#__codelineno-3-14">14</a></span>
-<span class="normal"><a href="#__codelineno-3-15">15</a></span>
-<span class="normal"><a href="#__codelineno-3-16">16</a></span>
-<span class="normal"><a href="#__codelineno-3-17">17</a></span>
-<span class="normal"><a href="#__codelineno-3-18">18</a></span>
-<span class="normal"><a href="#__codelineno-3-19">19</a></span>
-<span class="normal"><a href="#__codelineno-3-20">20</a></span>
-<span class="normal"><a href="#__codelineno-3-21">21</a></span>
-<span class="normal"><a href="#__codelineno-3-22">22</a></span>
-<span class="normal"><a href="#__codelineno-3-23">23</a></span>
-<span class="normal"><a href="#__codelineno-3-24">24</a></span>
-<span class="normal"><a href="#__codelineno-3-25">25</a></span>
-<span class="normal"><a href="#__codelineno-3-26">26</a></span>
-<span class="normal"><a href="#__codelineno-3-27">27</a></span>
-<span class="normal"><a href="#__codelineno-3-28">28</a></span>
-<span class="normal"><a href="#__codelineno-3-29">29</a></span>
-<span class="normal"><a href="#__codelineno-3-30">30</a></span>
-<span class="normal"><a href="#__codelineno-3-31">31</a></span>
-<span class="normal"><a href="#__codelineno-3-32">32</a></span>
-<span class="normal"><a href="#__codelineno-3-33">33</a></span>
-<span class="normal"><a href="#__codelineno-3-34">34</a></span>
-<span class="normal"><a href="#__codelineno-3-35">35</a></span>
-<span class="normal"><a href="#__codelineno-3-36">36</a></span>
-<span class="normal"><a href="#__codelineno-3-37">37</a></span>
-<span class="normal"><a href="#__codelineno-3-38">38</a></span>
-<span class="normal"><a href="#__codelineno-3-39">39</a></span>
-<span class="normal"><a href="#__codelineno-3-40">40</a></span>
-<span class="normal"><a href="#__codelineno-3-41">41</a></span>
-<span class="normal"><a href="#__codelineno-3-42">42</a></span>
-<span class="normal"><a href="#__codelineno-3-43">43</a></span>
-<span class="normal"><a href="#__codelineno-3-44">44</a></span>
-<span class="normal"><a href="#__codelineno-3-45">45</a></span>
-<span class="normal"><a href="#__codelineno-3-46">46</a></span>
-<span class="normal"><a href="#__codelineno-3-47">47</a></span>
-<span class="normal"><a href="#__codelineno-3-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">class</span> <span class="nc">Maintain</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a>    <span class="o">...</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="k">def</span> <span class="nf">fetch_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a>        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">API_URL</span><span class="p">)</span> <span class="c1"># fetch data from Moonraker History API</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a>        <span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a>            <span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> 
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a>            <span class="k">return</span> <span class="p">{</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a>                <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a>                <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a>                <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a>            <span class="p">}</span> <span class="c1"># (1)!</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a>        <span class="n">job_totals</span> <span class="o">=</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="s1">&#39;job_totals&#39;</span><span class="p">]</span> <span class="c1"># get job totals from JSON response</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16"></a>        <span class="k">return</span> <span class="p">{</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17"></a>            <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="n">job_totals</span><span class="p">[</span><span class="s1">&#39;total_time&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">3600</span><span class="p">,</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18"></a>            <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="n">job_totals</span><span class="p">[</span><span class="s1">&#39;total_filament_used&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19"></a>            <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20"></a>        <span class="p">}</span> <span class="c1"># (2)!</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21"></a>
-<a id="__codelineno-3-22" name="__codelineno-3-22"></a>    <span class="k">def</span> <span class="nf">init_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23"></a>        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_db</span><span class="p">()</span> <span class="c1"># Load the database</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24"></a>        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25"></a>            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_history</span><span class="p">()</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">update_db</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Update the database with history data</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27"></a>
-<a id="__codelineno-3-28" name="__codelineno-3-28"></a>    <span class="k">def</span> <span class="nf">fetch_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOME_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;maintain-db/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># (3)!</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30"></a>        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31"></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32"></a>                <span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33"></a>                    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1"># JSON parse the file contents</span>
-<a id="__codelineno-3-34" name="__codelineno-3-34"></a>                <span class="k">except</span><span class="p">:</span>
-<a id="__codelineno-3-35" name="__codelineno-3-35"></a>                    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span><span class="p">}</span>
-<a id="__codelineno-3-36" name="__codelineno-3-36"></a>                <span class="k">return</span> <span class="n">data</span> <span class="c1"># Return parsed data</span>
-<a id="__codelineno-3-37" name="__codelineno-3-37"></a>
-<a id="__codelineno-3-38" name="__codelineno-3-38"></a>    <span class="k">def</span> <span class="nf">update_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-<a id="__codelineno-3-39" name="__codelineno-3-39"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOME_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;maintain-db/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># (3)!</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40"></a>        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># (4)!</span>
-<a id="__codelineno-3-41" name="__codelineno-3-41"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> <span class="c1"># The &quot;w+&quot; file operator allows reading and writing</span>
-<a id="__codelineno-3-42" name="__codelineno-3-42"></a>            <span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-3-43" name="__codelineno-3-43"></a>                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1"># JSON parse the file contents</span>
-<a id="__codelineno-3-44" name="__codelineno-3-44"></a>            <span class="k">except</span><span class="p">:</span>
-<a id="__codelineno-3-45" name="__codelineno-3-45"></a>                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span><span class="p">}</span>
-<a id="__codelineno-3-46" name="__codelineno-3-46"></a>            <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new</span><span class="p">)</span> <span class="c1"># Update the file contents with the new data</span>
-<a id="__codelineno-3-47" name="__codelineno-3-47"></a>            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="c1"># JSON write the new data to the file</span>
-<a id="__codelineno-3-48" name="__codelineno-3-48"></a>        <span class="k">return</span> <span class="n">data</span> <span class="c1"># Return the new updated data</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">maintain.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#__codelineno-4-32">32</a></span>
+<span class="normal"><a href="#__codelineno-4-33">33</a></span>
+<span class="normal"><a href="#__codelineno-4-34">34</a></span>
+<span class="normal"><a href="#__codelineno-4-35">35</a></span>
+<span class="normal"><a href="#__codelineno-4-36">36</a></span>
+<span class="normal"><a href="#__codelineno-4-37">37</a></span>
+<span class="normal"><a href="#__codelineno-4-38">38</a></span>
+<span class="normal"><a href="#__codelineno-4-39">39</a></span>
+<span class="normal"><a href="#__codelineno-4-40">40</a></span>
+<span class="normal"><a href="#__codelineno-4-41">41</a></span>
+<span class="normal"><a href="#__codelineno-4-42">42</a></span>
+<span class="normal"><a href="#__codelineno-4-43">43</a></span>
+<span class="normal"><a href="#__codelineno-4-44">44</a></span>
+<span class="normal"><a href="#__codelineno-4-45">45</a></span>
+<span class="normal"><a href="#__codelineno-4-46">46</a></span>
+<span class="normal"><a href="#__codelineno-4-47">47</a></span>
+<span class="normal"><a href="#__codelineno-4-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">class</span> <span class="nc">Maintain</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="o">...</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>    <span class="k">def</span> <span class="nf">fetch_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">API_URL</span><span class="p">)</span> <span class="c1"># fetch data from Moonraker History API</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>            <span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> 
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>            <span class="k">return</span> <span class="p">{</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>                <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>                <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>                <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>            <span class="p">}</span> <span class="c1"># (1)!</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>        <span class="n">job_totals</span> <span class="o">=</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="s1">&#39;job_totals&#39;</span><span class="p">]</span> <span class="c1"># get job totals from JSON response</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>        <span class="k">return</span> <span class="p">{</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>            <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="n">job_totals</span><span class="p">[</span><span class="s1">&#39;total_time&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">3600</span><span class="p">,</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a>            <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="n">job_totals</span><span class="p">[</span><span class="s1">&#39;total_filament_used&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>            <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>        <span class="p">}</span> <span class="c1"># (2)!</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>    <span class="k">def</span> <span class="nf">init_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_db</span><span class="p">()</span> <span class="c1"># Load the database</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_history</span><span class="p">()</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">update_db</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Update the database with history data</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>    <span class="k">def</span> <span class="nf">fetch_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOME_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;maintain-db/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># (3)!</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a>        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a>                <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33"></a>                    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1"># JSON parse the file contents</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34"></a>                <span class="k">except</span><span class="p">:</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35"></a>                    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span><span class="p">}</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36"></a>                <span class="k">return</span> <span class="n">data</span> <span class="c1"># Return parsed data</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37"></a>
+<a id="__codelineno-4-38" name="__codelineno-4-38"></a>    <span class="k">def</span> <span class="nf">update_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOME_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;maintain-db/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># (3)!</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40"></a>        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># (4)!</span>
+<a id="__codelineno-4-41" name="__codelineno-4-41"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> <span class="c1"># The &quot;w+&quot; file operator allows reading and writing</span>
+<a id="__codelineno-4-42" name="__codelineno-4-42"></a>            <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-4-43" name="__codelineno-4-43"></a>                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1"># JSON parse the file contents</span>
+<a id="__codelineno-4-44" name="__codelineno-4-44"></a>            <span class="k">except</span><span class="p">:</span>
+<a id="__codelineno-4-45" name="__codelineno-4-45"></a>                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span><span class="p">}</span>
+<a id="__codelineno-4-46" name="__codelineno-4-46"></a>            <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new</span><span class="p">)</span> <span class="c1"># Update the file contents with the new data</span>
+<a id="__codelineno-4-47" name="__codelineno-4-47"></a>            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="c1"># JSON write the new data to the file</span>
+<a id="__codelineno-4-48" name="__codelineno-4-48"></a>        <span class="k">return</span> <span class="n">data</span> <span class="c1"># Return the new updated data</span>
 </code></pre></div></td></tr></table></div>
 <ol>
 <li>In case of an error, empty placeholder data is returned.</li>
@@ -1660,6 +1698,46 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../extras-ex2/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Example 2: BetterGreeter">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Example 2: BetterGreeter
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../examples/" class="md-footer__link md-footer__link--next" aria-label="Next: Example Macros">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Example Macros
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -1668,6 +1746,21 @@
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://3dcoded.github.io" target="_blank" rel="noopener" title="3dcoded.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
     </a>
   
 </div>
@@ -1682,7 +1775,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "navigation.footer", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>

@@ -139,6 +139,26 @@ The major breakdown of this initializer is:
 
 The line `#!py self.init_db()` will be explained later in functions.
 
+!!! question "Quiz"
+    === "Question"
+        How would you add another trigger type (called `#!py "axes_distance"` with units `#!py "m"`)?
+    === "Answer"
+        ```py hl_lines="5 12-13"
+        self.trigger = config.getchoice('trigger', [
+            'print_time',
+            'filament',
+            'time',
+            'axes_distance'])
+        if self.trigger == 'print_time': # (3)!
+            self.units = 'h'
+        elif self.trigger == 'filament':
+            self.units = 'm'
+        elif self.trigger == 'time':
+            self.units = 'h'
+        elif self.trigger == 'axes_distance':
+            self.units = 'm'
+        ```
+
 ### Functions
 
 The next part of the `Maintain` class is its functions. The functions in this class are, broken down into two sections:

@@ -23,7 +23,11 @@ Your macros are written in a `.cfg` file, then included into your `printer.cfg`.
 
 ## How Dynamic Macros Work
 
-Your macros are written in a `.cfg` file, then the relative path to that file is configured in a `[dynamicmacros]` config section. The config files are read and parsed every time you run the macro, allowing you to update macros without restarting Klipper.
+Your macros are written in a `.cfg` file, then the relative path to that file is configured in a `[dynamicmacros]` config section. The config files are read and parsed every time you run the `DYNAMIC_MACRO` command, allowing you to update macros without restarting Klipper.
+
+## Klippy Extras Tutorial
+
+DynamicMacros also includes a [tutorial on writing Klippy extras](extras-start.md).
 
 ## Get Started
 Follow [Setup](setup.md) to get started with Dynamic Macros.

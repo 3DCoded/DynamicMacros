@@ -93,7 +93,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -150,7 +150,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -1060,7 +1060,9 @@
 <h2 id="index-how-normal-macros-work">How Normal Macros Work</h2>
 <p>Your macros are written in a <code>.cfg</code> file, then included into your <code>printer.cfg</code>. When Klipper restarts, it parses these files and saves the macros internally (you can't change them without restarting Klipper). When a macro is called, the cached code is interpreted and run.</p>
 <h2 id="index-how-dynamic-macros-work">How Dynamic Macros Work</h2>
-<p>Your macros are written in a <code>.cfg</code> file, then the relative path to that file is configured in a <code>[dynamicmacros]</code> config section. The config files are read and parsed every time you run the macro, allowing you to update macros without restarting Klipper.</p>
+<p>Your macros are written in a <code>.cfg</code> file, then the relative path to that file is configured in a <code>[dynamicmacros]</code> config section. The config files are read and parsed every time you run the <code>DYNAMIC_MACRO</code> command, allowing you to update macros without restarting Klipper.</p>
+<h2 id="index-klippy-extras-tutorial">Klippy Extras Tutorial</h2>
+<p>DynamicMacros also includes a <a href="#extras-extras-start">tutorial on writing Klippy extras</a>.</p>
 <h2 id="index-get-started">Get Started</h2>
 <p>Follow <a href="#setup">Setup</a> to get started with Dynamic Macros.</p>
 <h2 id="index-planned-features">Planned Features</h2>
@@ -1567,20 +1569,12 @@
 <p class="admonition-title">Info</p>
 <p>To write a Klipper extra, you should be <strong>fluent</strong> in Python.</p>
 </div>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>This guide is still under construction</p>
-</div>
 <details class="info">
 <summary>Klipper vs Klippy</summary>
 <p>To limit confusion, I'm going to explain this here. "Klipper" is the name of the firmware running on your 3D printer. "Klippy" is the name of the software running on your Klipper Host (usually a Raspberry Pi). Klipper is written in C code, and Klippy is mostly written in Python.</p>
 </details>
 <p>Start writing your first Klippy extra:</p>
-<p><a class="md-button" href="#extras-extras-ex1">Start <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 3h2v2H5v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5h2v2H5c-1.07-.27-2-.9-2-2v-4a2 2 0 0 0-2-2H0v-2h1a2 2 0 0 0 2-2V5a2 2 0 0 1 2-2m14 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2m-7 12a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-4 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m8 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1Z"/></svg></span></a></p></section><section class="print-page" id="extras-extras-ex1"><h1 id="extras-extras-ex1-example-1-greeter-structure">Example 1: Greeter (Structure)</h1>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>This page is under construction.</p>
-</div>
+<p><a class="md-button" href="#extras-extras-ex1">Start <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span></a></p></section><section class="print-page" id="extras-extras-ex1"><h1 id="extras-extras-ex1-example-1-greeter-structure">Example 1: Greeter (Structure)</h1>
 <p>Before you start to write a Klippy extra, it is important to understand the structure of a Klippy extra. </p>
 <hr />
 <p>In Python, a Klippy extra is defined as a class, then referenced in a function at the end of the file. Example:</p>
@@ -1742,11 +1736,7 @@
 </ul>
 <hr />
 <p>Next example:</p>
-<p><a class="md-button" href="#extras-extras-ex2">Example 2: BetterGreeter <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"/></svg></span></a></p></section><section class="print-page" id="extras-extras-ex2"><h1 id="extras-extras-ex2-example-2-bettergreeter">Example 2: BetterGreeter</h1>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>This page is under construction.</p>
-</div>
+<p><a class="md-button" href="#extras-extras-ex2">Example 2: BetterGreeter <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span></a></p></section><section class="print-page" id="extras-extras-ex2"><h1 id="extras-extras-ex2-example-2-bettergreeter">Example 2: BetterGreeter</h1>
 <p>For this tutorial, we are going to improve on the greeter code used in <a href="#extras-extras-ex1">Structure</a>. </p>
 <p>For reference, the entire original greeter code is below:</p>
 <details open="open">
@@ -1888,6 +1878,19 @@
 </span><a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Welcome to Klipper!&#39;</span><span class="p">)</span>
 </span><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
+<div class="admonition question inline end">
+<p class="admonition-title">Quiz</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="extras-extras-ex2-__tabbed_1_1" name="extras-extras-ex2-__tabbed_1" type="radio" /><input id="extras-extras-ex2-__tabbed_1_2" name="extras-extras-ex2-__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="extras-extras-ex2-__tabbed_1_1">Question</label><label for="extras-extras-ex2-__tabbed_1_2">Answer</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>If there was a configuration option (int) named <code>repeats</code>, how would you get it in the initializer?</p>
+</div>
+<div class="tabbed-block">
+<p><code class="highlight"><span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;repeats&#39;</span><span class="p">)</span></code></p>
+</div>
+</div>
+</div>
+</div>
 <p>Here, the <code>printer</code>, <code>reactor</code>, <code>gcode</code>, and <code>message</code> variables are the same as in the previous Klippy extra. However, in this case, there are a couple new variables:</p>
 <ul>
 <li><code>name</code> is explained in <a href="#extras-extras-ex1-other-things">the last section of Structure</a>.</li>
@@ -2104,6 +2107,10 @@ A[klippy:ready] --&gt; B[_ready_handler]
 <ol>
 <li>This is passed by Klippy when it calls <code>_greet()</code> after the timer occurs.</li>
 </ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want the timer function to repeat, you can return the provided <code>eventtime</code> plus any number of seconds in the future, and it will repeat.</p>
+</div>
 <hr />
 <p>The final function in this class is the <code>cmd_GREETING</code> function:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">greeting.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#extras-extras-ex2-__codelineno-9-1"> 1</a></span>
@@ -2248,7 +2255,7 @@ A[klippy:ready] --&gt; B[_ready_handler]
 <p>You can install it following <a href="#extras-extras-ex1-install">these</a> instructions, replacing <code>greeter.py</code> with <code>greeting.py</code>.</p>
 <hr />
 <p>Last example (so far):</p>
-<p><a class="md-button" href="#extras-extras-ex3">Example 3: KlipperMaintenance <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 407 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="m372 232.5-3.7-6.5c.1-46.4-21.4-65.3-46.5-79.7 7.6-2 15.4-3.6 17.6-13.2 13.1-3.3 15.8-9.4 17.1-15.8 3.4-2.3 14.8-8.7 13.6-19.7 6.4-4.4 10-10.1 8.1-18.1 6.9-7.5 8.7-13.7 5.8-19.4 8.3-10.3 4.6-15.6 1.1-20.9 6.2-11.2.7-23.2-16.6-21.2-6.9-10.1-21.9-7.8-24.2-7.8-2.6-3.2-6-6-16.5-4.7-6.8-6.1-14.4-5-22.3-2.1-9.3-7.3-15.5-1.4-22.6.8C271.6.6 269 5.5 263.5 7.6c-12.3-2.6-16.1 3-22 8.9l-6.9-.1c-18.6 10.8-27.8 32.8-31.1 44.1-3.3-11.3-12.5-33.3-31.1-44.1l-6.9.1c-5.9-5.9-9.7-11.5-22-8.9-5.6-2-8.1-7-19.4-3.4-4.6-1.4-8.9-4.4-13.9-4.3-2.6.1-5.5 1-8.7 3.5-7.9-3-15.5-4-22.3 2.1-10.5-1.3-14 1.4-16.5 4.7-2.3 0-17.3-2.3-24.2 7.8C21.2 16 15.8 28 22 39.2c-3.5 5.4-7.2 10.7 1.1 20.9-2.9 5.7-1.1 11.9 5.8 19.4-1.8 8 1.8 13.7 8.1 18.1-1.2 11 10.2 17.4 13.6 19.7 1.3 6.4 4 12.4 17.1 15.8 2.2 9.5 10 11.2 17.6 13.2-25.1 14.4-46.6 33.3-46.5 79.7l-3.7 6.5c-28.8 17.2-54.7 72.7-14.2 117.7 2.6 14.1 7.1 24.2 11 35.4 5.9 45.2 44.5 66.3 54.6 68.8 14.9 11.2 30.8 21.8 52.2 29.2C159 504.2 181 512 203 512h1c22.1 0 44-7.8 64.2-28.4 21.5-7.4 37.3-18 52.2-29.2 10.2-2.5 48.7-23.6 54.6-68.8 3.9-11.2 8.4-21.3 11-35.4 40.6-45.1 14.7-100.5-14-117.7zm-22.2-8c-1.5 18.7-98.9-65.1-82.1-67.9 45.7-7.5 83.6 19.2 82.1 67.9zm-43 93.1c-24.5 15.8-59.8 5.6-78.8-22.8s-14.6-64.2 9.9-80c24.5-15.8 59.8-5.6 78.8 22.8s14.6 64.2-9.9 80zM238.9 29.3c.8 4.2 1.8 6.8 2.9 7.6 5.4-5.8 9.8-11.7 16.8-17.3 0 3.3-1.7 6.8 2.5 9.4 3.7-5 8.8-9.5 15.5-13.3-3.2 5.6-.6 7.3 1.2 9.6 5.1-4.4 10-8.8 19.4-12.3-2.6 3.1-6.2 6.2-2.4 9.8 5.3-3.3 10.6-6.6 23.1-8.9-2.8 3.1-8.7 6.3-5.1 9.4 6.6-2.5 14-4.4 22.1-5.4-3.9 3.2-7.1 6.3-3.9 8.8 7.1-2.2 16.9-5.1 26.4-2.6l-6 6.1c-.7.8 14.1.6 23.9.8-3.6 5-7.2 9.7-9.3 18.2 1 1 5.8.4 10.4 0-4.7 9.9-12.8 12.3-14.7 16.6 2.9 2.2 6.8 1.6 11.2.1-3.4 6.9-10.4 11.7-16 17.3 1.4 1 3.9 1.6 9.7.9-5.2 5.5-11.4 10.5-18.8 15 1.3 1.5 5.8 1.5 10 1.6-6.7 6.5-15.3 9.9-23.4 14.2 4 2.7 6.9 2.1 10 2.1-5.7 4.7-15.4 7.1-24.4 10 1.7 2.7 3.4 3.4 7.1 4.1-9.5 5.3-23.2 2.9-27 5.6.9 2.7 3.6 4.4 6.7 5.8-15.4.9-57.3-.6-65.4-32.3 15.7-17.3 44.4-37.5 93.7-62.6-38.4 12.8-73 30-102 53.5-34.3-15.9-10.8-55.9 5.8-71.8zm-34.4 114.6c24.2-.3 54.1 17.8 54 34.7-.1 15-21 27.1-53.8 26.9-32.1-.4-53.7-15.2-53.6-29.8 0-11.9 26.2-32.5 53.4-31.8zm-123-12.8c3.7-.7 5.4-1.5 7.1-4.1-9-2.8-18.7-5.3-24.4-10 3.1 0 6 .7 10-2.1-8.1-4.3-16.7-7.7-23.4-14.2 4.2-.1 8.7 0 10-1.6-7.4-4.5-13.6-9.5-18.8-15 5.8.7 8.3.1 9.7-.9-5.6-5.6-12.7-10.4-16-17.3 4.3 1.5 8.3 2 11.2-.1-1.9-4.2-10-6.7-14.7-16.6 4.6.4 9.4 1 10.4 0-2.1-8.5-5.8-13.3-9.3-18.2 9.8-.1 24.6 0 23.9-.8l-6-6.1c9.5-2.5 19.3.4 26.4 2.6 3.2-2.5-.1-5.6-3.9-8.8 8.1 1.1 15.4 2.9 22.1 5.4 3.5-3.1-2.3-6.3-5.1-9.4 12.5 2.3 17.8 5.6 23.1 8.9 3.8-3.6.2-6.7-2.4-9.8 9.4 3.4 14.3 7.9 19.4 12.3 1.7-2.3 4.4-4 1.2-9.6 6.7 3.8 11.8 8.3 15.5 13.3 4.1-2.6 2.5-6.2 2.5-9.4 7 5.6 11.4 11.5 16.8 17.3 1.1-.8 2-3.4 2.9-7.6 16.6 15.9 40.1 55.9 6 71.8-29-23.5-63.6-40.7-102-53.5 49.3 25 78 45.3 93.7 62.6-8 31.8-50 33.2-65.4 32.3 3.1-1.4 5.8-3.2 6.7-5.8-4-2.8-17.6-.4-27.2-5.6zm60.1 24.1c16.8 2.8-80.6 86.5-82.1 67.9-1.5-48.7 36.5-75.5 82.1-67.9zM38.2 342c-23.7-18.8-31.3-73.7 12.6-98.3 26.5-7 9 107.8-12.6 98.3zm91 98.2c-13.3 7.9-45.8 4.7-68.8-27.9-15.5-27.4-13.5-55.2-2.6-63.4 16.3-9.8 41.5 3.4 60.9 25.6 16.9 20 24.6 55.3 10.5 65.7zm-26.4-119.7c-24.5-15.8-28.9-51.6-9.9-80s54.3-38.6 78.8-22.8 28.9 51.6 9.9 80c-19.1 28.4-54.4 38.6-78.8 22.8zM205 496c-29.4 1.2-58.2-23.7-57.8-32.3-.4-12.7 35.8-22.6 59.3-22 23.7-1 55.6 7.5 55.7 18.9.5 11-28.8 35.9-57.2 35.4zm58.9-124.9c.2 29.7-26.2 53.8-58.8 54-32.6.2-59.2-23.8-59.4-53.4v-.6c-.2-29.7 26.2-53.8 58.8-54 32.6-.2 59.2 23.8 59.4 53.4v.6zm82.2 42.7c-25.3 34.6-59.6 35.9-72.3 26.3-13.3-12.4-3.2-50.9 15.1-72 20.9-23.3 43.3-38.5 58.9-26.6 10.5 10.3 16.7 49.1-1.7 72.3zm22.9-73.2c-21.5 9.4-39-105.3-12.6-98.3 43.9 24.7 36.3 79.6 12.6 98.3z"/></svg></span></a></p></section><section class="print-page" id="extras-extras-ex3"><h1 id="extras-extras-ex3-example-3-klippermaintenance">Example 3: KlipperMaintenance</h1>
+<p><a class="md-button" href="#extras-extras-ex3">Example 3: KlipperMaintenance <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span></a></p></section><section class="print-page" id="extras-extras-ex3"><h1 id="extras-extras-ex3-example-3-klippermaintenance">Example 3: KlipperMaintenance</h1>
 <p>This last example of the Klippy extra development tutorial is actually one of my other Klipper projects: <a href="https://github.com/3DCoded/KlipperMaintenance">KlipperMaintenance</a>, a maintenance reminder system for Klipper.</p>
 <p>This example will go through how the KlipperMaintenance code works to teach a few more important things about developing Klippy extras.</p>
 <h2 id="extras-extras-ex3-full-code">Full Code</h2>
@@ -2723,6 +2730,44 @@ A[klippy:ready] --&gt; B[_ready_handler]
 <li><strong>Third highlighted section:</strong> Register GCode commands</li>
 </ul>
 <p>The line <code class="highlight"><span class="bp">self</span><span class="o">.</span><span class="n">init_db</span><span class="p">()</span></code> will be explained later in functions.</p>
+<div class="admonition question">
+<p class="admonition-title">Quiz</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="extras-extras-ex3-__tabbed_1_1" name="extras-extras-ex3-__tabbed_1" type="radio" /><input id="extras-extras-ex3-__tabbed_1_2" name="extras-extras-ex3-__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="extras-extras-ex3-__tabbed_1_1">Question</label><label for="extras-extras-ex3-__tabbed_1_2">Answer</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>How would you add another trigger type (called <code class="highlight"><span class="s2">&quot;axes_distance&quot;</span></code> with units <code class="highlight"><span class="s2">&quot;m&quot;</span></code>)?</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#extras-extras-ex3-__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getchoice</span><span class="p">(</span><span class="s1">&#39;trigger&#39;</span><span class="p">,</span> <span class="p">[</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>    <span class="s1">&#39;print_time&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="s1">&#39;filament&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>    <span class="s1">&#39;time&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="hll">    <span class="s1">&#39;axes_distance&#39;</span><span class="p">])</span>
+</span><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">==</span> <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="c1"># (3)!</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;h&#39;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">==</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">==</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;h&#39;</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="hll"><span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">==</span> <span class="s1">&#39;axes_distance&#39;</span><span class="p">:</span>
+</span><a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="hll">    <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+</div>
 <h3 id="extras-extras-ex3-functions">Functions</h3>
 <p>The next part of the <code>Maintain</code> class is its functions. The functions in this class are, broken down into two sections:</p>
 <p><strong>Database:</strong></p>
@@ -2739,101 +2784,101 @@ A[klippy:ready] --&gt; B[_ready_handler]
 <li><code>cmd_UPDATE_MAINTENANCE(gcmd)</code></li>
 </ul>
 <p>First, the database functions (again, plus signs throughout the code explain in more detail what each part does):</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">maintain.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#extras-extras-ex3-__codelineno-3-1"> 1</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-2"> 2</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-3"> 3</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-4"> 4</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-5"> 5</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-6"> 6</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-7"> 7</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-8"> 8</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-9"> 9</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-10">10</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-11">11</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-12">12</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-13">13</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-14">14</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-15">15</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-16">16</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-17">17</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-18">18</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-19">19</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-20">20</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-21">21</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-22">22</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-23">23</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-24">24</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-25">25</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-26">26</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-27">27</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-28">28</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-29">29</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-30">30</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-31">31</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-32">32</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-33">33</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-34">34</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-35">35</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-36">36</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-37">37</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-38">38</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-39">39</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-40">40</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-41">41</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-42">42</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-43">43</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-44">44</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-45">45</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-46">46</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-47">47</a></span>
-<span class="normal"><a href="#extras-extras-ex3-__codelineno-3-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">class</span> <span class="nc">Maintain</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a>    <span class="o">...</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="k">def</span> <span class="nf">fetch_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a>        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">API_URL</span><span class="p">)</span> <span class="c1"># fetch data from Moonraker History API</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a>        <span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a>            <span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> 
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a>            <span class="k">return</span> <span class="p">{</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a>                <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a>                <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a>                <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a>            <span class="p">}</span> <span class="c1"># (1)!</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a>        <span class="n">job_totals</span> <span class="o">=</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="s1">&#39;job_totals&#39;</span><span class="p">]</span> <span class="c1"># get job totals from JSON response</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16"></a>        <span class="k">return</span> <span class="p">{</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17"></a>            <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="n">job_totals</span><span class="p">[</span><span class="s1">&#39;total_time&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">3600</span><span class="p">,</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18"></a>            <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="n">job_totals</span><span class="p">[</span><span class="s1">&#39;total_filament_used&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19"></a>            <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20"></a>        <span class="p">}</span> <span class="c1"># (2)!</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21"></a>
-<a id="__codelineno-3-22" name="__codelineno-3-22"></a>    <span class="k">def</span> <span class="nf">init_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23"></a>        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_db</span><span class="p">()</span> <span class="c1"># Load the database</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24"></a>        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25"></a>            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_history</span><span class="p">()</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">update_db</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Update the database with history data</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27"></a>
-<a id="__codelineno-3-28" name="__codelineno-3-28"></a>    <span class="k">def</span> <span class="nf">fetch_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOME_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;maintain-db/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># (3)!</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30"></a>        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31"></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32"></a>                <span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33"></a>                    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1"># JSON parse the file contents</span>
-<a id="__codelineno-3-34" name="__codelineno-3-34"></a>                <span class="k">except</span><span class="p">:</span>
-<a id="__codelineno-3-35" name="__codelineno-3-35"></a>                    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span><span class="p">}</span>
-<a id="__codelineno-3-36" name="__codelineno-3-36"></a>                <span class="k">return</span> <span class="n">data</span> <span class="c1"># Return parsed data</span>
-<a id="__codelineno-3-37" name="__codelineno-3-37"></a>
-<a id="__codelineno-3-38" name="__codelineno-3-38"></a>    <span class="k">def</span> <span class="nf">update_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-<a id="__codelineno-3-39" name="__codelineno-3-39"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOME_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;maintain-db/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># (3)!</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40"></a>        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># (4)!</span>
-<a id="__codelineno-3-41" name="__codelineno-3-41"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> <span class="c1"># The &quot;w+&quot; file operator allows reading and writing</span>
-<a id="__codelineno-3-42" name="__codelineno-3-42"></a>            <span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-3-43" name="__codelineno-3-43"></a>                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1"># JSON parse the file contents</span>
-<a id="__codelineno-3-44" name="__codelineno-3-44"></a>            <span class="k">except</span><span class="p">:</span>
-<a id="__codelineno-3-45" name="__codelineno-3-45"></a>                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span><span class="p">}</span>
-<a id="__codelineno-3-46" name="__codelineno-3-46"></a>            <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new</span><span class="p">)</span> <span class="c1"># Update the file contents with the new data</span>
-<a id="__codelineno-3-47" name="__codelineno-3-47"></a>            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="c1"># JSON write the new data to the file</span>
-<a id="__codelineno-3-48" name="__codelineno-3-48"></a>        <span class="k">return</span> <span class="n">data</span> <span class="c1"># Return the new updated data</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">maintain.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#extras-extras-ex3-__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-32">32</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-33">33</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-34">34</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-35">35</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-36">36</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-37">37</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-38">38</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-39">39</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-40">40</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-41">41</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-42">42</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-43">43</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-44">44</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-45">45</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-46">46</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-47">47</a></span>
+<span class="normal"><a href="#extras-extras-ex3-__codelineno-4-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">class</span> <span class="nc">Maintain</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="o">...</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>    <span class="k">def</span> <span class="nf">fetch_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">API_URL</span><span class="p">)</span> <span class="c1"># fetch data from Moonraker History API</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>            <span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> 
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">gcode</span><span class="o">.</span><span class="n">respond_info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>            <span class="k">return</span> <span class="p">{</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>                <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>                <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>                <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>            <span class="p">}</span> <span class="c1"># (1)!</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>        <span class="n">job_totals</span> <span class="o">=</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="s1">&#39;job_totals&#39;</span><span class="p">]</span> <span class="c1"># get job totals from JSON response</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>        <span class="k">return</span> <span class="p">{</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>            <span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="n">job_totals</span><span class="p">[</span><span class="s1">&#39;total_time&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">3600</span><span class="p">,</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a>            <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="n">job_totals</span><span class="p">[</span><span class="s1">&#39;total_filament_used&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>            <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>        <span class="p">}</span> <span class="c1"># (2)!</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>    <span class="k">def</span> <span class="nf">init_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_db</span><span class="p">()</span> <span class="c1"># Load the database</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_history</span><span class="p">()</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">update_db</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Update the database with history data</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>    <span class="k">def</span> <span class="nf">fetch_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOME_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;maintain-db/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># (3)!</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a>        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a>                <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33"></a>                    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1"># JSON parse the file contents</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34"></a>                <span class="k">except</span><span class="p">:</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35"></a>                    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span><span class="p">}</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36"></a>                <span class="k">return</span> <span class="n">data</span> <span class="c1"># Return parsed data</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37"></a>
+<a id="__codelineno-4-38" name="__codelineno-4-38"></a>    <span class="k">def</span> <span class="nf">update_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39"></a>        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HOME_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;maintain-db/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># (3)!</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40"></a>        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># (4)!</span>
+<a id="__codelineno-4-41" name="__codelineno-4-41"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> <span class="c1"># The &quot;w+&quot; file operator allows reading and writing</span>
+<a id="__codelineno-4-42" name="__codelineno-4-42"></a>            <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-4-43" name="__codelineno-4-43"></a>                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1"># JSON parse the file contents</span>
+<a id="__codelineno-4-44" name="__codelineno-4-44"></a>            <span class="k">except</span><span class="p">:</span>
+<a id="__codelineno-4-45" name="__codelineno-4-45"></a>                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;print_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;filament&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">/</span><span class="mi">3600</span><span class="p">}</span>
+<a id="__codelineno-4-46" name="__codelineno-4-46"></a>            <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new</span><span class="p">)</span> <span class="c1"># Update the file contents with the new data</span>
+<a id="__codelineno-4-47" name="__codelineno-4-47"></a>            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="c1"># JSON write the new data to the file</span>
+<a id="__codelineno-4-48" name="__codelineno-4-48"></a>        <span class="k">return</span> <span class="n">data</span> <span class="c1"># Return the new updated data</span>
 </code></pre></div></td></tr></table></div>
 <ol>
 <li>In case of an error, empty placeholder data is returned.</li>
@@ -3071,6 +3116,8 @@ A[klippy:ready] --&gt; B[_ready_handler]
       
         <footer class="md-footer">
   
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -3079,6 +3126,21 @@ A[klippy:ready] --&gt; B[_ready_handler]
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://3dcoded.github.io" target="_blank" rel="noopener" title="3dcoded.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
     </a>
   
 </div>
@@ -3093,7 +3155,7 @@ A[klippy:ready] --&gt; B[_ready_handler]
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/DynamicMacros/", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "/DynamicMacros/", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "navigation.footer", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>

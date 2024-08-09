@@ -31,6 +31,9 @@ markdown_extensions:
       linenums: true
   - pymdownx.inlinehilite
 extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://3dcoded.github.io
   analytics:
     provider: google
     property: G-1YVCJR4FQR
@@ -56,6 +59,7 @@ theme:
       - navigation.expand
       - navigation.instant
       - navigation.instant.prefetch
+      - navigation.footer
       - content.code.copy
       - content.code.annotate
       - search.suggest
@@ -65,7 +69,7 @@ theme:
   palette: 
     # Palette toggle for light mode
     - scheme: default
-      primary: deep orange
+      primary: blue grey
       toggle:
         icon: material/brightness-7 
         name: Switch to dark mode
