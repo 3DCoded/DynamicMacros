@@ -2,6 +2,8 @@
 
 **Never restart Klipper again for simple macros.**
 
+<img src="logo.png" alt="logo" width="200"/>
+
 ---
 
 Klipper Dynamic Macros is an unofficial way to update macros without restarting Klipper, so you can update macros mid-print and see their results live. It also supports extra features that normal GCode Macros don't have.
