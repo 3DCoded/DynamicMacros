@@ -251,3 +251,168 @@ The next section of functions in the `Maintain` class are the GCode commands. Th
 - `get_remaining()`
 - `cmd_CHECK_MAINTENANCE(gcmd)`
 - `cmd_UPDATE_MAINTENANCE(gcmd)`
+
+```py title="maintain.py"
+class Maintain:
+    ...
+    def get_remaining(self): # Returns the remaining hours/meters until this expires
+        last = self.fetch_db()[self.trigger] # Get the last trigger
+        now = self.fetch_history()[self.trigger] # Get the current state
+        return round(self.threshold - (now - last), 2) # Return how close the difference is to self.threshold, and round to two decimal places
+
+    cmd_CHECK_MAINTENANCE_help = 'Check maintenance'
+    def cmd_CHECK_MAINTENANCE(self, gcmd):
+        gcmd.respond_info(f'''
+Maintenance {self.label} Status:
+Next maintenance in {self.get_remaining()}{self.units}
+Maintenance message: {self.message}
+        '''.strip())
+    
+    cmd_UPDATE_MAINTENANCE_help = 'Update maintenance'
+    def cmd_UPDATE_MAINTENANCE(self, gcmd):
+        self.update_db(self.fetch_history()) # (1)!
+```
+
+1. This erases the current maintenance status, and is called when maintenance has been done. `#!py self.fetch_history()` retrieves the current state of the printer history (print time, filament), and then `#!py self.update_db()` saves that data to the JSON database.
+
+The first function, `get_remaining`, works as follows (assuming the trigger is `print_time` and threshold is `250`):
+
+1. Read the last print time that maintenance occured at
+2. Read the current accumulated print time
+3. Get the difference between the two (how long has it been since last maintenance?)
+4. Subtract that from `threshold` (how much longer until maintenance should be done?)
+5. Round to two decimal places and return
+
+The next function, `cmd_CHECK_MAINTENANCE`, corresponds to the GCode command `CHECK_MAINTENANCE`, and outputs the `Maintain` object's variables in a user-friendly format.
+
+The final function, `cmd_UPDATE_MAINTENANCE`, corresponds to the GCode command `UPDATE_MAINTENANCE`, and erases the current maintenance state. Click the plus sign in the function for more information.
+
+## Maintenance Class
+
+Now that we've gone through the `Maintain` class, let's see how multiple `Maintain` objects are managed in the `Maintenance` class. This class does the following:
+
+- Displays maintenance reminders
+- Provides the `MAINTAIN_STATUS` command to overview the current maintenance state
+
+Unlike the `Maintain` class, which has multiple objects, there will be only one `Maintenance` object. Let's start with the initializer.
+
+### Initializer
+
+The initializer of the `Maintenance` class is shown below:
+
+```py title="maintain.py" hl_lines="5 8 10-12 14"
+class Maintenance:
+    def __init__(self, config):
+        self.config = config
+        self.printer = config.get_printer()
+        self.reactor = self.printer.get_reactor()
+        self.gcode = self.printer.lookup_object('gcode')
+        
+        self.interval = config.getint('interval', 60)
+
+        self.timer_handler = None
+        self.inside_timer = self.repeat = False
+        self.printer.register_event_handler("klippy:ready", self._handle_ready)
+
+        self.gcode.register_command('MAINTAIN_STATUS', self.cmd_MAINTAIN_STATUS, desc=self.cmd_MAINTAIN_STATUS_help)
+```
+
+This initializer may look similar to the BetterGreeter initializer in the previous example. This is because both the `BetterGreeter` and `Maintenance` classes use Klipper's timer system to schedule events. 
+
+There are four highlighted sections in the above code block. Let's go through each of them and explain what they do. 
+
+1. This sets up the `reactor` object, which is important in scheduling events with Klipper.
+2. This reads the interval from the configuration, defaulting to `#!py 60` if no value is provided.
+3. This section is based off the `delayed_gcode` code, which is builtin to Klipper. Source code [here](https://github.com/Klipper3d/klipper/blob/12cd1d9e81c32b26ccc319af1dfc3633438908f1/klippy/extras/delayed_gcode.py). This section declares a `timer_handler`, `inside_timer`, and `repeat` variables, all of which will be used later. The last line of this section registers the `#!py self._handle_ready` function to run when Klippy is ready.
+4. This final line registers the `#!py "MAINTAIN_STATUS"` GCode command.
+
+### Functions
+
+The next part of the `Maintenance` class is its functions:
+
+- `_handle_ready`
+- `_gcode_timer_event`
+- `check_maintenance`
+- `cmd_MAINTAIN_STATUS`
+
+Click on the plus symbols in the code below to learn more about specific parts.
+
+```py title="maintian.py"
+class Maintenance:
+    def _handle_ready(self):
+        waketime = self.reactor.monotonic() + self.interval # (1)!
+        self.timer_handler = self.reactor.register_timer(
+            self._gcode_timer_event, waketime)
+
+    def _gcode_timer_event(self, eventtime):
+        # This function is based on the delayed_gcode Klipper code.
+        self.inside_timer = True
+        self.check_maintenance() # Check if maintenance needs to be done.
+        nextwake = eventtime + self.interval
+        self.inside_timer = self.repeat = False
+        return nextwake # (2)!
+
+    def check_maintenance(self):
+        objs = self.printer.lookup_objects('maintain')
+        for obj in objs:
+            obj = obj[1] # (3)!
+            if not isinstance(obj, Maintain): # (4)!
+                continue
+            if obj.get_remaining() < 0: # (5)!
+                self.gcode.respond_info(f'Maintenance "{obj.label}" Expired!\n{obj.message}')
+                self.gcode.run_script_from_command('M117 Maintenance Expired!')
+
+    cmd_MAINTAIN_STATUS_help = 'Check status of maintenance'
+    def cmd_MAINTAIN_STATUS(self, gcmd):
+        objs = self.printer.lookup_objects('maintain') # Load all Maintain objects
+        for obj in objs:
+            obj = obj[1] # (3)!
+            if not isinstance(obj, Maintain): # (4)!
+                continue
+            remain = obj.get_remaining() # You can call functions on other Klippy extras
+            if remain < 0: # (5)!
+                self.gcode.respond_info(f'Maintenance "{obj.label}" Expired!\n{obj.message}')
+            self.gcode.respond_info(f'{obj.label}: {obj.get_remaining()}{obj.units} remaining')
+```
+
+1. !!! question "Quiz"
+    === "Question"
+        What does `#!py self.reactor.monotonic()` return?
+    === "Answer"
+        `#!py self.reactor.monotonic()` returns the current Klippy time.
+2. This is necessary for the timer to repeat. If you wanted to make this function not repeat, you can make it return `#!py self.reactor.NEVER`.
+3. Whenever you use `#!py printer.lookup_objects`, it will return a list of tuples, where each tuple contains, in order, the configuration name of the object, then the actual Python object.
+4. Because the `Maintenance` class is also configured with a `[maintain]` config section (the difference being that `Maintenance` doesn't have a name, while `Maintain` does have a name, like `[maintain lubricate]`), a check has to be made to ensure a `Maintain` object has been found.
+5. `#!py if get_remaining() < 0`, the maintenance is expired and needs to be done.
+
+There are general flows of information in these functions:
+
+**GCode Flow:**
+
+1. `MAINTAIN_STATUS` is called from GCode
+2. `cmd_MAINTAIN_STATUS` is called in Python
+3. All `Maintain` objects are retrieved
+4. If a `Maintain` object is expired, notify the user in the terminal
+5. Display the status of all `Maintain` objects
+
+**Timer Flow:**
+
+1. Klippy reports ready and calls `_handle_ready`
+2. `_handle_ready` schedules an event to happen in `#!py self.interval` seconds
+3. `_gcode_timer_event` is called by Klippy, and the maintenance is checked
+4. Repeat step 3 until Klippy shuts down
+
+The first flow, the GCode flow, runs when the user manually runs the `MAINTAIN_STATUS` command. This makes it useful for checking how close certain maintenance objects are to being expired.
+
+The second flow, the timer flow, runs behind the scenes as long as Klippy is running. This makes it useful for reminding the user if maintenance needs to be done without the need for manually checking.
+
+!!! tip
+    Using a combination of GCode-initiated code, and timer-initiated code allows for Klippy extras to be more user-friendly.
+
+## Feedback
+
+Was this tutorial helpful? Do you have any feedback for it? Are there any areas where you think this could be improved?
+
+Let me know either on the [Klipper Discourse](https://klipper.discourse.group/t/klippy-extras-tutorial/18184?u=3dcoded) or in a [Documentation Issue](https://github.com/3DCoded/DynamicMacros/issues/new?assignees=&labels=documentation&projects=&template=documentation.md&title=%5BDOCS%5D) on Github.
+
+Thank you for your feedback!
