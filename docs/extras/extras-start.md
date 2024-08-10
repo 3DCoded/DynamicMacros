@@ -12,4 +12,4 @@ While DynamicMacros makes Klipper macros much more powerful, sometimes a Klippy 
 
 Start writing your first Klippy extra:
 
-[Start :fontawesome-solid-angle-right:](extras-ex1.md){ .md-button }
+[Introduction :fontawesome-solid-angle-right:](extras-intro.md){ .md-button }

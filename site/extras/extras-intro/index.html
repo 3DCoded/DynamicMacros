@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/features/delayed/">
+        <link rel="canonical" href="https://3dcoded.github.io/DynamicMacros/extras/extras-intro/">
       
       
-        <link rel="prev" href="../python/">
+        <link rel="prev" href="../extras-start/">
       
       
-        <link rel="next" href="../../extras/extras-start/">
+        <link rel="next" href="../extras-ex1/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Delayed GCode - Klipper Dynamic Macros</title>
+        <title>Introduction to Writing Klippy Extras - Klipper Dynamic Macros</title>
       
     
     
@@ -100,7 +100,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#delayed-gcode" class="md-skip">
+        <a href="#introduction-to-writing-klippy-extras" class="md-skip">
           Skip to content
         </a>
       
@@ -135,7 +135,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Delayed GCode
+              Introduction to Writing Klippy Extras
             
           </span>
         </div>
@@ -449,19 +449,19 @@
       
   
   
-    
   
   
-  
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -475,7 +475,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Features
@@ -489,7 +489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../recursion/" class="md-nav__link">
+      <a href="../../features/recursion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -510,7 +510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../receivingvariables/" class="md-nav__link">
+      <a href="../../features/receivingvariables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -531,7 +531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utilities/" class="md-nav__link">
+      <a href="../../features/utilities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -552,7 +552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../variables/" class="md-nav__link">
+      <a href="../../features/variables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -573,11 +573,97 @@
   
   
     <li class="md-nav__item">
-      <a href="../python/" class="md-nav__link">
+      <a href="../../features/python/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/delayed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delayed GCode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Klippy Extras
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Klippy Extras
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extras-start/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Start Writing Klippy Extras
   </span>
   
 
@@ -607,7 +693,7 @@
           
   
   <span class="md-ellipsis">
-    Delayed GCode
+    Introduction to Writing Klippy Extras
   </span>
   
 
@@ -618,7 +704,7 @@
         
   
   <span class="md-ellipsis">
-    Delayed GCode
+    Introduction to Writing Klippy Extras
   </span>
   
 
@@ -640,18 +726,81 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#the-config-object" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      The config object
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#the-printer-object" class="md-nav__link">
     <span class="md-ellipsis">
-      Parameters
+      The printer object
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-gcode-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      The gcode object
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-do-klippy-extras-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where do Klippy Extras go?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamicmacros" class="md-nav__link">
+    <span class="md-ellipsis">
+      DynamicMacros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-reactor-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      The reactor object
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-extras" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Extras
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
     </span>
   </a>
   
@@ -666,50 +815,6 @@
 
               
             
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Klippy Extras
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            Klippy Extras
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
               
                 
   
@@ -717,49 +822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../extras/extras-start/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Start Writing Klippy Extras
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../extras/extras-intro/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Introduction to Writing Klippy Extras
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../extras/extras-ex1/" class="md-nav__link">
+      <a href="../extras-ex1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -780,7 +843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../extras/extras-ex2/" class="md-nav__link">
+      <a href="../extras-ex2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -801,7 +864,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../extras/extras-ex3/" class="md-nav__link">
+      <a href="../extras-ex3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -889,18 +952,81 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#the-config-object" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      The config object
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#the-printer-object" class="md-nav__link">
     <span class="md-ellipsis">
-      Parameters
+      The printer object
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-gcode-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      The gcode object
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-do-klippy-extras-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where do Klippy Extras go?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamicmacros" class="md-nav__link">
+    <span class="md-ellipsis">
+      DynamicMacros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-reactor-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      The reactor object
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-extras" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Extras
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
     </span>
   </a>
   
@@ -929,7 +1055,7 @@
                   
 
   
-    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/features/delayed.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/3dcoded/DynamicMacros/blob/docs/docs/extras/extras-intro.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -937,37 +1063,149 @@
   
 
 
-<h1 id="delayed-gcode">Delayed GCode</h1>
-<p>Dynamic Macros supports a feature similar to <code>delayed_gcode</code>.</p>
-<h2 id="configuration">Configuration</h2>
-<p>To configure a DynamicMacro to be run repeatedly/after a delay, update your macro as follows:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Before</label><label for="__tabbed_1_2">After</label></div>
+<h1 id="introduction-to-writing-klippy-extras">Introduction to Writing Klippy Extras</h1>
+<p>This page contains many things that are useful to know before writing Klippy extras.</p>
+<h2 id="the-config-object">The <code>config</code> object</h2>
+<p>Every Klippy extra is a class. Everything in a Klippy extra starts when the class is initialized, passing a <code>config</code> object into the class. This <code>config</code> object allows access to many parts of Klipper discussed next.</p>
+<h2 id="the-printer-object">The <code>printer</code> object</h2>
+<p>This is probably the most useful object you can use in a Klippy extra. This code block below shows how to get it:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">printer</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_printer</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>It's that simple!</p>
+<p>The printer object lets you access all sorts of useful parts of Klippy, which will be explained later in this page.</p>
+<h2 id="the-gcode-object">The <code>gcode</code> object</h2>
+<p>The next object you will want to get familiar with is the <code>gcode</code> object. This code block below shows how to get it:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">gcode</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;gcode&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This <code>gcode</code> object is useful for many things. Here are a few of its functions:</p>
+<ul>
+<li><code>run_script_from_command</code> Runs any GCode provided as a string</li>
+<li><code>respond_info</code> Displays text to the Klipper terminal; essentially the same as running <code>RESPOND MSG=</code> in a macro</li>
+<li><code>register_command</code> Allows for defining custom GCode commands</li>
+<li><code>register_mux_command</code> A different way to definine custom GCode commands. This is explained later in the examples.</li>
+</ul>
+<p>For example, if you wanted to run a <code>G28</code> command (home all axes), you would run:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">gcode</span><span class="o">.</span><span class="n">run_script_from_command</span><span class="p">(</span><span class="s1">&#39;G28&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="configuration-options">Configuration options</h2>
+<p>The <code>config</code> object also allows reading of the configuration options present in the <code>printer.cfg</code> file. Here's an example config:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[myextra]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">integer</span><span class="o">:</span><span class="w"> </span><span class="s">5</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="na">float</span><span class="o">:</span><span class="w"> </span><span class="s">2.5</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="na">string</span><span class="o">:</span><span class="w"> </span><span class="s">hello</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="na">list</span><span class="o">:</span><span class="w"> </span><span class="s">3d,printing</span>
+</code></pre></div></td></tr></table></div>
+<p>This configuration shows four main option types:</p>
+<ul>
+<li><code>int</code></li>
+<li><code>float</code></li>
+<li><code>str</code></li>
+<li><code>list</code></li>
+</ul>
+<p>To read them, you can use the corresponding functions of <code>config</code>:</p>
+<ul>
+<li><code>getint</code></li>
+<li><code>getfloat</code></li>
+<li><code>get</code></li>
+<li><code>getlist</code></li>
+</ul>
+<p>Here's how to use them in code:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">number</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;integer&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">decimal_number</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getfloat</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">text</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;string&#39;</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="n">my_list</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To make a configuration option optional, pass another parameter to the <code>get</code> function as a default value. Example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">number</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<h2 id="where-do-klippy-extras-go">Where do Klippy Extras go?</h2>
+<p>Before we go much further into this tutorial, it's good to know how Klippy reads the extras files. First, there's one last missing part of our Python file:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="k">return</span> <span class="n">MyExtra</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This is explained later in the examples.</p>
+<p>For Klippy to read your extras file, you need to put it in <code>~/klipper/klippy/extras</code>. The filename, in this case <code>myextra.py</code>, becomes the config name, in this case <code>[myextra]</code>. After putting your file in the <code>extras</code> folder, you can put a corresponding section into your <code>printer.cfg</code> and restart Klipper. Your extra is installed!</p>
+<p>However, every time you want to change something, you have to copy your file to the extras folder and restart Klipper. This is a very slow way to develop extras, as each Klipper restart turns off your heaters, loses your home position, and wastes too much time. </p>
+<p>Fortunately, DynamicMacros provides a better solution.</p>
+<h2 id="dynamicmacros">DynamicMacros</h2>
+<p>Follow the installation instructions <a href="../../setup/">here</a>.</p>
+<p>DynamicMacros supports running Python code from a macro. This makes testing parts of Klippy extras much quicker. Here's the current example, as a Klippy extra, excluding the config reading:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span>
+<span class="normal"><a href="#__codelineno-7-6">6</a></span>
+<span class="normal"><a href="#__codelineno-7-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="k">class</span> <span class="nc">MyExtra</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>        <span class="n">printer</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_printer</span><span class="p">()</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>        <span class="n">gcode</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;gcode&#39;</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>    <span class="k">return</span> <span class="n">MyExtra</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Here it is as a DynamicMacro (use the tabs to navigate between the two files):</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">macros.cfg</label><label for="__tabbed_1_2">myextra.py</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">[gcode_macro test]</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;test&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">[gcode_macro myextra]</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="na">{% _</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">python_file(&quot;myextra.py&quot;) %}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
-<span class="normal"><a href="#__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">[gcode_macro test]</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="na">initial_duration</span><span class="o">:</span><span class="w"> </span><span class="s">2</span><span class="w"> </span><span class="c1"># Wait two seconds after Klipper starts to run this, and two seconds between repeats (if enabled)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="na">repeat</span><span class="o">:</span><span class="w"> </span><span class="s">true</span><span class="w"> </span><span class="c1"># true means repeat, false means don&#39;t repeat</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;test&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">printer_gcode</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;gcode&#39;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<h2 id="parameters">Parameters</h2>
-<p><code>initial_duration</code> specifies the delay after Klipper starts that the macro will be run, and the duration between repeats, if <code>repeat</code> is true.</p>
-<p><code>repeat</code> specifies whether or not to repeat the macro.</p>
+<p>Now, you can change anything without restarting Klipper! Whenever you change the macro/Python code, simply run the <code>DYNAMIC_MACRO</code> command to internally refresh DynamicMacros.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This setup is intended for development, and not release, as this approach has a few limitations:</p>
+<ul>
+<li>This approach can't read configuration sections</li>
+<li>This approach isn't as structured as a full Klippy extra</li>
+</ul>
+<p>For these reasons, this approach is only intended for testing parts of a Klippy extra, and isn't a replacement of extras.</p>
+</div>
+<p>This tutorial won't go in depth about testing extras with DynamicMacros. Instead, this tutorial focuses on writing traditional Klippy extras.</p>
+<h2 id="the-reactor-object">The <code>reactor</code> object</h2>
+<p>Another useful object from the <code>config</code> object is the <code>reactor</code>. The code block below shows how to get it:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="bp">self</span><span class="o">.</span><span class="n">reactor</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">get_reactor</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>The reactor opens up a new possibility of Klippy extras: scheduling code to run/repeat at any time. This ability is explained in more detail in the third example.</p>
+<h2 id="other-extras">Other Extras</h2>
+<p>This is one more good-to-know about Klippy extras before continuing to the examples:</p>
+<p>You can access other extras from an extra. This allows for extended capabilities of extras. For example, this project, DynamicMacros invokes the <code>gcode_macro</code> extra to run macros internally. The code blocks below shows two ways to access any other extra:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Method 1</label><label for="__tabbed_2_2">Method 2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">gcode_macro</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;gcode_macro&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">gcode_macro</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h2 id="examples">Examples</h2>
+<p>I hope this introduction was helpful. The next part of this tutorial consists of three examples. The first one is linked below:</p>
+<p><a class="md-button" href="../extras-ex1/">Example 1: Greeter <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span></a></p>
 
 
 
@@ -1040,7 +1278,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../python/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Python">
+          <a href="../extras-start/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Start Writing Klippy Extras">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1050,20 +1288,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Python
+                Start Writing Klippy Extras
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../extras/extras-start/" class="md-footer__link md-footer__link--next" aria-label="Next: Start Writing Klippy Extras">
+          <a href="../extras-ex1/" class="md-footer__link md-footer__link--next" aria-label="Next: Example 1: Greeter (Structure)">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Start Writing Klippy Extras
+                Example 1: Greeter (Structure)
               </div>
             </div>
             <div class="md-footer__button md-icon">
