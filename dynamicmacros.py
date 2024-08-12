@@ -18,7 +18,7 @@ class MacroConfigParser:
     def __init__(self, printer):
         self.printer = printer
         self.config_file = printer.start_args['config_file']
-        self.config_path = os.path.dirname(self.config_file)
+        self.config_path = Path(os.path.dirname(self.config_file))
 
     def read_config_file(self, filename):
         path = self.config_path / filename
