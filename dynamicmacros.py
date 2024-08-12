@@ -77,8 +77,6 @@ class DynamicMacros:
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
             if isinstance(macro, DelayedDynamicMacro):
                 self.gcode.register_mux_command(
-                    'UPDATE_DELAYED_GCODE', 'ID', macro.name, None)
-                self.gcode.register_mux_command(
                     'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
             self.gcode._build_status_commands()
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
@@ -113,8 +111,6 @@ class DynamicMacros:
         macro.repeat = False
         self.gcode.register_command(macro.name.upper(), None)
         if isinstance(macro, DelayedDynamicMacro):
-            # self.gcode.register_mux_command(
-                # 'UPDATE_DELAYED_GCODE', 'ID', macro.name, None)
             _, vals = self.gcode.mux_commands.get('UPDATE_DELAYED_GCODE')
             if macro.name in vals:
                 del vals[macro.name]
