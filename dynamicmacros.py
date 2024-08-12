@@ -63,9 +63,7 @@ class DynamicMacros:
         # Register commands
         self.gcode.register_command(
             'DYNAMIC_MACRO', self.cmd_DYNAMIC_MACRO, desc='Run Dynamic Macro')
-        self.prev_SET_GCODE_VARIABLE = self.gcode.register_command(
-            'SET_GCODE_VARIABLE', None)
-        self.gcode.register_command('SET_GCODE_VARIABLE', self.cmd_SET_GCODE_VARIABLE)
+        self.gcode.register_command('SET_DYNAMIC_VARIABLE', self.cmd_SET_DYNAMIC_VARIABLE, desc="Set the variable of a Dynamic Macro.")
 
         self.config_parser = MacroConfigParser(self.printer)
         self._update_macros()
@@ -81,17 +79,15 @@ class DynamicMacros:
             self.gcode._build_status_commands()
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
 
-    def cmd_SET_GCODE_VARIABLE(self, gcmd):
+    def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         macro = gcmd.get('MACRO').upper()
         if macro not in self.macros:
             for cluster in self.clusters:
                 if macro in cluster.macros:
-                    return cluster._cmd_SET_GCODE_VARIABLE(gcmd)
-        else:
-            return self._cmd_SET_GCODE_VARIABLE(gcmd)
-        self.prev_SET_GCODE_VARIABLE(gcmd)
+                    return cluster._cmd_SET_DYNAMIC_VARIABLE(gcmd)
+        return self._cmd_SET_DYNAMIC_VARIABLE(gcmd)
 
-    def _cmd_SET_GCODE_VARIABLE(self, gcmd):
+    def _cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         name = gcmd.get('MACRO')
         variable = gcmd.get('VARIABLE')
         value = gcmd.get('VALUE')
