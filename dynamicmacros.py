@@ -92,8 +92,6 @@ class DynamicMacros:
         variable = gcmd.get('VARIABLE')
         value = gcmd.get('VALUE')
 
-        self.gcode.respond_info(f'SET {name}.{variable} = {value}')
-
         try:
             literal = ast.literal_eval(value)
             json.dumps(literal, separators=(',', ':'))
@@ -104,7 +102,8 @@ class DynamicMacros:
             macro = self.macros.get(name.upper())
             if macro:
                 macro.variables[variable] = literal
-                self.gcode.respond_info(f'FINISHED {name}: {macro.variables} ":" {macro.literal}')
+            else:
+                self.gcode.respond_info(f'ERROR: Macro {name} not found!')
 
     def unregister_macro(self, macro):
         macro.repeat = False
