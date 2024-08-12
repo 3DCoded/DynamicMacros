@@ -14,16 +14,11 @@ log_path = Path(os.path.expanduser('~')) / 'DynamicMacros-logs' / 'DynamicMacros
 
 os.makedirs(log_path.parent, exist_ok=True)
 
-logging.basicConfig(
-    handlers=[
-        logging.FileHandler(log_path),
-        logging.StreamHandler()
-    ]
-)
-
 class MacroConfigParser:
-    def __init__(self, config_path):
-        self.config_path = config_path
+    def __init__(self, printer):
+        self.printer = printer
+        self.config_file = printer.start_args['config_file']
+        self.config_path = os.path.dirname(self.config_file)
 
     def read_config_file(self, filename):
         path = self.config_path / filename
@@ -59,8 +54,6 @@ class DynamicMacros:
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-        self.config_path_str = str(config.get('config_path', str(config_path))).replace('~', os.path.expanduser('~'))
-        self.config_path = Path(self.config_path_str)
 
         DynamicMacros.printer = self.printer
         self.macros = {}
@@ -70,10 +63,11 @@ class DynamicMacros:
         # Register commands
         self.gcode.register_command(
             'DYNAMIC_MACRO', self.cmd_DYNAMIC_MACRO, desc='Run Dynamic Macro')
-        self.gcode.register_command(
-            'SET_DYNAMIC_VARIABLE', self.cmd_SET_DYNAMIC_VARIABLE, desc="Set macro variable value")
+        self.prev_SET_GCODE_VARIABLE = self.gcode.register_command(
+            'SET_GCODE_VARIABLE', None)
+        self.gcode.register_command('SET_GCODE_VARIABLE', self.cmd_SET_GCODE_VARIABLE)
 
-        self.config_parser = MacroConfigParser(self.config_path)
+        self.config_parser = MacroConfigParser(self.printer)
         self._update_macros()
 
     def register_macro(self, macro):
@@ -83,18 +77,23 @@ class DynamicMacros:
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
             if isinstance(macro, DelayedDynamicMacro):
                 self.gcode.register_mux_command(
+                    'UPDATE_DELAYED_GCODE', 'ID', macro.name, None)
+                self.gcode.register_mux_command(
                     'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
             self.gcode._build_status_commands()
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
 
-    # TODO: Replace with SET_GCODE_VARIABLE
-    def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
-        cluster = gcmd.get('CLUSTER', None)
-        if cluster is not None and cluster in self.clusters:
-            return self.clusters[cluster]._cmd_SET_DYNAMIC_VARIABLE(gcmd)
-        return self._cmd_SET_DYNAMIC_VARIABLE(gcmd)
+    def cmd_SET_GCODE_VARIABLE(self, gcmd):
+        macro = gcmd.get('MACRO').upper()
+        if macro not in self.macros:
+            for cluster in self.clusters:
+                if macro in cluster.macros:
+                    return cluster._cmd_SET_GCODE_VARIABLE(gcmd)
+        else:
+            return self._cmd_SET_GCODE_VARIABLE(gcmd)
+        self.prev_SET_GCODE_VARIABLE(gcmd)
 
-    def _cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
+    def _cmd_SET_GCODE_VARIABLE(self, gcmd):
         name = gcmd.get('MACRO')
         variable = gcmd.get('VARIABLE')
         value = gcmd.get('VALUE')
@@ -182,8 +181,6 @@ class DynamicMacrosCluster(DynamicMacros):
         self.name = config.get_name().split()[1]
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-        self.config_path_str = str(config.get('config_path', str(config_path))).replace('~', os.path.expanduser('~'))
-        self.config_path = Path(self.config_path_str)
 
         DynamicMacros.printer = self.printer
         self.macros = {}
