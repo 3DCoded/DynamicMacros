@@ -69,7 +69,7 @@ class DynamicMacros:
         self._update_macros()
 
     def register_macro(self, macro):
-        self.macros[macro.name] = macro
+        self.macros[macro.name.upper()] = macro
         if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
             self.gcode.register_command(
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
@@ -114,7 +114,7 @@ class DynamicMacros:
             if macro.name in vals:
                 del vals[macro.name]
         self.gcode._build_status_commands()
-        self.macros.pop(macro.name, None)
+        self.macros.pop(macro.name.upper(), None)
 
     def cmd_DYNAMIC_MACRO(self, gcmd):
         cluster = gcmd.get('CLUSTER', None)
