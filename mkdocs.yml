@@ -5,6 +5,8 @@ edit_uri: blob/docs/docs/
 plugins:
   - search
   - autolinks
+  - git-revision-date-localized:
+      enable_creation_date: true
   - print-site
 markdown_extensions:
   - attr_list
