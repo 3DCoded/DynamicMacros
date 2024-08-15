@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Python
 
 Dynamic Macros's most powerful feature allows you to run Python code directly from within a macro.

@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Using Dynamic Macros Features
 
 Now that your macros are dynamic, you can use the powerful feature set of Dynamic Macros.

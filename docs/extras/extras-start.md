@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Start Writing Klippy Extras
 
 While DynamicMacros makes Klipper macros much more powerful, sometimes a Klippy extra is required for more functionality. In this tutorial, you will learn how to develop a Klippy extra and test it using DynamicMacros.

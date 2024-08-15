@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Setup
 
 Follow this guide to setup and confiure Dynamic Macros.

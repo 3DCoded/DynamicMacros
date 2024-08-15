@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Utility Functions
 
 Dynamic Macros provides a few utility functions to make Dynamic Macros easier to write.

@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Table of Contents
 
 Follow this tutorial to learn how to create Dynamic Macros and to use its powerful features.

@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Introduction to Writing Klippy Extras
 
 This page contains many things that are useful to know before writing Klippy extras.

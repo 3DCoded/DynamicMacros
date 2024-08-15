@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Variables
 
 Dynamic Macro variables work nearly the same way as standard `gcode_macro` variables. This guide covers the differences.

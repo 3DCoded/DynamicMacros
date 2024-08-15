@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Receiving Variable Updates
 
 Unlike normal `gcode_macro`s, Dynamic Macros supports receiving variable updates within the same macro. For example, the following macro will show the same output in both `M117`s:

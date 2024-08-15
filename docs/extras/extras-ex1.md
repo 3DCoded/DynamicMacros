@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Example 1: Greeter (Structure)
 
 Before you start to write a Klippy extra, it is important to understand the structure of a Klippy extra. 

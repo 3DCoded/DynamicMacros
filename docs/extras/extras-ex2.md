@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Example 2: BetterGreeter
 
 For this tutorial, we are going to improve on the greeter code used in [Structure](extras-ex1.md). 

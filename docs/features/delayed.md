@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Delayed GCode
 
 Dynamic Macros supports a feature similar to `delayed_gcode`.

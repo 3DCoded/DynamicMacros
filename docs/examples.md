@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Example Macros
 
 This page will hold several different Dynamic Macro examples. Note that most of the examples here are specific to Dynamic Macros only.

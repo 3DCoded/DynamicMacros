@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Converting to Dynamic Macros
 
 Follow this tutorial to convert your standard `gcode_macro` to a Dynamic Macro. 

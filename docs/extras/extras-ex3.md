@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Example 3: KlipperMaintenance
 
 This last example of the Klippy extra development tutorial is actually one of my other Klipper projects: [KlipperMaintenance](https://github.com/3DCoded/KlipperMaintenance), a maintenance reminder system for Klipper.
