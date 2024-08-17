@@ -304,7 +304,8 @@ class DynamicMacro:
             with open(self.config_path / fname, 'r') as file:
                 text = file.read()
         except Exception as e:
-            self.gcode.respond_info('Python file missing')
+            self.gcode.respond_info(f'Python file missing: {config_path / fname}')
+            return
         return self.python(text, *args, **kwargs)
 
     @staticmethod
