@@ -19,6 +19,8 @@ class MacroConfigParser:
         self.printer = printer
         self.config_file = printer.start_args['config_file']
         self.config_path = Path(os.path.dirname(self.config_file))
+        global config_path
+        config_path = self.config_path
 
     def read_config_file(self, filename):
         path = self.config_path / filename
@@ -301,7 +303,7 @@ class DynamicMacro:
 
     def python_file(self, fname, *args, **kwargs):
         try:
-            with open(self.config_path / fname, 'r') as file:
+            with open(config_path / fname, 'r') as file:
                 text = file.read()
         except Exception as e:
             self.gcode.respond_info(f'Python file missing: {config_path / fname}')
