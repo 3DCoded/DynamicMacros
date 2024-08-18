@@ -8,116 +8,248 @@ import json
 from secrets import token_hex
 import logging
 
+# Define the path to the configuration files
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
+log_path = Path(os.path.expanduser('~')) / 'DynamicMacros-logs' / 'DynamicMacros.log'
+
+os.makedirs(log_path.parent, exist_ok=True)
+
+class MacroConfigParser:
+    def __init__(self, printer):
+        self.printer = printer
+        self.config_file = printer.start_args['config_file']
+        self.config_path = Path(os.path.dirname(self.config_file))
+        global config_path
+        config_path = self.config_path
+
+    def read_config_file(self, filename):
+        path = self.config_path / filename
+        if not os.path.exists(path):
+            raise MissingConfigError(f'Missing Configuration at {path}')
+        config = configparser.RawConfigParser(
+            strict=False, inline_comment_prefixes=(';', '#'))
+        config.read(path)
+        return config
+
+    def extract_macros(self, config):
+        macros = {}
+        for section in config.sections():
+            logging.info(f'DynamicMacros: Reading section {section}')
+            if section.startswith('gcode_macro'):
+                macro = DynamicMacro.from_section(
+                    config, section, DynamicMacros.printer)
+                macros[macro.name] = macro
+            elif section.startswith('delayed_gcode'):
+                macro = DelayedDynamicMacro.from_section(
+                    config, section, DynamicMacros.printer)
+                macros[macro.name] = macro
+        return macros
+
 
 class MissingConfigError(Exception):
     pass
 
 class DynamicMacros:
+    clusters = {}
+
     def __init__(self, config):
-        # Initialize variables
         self.printer = config.get_printer()
-        DynamicMacros.printer = self.printer
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
-        self.config_path = Path(config.get('config_path', config_path).replace('~', os.path.expanduser('~')))
 
-        self.macros = {} # Holds macros in name: DynamicMacro format
-        self.placeholder = DynamicMacro('Error', 'RESPOND MSG="ERROR"', self.printer) # Placeholder macro if macro isn't found by name
-        
-        self.gcode.register_command(
-            'DYNAMIC_MACRO',
-            self.cmd_DYNAMIC_MACRO,
-            desc='Run Dynamic Macro'
-        )
-        self.gcode.register_command(
-            'SET_DYNAMIC_VARIABLE',
-            self.cmd_SET_DYNAMIC_VARIABLE,
-            desc="Set the value of a G-Code macro variable"
-        )
+        DynamicMacros.printer = self.printer
+        self.macros = {}
+        self.placeholder = DynamicMacro(
+            'Error', 'RESPOND MSG="ERROR"', self.printer)
 
+        # Register commands
+        self.gcode.register_command(
+            'DYNAMIC_MACRO', self.cmd_DYNAMIC_MACRO, desc='Run a Dynamic Macro')
+        self.gcode.register_command(
+            'DYNAMIC_RENDER', self.cmd_DYNAMIC_RENDER, desc='Render a Dynamic Macro')
+        self.gcode.register_command('SET_DYNAMIC_VARIABLE', self.cmd_SET_DYNAMIC_VARIABLE, desc="Set the variable of a Dynamic Macro.")
+
+        self.config_parser = MacroConfigParser(self.printer)
         self._update_macros()
-    
+
     def register_macro(self, macro):
-        self.macros[macro.name] = macro # update internal macros list
+        self.macros[macro.name.upper()] = macro
         if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
-            self.gcode.register_command(macro.name.upper(), self.generate_cmd(macro), desc=macro.desc) # register GCode command
-            self.printer.objects[f'gcode_macro {macro.name}'] = macro # trick Klipper into thinking this is a gcode_macro
-    
+            self.gcode.register_command(
+                macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
+            if isinstance(macro, DelayedDynamicMacro):
+                self.gcode.register_mux_command(
+                    'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
+            self.gcode._build_status_commands()
+            self.printer.objects[f'gcode_macro {macro.name}'] = macro
+
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
+        macro = gcmd.get('MACRO').upper()
+        if macro not in self.macros:
+            for cluster in self.clusters:
+                if macro in cluster.macros:
+                    return cluster._cmd_SET_DYNAMIC_VARIABLE(gcmd)
+        return self._cmd_SET_DYNAMIC_VARIABLE(gcmd)
+
+    def _cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         name = gcmd.get('MACRO')
         variable = gcmd.get('VARIABLE')
         value = gcmd.get('VALUE')
 
-        # Convert to a literal, if possible
         try:
             literal = ast.literal_eval(value)
             json.dumps(literal, separators=(',', ':'))
         except (SyntaxError, TypeError, ValueError) as e:
-            raise gcmd.error("Unable to parse '%s' as a literal: %s" %
-                             (value, e))
-        
-        if name is not None:
-            name = name.upper()
-            if name in self.macros:
-                macro = self.macros[name]
+            raise gcmd.error(f"Unable to parse '{value}' as a literal: {e}")
+
+        if name:
+            macro = self.macros.get(name.upper())
+            if macro:
                 macro.variables[variable] = literal
+            else:
+                self.gcode.respond_info(f'ERROR: Macro {name} not found!')
 
     def unregister_macro(self, macro):
-        self.gcode.register_command(macro.name.upper(), None) # unregister GCode command
-        if macro in self.macros:
-            self.macros[macro.name] = None # update internal macros list
-            del self.macros[macro.name] # remove macro from internal macros list
+        macro.repeat = False
+        self.gcode.register_command(macro.name.upper(), None)
+        if isinstance(macro, DelayedDynamicMacro):
+            _, vals = self.gcode.mux_commands.get('UPDATE_DELAYED_GCODE')
+            if macro.name in vals:
+                del vals[macro.name]
+        self.gcode._build_status_commands()
+        self.macros.pop(macro.name.upper(), None)
     
+    def cmd_DYNAMIC_RENDER(self, gcmd):
+        cluster = gcmd.get('CLUSTER', None)
+        if cluster and cluster in self.clusters:
+            return self.clusters[cluster]._cmd_DYNAMIC_RENDER(gcmd)
+        return self._cmd_DYNAMIC_RENDER(gcmd)
+    
+    def _cmd_DYNAMIC_RENDER(self, gcmd):
+        try:
+            self._update_macros()
+            logging.info('DynamicMacros Macros:')
+            for name in self.macros:
+                logging.info(f'    Name: {name}')
+            macro_name = gcmd.get('MACRO', '').upper()
+            if macro_name:
+                params = gcmd.get_command_parameters()
+                rawparams = gcmd.get_raw_command_parameters()
+                macro = self.macros.get(macro_name, self.placeholder)
+                rendered = self._render_macro(macro, params, rawparams)
+                gcmd.respond_info(f'Rendered {macro.name}:\n\n{rendered}')
+        except Exception as e:
+            gcmd.respond_info(str(e))
+    
+    def _render_macro(self, macro, params, rawparams):
+        rendered = []
+        for template in macro.templates:
+            macro.update_kwparams(template, params, rawparams)
+            rendered.append(template.template.render(macro.kwparams))
+        return '\n'.join(rendered)
+
     def cmd_DYNAMIC_MACRO(self, gcmd):
+        cluster = gcmd.get('CLUSTER', None)
+        if cluster and cluster in self.clusters:
+            return self.clusters[cluster]._cmd_DYNAMIC_MACRO(gcmd)
+        return self._cmd_DYNAMIC_MACRO(gcmd)
+
+    def _cmd_DYNAMIC_MACRO(self, gcmd):
         try:
             self._update_macros()
             logging.info('DynamicMacros Macros:')
             for name in self.macros:
                 logging.info(f'    Name: {name}')
             macro_name = gcmd.get('MACRO', '')
-            if not macro_name:
-                return
-            params = gcmd.get_command_parameters()
-            rawparams = gcmd.get_raw_command_parameters()
-            macro = self.macros.get(macro_name, self.placeholder)
-            self._run_macro(macro, params, rawparams) # Run macro
+            if macro_name:
+                params = gcmd.get_command_parameters()
+                rawparams = gcmd.get_raw_command_parameters()
+                macro = self.macros.get(macro_name, self.placeholder)
+                self._run_macro(macro, params, rawparams)
         except Exception as e:
             gcmd.respond_info(str(e))
-    
+
     def generate_cmd(self, macro):
         def cmd(gcmd):
             params = gcmd.get_command_parameters()
             rawparams = gcmd.get_raw_command_parameters()
-            macro.run(params, rawparams)
+            self._run_macro(macro, params, rawparams)
         return cmd
-    
+
     def _run_macro(self, macro, params, rawparams):
         macro.run(params, rawparams)
-    
+
     def _update_macros(self):
-        for macro in self.macros.values():
-            self.unregister_macro(macro) # unregister all macros
+        self._unregister_all_macros()
+        self._load_and_register_macros_from_files()
+
+    def _unregister_all_macros(self):
+        for macro in list(self.macros.values()):
+            self.unregister_macro(macro)
+
+    def _load_and_register_macros_from_files(self):
         for fname in self.fnames:
-            path = self.config_path / fname # create full file path
+            self._load_and_register_macros_from_file(fname)
 
-            if not os.path.exists(path):
-                raise MissingConfigError(f'Missing Configuration at {path}')
+    def _load_and_register_macros_from_file(self, fname):
+        config = self.config_parser.read_config_file(fname)
+        new_macros = self.config_parser.extract_macros(config)
+        self._register_new_macros(new_macros)
 
-            # Pase config files
-            config = configparser.RawConfigParser(strict=False, inline_comment_prefixes=(';', '#'))
-            config.read(path)
-            for section in config.sections():
-                logging.info(f'DynamicMacros: Reading section {section}')
-                if section.split()[0] == 'gcode_macro': # Check if section is a gcode_macro
-                    name = section.split()[1] # get name
-                    macro = DynamicMacro.from_section(config, section, self.printer) # create DynamicMacro from config section
-                    self.macros[name] = macro
-                    self.register_macro(macro) # register new macro
+    def _register_new_macros(self, new_macros):
+        for name, macro in new_macros.items():
+            self.macros[name] = macro
+            self.register_macro(macro)
+
+
+class DynamicMacrosCluster(DynamicMacros):
+    def __init__(self, config):
+        self.printer = config.get_printer()
+        self.name = config.get_name().split()[1]
+        self.gcode = self.printer.lookup_object('gcode')
+        self.fnames = config.getlist('configs')
+
+        DynamicMacros.printer = self.printer
+        self.macros = {}
+        self.placeholder = DynamicMacro(
+            'Error', 'RESPOND MSG="ERROR"', self.printer)
+        
+        DynamicMacros.printer = self.printer
+        DynamicMacros.clusters[self.name] = self
+
+        self.python_enabled = config.getboolean('python_enabled', True)
+        self.printer_enabled = config.getboolean('printer_enabled', True)
+
+        self.config_parser = MacroConfigParser(self.printer)
+        self._update_macros()
+
+    def disabled_func(self, name, msg):
+        def func(*args, **kwargs):
+            self.gcode.respond_info(
+                f'WARNING: {name} attempted to {msg} when disabled.')
+            self.gcode.respond_info(
+                f'{name} has been blocked from performing a disabled task.')
+        return func
+
+    def sandboxed_kwparams(self, macro):
+        def func(template, params, rawparams):
+            macro._update_kwparams(template, params, rawparams)
+            if not self.python_enabled:
+                macro.kwparams['python'] = self.disabled_func(
+                    macro.name, 'run Python code')
+                macro.kwparams['python_file'] = self.disabled_func(
+                    macro.name, 'run Python file')
+            if not self.printer_enabled:
+                macro.kwparams['printer'] = None
+        return func
+
+    def _run_macro(self, macro, params, rawparams):
+        macro.update_kwparams = self.sandboxed_kwparams(macro)
+        macro.run(params, rawparams)
+
 
 class DynamicMacro:
-    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None, repeat=False):
-        # initialize variables
+    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None):
         self.name = name
         self.raw = raw
         self.printer = printer
@@ -125,138 +257,177 @@ class DynamicMacro:
         self.desc = desc
         self.variables = variables
         self.rename_existing = rename_existing
-        self.initial_duration = initial_duration
-        self.repeat = repeat
+        self.duration = initial_duration
         self.vars = {}
 
-        if self.initial_duration is not None:
+        if self.duration:
             self.reactor = self.printer.get_reactor()
             self.timer_handler = None
-            self.inside_timer = False
-            self.printer.register_event_handler("klippy:ready", self._handle_ready)
+            self.inside_timer = self.repeat = False
+            self.printer.register_event_handler(
+                "klippy:ready", self._handle_ready)
 
-        if self.rename_existing is not None:
-            self.rename() # rename previous macro if necessary
+        if self.rename_existing:
+            self.rename()
 
-        self.gcodes = self.raw.split('\n\n\n') # split gcode by triple-newlines
-        self.templates = []
-        for gcode in self.gcodes:
-            self.templates.append(self.generate_template(gcode))
-    
+        self.gcodes = self.raw.split('\n\n\n')
+        self.templates = [self.generate_template(
+            gcode) for gcode in self.gcodes]
+
     def _handle_ready(self):
-        waketime = self.reactor.monotonic() + self.initial_duration
+        waketime = self.reactor.NEVER
+        if self.duration:
+            waketime = self.reactor.monotonic() + self.duration
         self.timer_handler = self.reactor.register_timer(
             self._gcode_timer_event, waketime)
-        
+
     def _gcode_timer_event(self, eventtime):
         self.inside_timer = True
+        try:
+            self.run({}, '')
+        except Exception:
+            pass
         nextwake = self.reactor.NEVER
         if self.repeat:
-            nextwake = eventtime + self.initial_duration
-        self.run({}, '')
-        self.inside_timer = False
+            nextwake = eventtime + self.duration
+        self.inside_timer = self.repeat = False
         return nextwake
-    
+
     def generate_template(self, gcode):
         env = jinja2.Environment('{%', '%}', '{', '}')
         return TemplateWrapper(self.printer, env, self.name, gcode)
-    
-    def rename(self):
-        prev_cmd = self.gcode.register_command(self.name, None) # get previous command
-        prev_desc = f'Renamed from {self.name}'
-        if prev_cmd is None:
-            return
-        self.gcode.register_command(self.rename_existing, prev_cmd, desc=prev_desc) # rename previous command
-    
-    # --- Utility Functions ---
 
-    # Update vars from within a macro
+    def rename(self):
+        prev_cmd = self.gcode.register_command(self.name, None)
+        if prev_cmd:
+            self.gcode.register_command(
+                self.rename_existing, prev_cmd, desc=f'Renamed from {self.name}')
+
     def update(self, name, val):
         self.vars[name] = val
         return val
 
-    # Get all the variables from another macro
     def get_macro_variables(self, macro_name):
         macro = self.printer.lookup_object(f'gcode_macro {macro_name}')
         return macro.variables
 
-    # Update vars from a dictionary
     def update_from_dict(self, dictionary):
         self.vars.update(dictionary)
         return dictionary
 
-    # Run Python code from within a macro
     def python(self, python, *args, **kwargs):
         key = f'_python{token_hex()}'
+
         def output(value):
             return self.update(key, value)
-        python_vars = {}
-        for k, v in self.kwparams.items():
-            python_vars[k] = v
-        python_vars['output'] = output
-        python_vars['gcode'] = self.gcode.run_script_from_command
-        python_vars['printer'] = self.printer
-        python_vars['print'] = lambda *args: self.gcode.run_script_from_command('RESPOND MSG="' + ' '.join(map(str, args)) + '"')
+        python_vars = {**self.kwparams, 'output': output,
+                       'gcode': self.gcode.run_script_from_command, 'printer': self.printer}
+        python_vars['print'] = lambda *args: self.gcode.run_script_from_command(
+            'RESPOND MSG="' + ' '.join(map(str, args)) + '"')
         python_vars['args'] = args
         python_vars['kwargs'] = kwargs
         try:
-            exec(
-                python,
-                python_vars,
-            )
+            exec(python, python_vars)
         except Exception as e:
             self.gcode.respond_info(f'Python Error:\n{e}')
         return self.vars.get(key)
 
-    # Run Python file from within a macro
     def python_file(self, fname, *args, **kwargs):
         try:
-            with open(self.config_path / fname, 'r') as file:
+            with open(config_path / fname, 'r') as file:
                 text = file.read()
         except Exception as e:
-            self.gcode.respond_info('Python file missing')
+            self.gcode.respond_info(f'Python file missing: {config_path / fname}')
+            return
         return self.python(text, *args, **kwargs)
-    
 
-
-    
-    def from_section(config: configparser.RawConfigParser, section, printer):
+    @staticmethod
+    def from_section(config, section, printer):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
-        desc = config.get(section, 'description') if config.has_option(section, 'description') else 'No Description'
-        rename_existing = config.get(section, 'rename_existing') if config.has_option(section, 'rename_existing') else None
-        initial_duration = config.getfloat(section, 'initial_duration') if config.has_option(section, 'initial_duration') else None
-        repeat = config.getboolean(section, 'repeat') if config.has_option(section, 'repeat') else False
-        variables = {}
-        for key, value in config.items(section):
-            if key.startswith('variable_'):
-                variable = key[len('variable_'):]
-                variables[variable] = value
-        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
-    
+        desc = config.get(section, 'description', fallback='No Description')
+        rename_existing = config.get(section, 'rename_existing', fallback=None)
+        initial_duration = config.getfloat(
+            section, 'initial_duration', fallback=None)
+        variables = {key[len('variable_'):]: value for key, value in config.items(
+            section) if key.startswith('variable_')}
+        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration)
+
     def get_status(self, *args, **kwargs):
         return self.variables
-    
-    def update_kwparams(self, template, params, rawparams):
-        kwparams = dict(self.variables)
-        kwparams.update(self.vars)
-        kwparams.update(template.create_template_context())
-        kwparams['params'] = params
-        kwparams['rawparams'] = rawparams
-        kwparams['update'] = self.update
-        kwparams['get_macro_variables'] = self.get_macro_variables
-        kwparams['update_from_dict'] = self.update_from_dict
-        kwparams['python'] = self.python
-        kwparams['python_file'] = self.python_file
+
+    def _update_kwparams(self, template, params, rawparams):
+        kwparams = {**self.variables, **self.vars,
+                    **template.create_template_context()}
+        kwparams.update({'params': params, 'rawparams': rawparams, 'update': self.update, 'get_macro_variables': self.get_macro_variables,
+                        'update_from_dict': self.update_from_dict, 'python': self.python, 'python_file': self.python_file})
         self.kwparams = kwparams
+
+    def update_kwparams(self, template, params, rawparams):
+        self._update_kwparams(template, params, rawparams)
 
     def run(self, params, rawparams):
         for template in self.templates:
             self._run(template, params, rawparams)
-    
+
     def _run(self, template, params, rawparams):
         self.update_kwparams(template, params, rawparams)
         template.run_gcode_from_command(self.kwparams)
-    
+
+
+class DelayedDynamicMacro(DynamicMacro):
+    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None):
+        self.name = name
+        self.raw = raw
+        self.printer = printer
+        self.gcode = self.printer.lookup_object('gcode')
+        self.desc = desc
+        self.variables = variables
+        self.rename_existing = rename_existing
+        self.duration = initial_duration
+        self.vars = {}
+
+        if self.duration:
+            self.reactor = self.printer.get_reactor()
+            self.timer_handler = None
+            self.inside_timer = self.repeat = False
+            self.printer.register_event_handler(
+                "klippy:ready", self._handle_ready)
+
+        if self.rename_existing:
+            self.rename()
+
+        self.gcodes = self.raw.split('\n\n\n')
+        self.templates = [self.generate_template(
+            gcode) for gcode in self.gcodes]
+
+    @staticmethod
+    def from_section(config, section, printer):
+        raw = config.get(section, 'gcode')
+        name = section.split()[1]
+        desc = config.get(section, 'description', fallback='No Description')
+        rename_existing = config.get(section, 'rename_existing', fallback=None)
+        initial_duration = config.getfloat(
+            section, 'initial_duration', fallback=None)
+        variables = {key[len('variable_'):]: value for key, value in config.items(
+            section) if key.startswith('variable_')}
+        return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration)
+
+    # Handle UPDATE_DELAYED_GCODE command
+    def cmd_UPDATE_DELAYED_GCODE(self, gcmd):
+        self.duration = gcmd.get_float('DURATION', minval=0)
+        if self.inside_timer:
+            self.repeat = (self.duration != 0.)
+        else:
+            waketime = self.reactor.NEVER
+            if self.duration:
+                waketime = self.reactor.monotonic() + self.duration
+            self.reactor.update_timer(self.timer_handler, waketime)
+
+
 def load_config(config):
     return DynamicMacros(config)
+
+
+def load_config_prefix(config):
+    return DynamicMacrosCluster(config)
