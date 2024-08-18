@@ -29,6 +29,8 @@ If you like this project, don't forget to give it a star! Also, check out my oth
 - [Variables](https://3dcoded.github.io/DynamicMacros/features/variables)
 - [Python](https://3dcoded.github.io/DynamicMacros/features/python)
 - [Delayed GCode](https://3dcoded.github.io/DynamicMacros/features/delayed)
+- [Macro Clusters](https://3dcoded.github.io/DynamicMacros/features/clusters)
+- [Rendering Macros](https://3dcoded.github.io/DynamicMacros/features/rendering)
 
 ## How Normal Macros Work
 
