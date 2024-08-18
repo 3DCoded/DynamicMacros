@@ -220,7 +220,7 @@ class DynamicMacrosCluster(DynamicMacros):
         self.python_enabled = config.getboolean('python_enabled', True)
         self.printer_enabled = config.getboolean('printer_enabled', True)
 
-        self.config_parser = MacroConfigParser(self.config_path)
+        self.config_parser = MacroConfigParser(self.printer)
         self._update_macros()
 
     def disabled_func(self, name, msg):
