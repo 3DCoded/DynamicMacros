@@ -146,7 +146,7 @@ class DynamicMacros:
         for template in macro.templates:
             macro.update_kwparams(template, params, rawparams)
             rendered.append(template.template.render(macro.kwparams))
-        return '\n\n\n'.join(rendered)
+        return '\n'.join(rendered)
 
     def cmd_DYNAMIC_MACRO(self, gcmd):
         cluster = gcmd.get('CLUSTER', None)
