@@ -136,7 +136,8 @@ class DynamicMacros:
                 params = gcmd.get_command_parameters()
                 rawparams = gcmd.get_raw_command_parameters()
                 macro = self.macros.get(macro_name, self.placeholder)
-                self._render_macro(macro, params, rawparams)
+                rendered = self._render_macro(macro, params, rawparams)
+                gcmd.respond_info(f'Rendered {macro.name}:\n\n{rendered}')
         except Exception as e:
             gcmd.respond_info(str(e))
     
