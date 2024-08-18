@@ -144,7 +144,7 @@ class DynamicMacros:
         rendered = []
         for template in macro.templates:
             macro.update_kwparams(template, params, rawparams)
-            rendered.append(macro.template.template.render(macro.kwparams))
+            rendered.append(template.template.render(macro.kwparams))
         return '\n\n\n'.join(rendered)
 
     def cmd_DYNAMIC_MACRO(self, gcmd):
