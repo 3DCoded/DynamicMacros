@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Dynamic Rendering
 
 DynamicMacros includes a `DYNAMIC_RENDER` command, useful for developing new macros.

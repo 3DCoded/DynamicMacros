@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # Macro Clusters
 
 Dynamic Macro clusters allow for multiple `[dynamicmacros]` configuration sections, and allow for security features. 
