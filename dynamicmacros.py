@@ -64,7 +64,9 @@ class DynamicMacros:
 
         # Register commands
         self.gcode.register_command(
-            'DYNAMIC_MACRO', self.cmd_DYNAMIC_MACRO, desc='Run Dynamic Macro')
+            'DYNAMIC_MACRO', self.cmd_DYNAMIC_MACRO, desc='Run a Dynamic Macro')
+        self.gcode.register_command(
+            'DYNAMIC_RENDER', self.cmd_DYNAMIC_RENDER, desc='Render a Dynamic Macro')
         self.gcode.register_command('SET_DYNAMIC_VARIABLE', self.cmd_SET_DYNAMIC_VARIABLE, desc="Set the variable of a Dynamic Macro.")
 
         self.config_parser = MacroConfigParser(self.printer)
@@ -116,6 +118,34 @@ class DynamicMacros:
                 del vals[macro.name]
         self.gcode._build_status_commands()
         self.macros.pop(macro.name.upper(), None)
+    
+    def cmd_DYNAMIC_RENDER(self, gcmd):
+        cluster = gcmd.get('CLUSTER', None)
+        if cluster and cluster in self.clusters:
+            return self.clusters[cluster]._cmd_DYNAMIC_RENDER(gcmd)
+        return self._cmd_DYNAMIC_RENDER(gcmd)
+    
+    def _cmd_DYNAMIC_RENDER(self, gcmd):
+        try:
+            self._update_macros()
+            logging.info('DynamicMacros Macros:')
+            for name in self.macros:
+                logging.info(f'    Name: {name}')
+            macro_name = gcmd.get('MACRO', '')
+            if macro_name:
+                params = gcmd.get_command_parameters()
+                rawparams = gcmd.get_raw_command_parameters()
+                macro = self.macros.get(macro_name, self.placeholder)
+                self._render_macro(macro, params, rawparams)
+        except Exception as e:
+            gcmd.respond_info(str(e))
+    
+    def _render_macro(self, macro, params, rawparams):
+        rendered = []
+        for template in macro.templates:
+            macro.update_kwparams(template, params, rawparams)
+            rendered.append(macro.template.template.render(macro.kwparams))
+        return '\n\n\n'.join(rendered)
 
     def cmd_DYNAMIC_MACRO(self, gcmd):
         cluster = gcmd.get('CLUSTER', None)
