@@ -97,6 +97,8 @@ nav:
     - features/variables.md
     - features/python.md
     - features/delayed.md
+    - features/clusters.md
+    - features/rendering.md
   - Klippy Extras:
     - extras/extras-start.md
     - extras/extras-intro.md

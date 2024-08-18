@@ -16,6 +16,8 @@ Klipper Dynamic Macros is an unofficial way to update macros without restarting 
 - [Variables](variables.md)
 - [Python](python.md)
 - [Delayed GCode](delayed.md)
+- [Macro Clusters](clusters.md)
+- [Rendering Macros](rendering.md)
 
 ## How Normal Macros Work
 

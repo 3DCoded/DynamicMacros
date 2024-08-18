@@ -18,17 +18,14 @@ comments: true
 - Support for `rename_existing`
 - Running Python from within a Dynamic Macro
 - Dynamic `delayed_gcode` implementation
+- Traditional `delayed_gcode` syntax
 - Klippy extras tutorial
 - Logging for easier debugging
-- Configurable `config_path`
+- Configuring DynamicMacros clusters
+- Internal logging
+- Support for multiple Klipper instances
+- Rendering a Dynamic Macro without running it
 
 ## Planned Features
 
 A checkmark indicates a feature is implemented and experimental.
-
-- [X] Allow configuring multiple `dynamicmacros` config sections as clusters
-    - [X] Disable Python per-cluster
-    - [X] Disable `printer` object per-cluster
-- [X] Logging for easier debugging
-- [X] Automatic retrieval of `config_path`
-- [X] Better error handling
