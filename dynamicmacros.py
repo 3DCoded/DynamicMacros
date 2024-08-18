@@ -131,7 +131,7 @@ class DynamicMacros:
             logging.info('DynamicMacros Macros:')
             for name in self.macros:
                 logging.info(f'    Name: {name}')
-            macro_name = gcmd.get('MACRO', '')
+            macro_name = gcmd.get('MACRO', '').upper()
             if macro_name:
                 params = gcmd.get_command_parameters()
                 rawparams = gcmd.get_raw_command_parameters()
