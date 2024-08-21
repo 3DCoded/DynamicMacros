@@ -417,6 +417,6 @@ The second flow, the timer flow, runs behind the scenes as long as Klippy is run
 
 Was this tutorial helpful? Do you have any feedback for it? Are there any areas where you think this could be improved?
 
-Let me know either on the [Klipper Discourse](https://klipper.discourse.group/t/klippy-extras-tutorial/18184?u=3dcoded) or in a [Documentation Issue](https://github.com/3DCoded/DynamicMacros/issues/new?assignees=&labels=documentation&projects=&template=documentation.md&title=%5BDOCS%5D) on Github.
+Let me know either on the [Klipper Discourse](https://klipper.discourse.group/t/klippy-extras-tutorial/18184?u=3dcoded) or in a [Documentation Issue](https://github.com/3DCoded/DynamicMacros/issues/new?assignees=3dcoded&labels=documentation&projects=&template=docs.yml&title=%5BDOCS%5D%3A+) on Github.
 
 Thank you for your feedback!
