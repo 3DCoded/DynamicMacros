@@ -223,6 +223,8 @@ class DynamicMacrosCluster(DynamicMacros):
         self.python_enabled = config.getboolean('python_enabled', True)
         self.printer_enabled = config.getboolean('printer_enabled', True)
 
+        self.configfile = self.printer.lookup_object('configfile')
+
         self.config_parser = MacroConfigParser(self.printer)
         self._update_macros()
 
