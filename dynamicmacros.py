@@ -69,6 +69,8 @@ class DynamicMacros:
             'DYNAMIC_RENDER', self.cmd_DYNAMIC_RENDER, desc='Render a Dynamic Macro')
         self.gcode.register_command('SET_DYNAMIC_VARIABLE', self.cmd_SET_DYNAMIC_VARIABLE, desc="Set the variable of a Dynamic Macro.")
 
+        self.configfile = self.printer.lookup_object('configfile')
+
         self.config_parser = MacroConfigParser(self.printer)
         self._update_macros()
 
@@ -82,6 +84,7 @@ class DynamicMacros:
                     'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
             self.gcode._build_status_commands()
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
+            self.configfile.status_raw_config[f'gcode_macro {macro.name}'] = macro.get_status()
 
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         macro = gcmd.get('MACRO').upper()
