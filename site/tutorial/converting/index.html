@@ -1015,6 +1015,22 @@
 <p>If you are getting a "Unknown config object 'gcode_macro'" error after converting your macros to Dynamic Macros, move your <code>[dynamicmacros]</code> section to be after your <code>[virtual_sdcard]</code> section.</p>
 </details>
 <details class="tip">
+<summary>Fluidd</summary>
+<p>Fluidd may not display macros after install DynamicMacros. As a workaround, you can switch to Mainsail, or define a standard <code>gcode_macro</code>, then override it in a dynamic macro. Example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">normal_macros.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[gcode_macro HELLO]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="c1"># Dummy GCode to be overriden by a Dynamic Macro</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">dynamic_macros.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">[gcode_macro HELLO]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Hello&quot;</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<details class="tip">
 <summary>Nacro Names</summary>
 <p>Klipper has certain macro names reserved for core functionality. If you are experiencing errors, don't name your Dynamic Macros any of the following:</p>
 <ul>
@@ -1023,11 +1039,11 @@
 <li><code>CANCEL_PRINT</code></li>
 </ul>
 <p>If you want to make those macros dynamic, first define them as a <strong>standard</strong> GCode macro:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[gcode_macro PAUSE]</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="na">DYNAMIC_PAUSE</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">[gcode_macro PAUSE]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="na">DYNAMIC_PAUSE</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Restart Klipper.</p>
@@ -1054,7 +1070,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">August 15, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 4, 2024</span>
   </span>
 
     
