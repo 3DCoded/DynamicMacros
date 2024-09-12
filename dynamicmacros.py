@@ -1,12 +1,15 @@
-import jinja2
-from .gcode_macro import TemplateWrapper
-from pathlib import Path
-import configparser
-import os
 import ast
+import configparser
 import json
-from secrets import token_hex
 import logging
+import os
+import re
+from pathlib import Path
+from secrets import token_hex
+
+import jinja2
+
+from .gcode_macro import TemplateWrapper
 
 # Define the path to the configuration files
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
@@ -137,6 +140,7 @@ class DynamicMacros:
                 rawparams = gcmd.get_raw_command_parameters()
                 macro = self.macros.get(macro_name, self.placeholder)
                 rendered = self._render_macro(macro, params, rawparams)
+                rendered = re.sub(r'\n+', '\n', rendered)
                 gcmd.respond_info(f'Rendered {macro.name}:\n\n{rendered}')
         except Exception as e:
             gcmd.respond_info(str(e))
