@@ -1,3 +1,3 @@
 #!/bin/bash
-ln -f dynamicmacros.py /usr/share/klipper/klippy/extras/dynamicmacros.py
+ln -f dynamicmacros_k1.py /usr/share/klipper/klippy/extras/dynamicmacros.py
 echo Installed Klipper Dynamic Macros!
