@@ -79,6 +79,8 @@ class DynamicMacros:
         self.macros[macro.name.upper()] = macro
         if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
             self.gcode.register_command(
+                macro.name.upper(), None, desc=macro.desc)
+            self.gcode.register_command(
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
             if isinstance(macro, DelayedDynamicMacro):
                 self.gcode.register_mux_command(
