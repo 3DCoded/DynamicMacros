@@ -2,6 +2,8 @@
 
 **Never restart Klipper again for simple macros.**
 
+<img src="logo.png" alt="logo" width="200"/>
+
 ---
 
 Klipper Dynamic Macros is an unofficial way to update macros without restarting Klipper, so you can update macros mid-print and see their results live. It also supports extra features that normal GCode Macros don't have.
@@ -27,6 +29,8 @@ If you like this project, don't forget to give it a star! Also, check out my oth
 - [Variables](https://3dcoded.github.io/DynamicMacros/features/variables)
 - [Python](https://3dcoded.github.io/DynamicMacros/features/python)
 - [Delayed GCode](https://3dcoded.github.io/DynamicMacros/features/delayed)
+- [Macro Clusters](https://3dcoded.github.io/DynamicMacros/features/clusters)
+- [Rendering Macros](https://3dcoded.github.io/DynamicMacros/features/rendering)
 
 ## How Normal Macros Work
 
@@ -34,7 +38,7 @@ Your macros are written in a `.cfg` file, then included into your `printer.cfg`.
 
 ## How Dynamic Macros Work
 
-Your macros are written in a `.cfg` file, then the relative path to that file is configured in a `[dynamicmacros]` config section. The config files are read and parsed every time you run the macro, allowing you to update macros without restarting Klipper.
+Your macros are written in a `.cfg` file, then the relative path to that file is configured in a `[dynamicmacros]` config section. The config files are read and parsed every time you run the `DYNAMIC_MACRO` command, allowing you to update macros without restarting Klipper.
 
 ## Get Started
 Follow the [Tutorial](https://3dcoded.github.io/DynamicMacros/tutorial) to get started with Dynamic Macros.

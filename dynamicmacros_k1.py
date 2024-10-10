@@ -72,8 +72,6 @@ class DynamicMacros:
             'DYNAMIC_RENDER', self.cmd_DYNAMIC_RENDER, desc='Render a Dynamic Macro')
         self.gcode.register_command('SET_DYNAMIC_VARIABLE', self.cmd_SET_DYNAMIC_VARIABLE, desc="Set the variable of a Dynamic Macro.")
 
-        self.configfile = self.printer.lookup_object('configfile')
-
         self.config_parser = MacroConfigParser(self.printer)
         self._update_macros()
 
@@ -81,13 +79,14 @@ class DynamicMacros:
         self.macros[macro.name.upper()] = macro
         if (macro.name not in self.gcode.ready_gcode_handlers) and (macro.name not in self.gcode.base_gcode_handlers):
             self.gcode.register_command(
+                macro.name.upper(), None, desc=macro.desc)
+            self.gcode.register_command(
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
             if isinstance(macro, DelayedDynamicMacro):
                 self.gcode.register_mux_command(
                     'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
-            self.gcode._build_status_commands()
+            # self.gcode._build_status_commands()
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
-            self.configfile.status_raw_config[f'gcode_macro {macro.name}'] = macro.get_status()
 
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         macro = gcmd.get('MACRO').upper()
@@ -122,7 +121,7 @@ class DynamicMacros:
             _, vals = self.gcode.mux_commands.get('UPDATE_DELAYED_GCODE')
             if macro.name in vals:
                 del vals[macro.name]
-        self.gcode._build_status_commands()
+        # self.gcode._build_status_commands()
         self.macros.pop(macro.name.upper(), None)
     
     def cmd_DYNAMIC_RENDER(self, gcmd):
@@ -226,8 +225,6 @@ class DynamicMacrosCluster(DynamicMacros):
 
         self.python_enabled = config.getboolean('python_enabled', True)
         self.printer_enabled = config.getboolean('printer_enabled', True)
-
-        self.configfile = self.printer.lookup_object('configfile')
 
         self.config_parser = MacroConfigParser(self.printer)
         self._update_macros()
