@@ -82,6 +82,11 @@ class DynamicMacros:
             self.gcode.register_command(
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
             if isinstance(macro, DelayedDynamicMacro):
+                prev = self.gcode.mux_commands.get('UPDATE_DELAYED_GCODE')
+                if prev is not None:
+                    prev_key, prev_values = prev
+                    prev_values[macro.name] = None
+                    del prev_values[macro.name]
                 self.gcode.register_mux_command(
                     'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
             self.gcode._build_status_commands()
