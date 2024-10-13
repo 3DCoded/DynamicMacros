@@ -136,7 +136,7 @@ class DynamicMacros:
     
     def _cmd_DYNAMIC_RENDER(self, gcmd):
         try:
-            self._update_macros()
+            # self._update_macros()
             logging.info('DynamicMacros Macros:')
             for name in self.macros:
                 logging.info(f'    Name: {name}')
