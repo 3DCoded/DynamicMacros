@@ -95,7 +95,7 @@ class DynamicMacros:
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         macro = gcmd.get('MACRO').upper()
         if macro not in self.macros:
-            for cluster in self.clusters:
+            for name, cluster in self.clusters.items():
                 if macro in cluster.macros:
                     return cluster._cmd_SET_DYNAMIC_VARIABLE(gcmd)
         return self._cmd_SET_DYNAMIC_VARIABLE(gcmd)
