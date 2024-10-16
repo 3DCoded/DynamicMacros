@@ -6,6 +6,7 @@ import os
 import re
 from pathlib import Path
 from secrets import token_hex
+from io import StringIO
 
 import jinja2
 
@@ -48,7 +49,6 @@ class MacroConfigParser:
                 macros[macro.name] = macro
         return macros
 
-
 class MissingConfigError(Exception):
     pass
 
@@ -75,7 +75,32 @@ class DynamicMacros:
         self.configfile = self.printer.lookup_object('configfile')
 
         self.config_parser = MacroConfigParser(self.printer)
+        
+        if config.getboolean('interface_workaround', False):
+            self.interface_workaround()
+
         self._update_macros()
+    
+    def interface_workaround(self):
+        full_cfg = StringIO()
+        for fname in self.fnames:
+            cfg = self.config_parser.read_config_file(fname)
+            for section in cfg.sections():
+                cfg.set(section, 'gcode', f'DYNAMIC_MACRO MACRO={section.split()[1]}')
+            cfg.write(full_cfg)
+
+        # Write cfg to config_path/.dynamicmacros.cfg
+        with open(config_path / '.dynamicmacros.cfg', 'w+') as file:
+            file.write(full_cfg.getvalue())
+
+        # Update printer.cfg to [include .dynamicmacros.cfg]
+        with open(config_path / 'printer.cfg', 'r') as file:
+            lines = file.readlines()
+            if '[include .dynamicmacros.cfg]' not in '\n'.join(lines):
+                lines.insert(0, '[include .dynamicmacros.cfg]\n')
+        
+        with open(config_path / 'printer.cfg', 'w+') as file:
+            file.writelines(lines)
 
     def register_macro(self, macro):
         self.macros[macro.name.upper()] = macro
@@ -88,7 +113,15 @@ class DynamicMacros:
                     'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
             self.gcode._build_status_commands()
             self.printer.objects[f'gcode_macro {macro.name}'] = macro
-            self.configfile.status_raw_config[f'gcode_macro {macro.name}'] = macro.get_status()
+            # self.configfile.status_raw_config[f'gcode_macro {macro.name}'] = macro.get_status()
+            original_get_status = self.configfile.get_status
+            def get_status(eventtime):
+                status = original_get_status(eventtime)
+                config = status['config']
+                config.update({f'gcode_macro {macro.name}': {'key': 'value'}})
+                status.update({'config': config})
+                return status
+            self.configfile.get_status = get_status
 
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         macro = gcmd.get('MACRO').upper()
@@ -363,7 +396,7 @@ class DynamicMacro:
             section) if key.startswith('variable_')}
         return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration)
 
-    def get_status(self, *args, **kwargs):
+    def get_status(self, eventtime=None):
         return self.variables
 
     def _update_kwparams(self, template, params, rawparams):
