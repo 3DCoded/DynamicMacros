@@ -27,13 +27,32 @@ class MacroConfigParser:
         config_path = self.config_path
 
     def read_config_file(self, filename):
+        buffer = self._read_file(filename)
+        sbuffer = StringIO('\n'.join(buffer))
+        config = configparser.RawConfigParser(
+            strict=False, inline_comment_prefixes=(';', '#'))
+        config.read_file(sbuffer, filename)
+        return config
+    
+    def _read_file(self, filename, visited=[]):
         path = self.config_path / filename
         if not os.path.exists(path):
             raise MissingConfigError(f'Missing Configuration at {path}')
-        config = configparser.RawConfigParser(
-            strict=False, inline_comment_prefixes=(';', '#'))
-        config.read(path)
-        return config
+        if path in visited:
+            raise RecursiveConfigError(f'Recursively included file at {path}')
+        visited.append(path)
+        buffer = []
+        with open(path, 'r') as file:
+            for line in file.readlines():
+                mo = configparser.RawConfigParser.SECTCRE.match(line)
+                header = mo and mo.group('header')
+                if header and header.startswith('include '):
+                    include_spec = header[8:].strip()
+                    buffer.extend(self._read_file(include_spec, visited))
+                else:
+                    buffer.append(line)
+        visited.remove(path)
+        return buffer
 
     def extract_macros(self, config):
         macros = {}
@@ -50,6 +69,9 @@ class MacroConfigParser:
         return macros
 
 class MissingConfigError(Exception):
+    pass
+
+class RecursiveConfigError(Exception):
     pass
 
 class DynamicMacros:
