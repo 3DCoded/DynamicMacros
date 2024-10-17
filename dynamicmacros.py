@@ -144,6 +144,11 @@ class DynamicMacros:
             self.gcode.register_command(
                 macro.name.upper(), self.generate_cmd(macro), desc=macro.desc)
             if isinstance(macro, DelayedDynamicMacro):
+                prev = self.gcode.mux_commands.get('UPDATE_DELAYED_GCODE')
+                if prev is not None:
+                    prev_key, prev_values = prev
+                    prev_values[macro.name] = None
+                    del prev_values[macro.name]
                 self.gcode.register_mux_command(
                     'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
             self.gcode._build_status_commands()
@@ -161,7 +166,7 @@ class DynamicMacros:
     def cmd_SET_DYNAMIC_VARIABLE(self, gcmd):
         macro = gcmd.get('MACRO').upper()
         if macro not in self.macros:
-            for cluster in self.clusters:
+            for name, cluster in self.clusters.items():
                 if macro in cluster.macros:
                     return cluster._cmd_SET_DYNAMIC_VARIABLE(gcmd)
         return self._cmd_SET_DYNAMIC_VARIABLE(gcmd)
@@ -202,7 +207,7 @@ class DynamicMacros:
     
     def _cmd_DYNAMIC_RENDER(self, gcmd):
         try:
-            self._update_macros()
+            # self._update_macros()
             logging.info('DynamicMacros Macros:')
             for name in self.macros:
                 logging.info(f'    Name: {name}')
