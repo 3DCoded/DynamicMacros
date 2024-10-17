@@ -117,7 +117,11 @@ class DynamicMacros:
                     if '{% set ' in line:
                         lines.append(line)
                 compiled_gcode = '\n'.join(lines)
-                cfg.set(section, 'gcode', f'{compiled_gcode}\nDYNAMIC_MACRO MACRO={section.split()[1]}')
+                if hasattr(self, 'name'):
+                    cmd = f'DYNAMIC_MACRO MACRO={section.split()[1]} CLUSTER={self.name}'
+                else:
+                    cmd = f'DYNAMIC_MACRO MACRO={section.split()[1]}'
+                cfg.set(section, 'gcode', f'{compiled_gcode}\n{cmd}')
             cfg.write(full_cfg)
 
         # Write cfg to config_path/.dynamicmacros.cfg
