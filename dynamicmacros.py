@@ -108,7 +108,16 @@ class DynamicMacros:
         for fname in self.fnames:
             cfg = self.config_parser.read_config_file(fname)
             for section in cfg.sections():
-                cfg.set(section, 'gcode', f'DYNAMIC_MACRO MACRO={section.split()[1]}')
+                if not section.startswith('gcode_macro'):
+                    cfg.remove_section(section)
+                    continue
+                prev_gcode = cfg.get(section, 'gcode')
+                lines = []
+                for line in prev_gcode.splitlines():
+                    if '{% set ' in line:
+                        lines.append(line)
+                compiled_gcode = '\n'.join(lines)
+                cfg.set(section, 'gcode', f'{compiled_gcode}\nDYNAMIC_MACRO MACRO={section.split()[1]}')
             cfg.write(full_cfg)
 
         # Write cfg to config_path/.dynamicmacros.cfg
@@ -286,6 +295,10 @@ class DynamicMacrosCluster(DynamicMacros):
         self.configfile = self.printer.lookup_object('configfile')
 
         self.config_parser = MacroConfigParser(self.printer)
+        
+        if config.getboolean('interface_workaround', False):
+            self.interface_workaround()
+
         self._update_macros()
 
     def disabled_func(self, name, msg):
@@ -335,7 +348,7 @@ class DynamicMacro:
         if self.rename_existing:
             self.rename()
 
-        self.gcodes = self.raw.split('\n\n\n')
+        self.gcodes = self.raw.split('\n\n\n\n\n')
         self.templates = [self.generate_template(
             gcode) for gcode in self.gcodes]
 
@@ -360,6 +373,7 @@ class DynamicMacro:
 
     def generate_template(self, gcode):
         env = jinja2.Environment('{%', '%}', '{', '}')
+        logging.info(f'DynamicMacros [{self.name}]: \n{gcode}\n\n\n')
         return TemplateWrapper(self.printer, env, self.name, gcode)
 
     def rename(self):
@@ -410,6 +424,7 @@ class DynamicMacro:
     def from_section(config, section, printer):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
+        logging.info(f'DynamicMacros [{name}] Raw:\n{raw}\n\n\n\n\n')
         desc = config.get(section, 'description', fallback='No Description')
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
