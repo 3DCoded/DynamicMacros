@@ -87,6 +87,8 @@ gcode:
 
 Save the file, but **do not** restart Klipper.
 
+Run the `DYNAMIC_MACRO` command to reload the macros.
+
 Run `MYTEST` again, and the output should be:
 ```
 Test successful!
