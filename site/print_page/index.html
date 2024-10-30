@@ -1304,40 +1304,30 @@
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="na">configs</span><span class="o">:</span><span class="w"> </span><span class="s">macros.cfg</span><span class="w"> </span><span class="c1"># You can add more files to this list, separated by commas.</span>
 </code></pre></div></td></tr></table></div>
 <details class="tip">
+<summary>Fluidd and KlipperScreen</summary>
+<p>If your Fluidd macros list is empty or your dynamic macros don't appear in KlipperScreen's macros list, you can add the following parameter to your <code>[dynamicmacros]</code> config section:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#tutorial-converting-__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="na">interface_workaround</span><span class="o">:</span><span class="w"> </span><span class="s">true</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<details class="tip">
 <summary>KlipperScreen</summary>
 <p>If you convert your <code>LOAD_FILAMENT</code> and <code>UNLOAD_FILAMENT</code> macros to be dynamic, KlipperScreen may not recognize them and report an error. To fix this, add blank macros to your <code>printer.cfg</code>, before your <code>[dynamicmacros]</code> section. Example:
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">printer.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#tutorial-converting-__codelineno-2-1">1</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-2-2">2</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-2-3">3</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-2-4">4</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-2-5">5</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">[gcode_macro LOAD_FILAMENT]</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="na">M117 LOAD</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">[gcode_macro UNLOAD_FILAMENT]</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="na">M117 UNLOAD</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">printer.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#tutorial-converting-__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#tutorial-converting-__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#tutorial-converting-__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#tutorial-converting-__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#tutorial-converting-__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#tutorial-converting-__codelineno-3-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[gcode_macro LOAD_FILAMENT]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="na">M117 LOAD</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="k">[gcode_macro UNLOAD_FILAMENT]</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="na">M117 UNLOAD</span>
 </code></pre></div></td></tr></table></div></p>
 </details>
 <details class="failure">
 <summary>Unknown config object 'gcode_macro'</summary>
 <p>If you are getting a "Unknown config object 'gcode_macro'" error after converting your macros to Dynamic Macros, move your <code>[dynamicmacros]</code> section to be after your <code>[virtual_sdcard]</code> section.</p>
-</details>
-<details class="tip">
-<summary>Fluidd</summary>
-<p>Fluidd may not display macros after install DynamicMacros. As a workaround, you can switch to Mainsail, or define a standard <code>gcode_macro</code>, then override it in a dynamic macro. Example:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">normal_macros.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#tutorial-converting-__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-3-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[gcode_macro HELLO]</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="c1"># Dummy GCode to be overriden by a Dynamic Macro</span>
-</code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">dynamic_macros.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#tutorial-converting-__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-4-2">2</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">[gcode_macro HELLO]</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Hello&quot;</span>
-</code></pre></div></td></tr></table></div>
 </details>
 <details class="tip">
 <summary>Nacro Names</summary>
@@ -1348,11 +1338,11 @@
 <li><code>CANCEL_PRINT</code></li>
 </ul>
 <p>If you want to make those macros dynamic, first define them as a <strong>standard</strong> GCode macro:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#tutorial-converting-__codelineno-5-1">1</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-5-2">2</a></span>
-<span class="normal"><a href="#tutorial-converting-__codelineno-5-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">[gcode_macro PAUSE]</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="na">DYNAMIC_PAUSE</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#tutorial-converting-__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#tutorial-converting-__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#tutorial-converting-__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">[gcode_macro PAUSE]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="na">DYNAMIC_PAUSE</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Restart Klipper.</p>

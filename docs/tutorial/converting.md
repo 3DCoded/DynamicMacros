@@ -26,6 +26,13 @@ config_path: ~/printer_data/config # If you left your printer configuration path
 configs: macros.cfg # You can add more files to this list, separated by commas.
 ```
 
+??? tip "Fluidd and KlipperScreen"
+    If your Fluidd macros list is empty or your dynamic macros don't appear in KlipperScreen's macros list, you can add the following parameter to your `[dynamicmacros]` config section:
+
+    ```cfg
+    interface_workaround: true
+    ```
+
 ??? tip "KlipperScreen"
     If you convert your `LOAD_FILAMENT` and `UNLOAD_FILAMENT` macros to be dynamic, KlipperScreen may not recognize them and report an error. To fix this, add blank macros to your `printer.cfg`, before your `[dynamicmacros]` section. Example:
     ```cfg title="printer.cfg"
@@ -38,21 +45,6 @@ configs: macros.cfg # You can add more files to this list, separated by commas.
     ```
 ??? failure "Unknown config object 'gcode_macro'"
     If you are getting a "Unknown config object 'gcode_macro'" error after converting your macros to Dynamic Macros, move your `[dynamicmacros]` section to be after your `[virtual_sdcard]` section.
-
-??? tip "Fluidd"
-    Fluidd may not display macros after install DynamicMacros. As a workaround, you can switch to Mainsail, or define a standard `gcode_macro`, then override it in a dynamic macro. Example:
-
-    ```cfg title="normal_macros.cfg"
-    [gcode_macro HELLO]
-    gcode:
-        RESPOND MSG="" # Dummy GCode to be overriden by a Dynamic Macro
-    ```
-
-    ```cfg title="dynamic_macros.cfg"
-    [gcode_macro HELLO]
-    gcode:
-        RESPOND MSG="Hello"
-    ```
 
 ??? tip "Nacro Names"
     Klipper has certain macro names reserved for core functionality. If you are experiencing errors, don't name your Dynamic Macros any of the following:
