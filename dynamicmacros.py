@@ -336,14 +336,14 @@ class DynamicMacrosCluster(DynamicMacros):
 
 
 class DynamicMacro:
-    def __init__(self, name, raw, printer, desc='', variables={}, delimeter=None, rename_existing=None, initial_duration=None):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimeter='\n\n\n', rename_existing=None, initial_duration=None):
         self.name = name
         self.raw = raw
         self.printer = printer
         self.gcode = self.printer.lookup_object('gcode')
         self.desc = desc
         self.variables = variables
-        self.delimeter = delimeter
+        self.delimeter = delimeter if delimeter != 'NO_DELIMETER' else None
         self.rename_existing = rename_existing
         self.duration = initial_duration
         self.vars = {}
@@ -470,14 +470,14 @@ class DynamicMacro:
 
 
 class DelayedDynamicMacro(DynamicMacro):
-    def __init__(self, name, raw, printer, desc='', variables={}, delimeter=None, rename_existing=None, initial_duration=None):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimeter='\n\n\n', rename_existing=None, initial_duration=None):
         self.name = name
         self.raw = raw
         self.printer = printer
         self.gcode = self.printer.lookup_object('gcode')
         self.desc = desc
         self.variables = variables
-        self.delimeter = delimeter
+        self.delimeter = delimeter if delimeter != 'NO_DELIMETER' else None
         self.rename_existing = rename_existing
         self.duration = initial_duration
         self.vars = {}
