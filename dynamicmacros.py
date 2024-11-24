@@ -336,13 +336,14 @@ class DynamicMacrosCluster(DynamicMacros):
 
 
 class DynamicMacro:
-    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimeter=None, rename_existing=None, initial_duration=None):
         self.name = name
         self.raw = raw
         self.printer = printer
         self.gcode = self.printer.lookup_object('gcode')
         self.desc = desc
         self.variables = variables
+        self.delimeter = delimeter
         self.rename_existing = rename_existing
         self.duration = initial_duration
         self.vars = {}
@@ -356,8 +357,11 @@ class DynamicMacro:
 
         if self.rename_existing:
             self.rename()
-
-        self.gcodes = self.raw.split('\n\n\n\n\n')
+        
+        if self.delimeter:
+            self.gcodes = self.raw.split(self.delimeter)
+        else:
+            self.gcodes = [self.raw]
         self.templates = [self.generate_template(
             gcode) for gcode in self.gcodes]
 
@@ -438,9 +442,10 @@ class DynamicMacro:
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
             section, 'initial_duration', fallback=None)
+        delimeter = config.get(section, 'delimeter', fallback=None)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
-        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration)
+        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration)
 
     def get_status(self, eventtime=None):
         return self.variables
@@ -465,13 +470,14 @@ class DynamicMacro:
 
 
 class DelayedDynamicMacro(DynamicMacro):
-    def __init__(self, name, raw, printer, desc='', variables={}, rename_existing=None, initial_duration=None):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimeter=None, rename_existing=None, initial_duration=None):
         self.name = name
         self.raw = raw
         self.printer = printer
         self.gcode = self.printer.lookup_object('gcode')
         self.desc = desc
         self.variables = variables
+        self.delimeter = delimeter
         self.rename_existing = rename_existing
         self.duration = initial_duration
         self.vars = {}
@@ -485,8 +491,11 @@ class DelayedDynamicMacro(DynamicMacro):
 
         if self.rename_existing:
             self.rename()
-
-        self.gcodes = self.raw.split('\n\n\n')
+        
+        if self.delimeter:
+            self.gcodes = self.raw.split(self.delimeter)
+        else:
+            self.gcodes = [self.raw]
         self.templates = [self.generate_template(
             gcode) for gcode in self.gcodes]
 
@@ -498,9 +507,10 @@ class DelayedDynamicMacro(DynamicMacro):
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
             section, 'initial_duration', fallback=None)
+        delimeter = config.get(section, 'delimeter', fallback=None)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
-        return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, rename_existing=rename_existing, initial_duration=initial_duration)
+        return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration)
 
     # Handle UPDATE_DELAYED_GCODE command
     def cmd_UPDATE_DELAYED_GCODE(self, gcmd):
