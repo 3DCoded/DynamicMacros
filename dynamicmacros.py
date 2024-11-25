@@ -19,10 +19,11 @@ log_path = Path(os.path.expanduser('~')) / 'DynamicMacros-logs' / 'DynamicMacros
 os.makedirs(log_path.parent, exist_ok=True)
 
 class MacroConfigParser:
-    def __init__(self, printer):
+    def __init__(self, printer, delimeter):
         self.printer = printer
         self.config_file = printer.start_args['config_file']
         self.config_path = Path(os.path.dirname(self.config_file))
+        self.delimeter = delimeter
         global config_path
         config_path = self.config_path
 
@@ -54,17 +55,17 @@ class MacroConfigParser:
         visited.remove(path)
         return buffer
 
-    def extract_macros(self, config):
+    def extract_macros(self, config, delimeter):
         macros = {}
         for section in config.sections():
             logging.info(f'DynamicMacros: Reading section {section}')
             if section.startswith('gcode_macro'):
                 macro = DynamicMacro.from_section(
-                    config, section, DynamicMacros.printer)
+                    config, section, DynamicMacros.printer, self.delimeter)
                 macros[macro.name] = macro
             elif section.startswith('delayed_gcode'):
                 macro = DelayedDynamicMacro.from_section(
-                    config, section, DynamicMacros.printer)
+                    config, section, DynamicMacros.printer, self.delimeter)
                 macros[macro.name] = macro
         return macros
 
@@ -96,11 +97,12 @@ class DynamicMacros:
 
         self.configfile = self.printer.lookup_object('configfile')
 
-        self.config_parser = MacroConfigParser(self.printer)
+        self.delimeter = config.get('delimeter', '\n\n\n')
+        self.config_parser = MacroConfigParser(self.printer, self.delimeter)
         
         if config.getboolean('interface_workaround', False):
             self.interface_workaround()
-
+        
         self._update_macros()
     
     def interface_workaround(self):
@@ -303,7 +305,8 @@ class DynamicMacrosCluster(DynamicMacros):
 
         self.configfile = self.printer.lookup_object('configfile')
 
-        self.config_parser = MacroConfigParser(self.printer)
+        self.delimeter = config.get('delimeter', '\n\n\n')
+        self.config_parser = MacroConfigParser(self.printer, self.delimeter)
         
         if config.getboolean('interface_workaround', False):
             self.interface_workaround()
@@ -434,7 +437,7 @@ class DynamicMacro:
         return self.python(text, *args, **kwargs)
 
     @staticmethod
-    def from_section(config, section, printer):
+    def from_section(config, section, printer, delimeter):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
         logging.info(f'DynamicMacros [{name}] Raw:\n{raw}\n\n\n\n\n')
@@ -442,7 +445,6 @@ class DynamicMacro:
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
             section, 'initial_duration', fallback=None)
-        delimeter = config.get(section, 'delimeter', fallback=None)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
         return DynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration)
@@ -500,14 +502,13 @@ class DelayedDynamicMacro(DynamicMacro):
             gcode) for gcode in self.gcodes]
 
     @staticmethod
-    def from_section(config, section, printer):
+    def from_section(config, section, printer, delimeter):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
         desc = config.get(section, 'description', fallback='No Description')
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
             section, 'initial_duration', fallback=None)
-        delimeter = config.get(section, 'delimeter', fallback=None)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
         return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration)
