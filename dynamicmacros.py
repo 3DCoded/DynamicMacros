@@ -55,7 +55,7 @@ class MacroConfigParser:
         visited.remove(path)
         return buffer
 
-    def extract_macros(self, config, delimeter):
+    def extract_macros(self, config):
         macros = {}
         for section in config.sections():
             logging.info(f'DynamicMacros: Reading section {section}')
