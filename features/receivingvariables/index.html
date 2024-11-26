@@ -519,6 +519,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Receiving Variable Updates
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -528,6 +539,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#custom-delimeters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Delimeters
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -876,6 +915,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#custom-delimeters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Delimeters
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -987,6 +1043,15 @@
 <a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="c1"># Above line outputs 10</span>
 </code></pre></div></td></tr></table></div>
 <p>See <a href="../../examples/#receiving-position-updates">Examples</a> for examples.</p>
+<h2 id="custom-delimeters">Custom Delimeters</h2>
+<p>To split a macro by something other than three empty lines, you can set the <code>delimeter</code> parameter in your <code>[dynamicmacros]</code> config section:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">[dynamicmacros]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="na">configs</span><span class="o">:</span><span class="w"> </span><span class="s">dynamic.cfg,macros.cfg</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="na">delimeter</span><span class="o">:</span><span class="w"> </span><span class="s">SPLIT_HERE</span>
+</code></pre></div></td></tr></table></div>
+<p>To disable receiving variable updates entirely, you can set <code>delimeter</code> to <code>NO_DELIMETER</code>.</p>
 
 
 
