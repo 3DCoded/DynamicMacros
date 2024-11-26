@@ -1492,7 +1492,16 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="na">M117 {num}</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="c1"># Above line outputs 10</span>
 </code></pre></div></td></tr></table></div>
-<p>See <a href="#examples-receiving-position-updates">Examples</a> for examples.</p></section><section class="print-page" id="features-utilities"><h1 id="features-utilities-utility-functions">Utility Functions</h1>
+<p>See <a href="#examples-receiving-position-updates">Examples</a> for examples.</p>
+<h2 id="features-receivingvariables-custom-delimeters">Custom Delimeters</h2>
+<p>To split a macro by something other than three empty lines, you can set the <code>delimeter</code> parameter in your <code>[dynamicmacros]</code> config section:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#features-receivingvariables-__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#features-receivingvariables-__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#features-receivingvariables-__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">[dynamicmacros]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="na">configs</span><span class="o">:</span><span class="w"> </span><span class="s">dynamic.cfg,macros.cfg</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="na">delimeter</span><span class="o">:</span><span class="w"> </span><span class="s">SPLIT_HERE</span>
+</code></pre></div></td></tr></table></div>
+<p>To disable receiving variable updates entirely, you can set <code>delimeter</code> to <code>NO_DELIMETER</code>.</p></section><section class="print-page" id="features-utilities"><h1 id="features-utilities-utility-functions">Utility Functions</h1>
 <p>Dynamic Macros provides a few utility functions to make Dynamic Macros easier to write.</p>
 <h2 id="features-utilities-update">update()</h2>
 <p>The <code>update()</code> function allows to save variables across whitespaces (see <a href="#features-receivingvariables">Receiving Variables</a> for more information). Example:</p>

@@ -63,3 +63,15 @@ gcode:
 ```
 
 See [Examples](examples.md#receiving-position-updates) for examples.
+
+## Custom Delimeters
+
+To split a macro by something other than three empty lines, you can set the `delimeter` parameter in your `[dynamicmacros]` config section:
+
+```cfg
+[dynamicmacros]
+configs: dynamic.cfg,macros.cfg
+delimeter: SPLIT_HERE
+```
+
+To disable receiving variable updates entirely, you can set `delimeter` to `NO_DELIMETER`.
