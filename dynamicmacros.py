@@ -124,6 +124,8 @@ class DynamicMacros:
                 else:
                     cmd = f'DYNAMIC_MACRO MACRO={section.split()[1]}'
                 cfg.set(section, 'gcode', f'{compiled_gcode}\n{cmd}')
+                if cfg.has_option(section, 'initial_duration'):
+                    cfg.remove_option(section, 'initial_duration')
             cfg.write(full_cfg)
 
         # Write cfg to config_path/.dynamicmacros.cfg
