@@ -86,7 +86,7 @@ class DynamicMacros:
         DynamicMacros.printer = self.printer
         self.macros = {}
         self.placeholder = DynamicMacro(
-            'Error', 'RESPOND MSG="ERROR"', self.printer)
+            'Macro Not Found', 'RESPOND MSG="Macro not found"', self.printer)
 
         # Register commands
         self.gcode.register_command(
@@ -110,13 +110,13 @@ class DynamicMacros:
         for fname in self.fnames:
             cfg = self.config_parser.read_config_file(fname)
             for section in cfg.sections():
-                if not section.startswith('gcode_macro'):
+                if not (section.startswith('gcode_macro') or section.startswith('delayed_gcode')):
                     cfg.remove_section(section)
                     continue
                 prev_gcode = cfg.get(section, 'gcode')
                 lines = []
                 for line in prev_gcode.splitlines():
-                    if '{% set ' in line:
+                    if '{% set ' in line and 'python' not in line:
                         lines.append(line)
                 compiled_gcode = '\n'.join(lines)
                 if hasattr(self, 'name'):
@@ -149,18 +149,15 @@ class DynamicMacros:
                 prev = self.gcode.mux_commands.get('UPDATE_DELAYED_GCODE')
                 if prev is not None:
                     prev_key, prev_values = prev
-                    prev_values[macro.name] = None
-                    del prev_values[macro.name]
-                self.gcode.register_mux_command(
-                    'UPDATE_DELAYED_GCODE', 'ID', macro.name, macro.cmd_UPDATE_DELAYED_GCODE)
+                    prev_values[macro.name] = macro.cmd_UPDATE_DELAYED_GCODE
             self.gcode._build_status_commands()
-            self.printer.objects[f'gcode_macro {macro.name}'] = macro
-            # self.configfile.status_raw_config[f'gcode_macro {macro.name}'] = macro.get_status()
+            label = 'delayed_gcode' if isinstance(macro, DelayedDynamicMacro) else 'gcode_macro'
+            self.printer.objects[f'{label} {macro.name}'] = macro
             original_get_status = self.configfile.get_status
             def get_status(eventtime):
                 status = original_get_status(eventtime)
                 config = status['config']
-                config.update({f'gcode_macro {macro.name}': {'key': 'value'}})
+                config.update({f'gcode_macro {macro.name}': {'description': macro.desc}})
                 status.update({'config': config})
                 return status
             self.configfile.get_status = get_status
@@ -295,7 +292,7 @@ class DynamicMacrosCluster(DynamicMacros):
         DynamicMacros.printer = self.printer
         self.macros = {}
         self.placeholder = DynamicMacro(
-            'Error', 'RESPOND MSG="ERROR"', self.printer)
+            'Macro Not Found', 'RESPOND MSG="Macro not found"', self.printer)
         
         DynamicMacros.printer = self.printer
         DynamicMacros.clusters[self.name] = self
@@ -484,12 +481,10 @@ class DelayedDynamicMacro(DynamicMacro):
         self.duration = initial_duration
         self.vars = {}
 
-        if self.duration:
-            self.reactor = self.printer.get_reactor()
-            self.timer_handler = None
-            self.inside_timer = self.repeat = False
-            self.printer.register_event_handler(
-                "klippy:ready", self._handle_ready)
+        self.reactor = self.printer.get_reactor()
+        self.timer_handler = None
+        self.inside_timer = self.repeat = False
+        self.printer.register_event_handler("klippy:ready", self._handle_ready)
 
         if self.rename_existing:
             self.rename()
@@ -522,7 +517,8 @@ class DelayedDynamicMacro(DynamicMacro):
             waketime = self.reactor.NEVER
             if self.duration:
                 waketime = self.reactor.monotonic() + self.duration
-            self.reactor.update_timer(self.timer_handler, waketime)
+            if self.timer_handler:
+                self.reactor.update_timer(self.timer_handler, waketime)
 
 
 def load_config(config):
