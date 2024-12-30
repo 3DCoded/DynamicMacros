@@ -100,8 +100,10 @@ class DynamicMacros:
         self.delimeter = config.get('delimeter', '\n\n\n')
         self.config_parser = MacroConfigParser(self.printer, self.delimeter)
         
+        self.do_interface_workaround = False
         if config.getboolean('interface_workaround', False):
             self.interface_workaround()
+            self.do_interface_workaround = True
         
         self._update_macros()
     
@@ -193,7 +195,7 @@ class DynamicMacros:
     def unregister_macro(self, macro):
         macro.repeat = False
         self.gcode.register_command(macro.name.upper(), None)
-        if isinstance(macro, DelayedDynamicMacro):
+        if isinstance(macro, DelayedDynamicMacro) and not self.do_interface_workaround:
             _, vals = self.gcode.mux_commands.get('UPDATE_DELAYED_GCODE')
             if macro.name in vals:
                 del vals[macro.name]
@@ -307,8 +309,10 @@ class DynamicMacrosCluster(DynamicMacros):
         self.delimeter = config.get('delimeter', '\n\n\n')
         self.config_parser = MacroConfigParser(self.printer, self.delimeter)
         
+        self.do_interface_workaround = False
         if config.getboolean('interface_workaround', False):
             self.interface_workaround()
+            self.do_interface_workaround = True
 
         self._update_macros()
 
