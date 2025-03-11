@@ -46,7 +46,7 @@ configs: macros.cfg # You can add more files to this list, separated by commas.
 ??? failure "Unknown config object 'gcode_macro'"
     If you are getting a "Unknown config object 'gcode_macro'" error after converting your macros to Dynamic Macros, move your `[dynamicmacros]` section to be after your `[virtual_sdcard]` section.
 
-??? tip "Nacro Names"
+??? tip "Macro Names"
     Klipper has certain macro names reserved for core functionality. If you are experiencing errors, don't name your Dynamic Macros any of the following:
     
     - `PAUSE`
