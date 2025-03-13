@@ -10,7 +10,7 @@ from io import StringIO
 
 import jinja2
 
-from .gcode_macro import TemplateWrapper
+from .gcode_macro import TemplateWrapperJinja as TemplateWrapper
 
 # Define the path to the configuration files
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
