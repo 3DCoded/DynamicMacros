@@ -16,7 +16,7 @@ from .gcode_macro import TemplateWrapper
 config_path = os.environ['DY_MAC_CONFIG']
 log_path = os.environ['DY_MAC_LOGS']
 
-os.makedirs(log_path.parent, exist_ok=True)
+# os.makedirs(log_path.parent, exist_ok=True)
 
 class MacroConfigParser:
     def __init__(self, printer, delimeter):
