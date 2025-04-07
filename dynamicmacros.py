@@ -13,10 +13,16 @@ import jinja2
 from .gcode_macro import TemplateWrapper
 
 # Define the path to the configuration files
-config_path = os.environ['DY_MAC_CONFIG']
-log_path = os.environ['DY_MAC_LOGS']
+if os.getenv("DYNAMIC_MACRO_CONFIG") is not None:
+    config_path = os.getenv("DYNAMIC_MACRO_CONFIG")
+else:
+    config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
-# os.makedirs(log_path.parent, exist_ok=True)
+if os.getenv("DYNAMIC_MACRO_LOGS") is not None:
+    log_path = os.getenv("DYNAMIC_MACRO_LOGS")
+else:
+    log_path = Path(os.path.expanduser('~')) / 'DynamicMacros-logs' / 'DynamicMacros.log'
+    os.makedirs(log_path.parent, exist_ok=True)
 
 class MacroConfigParser:
     def __init__(self, printer, delimeter):
