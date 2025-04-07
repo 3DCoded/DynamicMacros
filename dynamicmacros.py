@@ -13,8 +13,8 @@ import jinja2
 from .gcode_macro import TemplateWrapper
 
 # Define the path to the configuration files
-config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
-log_path = Path(os.path.expanduser('~')) / 'DynamicMacros-logs' / 'DynamicMacros.log'
+config_path = os.environ['DY_MAC_CONFIG']
+log_path = os.environ['DY_MAC_LOGS']
 
 os.makedirs(log_path.parent, exist_ok=True)
 
