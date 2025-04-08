@@ -13,10 +13,7 @@ import jinja2
 from .gcode_macro import TemplateWrapper
 
 # Define the path to the configuration files
-if os.getenv("DYNAMIC_MACRO_CONFIG") is not None:
-    config_path = os.getenv("DYNAMIC_MACRO_CONFIG")
-else:
-    config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
+config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
 if os.getenv("DYNAMIC_MACRO_LOGS") is not None:
     log_path = os.getenv("DYNAMIC_MACRO_LOGS")
