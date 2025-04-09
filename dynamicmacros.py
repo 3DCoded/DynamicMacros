@@ -14,17 +14,20 @@ from .gcode_macro import TemplateWrapper
 
 # Define the path to the configuration files
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
-log_path = Path(os.path.expanduser('~')) / 'DynamicMacros-logs' / 'DynamicMacros.log'
 
+log_path = Path(os.path.expanduser('~')) / 'DynamicMacros-logs' / 'DynamicMacros.log'
 os.makedirs(log_path.parent, exist_ok=True)
+
+logger = None
 
 class MacroConfigParser:
     def __init__(self, printer, delimeter):
+        global config_path
         self.printer = printer
+        self.delimeter = delimeter
+        
         self.config_file = printer.start_args['config_file']
         self.config_path = Path(os.path.dirname(self.config_file))
-        self.delimeter = delimeter
-        global config_path
         config_path = self.config_path
 
     def read_config_file(self, filename):
@@ -58,7 +61,7 @@ class MacroConfigParser:
     def extract_macros(self, config):
         macros = {}
         for section in config.sections():
-            logging.info(f'DynamicMacros: Reading section {section}')
+            logger.info(f'DynamicMacros: Reading section {section}')
             if section.startswith('gcode_macro'):
                 macro = DynamicMacro.from_section(
                     config, section, DynamicMacros.printer, self.delimeter)
@@ -83,6 +86,19 @@ class DynamicMacros:
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
 
+        self.delimeter = config.get('delimeter', '\n\n\n')
+
+        log_path = Path(os.path.dirname(self.printer.start_args['log_file'])) / 'DynamicMacros.log'
+        self.delimeter = self.delimeter
+        FORMAT = logging.Formatter('%(asctime)s-%(name)s-[%(levelname)s]-%(message)s')
+        file_handler = logging.FileHandler(log_path, mode='w')
+        file_handler.setFormatter(FORMAT)
+        logger = logging.getLogger(__name__)
+        logger.setLevel(logging.DEBUG)
+        logger.addHandler(file_handler)
+        globals()['logger'] = logger
+        logging.info('DYNAMICMACROS LOGGER INIT')
+
         DynamicMacros.printer = self.printer
         self.macros = {}
         self.placeholder = DynamicMacro(
@@ -97,7 +113,6 @@ class DynamicMacros:
 
         self.configfile = self.printer.lookup_object('configfile')
 
-        self.delimeter = config.get('delimeter', '\n\n\n')
         self.config_parser = MacroConfigParser(self.printer, self.delimeter)
         
         if config.getboolean('interface_workaround', False):
@@ -210,9 +225,9 @@ class DynamicMacros:
     def _cmd_DYNAMIC_RENDER(self, gcmd):
         try:
             # self._update_macros()
-            logging.info('DynamicMacros Macros:')
+            logger.info('DynamicMacros Macros:')
             for name in self.macros:
-                logging.info(f'    Name: {name}')
+                logger.info(f'    Name: {name}')
             macro_name = gcmd.get('MACRO', '').upper()
             if macro_name:
                 params = gcmd.get_command_parameters()
@@ -240,9 +255,9 @@ class DynamicMacros:
     def _cmd_DYNAMIC_MACRO(self, gcmd):
         try:
             self._update_macros()
-            logging.info('DynamicMacros Macros:')
+            logger.info('DynamicMacros Macros:')
             for name in self.macros:
-                logging.info(f'    Name: {name}')
+                logger.info(f'    Name: {name}')
             macro_name = gcmd.get('MACRO', '')
             if macro_name:
                 params = gcmd.get_command_parameters()
@@ -292,6 +307,19 @@ class DynamicMacrosCluster(DynamicMacros):
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
 
+        self.delimeter = config.get('delimeter', '\n\n\n')
+
+        log_path = Path(os.path.dirname(self.printer.start_args['log_file'])) / 'DynamicMacros.log'
+        self.delimeter = self.delimeter
+        FORMAT = logging.Formatter('%(asctime)s-%(name)s-[%(levelname)s]-%(message)s')
+        file_handler = logging.FileHandler(log_path, mode='w')
+        file_handler.setFormatter(FORMAT)
+        logger = logging.getLogger(__name__)
+        logger.setLevel(logging.DEBUG)
+        logger.addHandler(file_handler)
+        globals()['logger'] = logger
+        logging.info('DYNAMICMACROS LOGGER INIT')
+
         DynamicMacros.printer = self.printer
         self.macros = {}
         self.placeholder = DynamicMacro(
@@ -305,7 +333,6 @@ class DynamicMacrosCluster(DynamicMacros):
 
         self.configfile = self.printer.lookup_object('configfile')
 
-        self.delimeter = config.get('delimeter', '\n\n\n')
         self.config_parser = MacroConfigParser(self.printer, self.delimeter)
         
         if config.getboolean('interface_workaround', False):
@@ -389,7 +416,7 @@ class DynamicMacro:
 
     def generate_template(self, gcode):
         env = jinja2.Environment('{%', '%}', '{', '}')
-        logging.info(f'DynamicMacros [{self.name}]: \n{gcode}\n\n\n')
+        logger.info(f'DynamicMacros [{self.name}]: \n{gcode}\n\n\n')
         return TemplateWrapper(self.printer, env, self.name, gcode)
 
     def rename(self):
@@ -440,7 +467,7 @@ class DynamicMacro:
     def from_section(config, section, printer, delimeter):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
-        logging.info(f'DynamicMacros [{name}] Raw:\n{raw}\n\n\n\n\n')
+        logger.info(f'DynamicMacros [{name}] Raw:\n{raw}\n\n\n\n\n')
         desc = config.get(section, 'description', fallback='No Description')
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
