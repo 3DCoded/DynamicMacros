@@ -10,7 +10,10 @@ from io import StringIO
 
 import jinja2
 
-from .gcode_macro import TemplateWrapper
+try:
+    from .gcode_macro import TemplateWrapper # Klipper
+except:
+    from .gcode_macro import TemplateWrapperJinja as TemplateWrapper # Kalico
 
 # Define the path to the configuration files
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
@@ -115,6 +118,7 @@ class DynamicMacros:
 
         self.config_parser = MacroConfigParser(self.printer, self.delimeter)
         
+        # Interface workaround for KlipperScreen (latest Fluidd release no longer requires this)
         if config.getboolean('interface_workaround', False):
             self.interface_workaround()
         
