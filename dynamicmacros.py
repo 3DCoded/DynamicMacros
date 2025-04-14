@@ -18,9 +18,6 @@ except:
 # Define the path to the configuration files
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
-# log_path = Path(os.path.expanduser('~')) / 'DynamicMacros-logs' / 'DynamicMacros.log'
-# os.makedirs(log_path.parent, exist_ok=True)
-
 logger = None
 
 class MacroConfigParser:
@@ -420,7 +417,7 @@ class DynamicMacro:
 
     def generate_template(self, gcode):
         env = jinja2.Environment('{%', '%}', '{', '}')
-        logger.info(f'DynamicMacros [{self.name}]: \n{gcode}\n\n\n')
+        logger.info(f'DynamicMacros [{self.name}]: \n{gcode.strip()}')
         return TemplateWrapper(self.printer, env, self.name, gcode)
 
     def rename(self):
