@@ -471,7 +471,7 @@ class DynamicMacro:
     def from_section(config, section, printer, delimeter):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
-        logger.info(f'DynamicMacros [{name}] Raw:\n{raw}\n\n\n\n\n')
+        logger.info(f'DynamicMacros [{name}] Raw:\n{raw.strip()}')
         desc = config.get(section, 'description', fallback='No Description')
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
