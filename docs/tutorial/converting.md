@@ -25,8 +25,8 @@ Next, if you don't already have one, create a `[dynamicmacros]` config section i
 configs: macros.cfg # You can add more files to this list, separated by commas.
 ```
 
-??? tip "Fluidd and KlipperScreen"
-    If your Fluidd macros list is empty or your dynamic macros don't appear in KlipperScreen's macros list, you can add the following parameter to your `[dynamicmacros]` config section:
+??? tip "Interface Workaround (old Fluidd, KlipperScreen, Macro parameters)"
+    If your Fluidd/Mainsail macros list is empty, your macro parameters don't show up in your favorite UI, or your dynamic macros don't appear in KlipperScreen's macros list, you can add the following parameter to your `[dynamicmacros]` config section:
 
     ```cfg
     interface_workaround: true
