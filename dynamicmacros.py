@@ -120,7 +120,14 @@ class DynamicMacros:
             self.interface_workaround()
         
         self._update_macros()
+
+        self.reactor = self.printer.get_reactor()
+        self.printer.register_event_handler(
+            "klippy:ready", self._handle_ready)
     
+    def _handle_ready(self):
+        self._update_macros()
+
     def interface_workaround(self):
         full_cfg = StringIO()
         for fname in self.fnames:
@@ -341,6 +348,13 @@ class DynamicMacrosCluster(DynamicMacros):
 
         self._update_macros()
 
+        self.reactor = self.printer.get_reactor()
+        self.printer.register_event_handler(
+            "klippy:ready", self._handle_ready)
+    
+    def _handle_ready(self):
+        self._update_macros()
+
     def disabled_func(self, name, msg):
         def func(*args, **kwargs):
             self.gcode.respond_info(
@@ -367,7 +381,7 @@ class DynamicMacrosCluster(DynamicMacros):
 
 
 class DynamicMacro:
-    def __init__(self, name, raw, printer, desc='', variables={}, delimeter='\n\n\n', rename_existing=None, initial_duration=None):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimeter='\n\n\n', rename_existing=None, initial_duration=None, repeat=False):
         self.name = name
         self.raw = raw
         self.printer = printer
@@ -377,12 +391,13 @@ class DynamicMacro:
         self.delimeter = delimeter if delimeter != 'NO_DELIMETER' else None
         self.rename_existing = rename_existing
         self.duration = initial_duration
+        self.repeat = repeat
         self.vars = {}
 
         if self.duration:
             self.reactor = self.printer.get_reactor()
             self.timer_handler = None
-            self.inside_timer = self.repeat = False
+            self.inside_timer = self.repeat
             self.printer.register_event_handler(
                 "klippy:ready", self._handle_ready)
 
@@ -412,7 +427,7 @@ class DynamicMacro:
         nextwake = self.reactor.NEVER
         if self.repeat:
             nextwake = eventtime + self.duration
-        self.inside_timer = self.repeat = False
+        self.inside_timer = False
         return nextwake
 
     def generate_template(self, gcode):
@@ -473,9 +488,10 @@ class DynamicMacro:
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
             section, 'initial_duration', fallback=None)
+        repeat = config.getboolean(section, 'repeat', fallback=False)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
-        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration)
+        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
 
     def get_status(self, eventtime=None):
         return self.variables
@@ -500,7 +516,7 @@ class DynamicMacro:
 
 
 class DelayedDynamicMacro(DynamicMacro):
-    def __init__(self, name, raw, printer, desc='', variables={}, delimeter='\n\n\n', rename_existing=None, initial_duration=None):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimeter='\n\n\n', rename_existing=None, initial_duration=None, repeat=False):
         self.name = name
         self.raw = raw
         self.printer = printer
@@ -510,12 +526,13 @@ class DelayedDynamicMacro(DynamicMacro):
         self.delimeter = delimeter if delimeter != 'NO_DELIMETER' else None
         self.rename_existing = rename_existing
         self.duration = initial_duration
+        self.repeat = repeat
         self.vars = {}
 
         if self.duration:
             self.reactor = self.printer.get_reactor()
             self.timer_handler = None
-            self.inside_timer = self.repeat = False
+            self.inside_timer = self.repeat
             self.printer.register_event_handler(
                 "klippy:ready", self._handle_ready)
 
@@ -537,9 +554,10 @@ class DelayedDynamicMacro(DynamicMacro):
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
             section, 'initial_duration', fallback=None)
+        repeat = config.getboolean(section, 'repeat', fallback=False)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
-        return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration)
+        return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
 
     # Handle UPDATE_DELAYED_GCODE command
     def cmd_UPDATE_DELAYED_GCODE(self, gcmd):
