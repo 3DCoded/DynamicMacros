@@ -143,9 +143,9 @@ class DynamicMacros:
                         lines.append(line)
                 compiled_gcode = '\n'.join(lines)
                 if hasattr(self, 'name'):
-                    cmd = f'DYNAMIC_MACRO MACRO={section.split()[1]} CLUSTER={self.name}'
+                    cmd = f'DYNAMIC_MACRO MACRO={section.split()[1]} CLUSTER={self.name}' + ' {rawparams}'
                 else:
-                    cmd = f'DYNAMIC_MACRO MACRO={section.split()[1]}'
+                    cmd = f'DYNAMIC_MACRO MACRO={section.split()[1]}' + ' {rawparams}'
                 cfg.set(section, 'gcode', f'{compiled_gcode}\n{cmd}')
             cfg.write(full_cfg)
 
