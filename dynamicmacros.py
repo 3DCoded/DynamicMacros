@@ -127,6 +127,13 @@ class DynamicMacros:
     
     def _handle_ready(self):
         self._update_macros()
+        waketime = self.reactor.monotonic() + 1
+        self.timer_handler = self.reactor.register_timer(
+            self._gcode_timer_event, waketime)
+    
+    def _gcode_timer_event(self, eventtime):
+        self._update_macros()
+        return self.reactor.NEVER
 
     def interface_workaround(self):
         full_cfg = StringIO()
@@ -351,9 +358,6 @@ class DynamicMacrosCluster(DynamicMacros):
         self.reactor = self.printer.get_reactor()
         self.printer.register_event_handler(
             "klippy:ready", self._handle_ready)
-    
-    def _handle_ready(self):
-        self._update_macros()
 
     def disabled_func(self, name, msg):
         def func(*args, **kwargs):
