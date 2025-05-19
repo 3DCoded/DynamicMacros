@@ -21,10 +21,10 @@ config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 logger = None
 
 class MacroConfigParser:
-    def __init__(self, printer, delimeter):
+    def __init__(self, printer, delimiter):
         global config_path
         self.printer = printer
-        self.delimeter = delimeter
+        self.delimiter = delimiter
         
         self.config_file = printer.start_args['config_file']
         self.config_path = Path(os.path.dirname(self.config_file))
@@ -64,11 +64,11 @@ class MacroConfigParser:
             logger.info(f'DynamicMacros: Reading section {section}')
             if section.startswith('gcode_macro'):
                 macro = DynamicMacro.from_section(
-                    config, section, DynamicMacros.printer, self.delimeter)
+                    config, section, DynamicMacros.printer, self.delimiter)
                 macros[macro.name] = macro
             elif section.startswith('delayed_gcode'):
                 macro = DelayedDynamicMacro.from_section(
-                    config, section, DynamicMacros.printer, self.delimeter)
+                    config, section, DynamicMacros.printer, self.delimiter)
                 macros[macro.name] = macro
         return macros
 
@@ -86,10 +86,10 @@ class DynamicMacros:
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
 
-        self.delimeter = config.get('delimeter', '\n\n\n')
+        self.delimiter = config.get('delimiter', '\n\n\n')
 
         log_path = Path(os.path.dirname(self.printer.start_args['log_file'])) / 'DynamicMacros.log'
-        self.delimeter = self.delimeter
+        self.delimiter = self.delimiter
         FORMAT = logging.Formatter('%(asctime)s-%(name)s-[%(levelname)s]-%(message)s')
         file_handler = logging.FileHandler(log_path, mode='w')
         file_handler.setFormatter(FORMAT)
@@ -113,7 +113,7 @@ class DynamicMacros:
 
         self.configfile = self.printer.lookup_object('configfile')
 
-        self.config_parser = MacroConfigParser(self.printer, self.delimeter)
+        self.config_parser = MacroConfigParser(self.printer, self.delimiter)
         
         # Interface workaround for KlipperScreen (latest Fluidd release no longer requires this)
         if config.getboolean('interface_workaround', False):
@@ -322,10 +322,10 @@ class DynamicMacrosCluster(DynamicMacros):
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
 
-        self.delimeter = config.get('delimeter', '\n\n\n')
+        self.delimiter = config.get('delimiter', '\n\n\n')
 
         log_path = Path(os.path.dirname(self.printer.start_args['log_file'])) / 'DynamicMacros.log'
-        self.delimeter = self.delimeter
+        self.delimiter = self.delimiter
         FORMAT = logging.Formatter('%(asctime)s-%(name)s-[%(levelname)s]-%(message)s')
         file_handler = logging.FileHandler(log_path, mode='w')
         file_handler.setFormatter(FORMAT)
@@ -348,7 +348,7 @@ class DynamicMacrosCluster(DynamicMacros):
 
         self.configfile = self.printer.lookup_object('configfile')
 
-        self.config_parser = MacroConfigParser(self.printer, self.delimeter)
+        self.config_parser = MacroConfigParser(self.printer, self.delimiter)
         
         if config.getboolean('interface_workaround', False):
             self.interface_workaround()
@@ -385,14 +385,14 @@ class DynamicMacrosCluster(DynamicMacros):
 
 
 class DynamicMacro:
-    def __init__(self, name, raw, printer, desc='', variables={}, delimeter='\n\n\n', rename_existing=None, initial_duration=None, repeat=False):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimiter='\n\n\n', rename_existing=None, initial_duration=None, repeat=False):
         self.name = name
         self.raw = raw
         self.printer = printer
         self.gcode = self.printer.lookup_object('gcode')
         self.desc = desc
         self.variables = variables
-        self.delimeter = delimeter if delimeter != 'NO_DELIMETER' else None
+        self.delimiter = delimiter if delimiter != 'NO_DELIMITER' else None
         self.rename_existing = rename_existing
         self.duration = initial_duration
         self.repeat = repeat
@@ -408,8 +408,8 @@ class DynamicMacro:
         if self.rename_existing:
             self.rename()
         
-        if self.delimeter:
-            self.gcodes = self.raw.split(self.delimeter)
+        if self.delimiter:
+            self.gcodes = self.raw.split(self.delimiter)
         else:
             self.gcodes = [self.raw]
         self.templates = [self.generate_template(
@@ -484,7 +484,7 @@ class DynamicMacro:
         return self.python(text, *args, **kwargs)
 
     @staticmethod
-    def from_section(config, section, printer, delimeter):
+    def from_section(config, section, printer, delimiter):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
         logger.info(f'DynamicMacros [{name}] Raw:\n{raw.strip()}')
@@ -495,7 +495,7 @@ class DynamicMacro:
         repeat = config.getboolean(section, 'repeat', fallback=False)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
-        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
+        return DynamicMacro(name, raw, printer, desc=desc, variables=variables, delimiter=delimiter, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
 
     def get_status(self, eventtime=None):
         return self.variables
@@ -520,14 +520,14 @@ class DynamicMacro:
 
 
 class DelayedDynamicMacro(DynamicMacro):
-    def __init__(self, name, raw, printer, desc='', variables={}, delimeter='\n\n\n', rename_existing=None, initial_duration=None, repeat=False):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimiter='\n\n\n', rename_existing=None, initial_duration=None, repeat=False):
         self.name = name
         self.raw = raw
         self.printer = printer
         self.gcode = self.printer.lookup_object('gcode')
         self.desc = desc
         self.variables = variables
-        self.delimeter = delimeter if delimeter != 'NO_DELIMETER' else None
+        self.delimiter = delimiter if delimiter != 'NO_DELIMITER' else None
         self.rename_existing = rename_existing
         self.duration = initial_duration
         self.repeat = repeat
@@ -543,15 +543,15 @@ class DelayedDynamicMacro(DynamicMacro):
         if self.rename_existing:
             self.rename()
         
-        if self.delimeter:
-            self.gcodes = self.raw.split(self.delimeter)
+        if self.delimiter:
+            self.gcodes = self.raw.split(self.delimiter)
         else:
             self.gcodes = [self.raw]
         self.templates = [self.generate_template(
             gcode) for gcode in self.gcodes]
 
     @staticmethod
-    def from_section(config, section, printer, delimeter):
+    def from_section(config, section, printer, delimiter):
         raw = config.get(section, 'gcode')
         name = section.split()[1]
         desc = config.get(section, 'description', fallback='No Description')
@@ -561,7 +561,7 @@ class DelayedDynamicMacro(DynamicMacro):
         repeat = config.getboolean(section, 'repeat', fallback=False)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
-        return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, delimeter=delimeter, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
+        return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, delimiter=delimiter, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
 
     # Handle UPDATE_DELAYED_GCODE command
     def cmd_UPDATE_DELAYED_GCODE(self, gcmd):
