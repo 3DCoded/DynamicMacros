@@ -86,7 +86,7 @@ class DynamicMacros:
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
 
-        self.delimiter = config.get('delimiter', '\n\n\n')
+        self.delimiter = config.get('delimiter', '---')
 
         log_path = Path(os.path.dirname(self.printer.start_args['log_file'])) / 'DynamicMacros.log'
         self.delimiter = self.delimiter
@@ -322,7 +322,7 @@ class DynamicMacrosCluster(DynamicMacros):
         self.gcode = self.printer.lookup_object('gcode')
         self.fnames = config.getlist('configs')
 
-        self.delimiter = config.get('delimiter', '\n\n\n')
+        self.delimiter = config.get('delimiter', '---')
 
         log_path = Path(os.path.dirname(self.printer.start_args['log_file'])) / 'DynamicMacros.log'
         self.delimiter = self.delimiter
@@ -385,7 +385,7 @@ class DynamicMacrosCluster(DynamicMacros):
 
 
 class DynamicMacro:
-    def __init__(self, name, raw, printer, desc='', variables={}, delimiter='\n\n\n', rename_existing=None, initial_duration=None, repeat=False):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimiter='---', rename_existing=None, initial_duration=None, repeat=False):
         self.name = name
         self.raw = raw
         self.printer = printer
@@ -520,7 +520,7 @@ class DynamicMacro:
 
 
 class DelayedDynamicMacro(DynamicMacro):
-    def __init__(self, name, raw, printer, desc='', variables={}, delimiter='\n\n\n', rename_existing=None, initial_duration=None, repeat=False):
+    def __init__(self, name, raw, printer, desc='', variables={}, delimiter='---', rename_existing=None, initial_duration=None, repeat=False):
         self.name = name
         self.raw = raw
         self.printer = printer
