@@ -146,7 +146,7 @@ class DynamicMacros:
                 prev_gcode = cfg.get(section, 'gcode')
                 lines = []
                 for line in prev_gcode.splitlines():
-                    if '{% set ' in line:
+                    if '{% set ' in line and 'python' not in line:
                         lines.append(line)
                 compiled_gcode = '\n'.join(lines)
                 if hasattr(self, 'name'):
