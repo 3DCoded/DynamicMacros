@@ -71,6 +71,14 @@ class MacroConfigParser:
                     config, section, DynamicMacros.printer, self.delimiter)
                 macros[macro.name] = macro
         return macros
+    
+    def get_workaround_gcode(self, prev_gcode):
+        lines = []
+        for line in prev_gcode.splitlines():
+            if '{% set ' in line and 'python' not in line:
+                lines.append(line)
+        compiled_gcode = '\n'.join(lines)
+        return compiled_gcode
 
 class MissingConfigError(Exception):
     pass
@@ -144,11 +152,7 @@ class DynamicMacros:
                     cfg.remove_section(section)
                     continue
                 prev_gcode = cfg.get(section, 'gcode')
-                lines = []
-                for line in prev_gcode.splitlines():
-                    if '{% set ' in line and 'python' not in line:
-                        lines.append(line)
-                compiled_gcode = '\n'.join(lines)
+                compiled_gcode = self.config_parser.get_workaround_gcode(prev_gcode)
                 if hasattr(self, 'name'):
                     cmd = f'DYNAMIC_MACRO MACRO={section.split()[1]} CLUSTER={self.name}' + ' {rawparams}'
                 else:
@@ -190,7 +194,8 @@ class DynamicMacros:
             def get_status(eventtime):
                 status = original_get_status(eventtime)
                 config = status['config']
-                config.update({f'gcode_macro {macro.name}': {'key': 'value'}})
+                workaround_gcode = self.config_parser.get_workaround_gcode(macro.raw)
+                config.update({f'gcode_macro {macro.name}': {'gcode': workaround_gcode}})
                 status.update({'config': config})
                 return status
             self.configfile.get_status = get_status
