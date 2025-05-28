@@ -1625,6 +1625,15 @@
 <span class="normal"><a href="#features-python-__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello from Python!&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">gcode</span><span class="p">(</span><span class="s2">&quot;G28</span><span class="se">\n</span><span class="s2">G1 X100 Y100 Z100 F1200&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">output</span><span class="p">(</span><span class="s2">&quot;GCode Executed&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="features-python-no-return-variables">No Return Variables</h3>
+<p>To run Python without a return variable, you can use <code>{% set _ = python... %}</code></p>
+<p>Example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">macros.cfg</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#features-python-__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#features-python-__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#features-python-__codelineno-3-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[gcode_macro NO_RETURN]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="na">{% set _</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python(&quot;gcode(&#39;RESPOND MSG=\&#39;hello!\&#39;&#39;)) %}</span>
 </code></pre></div></td></tr></table></div></section><section class="print-page" id="features-delayed"><h1 id="features-delayed-delayed-gcode">Delayed GCode</h1>
 <p>Dynamic Macros supports a feature similar to <code>delayed_gcode</code>.</p>
 <h2 id="features-delayed-configuration">Configuration</h2>
