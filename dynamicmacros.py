@@ -129,8 +129,6 @@ class DynamicMacros:
         if do_interface_workaround:
             logger.info('Performing interface workaround')
             self.interface_workaround()
-        else:
-            logger.info('Not performing interface workaround')
 
         self._update_macros()
 
@@ -362,10 +360,7 @@ class DynamicMacrosCluster(DynamicMacros):
 
         self.config_parser = MacroConfigParser(self.printer, self.delimiter)
 
-        do_interface_workaround = config.getboolean('interface_workaround', False)
-        logging.info(f'Do interface workaround? "{do_interface_workaround}"')
-        if do_interface_workaround:
-            logging.info('Performing interface workaround')
+        if config.getboolean('interface_workaround', False):
             self.interface_workaround()
         else:
             logging.info('Not performing interface workaround')
@@ -512,6 +507,11 @@ class DynamicMacro:
         repeat = config.getboolean(section, 'repeat', fallback=False)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
+        for k, v in variables.items():
+            try:
+                variables[k] = ast.literal_eval(v)
+            except:
+                pass
         return DynamicMacro(name, raw, printer, desc=desc, variables=variables, delimiter=delimiter, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
 
     def get_status(self, eventtime=None):
@@ -578,6 +578,11 @@ class DelayedDynamicMacro(DynamicMacro):
         repeat = config.getboolean(section, 'repeat', fallback=False)
         variables = {key[len('variable_'):]: value for key, value in config.items(
             section) if key.startswith('variable_')}
+        for k, v in variables.items():
+            try:
+                variables[k] = ast.literal_eval(v)
+            except:
+                pass
         return DelayedDynamicMacro(name, raw, printer, desc=desc, variables=variables, delimiter=delimiter, rename_existing=rename_existing, initial_duration=initial_duration, repeat=repeat)
 
     # Handle UPDATE_DELAYED_GCODE command
