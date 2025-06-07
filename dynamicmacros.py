@@ -44,15 +44,17 @@ class MacroConfigParser:
             raise MissingConfigError(f'Missing Configuration at {path}')
         if path in visited:
             raise RecursiveConfigError(f'Recursively included file at {path}')
-        visited.append(path)
-        buffer = []
+        visited.append(path) # Keep a list of files previously included
+        buffer = [] # List of lines in the file
         with open(path, 'r') as file:
             for line in file.readlines():
                 mo = configparser.RawConfigParser.SECTCRE.match(line)
                 header = mo and mo.group('header')
+                # Handle [include xxx.cfg] sections
                 if header and header.startswith('include '):
                     include_spec = header[8:].strip()
-                    buffer.extend(self._read_file(include_spec, visited))
+                    include_path =  path.parent / include_spec
+                    buffer.extend(self._read_file(include_path, visited))
                 else:
                     buffer.append(line)
         visited.remove(path)
