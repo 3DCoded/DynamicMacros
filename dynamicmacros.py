@@ -2,11 +2,15 @@ import ast
 import configparser
 import json
 import logging
+import textwrap
 import os
 import re
 from pathlib import Path
 from secrets import token_hex
 from io import StringIO
+import subprocess
+
+DYNAMICMACROS_PATH = Path.home() / 'DynamicMacros'
 
 import jinja2
 
@@ -19,6 +23,12 @@ except:
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
 logger = None
+
+def clean_gcode(gcode):
+    gcode = '\n' + gcode.strip() + '\n'
+    gcode = re.sub(r'\n+', '\n', gcode)
+    gcode = textwrap.indent(gcode, ' '*4)
+    return gcode.strip()
 
 class MacroConfigParser:
     def __init__(self, printer, delimiter):
@@ -63,7 +73,7 @@ class MacroConfigParser:
     def extract_macros(self, config):
         macros = {}
         for section in config.sections():
-            logger.info(f'DynamicMacros: Reading section {section}')
+            logging.info(f'DynamicMacros: Reading section {section}')
             if section.startswith('gcode_macro'):
                 macro = DynamicMacro.from_section(
                     config, section, DynamicMacros.printer, self.delimiter)
@@ -98,16 +108,7 @@ class DynamicMacros:
 
         self.delimiter = config.get('delimiter', '---')
 
-        log_path = Path(os.path.dirname(self.printer.start_args['log_file'])) / 'DynamicMacros.log'
-        self.delimiter = self.delimiter
-        FORMAT = logging.Formatter('%(asctime)s-%(name)s-[%(levelname)s]-%(message)s')
-        file_handler = logging.FileHandler(log_path, mode='w')
-        file_handler.setFormatter(FORMAT)
-        logger = logging.getLogger(__name__)
-        logger.setLevel(logging.DEBUG)
-        logger.addHandler(file_handler)
-        globals()['logger'] = logger
-        logging.info('DYNAMICMACROS LOGGER INIT')
+        self._setup_logging()
 
         DynamicMacros.printer = self.printer
         self.macros = {}
@@ -137,6 +138,33 @@ class DynamicMacros:
         self.reactor = self.printer.get_reactor()
         self.printer.register_event_handler(
             "klippy:ready", self._handle_ready)
+
+    def _setup_logging(self):
+        # Get git short version hash
+        try:
+            result = subprocess.run(
+                ['git', 'rev-parse', '--short', 'HEAD'],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
+                text=True,
+                check=True,
+                cwd=DYNAMICMACROS_PATH
+            )
+            git_hash = result.stdout.strip()
+        except subprocess.CalledProcessError:
+            git_hash = 'unknown'
+
+        # Setup logging
+        logger = logging.Logger('DynamicMacros')
+        klippy_log = self.printer.start_args['log_file']
+        log_dir = os.path.dirname(klippy_log)
+        mimo_log = os.path.join(log_dir, 'dynamicmacros.log')
+        handler = logging.FileHandler(mimo_log, mode='w')
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s')
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.DEBUG)
+        globals()['logging'] = logger
 
     def _handle_ready(self):
         self._update_macros()
@@ -252,9 +280,9 @@ class DynamicMacros:
     def _cmd_DYNAMIC_RENDER(self, gcmd):
         try:
             # self._update_macros()
-            logger.info('DynamicMacros Macros:')
+            logging.info('DynamicMacros Macros:')
             for name in self.macros:
-                logger.info(f'    Name: {name}')
+                logging.info(f'    Name: {name}')
             macro_name = gcmd.get('MACRO', '').upper()
             if macro_name:
                 params = gcmd.get_command_parameters()
@@ -282,9 +310,9 @@ class DynamicMacros:
     def _cmd_DYNAMIC_MACRO(self, gcmd):
         try:
             self._update_macros()
-            logger.info('DynamicMacros Macros:')
+            logging.info('DynamicMacros Macros:')
             for name in self.macros:
-                logger.info(f'    Name: {name}')
+                logging.info(f'    Name: {name}')
             macro_name = gcmd.get('MACRO', '')
             if macro_name:
                 params = gcmd.get_command_parameters()
@@ -335,17 +363,6 @@ class DynamicMacrosCluster(DynamicMacros):
         self.fnames = config.getlist('configs')
 
         self.delimiter = config.get('delimiter', '---')
-
-        log_path = Path(os.path.dirname(self.printer.start_args['log_file'])) / 'DynamicMacros.log'
-        self.delimiter = self.delimiter
-        FORMAT = logging.Formatter('%(asctime)s-%(name)s-[%(levelname)s]-%(message)s')
-        file_handler = logging.FileHandler(log_path, mode='w')
-        file_handler.setFormatter(FORMAT)
-        logger = logging.getLogger(__name__)
-        logger.setLevel(logging.DEBUG)
-        logger.addHandler(file_handler)
-        globals()['logger'] = logger
-        logging.info('DYNAMICMACROS LOGGER INIT')
 
         DynamicMacros.printer = self.printer
         self.macros = {}
@@ -450,7 +467,7 @@ class DynamicMacro:
 
     def generate_template(self, gcode):
         env = jinja2.Environment('{%', '%}', '{', '}')
-        logger.info(f'DynamicMacros [{self.name}]: \n{gcode.strip()}')
+        logging.info(f'DynamicMacros [{self.name}]: \n{clean_gcode(gcode)}')
         return TemplateWrapper(self.printer, env, self.name, gcode)
 
     def rename(self):
@@ -500,8 +517,10 @@ class DynamicMacro:
     @staticmethod
     def from_section(config, section, printer, delimiter):
         raw = config.get(section, 'gcode')
+        raw = clean_gcode(raw)
+
         name = section.split()[1]
-        logger.info(f'DynamicMacros [{name}] Raw:\n{raw.strip()}')
+        logging.info(f'DynamicMacros [{name}] Raw:\n{raw}')
         desc = config.get(section, 'description', fallback='No Description')
         rename_existing = config.get(section, 'rename_existing', fallback=None)
         initial_duration = config.getfloat(
