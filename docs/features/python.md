@@ -52,3 +52,15 @@ print("Hello from Python!")
 gcode("G28\nG1 X100 Y100 Z100 F1200")
 output("GCode Executed")
 ```
+
+### No Return Variables
+
+To run Python without a return variable, you can use `{% set _ = python... %}`
+
+Example:
+
+```cfg title="macros.cfg"
+[gcode_macro NO_RETURN]
+gcode:
+    {% set _ = python("gcode('RESPOND MSG=\'hello!\'')) %}
+```

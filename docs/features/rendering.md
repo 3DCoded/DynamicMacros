@@ -39,7 +39,7 @@ When a macro is run, it is first rendered, then run. For example (click on the t
 The `DYNAMIC_RENDER` command is used the same way as the `DYNAMIC_MACRO` command. However, instead of running the macro, it will render the macro, as explained above, then print out the result to the Klipper console. Example:
 
 ```
-DYMAMIC_RENDER MACRO=test A=2
+DYNAMIC_RENDER MACRO=test A=2
 ```
 
 will display
