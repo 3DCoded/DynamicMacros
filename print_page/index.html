@@ -1153,6 +1153,7 @@
 <p>Your macros are written in a <code>.cfg</code> file, then included into your <code>printer.cfg</code>. When Klipper restarts, it parses these files and saves the macros internally (you can't change them without restarting Klipper). When a macro is called, the cached code is interpreted and run.</p>
 <h2 id="index-how-dynamic-macros-work">How Dynamic Macros Work</h2>
 <p>Your macros are written in a <code>.cfg</code> file, then the relative path to that file is configured in a <code>[dynamicmacros]</code> config section. The config files are read and parsed every time you run the <code>DYNAMIC_MACRO</code> command, allowing you to update macros without restarting Klipper.</p>
+<p>Dynamic Macros are defined in a separate file and <strong>not</strong> included in your <code>printer.cfg</code>. They are instead read by a <code>[dynamicmacros]</code> section in your <code>printer.cfg</code>. </p>
 <h2 id="index-klippy-extras-tutorial">Klippy Extras Tutorial</h2>
 <p>DynamicMacros also includes a <a href="#extras-extras-start">tutorial on writing Klippy extras</a>.</p>
 <h2 id="index-get-started">Get Started</h2>
@@ -1589,7 +1590,7 @@
 <p>To run Python from within a Dynamic Macro, use either the <code>python()</code> utility function, or the <code>python_file()</code> utility function. The <code>python()</code> function accepts python code as a multiline string, and the <code>python_file()</code> function accepts a filename (relative to your <code>printer.cfg</code> folder).</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>When using the <code>python()</code> utiltiy function, Jinja2 (which converts the macro to GCode) may throw errors during parsing. If you are getting errors, it is recommended to switch to <code>python_file()</code>.</p>
+<p>When using the <code>python()</code> utility function, Jinja2 (which converts the macro to GCode) may throw errors during parsing. If you are getting errors, it is recommended to switch to <code>python_file()</code>.</p>
 </div>
 <p>Here are a few examples:</p>
 <h3 id="features-python-python-math">Python Math</h3>
@@ -1626,6 +1627,10 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">gcode</span><span class="p">(</span><span class="s2">&quot;G28</span><span class="se">\n</span><span class="s2">G1 X100 Y100 Z100 F1200&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">output</span><span class="p">(</span><span class="s2">&quot;GCode Executed&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p class="admonition-title">Where does the Python file go?</p>
+<p>Python files run by <code>python_file()</code> should be placed in the same folder as your <code>printer.cfg</code></p>
+</div>
 <h3 id="features-python-no-return-variables">No Return Variables</h3>
 <p>To run Python without a return variable, you can use <code>{% set _ = python... %}</code></p>
 <p>Example:</p>

@@ -1105,6 +1105,7 @@
 <p>Your macros are written in a <code>.cfg</code> file, then included into your <code>printer.cfg</code>. When Klipper restarts, it parses these files and saves the macros internally (you can't change them without restarting Klipper). When a macro is called, the cached code is interpreted and run.</p>
 <h2 id="how-dynamic-macros-work">How Dynamic Macros Work</h2>
 <p>Your macros are written in a <code>.cfg</code> file, then the relative path to that file is configured in a <code>[dynamicmacros]</code> config section. The config files are read and parsed every time you run the <code>DYNAMIC_MACRO</code> command, allowing you to update macros without restarting Klipper.</p>
+<p>Dynamic Macros are defined in a separate file and <strong>not</strong> included in your <code>printer.cfg</code>. They are instead read by a <code>[dynamicmacros]</code> section in your <code>printer.cfg</code>. </p>
 <h2 id="klippy-extras-tutorial">Klippy Extras Tutorial</h2>
 <p>DynamicMacros also includes a <a href="extras/extras-start/">tutorial on writing Klippy extras</a>.</p>
 <h2 id="get-started">Get Started</h2>
