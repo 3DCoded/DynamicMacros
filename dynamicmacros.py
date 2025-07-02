@@ -125,12 +125,12 @@ class DynamicMacros:
 
         # Interface workaround for KlipperScreen (latest Fluidd release no longer requires this)
         do_interface_workaround = config.getboolean('interface_workaround', False)
-        logging.info(f'Do interface workaround? "{do_interface_workaround}"')
+        logger.info(f'Do interface workaround? "{do_interface_workaround}"')
         if do_interface_workaround:
-            logging.info('Performing interface workaround')
+            logger.info('Performing interface workaround')
             self.interface_workaround()
         else:
-            logging.info('Not performing interface workaround')
+            logger.info('Not performing interface workaround')
 
         self._update_macros()
 
@@ -168,7 +168,7 @@ class DynamicMacros:
         # Write cfg to config_path/.dynamicmacros.cfg
         path = config_path / '.dynamicmacros.cfg'
         with open(path, 'w+') as file:
-            logging.info(f'Will write to "{path}"\n{full_cfg.getvalue()}')
+            logger.info(f'Will write to "{path}"\n{full_cfg.getvalue()}')
             file.write(full_cfg.getvalue())
 
         # Update printer.cfg to [include .dynamicmacros.cfg]
