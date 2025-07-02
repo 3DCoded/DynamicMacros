@@ -25,7 +25,7 @@ class MacroConfigParser:
         global config_path
         self.printer = printer
         self.delimiter = delimiter
-        
+
         self.config_file = printer.start_args['config_file']
         self.config_path = Path(os.path.dirname(self.config_file))
         config_path = self.config_path
@@ -37,7 +37,7 @@ class MacroConfigParser:
             strict=False, inline_comment_prefixes=(';', '#'))
         config.read_file(sbuffer, filename)
         return config
-    
+
     def _read_file(self, filename, visited=[]):
         path = self.config_path / filename
         if not os.path.exists(path):
@@ -71,7 +71,7 @@ class MacroConfigParser:
                     config, section, DynamicMacros.printer, self.delimiter)
                 macros[macro.name] = macro
         return macros
-    
+
     def get_workaround_gcode(self, prev_gcode):
         lines = []
         for line in prev_gcode.splitlines():
@@ -122,23 +122,28 @@ class DynamicMacros:
         self.configfile = self.printer.lookup_object('configfile')
 
         self.config_parser = MacroConfigParser(self.printer, self.delimiter)
-        
+
         # Interface workaround for KlipperScreen (latest Fluidd release no longer requires this)
-        if config.getboolean('interface_workaround', False):
+        do_interface_workaround = config.getboolean('interface_workaround', False)
+        logging.info(f'Do interface workaround? "{do_interface_workaround}"')
+        if do_interface_workaround:
+            logging.info('Performing interface workaround')
             self.interface_workaround()
-        
+        else:
+            logging.info('Not performing interface workaround')
+
         self._update_macros()
 
         self.reactor = self.printer.get_reactor()
         self.printer.register_event_handler(
             "klippy:ready", self._handle_ready)
-    
+
     def _handle_ready(self):
         self._update_macros()
         waketime = self.reactor.monotonic() + 1
         self.timer_handler = self.reactor.register_timer(
             self._gcode_timer_event, waketime)
-    
+
     def _gcode_timer_event(self, eventtime):
         self._update_macros()
         return self.reactor.NEVER
@@ -161,7 +166,9 @@ class DynamicMacros:
             cfg.write(full_cfg)
 
         # Write cfg to config_path/.dynamicmacros.cfg
-        with open(config_path / '.dynamicmacros.cfg', 'w+') as file:
+        path = config_path / '.dynamicmacros.cfg'
+        with open(path, 'w+') as file:
+            logging.info(f'Will write to "{path}"\n{full_cfg.getvalue()}')
             file.write(full_cfg.getvalue())
 
         # Update printer.cfg to [include .dynamicmacros.cfg]
@@ -169,7 +176,7 @@ class DynamicMacros:
             lines = file.readlines()
             if '[include .dynamicmacros.cfg]' not in '\n'.join(lines):
                 lines.insert(0, '[include .dynamicmacros.cfg]\n')
-        
+
         with open(config_path / 'printer.cfg', 'w+') as file:
             file.writelines(lines)
 
@@ -235,13 +242,13 @@ class DynamicMacros:
                 del vals[macro.name]
         self.gcode._build_status_commands()
         self.macros.pop(macro.name.upper(), None)
-    
+
     def cmd_DYNAMIC_RENDER(self, gcmd):
         cluster = gcmd.get('CLUSTER', None)
         if cluster and cluster in self.clusters:
             return self.clusters[cluster]._cmd_DYNAMIC_RENDER(gcmd)
         return self._cmd_DYNAMIC_RENDER(gcmd)
-    
+
     def _cmd_DYNAMIC_RENDER(self, gcmd):
         try:
             # self._update_macros()
@@ -258,7 +265,7 @@ class DynamicMacros:
                 gcmd.respond_info(f'Rendered {macro.name}:\n\n{rendered}')
         except Exception as e:
             gcmd.respond_info(str(e))
-    
+
     def _render_macro(self, macro, params, rawparams):
         rendered = []
         for template in macro.templates:
@@ -344,7 +351,7 @@ class DynamicMacrosCluster(DynamicMacros):
         self.macros = {}
         self.placeholder = DynamicMacro(
             'Error', 'RESPOND MSG="ERROR"', self.printer)
-        
+
         DynamicMacros.printer = self.printer
         DynamicMacros.clusters[self.name] = self
 
@@ -354,9 +361,14 @@ class DynamicMacrosCluster(DynamicMacros):
         self.configfile = self.printer.lookup_object('configfile')
 
         self.config_parser = MacroConfigParser(self.printer, self.delimiter)
-        
-        if config.getboolean('interface_workaround', False):
+
+        do_interface_workaround = config.getboolean('interface_workaround', False)
+        logging.info(f'Do interface workaround? "{do_interface_workaround}"')
+        if do_interface_workaround:
+            logging.info('Performing interface workaround')
             self.interface_workaround()
+        else:
+            logging.info('Not performing interface workaround')
 
         self._update_macros()
 
@@ -412,7 +424,7 @@ class DynamicMacro:
 
         if self.rename_existing:
             self.rename()
-        
+
         if self.delimiter:
             self.gcodes = self.raw.split(self.delimiter)
         else:
@@ -547,7 +559,7 @@ class DelayedDynamicMacro(DynamicMacro):
 
         if self.rename_existing:
             self.rename()
-        
+
         if self.delimiter:
             self.gcodes = self.raw.split(self.delimiter)
         else:
