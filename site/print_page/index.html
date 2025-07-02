@@ -665,6 +665,46 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Example Macros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devstatus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -675,10 +715,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -689,8 +729,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Klippy Extras
           </label>
@@ -804,46 +844,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../examples/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Example Macros
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../devstatus/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Development Status
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1029,6 +1029,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      15. Example Macros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      16. Development Status
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#section-klippy-extras" class="md-nav__link">
     <span class="md-ellipsis">
       III. Klippy Extras
@@ -1041,7 +1059,7 @@
           <li class="md-nav__item">
   <a href="#extras-extras-start" class="md-nav__link">
     <span class="md-ellipsis">
-      15. Start Writing Klippy Extras
+      17. Start Writing Klippy Extras
     </span>
   </a>
   
@@ -1050,7 +1068,7 @@
           <li class="md-nav__item">
   <a href="#extras-extras-intro" class="md-nav__link">
     <span class="md-ellipsis">
-      16. Introduction to Writing Klippy Extras
+      18. Introduction to Writing Klippy Extras
     </span>
   </a>
   
@@ -1059,7 +1077,7 @@
           <li class="md-nav__item">
   <a href="#extras-extras-ex1" class="md-nav__link">
     <span class="md-ellipsis">
-      17. Example 1: Greeter (Structure)
+      19. Example 1: Greeter (Structure)
     </span>
   </a>
   
@@ -1068,7 +1086,7 @@
           <li class="md-nav__item">
   <a href="#extras-extras-ex2" class="md-nav__link">
     <span class="md-ellipsis">
-      18. Example 2: BetterGreeter
+      20. Example 2: BetterGreeter
     </span>
   </a>
   
@@ -1077,7 +1095,7 @@
           <li class="md-nav__item">
   <a href="#extras-extras-ex3" class="md-nav__link">
     <span class="md-ellipsis">
-      19. Example 3: KlipperMaintenance
+      21. Example 3: KlipperMaintenance
     </span>
   </a>
   
@@ -1085,24 +1103,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      20. Example Macros
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#devstatus" class="md-nav__link">
-    <span class="md-ellipsis">
-      21. Development Status
-    </span>
-  </a>
   
 </li>
       
@@ -1153,6 +1153,7 @@
 <p>Your macros are written in a <code>.cfg</code> file, then included into your <code>printer.cfg</code>. When Klipper restarts, it parses these files and saves the macros internally (you can't change them without restarting Klipper). When a macro is called, the cached code is interpreted and run.</p>
 <h2 id="index-how-dynamic-macros-work">How Dynamic Macros Work</h2>
 <p>Your macros are written in a <code>.cfg</code> file, then the relative path to that file is configured in a <code>[dynamicmacros]</code> config section. The config files are read and parsed every time you run the <code>DYNAMIC_MACRO</code> command, allowing you to update macros without restarting Klipper.</p>
+<p>Dynamic Macros are defined in a separate file and <strong>not</strong> included in your <code>printer.cfg</code>. They are instead read by a <code>[dynamicmacros]</code> section in your <code>printer.cfg</code>. </p>
 <h2 id="index-klippy-extras-tutorial">Klippy Extras Tutorial</h2>
 <p>DynamicMacros also includes a <a href="#extras-extras-start">tutorial on writing Klippy extras</a>.</p>
 <h2 id="index-get-started">Get Started</h2>
@@ -1589,7 +1590,7 @@
 <p>To run Python from within a Dynamic Macro, use either the <code>python()</code> utility function, or the <code>python_file()</code> utility function. The <code>python()</code> function accepts python code as a multiline string, and the <code>python_file()</code> function accepts a filename (relative to your <code>printer.cfg</code> folder).</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>When using the <code>python()</code> utiltiy function, Jinja2 (which converts the macro to GCode) may throw errors during parsing. If you are getting errors, it is recommended to switch to <code>python_file()</code>.</p>
+<p>When using the <code>python()</code> utility function, Jinja2 (which converts the macro to GCode) may throw errors during parsing. If you are getting errors, it is recommended to switch to <code>python_file()</code>.</p>
 </div>
 <p>Here are a few examples:</p>
 <h3 id="features-python-python-math">Python Math</h3>
@@ -1626,6 +1627,10 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">gcode</span><span class="p">(</span><span class="s2">&quot;G28</span><span class="se">\n</span><span class="s2">G1 X100 Y100 Z100 F1200&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">output</span><span class="p">(</span><span class="s2">&quot;GCode Executed&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p class="admonition-title">Where does the Python file go?</p>
+<p>Python files run by <code>python_file()</code> should be placed in the same folder as your <code>printer.cfg</code></p>
+</div>
 <h3 id="features-python-no-return-variables">No Return Variables</h3>
 <p>To run Python without a return variable, you can use <code>{% set _ = python... %}</code></p>
 <p>Example:</p>
@@ -1745,7 +1750,150 @@
 <span class="normal"><a href="#features-rendering-__codelineno-5-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>Rendered TEST:
 <a id="__codelineno-5-2" name="__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a>M117 2
-</code></pre></div></td></tr></table></div></section><h1 class='nav-section-title-end'>Ended: Features</h1>
+</code></pre></div></td></tr></table></div></section><h1 class='nav-section-title-end'>Ended: Features</h1><section class="print-page" id="examples"><h1 id="examples-example-macros">Example Macros</h1>
+<p>This page will hold several different Dynamic Macro examples. Note that most of the examples here are specific to Dynamic Macros only.</p>
+<h2 id="examples-m900">M900</h2>
+<div class="admonition info">
+<p class="admonition-title">Normal Macro</p>
+</div>
+<p>In Marlin, M900 K is used to set pressure/linear advance. Now, you can use it in Klipper too:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#examples-__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#examples-__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#examples-__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#examples-__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#examples-__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#examples-__codelineno-0-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">[gcode_macro M900]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="na">description</span><span class="o">:</span><span class="w"> </span><span class="s">Set Pressure Advance</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="na">{% set k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.K|default(0)|float %}</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">  </span><span class="na">{% if k &lt; 1 %}</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="na">SET_PRESSURE_ADVANCE ADVANCE</span><span class="o">=</span><span class="s">{k}</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">  </span><span class="na">{% endif %}</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="examples-recursion">Recursion</h2>
+<div class="admonition success">
+<p class="admonition-title">Dynamic Macro</p>
+</div>
+<p>These are a few example Dynamic Macros to demonstrate the recursive functionality of Dynamic Macros.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Counting to 10</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#examples-__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#examples-__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#examples-__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#examples-__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#examples-__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#examples-__codelineno-1-7">7</a></span>
+<span class="normal"><a href="#examples-__codelineno-1-8">8</a></span>
+<span class="normal"><a href="#examples-__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">[gcode_macro COUNT]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.NUM|default(1)|int %}</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="na">{% if num &lt;</span><span class="o">=</span><span class="w"> </span><span class="s">10 %}</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{num}</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">        </span><span class="na">COUNT NUM</span><span class="o">=</span><span class="s">{num+1}</span><span class="w"> </span><span class="c1"># Count up 1</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="na">{% else %}</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Done Counting&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="na">{% endif %}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Load to Filament Sensor</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#examples-__codelineno-2-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">[gcode_macro LOAD_TO_FSENSOR]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="na">{% set val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">printer[&quot;filament_sensor fsensor&quot;].filament_detected %}</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="na">{% if val</span><span class="w"> </span><span class="o">=</span><span class="s">= 0 %}</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">        </span><span class="na">M83</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">        </span><span class="na">G1 E50 F900 # Move filament 50mm forwards</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Waiting for fsensor&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="na">LOAD_TO_FSENSOR # Recursion</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="na">{% else %}</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">        </span><span class="na">G1 E65 F900 # Move filament to nozzle</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Filament Loaded&quot;</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="na">{% endif %}</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="examples-receiving-position-updates">Receiving Position Updates</h2>
+<div class="admonition success">
+<p class="admonition-title">Dynamic Macro</p>
+</div>
+<p>This is an example Dynamic Macro to demonstrate the ability to receive position updates from within the same macro.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#examples-__codelineno-3-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[gcode_macro DYNAMIC_MOVE]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="na">G28</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="na">M117 Before</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">  </span><span class="c1"># Above displays position after G28</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">  </span><span class="na">G90</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">  </span><span class="na">G1 Z20</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">  </span><span class="na">M117 After</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">  </span><span class="c1"># Above displays position after G1</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="examples-preserving-variables">Preserving Variables</h2>
+<div class="admonition success">
+<p class="admonition-title">Dynamic Macro</p>
+</div>
+<p>This is an example of how to preserve variables across triple-newlines in Dynamic Macros.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#examples-__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#examples-__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#examples-__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#examples-__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#examples-__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#examples-__codelineno-4-7">7</a></span>
+<span class="normal"><a href="#examples-__codelineno-4-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">[gcode_macro VARIABLES]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">update(&quot;num&quot;, 10) %}</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span><span class="na">M117 {num}</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="na">M117 {num}</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="c1"># Above line outputs 10</span>
+</code></pre></div></td></tr></table></div></section><section class="print-page" id="devstatus"><h1 id="devstatus-development-status">Development Status</h1>
+<h2 id="devstatus-features">Features</h2>
+<ul>
+<li>Editing macros without restarting Klipper</li>
+<li>Accessing printer information from within Dynamic Macros</li>
+<li>Accessing parameters from within Dynamic Macros</li>
+<li>Adding new Dynamic Macros without restarting Klipper</li>
+<li>Removing existing Dynamic Macros without restarting Klipper</li>
+<li>Renaming Dynamic Macros without restarting Klipper</li>
+<li>Dynamic Macro descriptions</li>
+<li>Dynamic Macro variables</li>
+<li>Retrieving variables from other macros</li>
+<li>Support for <code>rename_existing</code></li>
+<li>Running Python from within a Dynamic Macro</li>
+<li>Dynamic <code>delayed_gcode</code> implementation</li>
+<li>Traditional <code>delayed_gcode</code> syntax</li>
+<li>Klippy extras tutorial</li>
+<li>Logging for easier debugging</li>
+<li>Configuring DynamicMacros clusters</li>
+<li>Internal logging</li>
+<li>Support for multiple Klipper instances</li>
+<li>Rendering a Dynamic Macro without running it</li>
+</ul>
+<h2 id="devstatus-planned-features">Planned Features</h2>
+<p>A checkmark indicates a feature is implemented and experimental.</p></section>
                         <h1 class='nav-section-title' id='section-klippy-extras'>
                             Klippy Extras <a class='headerlink' href='#section-klippy-extras' title='Permanent link'>↵</a>
                         </h1>
@@ -3447,150 +3595,7 @@ A[klippy:ready] --&gt; B[_ready_handler]
 <h2 id="extras-extras-ex3-feedback">Feedback</h2>
 <p>Was this tutorial helpful? Do you have any feedback for it? Are there any areas where you think this could be improved?</p>
 <p>Let me know either on the <a href="https://klipper.discourse.group/t/klippy-extras-tutorial/18184?u=3dcoded">Klipper Discourse</a> or in a <a href="https://github.com/3DCoded/DynamicMacros/issues/new?assignees=3dcoded&amp;labels=documentation&amp;projects=&amp;template=docs.yml&amp;title=%5BDOCS%5D%3A+">Documentation Issue</a> on Github.</p>
-<p>Thank you for your feedback!</p></section><h1 class='nav-section-title-end'>Ended: Klippy Extras</h1><section class="print-page" id="examples"><h1 id="examples-example-macros">Example Macros</h1>
-<p>This page will hold several different Dynamic Macro examples. Note that most of the examples here are specific to Dynamic Macros only.</p>
-<h2 id="examples-m900">M900</h2>
-<div class="admonition info">
-<p class="admonition-title">Normal Macro</p>
-</div>
-<p>In Marlin, M900 K is used to set pressure/linear advance. Now, you can use it in Klipper too:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#examples-__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#examples-__codelineno-0-3">3</a></span>
-<span class="normal"><a href="#examples-__codelineno-0-4">4</a></span>
-<span class="normal"><a href="#examples-__codelineno-0-5">5</a></span>
-<span class="normal"><a href="#examples-__codelineno-0-6">6</a></span>
-<span class="normal"><a href="#examples-__codelineno-0-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">[gcode_macro M900]</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="na">description</span><span class="o">:</span><span class="w"> </span><span class="s">Set Pressure Advance</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="na">{% set k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.K|default(0)|float %}</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">  </span><span class="na">{% if k &lt; 1 %}</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="na">SET_PRESSURE_ADVANCE ADVANCE</span><span class="o">=</span><span class="s">{k}</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">  </span><span class="na">{% endif %}</span>
-</code></pre></div></td></tr></table></div>
-<h2 id="examples-recursion">Recursion</h2>
-<div class="admonition success">
-<p class="admonition-title">Dynamic Macro</p>
-</div>
-<p>These are a few example Dynamic Macros to demonstrate the recursive functionality of Dynamic Macros.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Counting to 10</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-1-1">1</a></span>
-<span class="normal"><a href="#examples-__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#examples-__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#examples-__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#examples-__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#examples-__codelineno-1-6">6</a></span>
-<span class="normal"><a href="#examples-__codelineno-1-7">7</a></span>
-<span class="normal"><a href="#examples-__codelineno-1-8">8</a></span>
-<span class="normal"><a href="#examples-__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">[gcode_macro COUNT]</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.NUM|default(1)|int %}</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="na">{% if num &lt;</span><span class="o">=</span><span class="w"> </span><span class="s">10 %}</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">{num}</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">        </span><span class="na">COUNT NUM</span><span class="o">=</span><span class="s">{num+1}</span><span class="w"> </span><span class="c1"># Count up 1</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="na">{% else %}</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Done Counting&quot;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="na">{% endif %}</span>
-</code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Load to Filament Sensor</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-2-1"> 1</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-2"> 2</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-3"> 3</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-4"> 4</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-5"> 5</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-6"> 6</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-7"> 7</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-8"> 8</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-9"> 9</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-10">10</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-11">11</a></span>
-<span class="normal"><a href="#examples-__codelineno-2-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">[gcode_macro LOAD_TO_FSENSOR]</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="na">{% set val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">printer[&quot;filament_sensor fsensor&quot;].filament_detected %}</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="na">{% if val</span><span class="w"> </span><span class="o">=</span><span class="s">= 0 %}</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">        </span><span class="na">M83</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">        </span><span class="na">G1 E50 F900 # Move filament 50mm forwards</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Waiting for fsensor&quot;</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="na">LOAD_TO_FSENSOR # Recursion</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="na">{% else %}</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">        </span><span class="na">G1 E65 F900 # Move filament to nozzle</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">        </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;Filament Loaded&quot;</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="na">{% endif %}</span>
-</code></pre></div></td></tr></table></div>
-<h2 id="examples-receiving-position-updates">Receiving Position Updates</h2>
-<div class="admonition success">
-<p class="admonition-title">Dynamic Macro</p>
-</div>
-<p>This is an example Dynamic Macro to demonstrate the ability to receive position updates from within the same macro.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-3-1"> 1</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-2"> 2</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-3"> 3</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-4"> 4</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-5"> 5</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-6"> 6</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-7"> 7</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-8"> 8</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-9"> 9</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-10">10</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-11">11</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-12">12</a></span>
-<span class="normal"><a href="#examples-__codelineno-3-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">[gcode_macro DYNAMIC_MOVE]</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="na">G28</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="na">M117 Before</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">  </span><span class="c1"># Above displays position after G28</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">  </span><span class="na">G90</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">  </span><span class="na">G1 Z20</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">  </span><span class="na">M117 After</span><span class="o">:</span><span class="w"> </span><span class="s">{printer.toolhead.position.z}</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">  </span><span class="c1"># Above displays position after G1</span>
-</code></pre></div></td></tr></table></div>
-<h2 id="examples-preserving-variables">Preserving Variables</h2>
-<div class="admonition success">
-<p class="admonition-title">Dynamic Macro</p>
-</div>
-<p>This is an example of how to preserve variables across triple-newlines in Dynamic Macros.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#examples-__codelineno-4-2">2</a></span>
-<span class="normal"><a href="#examples-__codelineno-4-3">3</a></span>
-<span class="normal"><a href="#examples-__codelineno-4-4">4</a></span>
-<span class="normal"><a href="#examples-__codelineno-4-5">5</a></span>
-<span class="normal"><a href="#examples-__codelineno-4-6">6</a></span>
-<span class="normal"><a href="#examples-__codelineno-4-7">7</a></span>
-<span class="normal"><a href="#examples-__codelineno-4-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">[gcode_macro VARIABLES]</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="na">gcode</span><span class="o">:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="na">{% set num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">update(&quot;num&quot;, 10) %}</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span><span class="na">M117 {num}</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a>
-<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="na">M117 {num}</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="c1"># Above line outputs 10</span>
-</code></pre></div></td></tr></table></div></section><section class="print-page" id="devstatus"><h1 id="devstatus-development-status">Development Status</h1>
-<h2 id="devstatus-features">Features</h2>
-<ul>
-<li>Editing macros without restarting Klipper</li>
-<li>Accessing printer information from within Dynamic Macros</li>
-<li>Accessing parameters from within Dynamic Macros</li>
-<li>Adding new Dynamic Macros without restarting Klipper</li>
-<li>Removing existing Dynamic Macros without restarting Klipper</li>
-<li>Renaming Dynamic Macros without restarting Klipper</li>
-<li>Dynamic Macro descriptions</li>
-<li>Dynamic Macro variables</li>
-<li>Retrieving variables from other macros</li>
-<li>Support for <code>rename_existing</code></li>
-<li>Running Python from within a Dynamic Macro</li>
-<li>Dynamic <code>delayed_gcode</code> implementation</li>
-<li>Traditional <code>delayed_gcode</code> syntax</li>
-<li>Klippy extras tutorial</li>
-<li>Logging for easier debugging</li>
-<li>Configuring DynamicMacros clusters</li>
-<li>Internal logging</li>
-<li>Support for multiple Klipper instances</li>
-<li>Rendering a Dynamic Macro without running it</li>
-</ul>
-<h2 id="devstatus-planned-features">Planned Features</h2>
-<p>A checkmark indicates a feature is implemented and experimental.</p></section></div>
+<p>Thank you for your feedback!</p></section><h1 class='nav-section-title-end'>Ended: Klippy Extras</h1></div>
 
 
 
