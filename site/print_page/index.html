@@ -1869,6 +1869,129 @@
 <a id="__codelineno-4-6" name="__codelineno-4-6"></a>
 <a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="na">M117 {num}</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="c1"># Above line outputs 10</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="examples-advanced-macros">Advanced Macros</h2>
+<p>Thank you to <a href="https://klipper.discourse.group/u/mykepredko/summary">@mykepredko</a> on the <a href="https://klipper.discourse.group/">Klipper Discourse</a> for these macro ideas and for testing them.</p>
+<h3 id="examples-query-adxl345-accelerometer">Query ADXL345 Accelerometer</h3>
+<div class="admonition success">
+<p class="admonition-title">Dynamic Macro</p>
+</div>
+<p>This macro reads the current acceleration values from an ADXL345 accelerometer.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#examples-__codelineno-5-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">[gcode_macro READ_ADXL]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">  </span><span class="na">{% set values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python_file(&#39;read_adxl.py&#39;) %}</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">  </span><span class="na">RESPOND TYPE</span><span class="o">=</span><span class="s">command MSG=&quot;Response={values}&quot;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="c1">#  {% if values == &quot;Python Error&quot; %}</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">  </span><span class="na">{% if values</span><span class="w"> </span><span class="o">=</span><span class="s">= &quot;No ADXL345&quot; %}</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="na">RESPOND TYPE</span><span class="o">=</span><span class="s">command MSG=&quot;READ_ADXL: No ADXL345 Present&quot;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">  </span><span class="na">{% else %}</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="na">RESPOND TYPE</span><span class="o">=</span><span class="s">command MSG=&quot;READ_ADXL: ADXL345 Present&quot;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="na">RESPOND TYPE</span><span class="o">=</span><span class="s">command MSG=&quot;READ_ADXL: x={values.x}, y={values.y}, z={values.z}&quot;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">  </span><span class="na">{% endif %}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">read_adxl.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#examples-__codelineno-6-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>  <span class="n">adxl</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;adxl345&#39;</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>  <span class="n">aclient</span> <span class="o">=</span> <span class="n">adxl</span><span class="o">.</span><span class="n">start_internal_client</span><span class="p">()</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>  <span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;toolhead&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dwell</span><span class="p">(</span><span class="mf">.1</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>  <span class="n">aclient</span><span class="o">.</span><span class="n">finish_measurements</span><span class="p">()</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a>  <span class="n">values</span> <span class="o">=</span> <span class="n">aclient</span><span class="o">.</span><span class="n">get_samples</span><span class="p">()</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a>  <span class="n">_</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>  <span class="n">output</span><span class="p">({</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a>    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a>    <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>    <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="n">z</span><span class="p">,</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a>  <span class="p">})</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="k">except</span><span class="p">:</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>  <span class="n">output</span><span class="p">(</span><span class="s2">&quot;No ADXL345&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="examples-query-bltouch">Query BLTouch</h3>
+<div class="admonition success">
+<p class="admonition-title">Dynamic Macro</p>
+</div>
+<p>This macro queries the status of a BLTouch sensor.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#examples-__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#examples-__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#examples-__codelineno-7-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="k">[gcode_macro QUERY_BLTOUCH]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">  </span><span class="na">{% set values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python_file(&#39;read_blt.py&#39;) %}</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">  </span><span class="na">RESPOND TYPE</span><span class="o">=</span><span class="s">command MSG=&quot;BLT Object={values}&quot;</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">read_blt.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#examples-__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#examples-__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#examples-__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#examples-__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">blt</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;bltouch&#39;</span><span class="p">)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">toolhead</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="s1">&#39;toolhead&#39;</span><span class="p">)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">print_time</span> <span class="o">=</span> <span class="n">toolhead</span><span class="o">.</span><span class="n">get_last_move_time</span><span class="p">()</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="n">status</span> <span class="o">=</span> <span class="n">blt</span><span class="o">.</span><span class="n">query_endstop</span><span class="p">(</span><span class="n">print_time</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">output</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="examples-read-tmc-field">Read TMC field</h3>
+<div class="admonition success">
+<p class="admonition-title">Dynamic Macro</p>
+</div>
+<p>This macro reads the given field on the given TMC2209 driver, but can be adapted to use any TMC driver.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#examples-__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#examples-__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#examples-__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#examples-__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#examples-__codelineno-9-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="k">[gcode_macro READ_TMC_FIELD]</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="na">gcode</span><span class="o">:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">  </span><span class="na">{% set field_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.FIELD %}</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">  </span><span class="na">{% set stepper_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">params.STEPPER %}</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">  </span><span class="na">{% set value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">python_file(&#39;read_tmc_field.py&#39;, field=field_name, stepper=stepper_name) %}</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">  </span><span class="na">RESPOND MSG</span><span class="o">=</span><span class="s">&quot;\&quot;tmc2209 {stepper_name}-{field_name}\&quot; = {value}&quot;</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">read_tmc_field.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#examples-__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#examples-__codelineno-10-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">field</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="n">stepper</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;stepper&#39;</span><span class="p">]</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="n">tmc</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">lookup_object</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;tmc2209 </span><span class="si">{</span><span class="n">stepper</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="n">register</span> <span class="o">=</span> <span class="n">tmc</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">field_to_register</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="c1"># Find register for given field</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="n">reg_val</span> <span class="o">=</span> <span class="n">tmc</span><span class="o">.</span><span class="n">mcu_tmc</span><span class="o">.</span><span class="n">get_register</span><span class="p">(</span><span class="n">register</span><span class="p">)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="k">if</span> <span class="n">reg_val</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># Queried register</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a>  <span class="n">value</span> <span class="o">=</span> <span class="n">tmc</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">reg_name</span><span class="o">=</span><span class="n">register</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="k">else</span><span class="p">:</span> <span class="c1"># Write-only register</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a>  <span class="n">value</span> <span class="o">=</span> <span class="n">tmc</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">reg_value</span><span class="o">=</span><span class="n">reg_val</span><span class="p">,</span> <span class="n">reg_name</span><span class="o">=</span><span class="n">register</span><span class="p">)</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="n">output</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div></section><section class="print-page" id="devstatus"><h1 id="devstatus-development-status">Development Status</h1>
 <h2 id="devstatus-features">Features</h2>
 <ul>
