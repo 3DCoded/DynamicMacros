@@ -1,6 +1,6 @@
 # Klipper Dynamic Macros
 
-**Never restart Klipper again for simple macros.**
+**Never restart Klipper again for simple macros...and so much more**
 
 <img src="logo.png" alt="logo" width="200"/>
 
