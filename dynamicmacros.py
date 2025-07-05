@@ -212,10 +212,19 @@ class DynamicMacros:
             file.write(full_cfg.getvalue())
 
         # Update printer.cfg to [include .dynamicmacros.cfg]
+        include_statement = '[include .dynamicmacros.cfg]'
         with open(config_path / 'printer.cfg', 'r') as file:
             lines = file.readlines()
-            if '[include .dynamicmacros.cfg]' not in '\n'.join(lines):
-                lines.insert(0, '[include .dynamicmacros.cfg]\n')
+            found = False
+            for line in lines:
+                if line.strip()[0] in ('#', ';', '//'):
+                    # Ignore comments
+                    continue
+                if include_statement in line:
+                    found = True
+                    break
+            if not found:
+                lines.insert(0, include_statement+'\n')
 
         with open(config_path / 'printer.cfg', 'w+') as file:
             file.writelines(lines)
