@@ -57,6 +57,7 @@ theme:
   logo: assets/logo.png
   custom_dir: docs/overrides
   features:
+      - navigation.tabs
       - content.action.edit
       - navigation.expand
       - navigation.instant
@@ -84,23 +85,24 @@ theme:
         name: Switch to light mode
 nav:
   - Home: index.md
-  - setup.md
-  - Tutorial:
-    - tutorial/index.md
-    - tutorial/converting.md
-    - tutorial/usingfeatures.md
-    - tutorial/experimental.md
-  - Features:
-    - features/recursion.md
-    - features/receivingvariables.md
-    - features/utilities.md
-    - features/variables.md
-    - features/python.md
-    - features/delayed.md
-    - features/clusters.md
-    - features/rendering.md
-  - examples.md
-  - devstatus.md
+  - DynamicMacros:
+    - setup.md
+    - Tutorial:
+      - tutorial/index.md
+      - tutorial/converting.md
+      - tutorial/usingfeatures.md
+      - tutorial/experimental.md
+    - Features:
+      - features/recursion.md
+      - features/receivingvariables.md
+      - features/utilities.md
+      - features/variables.md
+      - features/python.md
+      - features/delayed.md
+      - features/clusters.md
+      - features/rendering.md
+    - examples.md
+    - devstatus.md
   - Klippy Extras:
     - extras/extras-start.md
     - extras/extras-intro.md
