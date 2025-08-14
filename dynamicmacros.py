@@ -1,23 +1,24 @@
 import ast
 import configparser
+import glob
 import json
 import logging
-import textwrap
 import os
 import re
+import subprocess
+import textwrap
+from io import StringIO
 from pathlib import Path
 from secrets import token_hex
-from io import StringIO
-import subprocess
 
 DYNAMICMACROS_PATH = Path.home() / 'DynamicMacros'
 
 import jinja2
 
 try:
-    from .gcode_macro import TemplateWrapper # Klipper
+    from .gcode_macro import TemplateWrapper  # Klipper
 except:
-    from .gcode_macro import TemplateWrapperJinja as TemplateWrapper # Kalico
+    from .gcode_macro import TemplateWrapperJinja as TemplateWrapper  # Kalico
 
 # Define the path to the configuration files
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
@@ -63,8 +64,11 @@ class MacroConfigParser:
                 # Handle [include xxx.cfg] sections
                 if header and header.startswith('include '):
                     include_spec = header[8:].strip()
-                    include_path =  path.parent / include_spec
-                    buffer.extend(self._read_file(include_path, visited))
+                    include_path = path.parent / include_spec
+                    include_filenames = glob.glob(include_path, recursive=True)
+                    for filename in include_filenames:
+                        buffer.extend(self._read_file(filename, visited))
+                    # buffer.extend(self._read_file(include_path, visited))
                 else:
                     buffer.append(line)
         visited.remove(path)
