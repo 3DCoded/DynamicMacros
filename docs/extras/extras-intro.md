@@ -6,6 +6,30 @@ comments: true
 
 This page contains many things that are useful to know before writing Klippy extras.
 
+## Klipper vs Klippy
+
+Klipper firmware is two parts. First, there's Klipper, which runs on the microcontroller. This is written in C. Then, there's Klippy which runs on the host (usually a Raspberry Pi), written in Python.
+
+While both are fully open-source and modifiable to your needs, this tutorial will focus solely on Klippy, due to its easily expandable extras system.
+
+## How extras are loaded
+
+When Klipper encounters a config section like the following:
+
+```ini title="printer.cfg"
+[myextra]
+```
+
+It looks for a file in the extras directory named `myextra.py`. Then, it imports it as a Python module and runs the `load_config()` function (if present), passing in a `config` object, which returns another object later stored in the printer.
+
+If the config has a name after the section like this:
+
+```ini title="printer.cfg"
+[myextra name]
+```
+
+It looks for a `load_config_prefix()` function instead.
+
 ## The `config` object
 
 Every Klippy extra is a class. Everything in a Klippy extra starts when the class is initialized, passing a `config` object into the class. This `config` object allows access to many parts of Klipper discussed next.
@@ -98,7 +122,7 @@ This is explained later in the examples.
 
 For Klippy to read your extras file, you need to put it in `~/klipper/klippy/extras`. The filename, in this case `myextra.py`, becomes the config name, in this case `[myextra]`. After putting your file in the `extras` folder, you can put a corresponding section into your `printer.cfg` and restart Klipper. Your extra is installed!
 
-However, every time you want to change something, you have to copy your file to the extras folder and restart Klipper. This is a very slow way to develop extras, as each Klipper restart turns off your heaters, loses your home position, and wastes too much time. 
+However, every time you want to change something, you have to copy your file to the extras folder and restart Klipper. This is a very slow way to develop extras, as each Klipper restart turns off your heaters, loses your home position, and wastes too much time.
 
 Fortunately, DynamicMacros provides a better solution.
 
