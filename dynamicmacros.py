@@ -7,13 +7,9 @@ import textwrap
 import os
 import re
 import subprocess
-import textwrap
 from io import StringIO
 from pathlib import Path
 from secrets import token_hex
-
-DYNAMICMACROS_PATH = Path.home() / 'DynamicMacros'
-import subprocess
 
 DYNAMICMACROS_PATH = Path.home() / 'DynamicMacros'
 
@@ -28,12 +24,6 @@ except:
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
 logger = None
-
-def clean_gcode(gcode):
-    gcode = '\n' + gcode.strip() + '\n'
-    gcode = re.sub(r'\n+', '\n', gcode)
-    gcode = textwrap.indent(gcode, ' '*4)
-    return gcode.strip()
 
 def clean_gcode(gcode):
     gcode = '\n' + gcode.strip() + '\n'
