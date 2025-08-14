@@ -1,13 +1,18 @@
 import ast
 import configparser
+import glob
 import json
 import logging
 import textwrap
 import os
 import re
+import subprocess
+import textwrap
+from io import StringIO
 from pathlib import Path
 from secrets import token_hex
-from io import StringIO
+
+DYNAMICMACROS_PATH = Path.home() / 'DynamicMacros'
 import subprocess
 
 DYNAMICMACROS_PATH = Path.home() / 'DynamicMacros'
@@ -15,14 +20,20 @@ DYNAMICMACROS_PATH = Path.home() / 'DynamicMacros'
 import jinja2
 
 try:
-    from .gcode_macro import TemplateWrapper # Klipper
+    from .gcode_macro import TemplateWrapper  # Klipper
 except:
-    from .gcode_macro import TemplateWrapperJinja as TemplateWrapper # Kalico
+    from .gcode_macro import TemplateWrapperJinja as TemplateWrapper  # Kalico
 
 # Define the path to the configuration files
 config_path = Path(os.path.expanduser('~')) / 'printer_data' / 'config'
 
 logger = None
+
+def clean_gcode(gcode):
+    gcode = '\n' + gcode.strip() + '\n'
+    gcode = re.sub(r'\n+', '\n', gcode)
+    gcode = textwrap.indent(gcode, ' '*4)
+    return gcode.strip()
 
 def clean_gcode(gcode):
     gcode = '\n' + gcode.strip() + '\n'
@@ -63,8 +74,11 @@ class MacroConfigParser:
                 # Handle [include xxx.cfg] sections
                 if header and header.startswith('include '):
                     include_spec = header[8:].strip()
-                    include_path =  path.parent / include_spec
-                    buffer.extend(self._read_file(include_path, visited))
+                    include_path = str(path.parent / include_spec)
+                    include_filenames = glob.glob(include_path, recursive=True)
+                    for filename in include_filenames:
+                        buffer.extend(self._read_file(filename, visited))
+                    # buffer.extend(self._read_file(include_path, visited))
                 else:
                     buffer.append(line)
         visited.remove(path)
@@ -135,10 +149,7 @@ class DynamicMacros:
         # Interface workaround
         # - Allows macros to display on KlipperScreen
         # - Allows macro parameters to display on all interfaces
-        do_interface_workaround = config.getboolean('interface_workaround', True)
-        logger.info(f'Do interface workaround? "{do_interface_workaround}"')
-        if do_interface_workaround:
-            logger.info('Performing interface workaround')
+        if config.getboolean('interface_workaround', True):
             self.interface_workaround()
 
         self._update_macros()
@@ -206,9 +217,7 @@ class DynamicMacros:
             cfg.write(full_cfg)
 
         # Write cfg to config_path/.dynamicmacros.cfg
-        path = config_path / '.dynamicmacros.cfg'
-        with open(path, 'w+') as file:
-            logger.info(f'Will write to "{path}"\n{full_cfg.getvalue()}')
+        with open(config_path / '.dynamicmacros.cfg', 'w+') as file:
             file.write(full_cfg.getvalue())
 
         # Update printer.cfg to [include .dynamicmacros.cfg]
