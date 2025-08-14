@@ -78,7 +78,6 @@ class MacroConfigParser:
                     include_filenames = glob.glob(include_path, recursive=True)
                     for filename in include_filenames:
                         buffer.extend(self._read_file(filename, visited))
-                    # buffer.extend(self._read_file(include_path, visited))
                 else:
                     buffer.append(line)
         visited.remove(path)
