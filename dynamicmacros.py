@@ -64,7 +64,7 @@ class MacroConfigParser:
                 # Handle [include xxx.cfg] sections
                 if header and header.startswith('include '):
                     include_spec = header[8:].strip()
-                    include_path = path.parent / include_spec
+                    include_path = str(path.parent / include_spec)
                     include_filenames = glob.glob(include_path, recursive=True)
                     for filename in include_filenames:
                         buffer.extend(self._read_file(filename, visited))
