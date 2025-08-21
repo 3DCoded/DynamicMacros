@@ -215,6 +215,9 @@ class DynamicMacros:
             lines = file.readlines()
             found = False
             for line in lines:
+                if len(line.strip()) < 1:
+                    # Ignore empty lines
+                    continue
                 if line.strip()[0] in ('#', ';', '//'):
                     # Ignore comments
                     continue
