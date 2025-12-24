@@ -7,7 +7,6 @@ plugins:
   - autolinks
   - git-revision-date-localized:
       enable_creation_date: true
-  - print-site
 markdown_extensions:
   - attr_list
   - md_in_html
@@ -34,8 +33,12 @@ markdown_extensions:
   - pymdownx.inlinehilite
 extra:
   social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/ekqxDhdGCg
+      name: Discord
     - icon: fontawesome/brands/github
-      link: https://3dcoded.github.io
+      link: https://github.com/3DCoded/3MS
+      name: GitHub
   analytics:
     provider: google
     property: G-1YVCJR4FQR
@@ -61,6 +64,7 @@ theme:
       - content.action.edit
       - navigation.expand
       - navigation.instant
+      - navigation.indexes
       - navigation.instant.prefetch
       - navigation.footer
       - content.code.copy
@@ -93,6 +97,7 @@ nav:
       - tutorial/usingfeatures.md
       - tutorial/experimental.md
     - Features:
+      - features/index.md
       - features/recursion.md
       - features/receivingvariables.md
       - features/utilities.md

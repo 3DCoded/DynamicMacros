@@ -1,5 +1,6 @@
 ---
 comments: true
+icon: material/variable
 ---
 
 # Variables

@@ -1,5 +1,6 @@
 ---
 comments: true
+icon: octicons/arrow-both-16
 ---
 
 # Recursion

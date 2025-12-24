@@ -17,6 +17,7 @@ comments: true
 - Retrieving variables from other macros
 - Support for `rename_existing`
 - Running Python from within a Dynamic Macro
+- Displaying the full error traceback if an error in custom Python code occurs
 - Dynamic `delayed_gcode` implementation
 - Traditional `delayed_gcode` syntax
 - Klippy extras tutorial

@@ -1,5 +1,6 @@
 ---
 comments: true
+icon: octicons/clock-16
 ---
 
 # Delayed GCode

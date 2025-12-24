@@ -10,6 +10,3 @@ mkdocs-print-site-plugin = "*"
 mkdocs-git-revision-date-localized-plugin = "*"
 
 [dev-packages]
-
-[requires]
-python_version = "3.11"

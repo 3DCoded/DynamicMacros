@@ -1,5 +1,6 @@
 ---
 comments: true
+icon: material/format-list-numbered
 ---
 
 # Table of Contents

@@ -1,5 +1,6 @@
 ---
 comments: true
+icon: octicons/eye-16
 ---
 
 # Dynamic Rendering
