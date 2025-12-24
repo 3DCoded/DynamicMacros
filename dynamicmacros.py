@@ -1,4 +1,5 @@
 import ast
+import traceback
 import configparser
 import glob
 import json
@@ -204,7 +205,7 @@ class DynamicMacros:
                     cmd = f'DYNAMIC_MACRO MACRO={section.split()[1]}' + ' {rawparams}'
                 cfg.set(section, 'gcode', f'{compiled_gcode}\n{cmd}')
 
-                # Only [delayed_gcode] sections should have initial_duration for interface workaround
+                # Only [delayed_gcode] sections should have initial_duration
                 if cfg.has_option(section, 'initial_duration') and not section.startswith('delayed_gcode'):
                     cfg.remove_option(section, 'initial_duration')
 
@@ -511,7 +512,9 @@ class DynamicMacro:
         try:
             exec(python, python_vars)
         except Exception as e:
-            self.gcode.respond_info(f'Python Error:\n{e}')
+            stderr = StringIO()
+            traceback.print_exc(file=stderr)
+            self.gcode.respond_info(f'Python Error:\n{stderr.getvalue()}')
         return self.vars.get(key)
 
     def python_file(self, fname, *args, **kwargs):
