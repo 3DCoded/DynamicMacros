@@ -208,6 +208,10 @@ class DynamicMacros:
                 # Only [delayed_gcode] sections should have initial_duration
                 if cfg.has_option(section, 'initial_duration') and not section.startswith('delayed_gcode'):
                     cfg.remove_option(section, 'initial_duration')
+                
+                # Klipper doesn't understand the repeat parameter
+                if cfg.has_option(section, 'repeat'):
+                    cfg.remove_option(section, 'repeat')
 
             cfg.write(full_cfg)
 
@@ -483,8 +487,11 @@ class DynamicMacro:
     def rename(self):
         prev_cmd = self.gcode.register_command(self.name, None)
         if prev_cmd:
-            self.gcode.register_command(
-                self.rename_existing, prev_cmd, desc=f'Renamed from {self.name}')
+            try:
+                self.gcode.register_command(
+                    self.rename_existing, prev_cmd, desc=f'Renamed from {self.name}')
+            except:
+                logging.warning(f'Could not register rename_existing "{self.name}" -> "{self.rename_existing}": Command already registered')
 
     def update(self, name, val):
         self.vars[name] = val
