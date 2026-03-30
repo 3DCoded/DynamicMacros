@@ -108,6 +108,11 @@ class DynamicMacros:
     def _init(self, config, is_cluster=False):
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object('gcode')
+        
+        # Creality compatibility
+        if not hasattr(self.gcode, '_build_status_commands'):
+            self.gcode._build_status_commands = lambda: None
+        
         self.fnames = config.getlist('configs')
 
         self.delimiter = config.get('delimiter', '---')
