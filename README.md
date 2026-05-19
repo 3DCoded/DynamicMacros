@@ -23,14 +23,14 @@ If you like this project, don't forget to give it a star! Also, check out my oth
 
 ## Features
 
-- [Recursion](https://3dcoded.github.io/DynamicMacros/features/recursion)
-- [Receiving Variables](https://3dcoded.github.io/DynamicMacros/features/receivingvariables)
-- [Utility Functions](https://3dcoded.github.io/DynamicMacros/features/utilities)
-- [Variables](https://3dcoded.github.io/DynamicMacros/features/variables)
-- [Python](https://3dcoded.github.io/DynamicMacros/features/python)
-- [Delayed GCode](https://3dcoded.github.io/DynamicMacros/features/delayed)
-- [Macro Clusters](https://3dcoded.github.io/DynamicMacros/features/clusters)
-- [Rendering Macros](https://3dcoded.github.io/DynamicMacros/features/rendering)
+- [Recursion](https://docs.3dcoded.xyz/DynamicMacros/features/recursion)
+- [Receiving Variables](https://docs.3dcoded.xyz/DynamicMacros/features/receivingvariables)
+- [Utility Functions](https://docs.3dcoded.xyz/DynamicMacros/features/utilities)
+- [Variables](https://docs.3dcoded.xyz/DynamicMacros/features/variables)
+- [Python](https://docs.3dcoded.xyz/DynamicMacros/features/python)
+- [Delayed GCode](https://docs.3dcoded.xyz/DynamicMacros/features/delayed)
+- [Macro Clusters](https://docs.3dcoded.xyz/DynamicMacros/features/clusters)
+- [Rendering Macros](https://docs.3dcoded.xyz/DynamicMacros/features/rendering)
 
 ## How Normal Macros Work
 
@@ -41,8 +41,8 @@ Your macros are written in a `.cfg` file, then included into your `printer.cfg`.
 Your macros are written in a `.cfg` file, then the relative path to that file is configured in a `[dynamicmacros]` config section. The config files are read and parsed every time you run the `DYNAMIC_MACRO` command, allowing you to update macros without restarting Klipper.
 
 ## Get Started
-Follow the [Tutorial](https://3dcoded.github.io/DynamicMacros/tutorial) to get started with Dynamic Macros.
+Follow the [Tutorial](https://docs.3dcoded.xyz/DynamicMacros/tutorial) to get started with Dynamic Macros.
 
 ## Features
 
-See [Development Status](https://3dcoded.github.io/DynamicMacros/devstatus) for the currently available features, and planned features.
+See [Features](https://docs.3dcoded.xyz/DynamicMacros/features/) for the currently available features, and planned features.
