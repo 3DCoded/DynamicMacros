@@ -443,12 +443,18 @@ class DynamicMacro:
 
         self.is_delayed_gcode = is_delayed_gcode
 
+        logging.debug(f'[{self.name}] Duration: {self.duration}, repeat: {self.repeat}')
+        
         if self.duration:
             self.reactor = self.printer.get_reactor()
             self.timer_handler = None
             self.inside_timer = self.repeat
-            self.printer.register_event_handler(
-                "klippy:ready", self._handle_ready)
+            _, state = self.printer.get_state_message()
+            if state == 'ready':
+                self._handle_ready()
+            else:
+                self.printer.register_event_handler(
+                    "klippy:ready", self._handle_ready)
 
         if self.rename_existing:
             self.rename()
@@ -464,6 +470,7 @@ class DynamicMacro:
         waketime = self.reactor.NEVER
         if self.duration:
             waketime = self.reactor.monotonic() + self.duration
+        logging.debug(f'[{self.name}] Set timer for {waketime:.2f} (currently at {self.reactor.monotonic():.2f})')
         self.timer_handler = self.reactor.register_timer(
             self._gcode_timer_event, waketime)
 
