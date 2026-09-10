@@ -142,7 +142,7 @@ class DynamicMacros:
         if config.getboolean('interface_workaround', True):
             self.interface_workaround()
 
-        self._update_macros()
+        # self._update_macros()
 
         self.reactor = self.printer.get_reactor()
         self.printer.register_event_handler(
