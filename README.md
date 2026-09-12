@@ -10,7 +10,7 @@ Klipper Dynamic Macros is an unofficial way to update macros without restarting 
 
 ## Documentation
 
-Read the documentation [here](https://dynamicmacros.3dcoded.xyz)
+Read the documentation [here](https://docs.3dcoded.xyz/DynamicMacros)
 
 ## More Projects
 
