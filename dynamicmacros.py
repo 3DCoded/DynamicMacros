@@ -108,9 +108,6 @@ class DynamicMacros:
     def _init(self, config, is_cluster=False):
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object('gcode')
-        self.fnames = config.getlist('configs')
-
-        self.delimiter = config.get('delimiter', '---')
 
         if is_cluster:
             self.name = config.get_name().split()[1]
@@ -127,6 +124,15 @@ class DynamicMacros:
             self.gcode.register_command(
                 'DYNAMIC_RENDER', self.cmd_DYNAMIC_RENDER, desc='Render a Dynamic Macro')
             self.gcode.register_command('SET_DYNAMIC_VARIABLE', self.cmd_SET_DYNAMIC_VARIABLE, desc="Set the variable of a Dynamic Macro.")
+            
+        self.raw_fnames = config.getlist('configs')
+        
+        self.delimiter = config.get('delimiter', '---')
+        self.config_parser = MacroConfigParser(self.printer, self.delimiter)
+        
+        self._expand_glob_fnames()
+
+        
 
         self.macros = {}
         self.placeholder = DynamicMacro(
@@ -134,7 +140,7 @@ class DynamicMacros:
 
         self.configfile = self.printer.lookup_object('configfile')
 
-        self.config_parser = MacroConfigParser(self.printer, self.delimiter)
+        
 
         # Interface workaround
         # - Allows macros to display on KlipperScreen
@@ -147,6 +153,13 @@ class DynamicMacros:
         self.reactor = self.printer.get_reactor()
         self.printer.register_event_handler(
             "klippy:ready", self._handle_ready)
+    
+    def _expand_glob_fnames(self):
+        self.fnames = []
+        for raw_fname in self.raw_fnames:
+            expanded = glob.glob(str(self.config_parser.config_path / raw_fname), recursive=True)
+            logging.info(f'DynamicMacros: Expanding glob pattern {raw_fname} -> {expanded}')
+            self.fnames.extend(expanded)
 
     def _setup_logging(self):
         # Get git short version hash
@@ -168,8 +181,8 @@ class DynamicMacros:
             logger = logging.Logger('DynamicMacros')
             klippy_log = self.printer.start_args['log_file']
             log_dir = os.path.dirname(klippy_log)
-            mimo_log = os.path.join(log_dir, 'dynamicmacros.log')
-            handler = logging.FileHandler(mimo_log, mode='w')
+            dm_log = os.path.join(log_dir, 'dynamicmacros.log')
+            handler = logging.FileHandler(dm_log, mode='w')
             formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s')
             handler.setFormatter(formatter)
             logger.addHandler(handler)
